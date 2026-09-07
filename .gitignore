@@ -1,4 +1,5 @@
-data/
+data/*
+!data/results/
 !data/.gitkeep
 __pycache__/
 *.py[cod]
