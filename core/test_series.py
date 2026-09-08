@@ -2,7 +2,7 @@ import pyarrow as pa
 import pyarrow.parquet as pq
 
 from contracts.schemas import CAND_DOCS, WORKS
-from core.series import country_spread, year_counts
+from core.series import country_spread, top_docs, year_counts
 
 
 def _корпус(tmp_path):
@@ -37,3 +37,14 @@ def test_страны_считаются_уникально_в_окне(tmp_path
     страны = country_spread(tmp_path, корпус, 2020, 2021)
     assert страны["c1"] == 2      # RU, US — US не задваивается
     assert страны["c2"] == 1
+
+
+def test_идентификатор_кандидата_не_склеивается_в_запрос(tmp_path):
+    """DuckDB умеет read_parquet по любому пути, поэтому склейка SQL из внешних
+    данных — это чтение произвольного файла, а не только порча выборки.
+    Значения обязаны идти параметрами.
+    """
+    корпус = _корпус(tmp_path)
+    злой = "c1' OR '1'='1"
+    assert top_docs(tmp_path, корпус, злой) == []
+    assert top_docs(tmp_path, корпус, "c1") == ["d2", "d1"]

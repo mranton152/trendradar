@@ -2,6 +2,11 @@
 
 Считается SQL-джойном по parquet: DuckDB делает это на порядок быстрее, чем
 питон в цикле, и не требует поднимать сервер БД.
+
+Все значения передаются параметрами, а не подстановкой в строку запроса.
+DuckDB умеет читать произвольные файлы через read_parquet, поэтому склейка
+запроса из внешних данных - это чтение любого файла на диске, а не только
+порча выборки.
 """
 from collections import defaultdict
 from pathlib import Path
@@ -9,14 +14,18 @@ from pathlib import Path
 import duckdb
 
 
+def _подключение() -> duckdb.DuckDBPyConnection:
+    return duckdb.connect(database=":memory:")
+
+
 def year_counts(index_dir: str | Path, corpus_path: str | Path) -> dict[str, dict[int, int]]:
     """{cand_id: {год: сколько документов}}"""
-    links = Path(index_dir) / "cand_docs.parquet"
-    строки = duckdb.sql(f"""
+    links = str(Path(index_dir) / "cand_docs.parquet")
+    строки = _подключение().execute("""
         SELECT cd.cand_id, w.year, count(*) AS n
-        FROM '{links}' cd JOIN '{corpus_path}' w USING (doc_id)
+        FROM read_parquet(?) cd JOIN read_parquet(?) w USING (doc_id)
         GROUP BY 1, 2
-    """).fetchall()
+    """, [links, str(corpus_path)]).fetchall()
     out: dict[str, dict[int, int]] = defaultdict(dict)
     for cand_id, year, n in строки:
         out[cand_id][int(year)] = int(n)
@@ -30,27 +39,27 @@ def country_spread(index_dir: str | Path, corpus_path: str | Path,
     Прокси распространения: тема, которой занимается одна лаборатория,
     ещё не тренд, каким бы быстрым ни был её рост.
     """
-    links = Path(index_dir) / "cand_docs.parquet"
-    строки = duckdb.sql(f"""
+    links = str(Path(index_dir) / "cand_docs.parquet")
+    строки = _подключение().execute("""
         SELECT cd.cand_id, count(DISTINCT c) AS n
-        FROM '{links}' cd
-        JOIN '{corpus_path}' w USING (doc_id),
+        FROM read_parquet(?) cd
+        JOIN read_parquet(?) w USING (doc_id),
              unnest(w.countries) AS t(c)
-        WHERE w.year BETWEEN {y_from} AND {y_to}
+        WHERE w.year BETWEEN ? AND ?
         GROUP BY 1
-    """).fetchall()
+    """, [links, str(corpus_path), int(y_from), int(y_to)]).fetchall()
     return {cand_id: int(n) for cand_id, n in строки}
 
 
 def top_docs(index_dir: str | Path, corpus_path: str | Path,
              cand_id: str, limit: int = 20) -> list[str]:
     """Документы кандидата для RAG и ссылок: свежие и цитируемые вперёд."""
-    links = Path(index_dir) / "cand_docs.parquet"
-    строки = duckdb.sql(f"""
+    links = str(Path(index_dir) / "cand_docs.parquet")
+    строки = _подключение().execute("""
         SELECT w.doc_id
-        FROM '{links}' cd JOIN '{corpus_path}' w USING (doc_id)
-        WHERE cd.cand_id = '{cand_id}'
+        FROM read_parquet(?) cd JOIN read_parquet(?) w USING (doc_id)
+        WHERE cd.cand_id = ?
         ORDER BY w.year DESC, w.cited_by DESC NULLS LAST
-        LIMIT {limit}
-    """).fetchall()
+        LIMIT ?
+    """, [links, str(corpus_path), cand_id, int(limit)]).fetchall()
     return [r[0] for r in строки]
