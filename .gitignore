@@ -1,13 +1,23 @@
+# Данные: в git едет только золотой снапшот
 data/*
 !data/results/
+!data/index/
+data/index/*
+!data/index/golden/
 !data/.gitkeep
+
+# Кэш ответов API — тяжёлый и восстановимый
+data/cache/
+
 __pycache__/
 *.py[cod]
 .venv/
 venv/
 .env
 .env.local
+.uv/
 node_modules/
+.next/
 dist/
 build/
 .DS_Store

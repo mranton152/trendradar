@@ -1,0 +1,39 @@
+name: границы ответственности
+
+# Роняет PR, если человек залез в чужую папку. Это не про недоверие, а про то,
+# что три LLM, правящие одни и те же файлы, гарантированно устроят кашу.
+
+on:
+  pull_request:
+
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Проверить, чьи файлы затронуты
+        run: |
+          author="${{ github.event.pull_request.user.login }}"
+          files=$(git diff --name-only origin/${{ github.base_ref }}...HEAD)
+          echo "Автор: $author"
+          echo "Изменено:"; echo "$files"
+
+          # Владельцы папок. Логины подставить после создания репозитория.
+          case "$author" in
+            anton)  allowed='^(contracts|core|validation|docs|team|spikes|\.github)/|^(AGENTS|CLAUDE|README)\.md$|^(Makefile|pyproject\.toml|\.gitignore)$' ;;
+            kostya) allowed='^(ingest|semantic)/' ;;
+            misha)  allowed='^(cards|api|web)/' ;;
+            *)      echo "::warning::неизвестный автор $author — проверка пропущена"; exit 0 ;;
+          esac
+
+          bad=$(echo "$files" | grep -vE "$allowed" || true)
+          if [ -n "$bad" ]; then
+            echo "::error::PR трогает файлы вне зоны ответственности:"
+            echo "$bad"
+            echo "Откатите их: git checkout origin/${{ github.base_ref }} -- <файлы>"
+            exit 1
+          fi
+          echo "✓ границы соблюдены"

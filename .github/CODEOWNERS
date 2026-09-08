@@ -1,0 +1,23 @@
+# Кто отвечает за что. GitHub автоматически зовёт владельца в ревью.
+# Логины подставить после создания репозитория.
+
+/contracts/   @anton
+/core/        @anton
+/validation/  @anton
+/docs/        @anton
+/team/        @anton
+/spikes/      @anton
+
+/ingest/      @kostya
+/semantic/    @kostya
+
+/cards/       @misha
+/api/         @misha
+/web/         @misha
+
+# Общие файлы: меняются только по договорённости
+/AGENTS.md        @anton
+/CLAUDE.md        @anton
+/Makefile         @anton
+/pyproject.toml   @anton
+/.github/         @anton

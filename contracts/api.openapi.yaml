@@ -1,0 +1,208 @@
+openapi: 3.1.0
+info:
+  title: TrendRadar API
+  version: 0.1.0-draft
+  description: >
+    Черновик до открытия ТЗ (15.09.2026). Фиксируется в первый день после ТЗ.
+    Сервис ничего не считает в реальном времени: он читает предрассчитанный
+    индекс из data/index/{domain}/. Поэтому целевое время ответа < 1 с.
+
+servers:
+  - url: http://localhost:8000
+
+paths:
+  /api/v1/health:
+    get:
+      summary: Живость сервиса и что есть в индексе
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status: { type: string, enum: [ok] }
+                  indexed_domains:
+                    type: array
+                    items: { type: string }
+                  offline_mode: { type: boolean }
+
+  /api/v1/domains/resolve:
+    post:
+      summary: Свободный текст пользователя -> домен в индексе
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required: [query]
+              properties:
+                query: { type: string, example: "технологии в ИИ" }
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  resolved:   { type: string, example: "artificial-intelligence" }
+                  display_name: { type: string, example: "Искусственный интеллект" }
+                  n_works:    { type: integer }
+                  in_index:   { type: boolean }
+                  alternatives:
+                    type: array
+                    items: { type: string }
+
+  /api/v1/trends:
+    post:
+      summary: ТОП-N зарождающихся трендов направления
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required: [domain]
+              properties:
+                domain: { type: string, example: "технологии в ИИ" }
+                top_n:  { type: integer, default: 15 }
+                as_of:  { type: integer, default: 2026, description: "год среза; прошлое = режим бэктеста" }
+                lang:   { type: string, enum: [ru, en], default: ru }
+      responses:
+        "200":
+          content:
+            application/json:
+              schema: { $ref: "#/components/schemas/TrendsResponse" }
+
+  /api/v1/trends/{trend_id}:
+    get:
+      summary: Полная карточка одного тренда со всеми документами
+      parameters:
+        - { name: trend_id, in: path, required: true, schema: { type: string } }
+      responses:
+        "200":
+          content:
+            application/json:
+              schema: { $ref: "#/components/schemas/Trend" }
+
+  /api/v1/methodology:
+    get:
+      summary: Веса, пороги фильтров, версия методологии
+      description: Прямое требование заказчика - методология должна быть видна в интерфейсе.
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  version: { type: string }
+                  weights: { type: object, additionalProperties: { type: number } }
+                  filters: { type: object }
+                  validation:
+                    type: object
+                    description: Результаты бэктеста - Precision@15, lead time, сравнение с baseline
+
+  /api/v1/export:
+    post:
+      summary: Выгрузка ТОП-N в файл
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                domain: { type: string }
+                as_of:  { type: integer }
+                format: { type: string, enum: [xlsx, pdf, docx] }
+      responses:
+        "200":
+          content:
+            application/octet-stream: { schema: { type: string, format: binary } }
+
+components:
+  schemas:
+    TrendsResponse:
+      type: object
+      properties:
+        domain:
+          type: object
+          properties:
+            query:    { type: string }
+            resolved: { type: string }
+            n_works:  { type: integer }
+        as_of: { type: integer }
+        methodology_version: { type: string }
+        generated_at: { type: string }
+        trends:
+          type: array
+          items: { $ref: "#/components/schemas/Trend" }
+
+    Trend:
+      type: object
+      properties:
+        trend_id: { type: string }
+        rank:     { type: integer }
+        title:    { type: string, description: "название по-русски" }
+        label_en: { type: string }
+        aliases:  { type: array, items: { type: string } }
+        emergence_score: { type: number }
+        components:
+          type: object
+          properties:
+            novelty:   { type: number }
+            growth:    { type: number }
+            accel:     { type: number }
+            burst:     { type: number }
+            diffusion: { type: number }
+        evidence:
+          type: object
+          properties:
+            first_mention: { type: integer }
+            takeoff_year:  { type: integer }
+            series:
+              type: array
+              items:
+                type: object
+                properties:
+                  year:  { type: integer }
+                  count: { type: integer }
+                  freq_per_million: { type: number }
+            n_docs:      { type: integer }
+            n_countries: { type: integer }
+            n_orgs:      { type: integer }
+            n_patents:   { type: integer }
+        motivation:
+          type: object
+          properties:
+            problem:   { type: string }
+            advantage: { type: string }
+            sources:   { type: array, items: { type: string } }
+        case_example:
+          type: object
+          properties:
+            type:        { type: string, enum: [research, company] }
+            name:        { type: string }
+            description: { type: string }
+            source:      { type: string }
+        sources:
+          type: array
+          items:
+            type: object
+            properties:
+              doc_id: { type: string }
+              title:  { type: string }
+              url:    { type: string }
+              year:   { type: integer }
+              type:   { type: string }
+        stage:      { type: string, enum: [emerging, early_growth, scaling] }
+        confidence: { type: string, enum: [high, medium, low] }
+        backtest:
+          type: object
+          nullable: true
+          description: Заполняется только при as_of < текущего года
+          properties:
+            at_cutoff:  { type: integer }
+            peak_after: { type: integer }
+            growth_x:   { type: number }

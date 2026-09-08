@@ -37,6 +37,41 @@
 | [07-demo-and-pitch.md](docs/07-demo-and-pitch.md) | Сценарий демо и структура питча |
 | [08-open-questions.md](docs/08-open-questions.md) | Вопросы организаторам |
 | [09-infrastructure.md](docs/09-infrastructure.md) | Железо: что есть, чего не хватает |
+| [10-setup-macbook.md](docs/10-setup-macbook.md) | Перенос репозитория на мак и первый запуск |
+| [11-team-plan.md](docs/11-team-plan.md) | **План работы командой: роли, задачи по дням** |
+| [12-github-setup.md](docs/12-github-setup.md) | **Репозиторий и доступы: пошагово** |
+
+## Команда
+
+| Кто | Роль | Папки |
+|---|---|---|
+| Антон | капитан, ядро методологии, интеграция | `core/`, `validation/`, `contracts/`, `docs/` |
+| Константин | данные и семантика, тяжёлые прогоны | `ingest/`, `semantic/` |
+| Михаил | продукт: API, фронт, карточки | `cards/`, `api/`, `web/` |
+
+Каждый работает **только в своих папках**; стык между людьми — не код, а формат
+файлов, описанный в [contracts/](contracts/README.md). Личные брифы —
+[team/](team/), процесс — [team/WORKFLOW.md](team/WORKFLOW.md).
+
+## Как устроена система
+
+Набор CLI-стадий, которые пишут parquet-файлы, плюс read-only API поверх них.
+Никакого сервера БД и очереди задач: индекс — это файлы, поэтому демо работает
+без сети по построению.
+
+```
+ingest/    → data/corpus/{domain}/works.parquet              Константин
+semantic/  → data/index/{domain}/candidates.parquet + .npy   Константин
+core/      → data/index/{domain}/trends.parquet              Антон
+cards/     → data/index/{domain}/cards.parquet               Михаил
+api/ web/  → читают data/index/, ничего не считают           Михаил
+```
+
+```bash
+make setup    # поставить зависимости
+make check    # линт + тесты + валидация контрактов — перед каждым PR
+make demo     # сквозной прогон от сбора данных до браузера
+```
 
 ## Быстрый старт: прототип методологии
 

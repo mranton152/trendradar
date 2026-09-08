@@ -1,0 +1,43 @@
+name: ci
+
+on:
+  pull_request:
+  push:
+    branches: [main]
+
+jobs:
+  ci:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Установить uv
+        uses: astral-sh/setup-uv@v3
+        with:
+          enable-cache: true
+
+      - name: Поставить зависимости
+        run: uv sync --all-extras
+
+      - name: Линт
+        run: uv run ruff check .
+
+      - name: Тесты
+        run: uv run pytest -q
+
+      - name: Валидация контрактов на золотом снапшоте
+        run: |
+          set -e
+          for pair in \
+            "data/index/golden/works.parquet:works" \
+            "data/index/golden/candidates.parquet:candidates" \
+            "data/index/golden/cand_docs.parquet:cand_docs" \
+            "data/index/golden/trends.parquet:trends" \
+            "data/index/golden/cards.parquet:cards"; do
+            f="${pair%%:*}"; s="${pair##*:}"
+            if [ -f "$f" ]; then
+              uv run python contracts/validate.py "$f" --schema "$s"
+            else
+              echo "· $f ещё нет — пропускаем"
+            fi
+          done

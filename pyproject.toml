@@ -1,0 +1,51 @@
+[project]
+name = "trendradar"
+version = "0.1.0"
+description = "Сервис детекции зарождающихся научно-технологических трендов (ЛЦТ-2026)"
+requires-python = ">=3.12"
+
+dependencies = [
+    # данные
+    "pyarrow>=17",
+    "duckdb>=1.1",
+    "pandas>=2.2",
+    "numpy>=2.0",
+    "scipy>=1.14",
+    # сеть
+    "httpx>=0.27",
+    "tenacity>=9.0",
+    # api
+    "fastapi>=0.115",
+    "uvicorn[standard]>=0.32",
+    "pydantic>=2.9",
+    "pydantic-settings>=2.6",
+    # экспорт
+    "openpyxl>=3.1",
+]
+
+[project.optional-dependencies]
+# Ставится только там, где реально считают эмбеддинги (машина Константина).
+# На CI и слабых машинах не нужен: torch тяжёлый.
+ml = [
+    "sentence-transformers>=3.2",
+    "umap-learn>=0.5.7",
+    "hdbscan>=0.8.38",
+    "scikit-learn>=1.5",
+]
+
+[dependency-groups]
+dev = [
+    "pytest>=8.3",
+    "ruff>=0.7",
+]
+
+[tool.ruff]
+line-length = 100
+target-version = "py312"
+
+[tool.ruff.lint]
+select = ["E", "F", "I", "UP", "B"]
+
+[tool.pytest.ini_options]
+testpaths = ["core", "ingest", "semantic", "cards", "api", "validation", "contracts"]
+python_files = ["test_*.py"]
