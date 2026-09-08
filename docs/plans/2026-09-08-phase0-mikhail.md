@@ -71,6 +71,15 @@ def test_тренды_фильтруются_по_срезу_и_сортирую
 
 def test_неизвестный_домен_даёт_пустой_список(индекс):
     assert Store(индекс).trends("нет-такого", as_of=2026, top=15) == []
+
+
+def test_имя_домена_не_выводит_за_каталог_индекса(индекс):
+    """domain приходит из HTTP. DuckDB читает любой файл через read_parquet,
+    поэтому выход из каталога здесь — чтение файлов сервера, а не 404."""
+    store = Store(индекс)
+    for злой in ["../../etc/passwd", "d/../../secret", "d' OR '1'='1", ""]:
+        assert store.trends(злой, as_of=2026, top=15) == []
+    assert store.trends("d", as_of=2026, top=15) != []
 ```
 
 - [ ] **Шаг 2: убедиться, что падает**
@@ -86,11 +95,22 @@ def test_неизвестный_домен_даёт_пустой_список(и
 
 API не считает ничего и не ходит в сеть: демо обязано работать в самолётном
 режиме. Всё, что нужно, лежит в parquet и читается SQL-запросом по файлу.
+
+БЕЗОПАСНОСТЬ. domain приходит из HTTP-запроса, поэтому:
+  1) имя домена проверяется по белому списку — тому, что реально лежит
+     в data/index/. Так закрывается выход из каталога («../../etc»);
+  2) значения передаются параметрами, а не подстановкой в текст запроса.
+DuckDB умеет читать произвольные файлы через read_parquet, поэтому склейка
+запроса из пользовательского ввода — это чтение любого файла на диске
+процессом API, а не только испорченная выборка.
 """
+import re
 from functools import lru_cache
 from pathlib import Path
 
 import duckdb
+
+ДОПУСТИМОЕ_ИМЯ = re.compile(r"^[a-z0-9][a-z0-9\-]{0,63}$")
 
 
 class Store:
@@ -105,39 +125,44 @@ class Store:
                       if (p / "trends.parquet").exists())
 
     def _путь(self, domain: str) -> Path | None:
-        p = self.root / domain / "trends.parquet"
-        return p if p.exists() else None
+        """Домен принимается, только если он есть в индексе. Белый список,
+        а не проверка на «плохие символы»: чёрные списки всегда дырявые."""
+        if not domain or not ДОПУСТИМОЕ_ИМЯ.match(domain) or domain not in self.domains():
+            return None
+        return self.root / domain / "trends.parquet"
 
     def trends(self, domain: str, as_of: int, top: int = 15) -> list[dict]:
         p = self._путь(domain)
         if p is None:
             return []
-        return self.con.sql(f"""
-            SELECT * FROM '{p}' WHERE as_of = {int(as_of)}
-            ORDER BY rank LIMIT {int(top)}
-        """).df().to_dict("records")
+        return self.con.execute(
+            "SELECT * FROM read_parquet(?) WHERE as_of = ? ORDER BY rank LIMIT ?",
+            [str(p), int(as_of), int(top)]).df().to_dict("records")
 
     def trend(self, trend_id: str) -> dict | None:
         domain = trend_id.split(":")[1] if trend_id.count(":") >= 2 else None
         p = self._путь(domain) if domain else None
         if p is None:
             return None
-        строки = self.con.sql(
-            f"SELECT * FROM '{p}' WHERE trend_id = '{trend_id}'").df().to_dict("records")
+        строки = self.con.execute(
+            "SELECT * FROM read_parquet(?) WHERE trend_id = ?",
+            [str(p), trend_id]).df().to_dict("records")
         return строки[0] if строки else None
 
     def works(self, domain: str, doc_ids: list[str]) -> list[dict]:
         """Документы по идентификаторам — для списка источников в карточке."""
+        if self._путь(domain) is None or not doc_ids:
+            return []
         корпус = self.root.parent / "corpus" / domain / "works.parquet"
         if not корпус.exists():
             корпус = self.root / domain / "works.parquet"
-        if not корпус.exists() or not doc_ids:
+        if not корпус.exists():
             return []
-        список = ", ".join(f"'{d}'" for d in doc_ids)
-        return self.con.sql(f"""
-            SELECT doc_id, title, url, year, doc_type, cited_by
-            FROM '{корпус}' WHERE doc_id IN ({список})
-        """).df().to_dict("records")
+        return self.con.execute(
+            "SELECT doc_id, title, url, year, doc_type, cited_by "
+            "FROM read_parquet(?) WHERE doc_id IN "
+            f"({', '.join('?' * len(doc_ids))})",
+            [str(корпус), *doc_ids]).df().to_dict("records")
 
 
 @lru_cache(maxsize=1)

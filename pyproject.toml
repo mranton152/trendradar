@@ -42,9 +42,18 @@ dev = [
 [tool.ruff]
 line-length = 100
 target-version = "py312"
+# spikes/ — замороженный прототип, написанный до ТЗ. Он лежит в репозитории как
+# доказательство того, что методология проверялась на реальных данных, и не
+# переписывается: переписанный прототип перестаёт быть свидетельством.
+exclude = ["spikes"]
 
 [tool.ruff.lint]
 select = ["E", "F", "I", "UP", "B"]
+
+[tool.ruff.lint.per-file-ignores]
+# schemas.py — декларативная таблица полей. Комментарий у поля объясняет его
+# смысл читателю контракта, и он важнее, чем уложиться в 100 символов.
+"contracts/schemas.py" = ["E501"]
 
 [tool.pytest.ini_options]
 testpaths = ["core", "ingest", "semantic", "cards", "api", "validation", "contracts"]
