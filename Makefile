@@ -1,16 +1,21 @@
-.PHONY: help check lint test contracts demo pull-corpus setup
+.PHONY: help check lint test contracts demo pull-corpus setup hooks
 
 DOMAIN ?= artificial-intelligence
 AS_OF  ?= 2026
 
 help:
 	@echo "setup        — поставить зависимости (uv sync)"
+	@echo "hooks        — включить git-хуки (запрет прямого пуша в main)"
 	@echo "check        — линт + тесты + валидация контрактов. Гнать перед каждым PR"
 	@echo "demo         — сквозной прогон: ingest → semantic → core → cards → api"
 	@echo "pull-corpus  — скачать полный корпус из GitHub Releases"
 
-setup:
+setup: hooks
 	uv sync --all-extras
+
+hooks:
+	git config core.hooksPath .githooks
+	@echo "✓ git-хуки включены: прямой пуш в main заблокирован"
 
 lint:
 	uv run ruff check .

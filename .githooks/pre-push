@@ -1,0 +1,19 @@
+#!/bin/sh
+# Запрещает пуш напрямую в main. Ставится командой: make hooks
+#
+# На приватном репозитории GitHub не даёт защитить ветку без платного тарифа,
+# поэтому защита локальная. Обойти можно (--no-verify), но случайно не пушнёшь.
+
+while read -r _local_ref _local_sha remote_ref _remote_sha; do
+  case "$remote_ref" in
+    refs/heads/main)
+      echo "✗ Прямой пуш в main запрещён."
+      echo "  Работаем через ветку и PR:"
+      echo "    git checkout -b feat/<имя>/<задача>"
+      echo "    git push -u origin feat/<имя>/<задача>"
+      echo "  Подробности: team/WORKFLOW.md"
+      exit 1
+      ;;
+  esac
+done
+exit 0

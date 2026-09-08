@@ -23,7 +23,7 @@ jobs:
 
           # Владельцы папок. Логины подставить после создания репозитория.
           case "$author" in
-            anton)  allowed='^(contracts|core|validation|docs|team|spikes|\.github)/|^(AGENTS|CLAUDE|README)\.md$|^(Makefile|pyproject\.toml|\.gitignore)$' ;;
+            mranton152)  allowed='^(contracts|core|validation|docs|team|spikes|\.github)/|^(AGENTS|CLAUDE|README)\.md$|^(Makefile|pyproject\.toml|\.gitignore)$' ;;
             kostya) allowed='^(ingest|semantic)/' ;;
             misha)  allowed='^(cards|api|web)/' ;;
             *)      echo "::warning::неизвестный автор $author — проверка пропущена"; exit 0 ;;

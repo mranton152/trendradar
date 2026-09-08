@@ -25,6 +25,16 @@ gh repo create trendradar --private --source=. --remote=origin --push
 
 Репозиторий сразу приватный: видят его только владелец и приглашённые.
 
+**Если репозиторий склонирован из bundle-файла**, `origin` уже занят и команда
+выше скажет `Unable to add remote "origin"`. Репозиторий на GitHub при этом
+создастся. Лечится переназначением remote:
+
+```bash
+git remote set-url origin https://github.com/ЛОГИН/trendradar.git
+git branch -M main
+git push -u origin main
+```
+
 ### 3. Пригласить Михаила и Константина
 
 Нужны их GitHub-логины (не почта — логин, вида `mikhail-xxx`).
@@ -41,9 +51,19 @@ gh api -X PUT repos/:owner/trendradar/collaborators/ЛОГИНА_КОНСТАН�
 
 ### 4. Защитить `main`
 
+На **приватном** репозитории GitHub не даёт настроить branch protection без
+платного тарифа — API отвечает `403 Upgrade to GitHub Pro`. Поэтому защита
+локальная, через git-хук: он ставится у каждого командой `make hooks`
+(входит в `make setup`) и не даёт запушить в `main` напрямую.
+
+Обойти хук можно (`--no-verify`), но случайно уже не пушнёшь — этого достаточно.
+CI при этом всё равно гоняется на каждый PR и красным показывает проблемы.
+
+Если решим сделать репозиторий публичным при сдаче — тогда включится и серверная
+защита:
+
 ```bash
-gh api -X PUT repos/:owner/trendradar/branches/main/protection \
-  --input - <<'JSON'
+gh api -X PUT repos/:owner/trendradar/branches/main/protection --input - <<'JSON'
 {
   "required_status_checks": {"strict": true, "contexts": ["ci"]},
   "enforce_admins": false,
@@ -54,9 +74,6 @@ gh api -X PUT repos/:owner/trendradar/branches/main/protection \
 }
 JSON
 ```
-
-Это запрещает пуш напрямую в `main` и мерж с красным CI. Ревью не делаем
-обязательным — на хакатоне это тормозит, честной истории PR достаточно.
 
 ### 5. Проверить, что всё встало
 
@@ -96,7 +113,7 @@ cd trendradar
 ```bash
 brew install uv          # macOS
 # или: curl -LsSf https://astral.sh/uv/install.sh | sh   (Linux/WSL)
-uv sync
+make setup               # зависимости + git-хуки
 ```
 
 Проверка, что всё встало:
