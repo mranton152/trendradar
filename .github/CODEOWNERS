@@ -8,12 +8,12 @@
 /team/        @anton
 /spikes/      @anton
 
-/ingest/      @kostya
-/semantic/    @kostya
+/ingest/      @DockerDun
+/semantic/    @DockerDun
 
-/cards/       @misha
-/api/         @misha
-/web/         @misha
+/cards/       @quisinon-blip
+/api/         @quisinon-blip
+/web/         @quisinon-blip
 
 # Общие файлы: меняются только по договорённости
 /AGENTS.md        @anton
