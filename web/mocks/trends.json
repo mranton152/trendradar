@@ -1,0 +1,807 @@
+{
+  "domain": {
+    "query": "golden",
+    "resolved": "golden",
+    "n_works": 5000
+  },
+  "as_of": 2026,
+  "generated_at": "2026-09-09T12:00:48.770440+00:00",
+  "methodology_version": "1.0",
+  "trends": [
+    {
+      "trend_id": "t:golden:2026:01",
+      "rank": 1,
+      "title": "mixture of experts",
+      "label_en": "mixture of experts",
+      "aliases": [],
+      "emergence_score": 0.7021999955177307,
+      "components": {
+        "novelty": 0.8859999775886536,
+        "growth": 0.8600000143051147,
+        "accel": 0.9649999737739563,
+        "burst": 0.9300000071525574,
+        "diffusion": 0.20200000703334808
+      },
+      "evidence": {
+        "first_mention": 1994,
+        "takeoff_year": 2024,
+        "series": [
+          {
+            "year": 2022,
+            "count": 39,
+            "freq_per_million": 205.83999633789062
+          },
+          {
+            "year": 2023,
+            "count": 67,
+            "freq_per_million": 297.2900085449219
+          },
+          {
+            "year": 2024,
+            "count": 130,
+            "freq_per_million": 494.739990234375
+          },
+          {
+            "year": 2025,
+            "count": 542,
+            "freq_per_million": 1422.0
+          },
+          {
+            "year": 2026,
+            "count": 979,
+            "freq_per_million": 2726.0
+          }
+        ],
+        "n_docs": 1757,
+        "n_countries": 62,
+        "n_orgs": null,
+        "n_patents": null
+      },
+      "sources": [],
+      "stage": "emerging",
+      "confidence": "high"
+    },
+    {
+      "trend_id": "t:golden:2026:02",
+      "rank": 2,
+      "title": "continual learning",
+      "label_en": "continual learning",
+      "aliases": [],
+      "emergence_score": 0.6119999885559082,
+      "components": {
+        "novelty": 0.5260000228881836,
+        "growth": 0.718999981880188,
+        "accel": 1.0,
+        "burst": 0.824999988079071,
+        "diffusion": 0.2280000001192093
+      },
+      "evidence": {
+        "first_mention": 2014,
+        "takeoff_year": 2021,
+        "series": [
+          {
+            "year": 2022,
+            "count": 165,
+            "freq_per_million": 870.8800048828125
+          },
+          {
+            "year": 2023,
+            "count": 214,
+            "freq_per_million": 949.5499877929688
+          },
+          {
+            "year": 2024,
+            "count": 308,
+            "freq_per_million": 1172.1500244140625
+          },
+          {
+            "year": 2025,
+            "count": 568,
+            "freq_per_million": 1490.2099609375
+          },
+          {
+            "year": 2026,
+            "count": 864,
+            "freq_per_million": 2405.7900390625
+          }
+        ],
+        "n_docs": 2119,
+        "n_countries": 67,
+        "n_orgs": null,
+        "n_patents": null
+      },
+      "sources": [],
+      "stage": "early_growth",
+      "confidence": "medium"
+    },
+    {
+      "trend_id": "t:golden:2026:03",
+      "rank": 3,
+      "title": "state space model",
+      "label_en": "state space model",
+      "aliases": [],
+      "emergence_score": 0.588100016117096,
+      "components": {
+        "novelty": 0.9819999933242798,
+        "growth": 0.6320000290870667,
+        "accel": 0.9470000267028809,
+        "burst": 0.7369999885559082,
+        "diffusion": 0.2630000114440918
+      },
+      "evidence": {
+        "first_mention": 1990,
+        "takeoff_year": 2025,
+        "series": [
+          {
+            "year": 2022,
+            "count": 423,
+            "freq_per_million": 2232.6298828125
+          },
+          {
+            "year": 2023,
+            "count": 475,
+            "freq_per_million": 2107.639892578125
+          },
+          {
+            "year": 2024,
+            "count": 534,
+            "freq_per_million": 2032.22998046875
+          },
+          {
+            "year": 2025,
+            "count": 1166,
+            "freq_per_million": 3059.1298828125
+          },
+          {
+            "year": 2026,
+            "count": 1349,
+            "freq_per_million": 3756.260009765625
+          }
+        ],
+        "n_docs": 3947,
+        "n_countries": 71,
+        "n_orgs": null,
+        "n_patents": null
+      },
+      "sources": [],
+      "stage": "emerging",
+      "confidence": "medium"
+    },
+    {
+      "trend_id": "t:golden:2026:04",
+      "rank": 4,
+      "title": "sparse attention",
+      "label_en": "sparse attention",
+      "aliases": [],
+      "emergence_score": 0.5680999755859375,
+      "components": {
+        "novelty": 0.6930000185966492,
+        "growth": 0.824999988079071,
+        "accel": 0.2809999883174896,
+        "burst": 0.8069999814033508,
+        "diffusion": 0.061000000685453415
+      },
+      "evidence": {
+        "first_mention": 2021,
+        "takeoff_year": 2022,
+        "series": [
+          {
+            "year": 2022,
+            "count": 34,
+            "freq_per_million": 179.4499969482422
+          },
+          {
+            "year": 2023,
+            "count": 65,
+            "freq_per_million": 288.4100036621094
+          },
+          {
+            "year": 2024,
+            "count": 130,
+            "freq_per_million": 494.739990234375
+          },
+          {
+            "year": 2025,
+            "count": 311,
+            "freq_per_million": 815.9400024414062
+          },
+          {
+            "year": 2026,
+            "count": 328,
+            "freq_per_million": 913.3099975585938
+          }
+        ],
+        "n_docs": 868,
+        "n_countries": 39,
+        "n_orgs": null,
+        "n_patents": null
+      },
+      "sources": [],
+      "stage": "early_growth",
+      "confidence": "high"
+    },
+    {
+      "trend_id": "t:golden:2026:05",
+      "rank": 5,
+      "title": "differentiable rendering",
+      "label_en": "differentiable rendering",
+      "aliases": [],
+      "emergence_score": 0.5370000004768372,
+      "components": {
+        "novelty": 0.5260000228881836,
+        "growth": 0.4390000104904175,
+        "accel": 0.9120000004768372,
+        "burst": 0.5440000295639038,
+        "diffusion": 0.0
+      },
+      "evidence": {
+        "first_mention": 2020,
+        "takeoff_year": 2021,
+        "series": [
+          {
+            "year": 2022,
+            "count": 27,
+            "freq_per_million": 142.50999450683594
+          },
+          {
+            "year": 2023,
+            "count": 32,
+            "freq_per_million": 141.99000549316406
+          },
+          {
+            "year": 2024,
+            "count": 37,
+            "freq_per_million": 140.80999755859375
+          },
+          {
+            "year": 2025,
+            "count": 58,
+            "freq_per_million": 152.1699981689453
+          },
+          {
+            "year": 2026,
+            "count": 63,
+            "freq_per_million": 175.4199981689453
+          }
+        ],
+        "n_docs": 217,
+        "n_countries": 20,
+        "n_orgs": null,
+        "n_patents": null
+      },
+      "sources": [],
+      "stage": "early_growth",
+      "confidence": "high"
+    },
+    {
+      "trend_id": "t:golden:2026:06",
+      "rank": 6,
+      "title": "prompt engineering",
+      "label_en": "prompt engineering",
+      "aliases": [],
+      "emergence_score": 0.5196999907493591,
+      "components": {
+        "novelty": 0.8859999775886536,
+        "growth": 0.9300000071525574,
+        "accel": 0.0,
+        "burst": 0.8600000143051147,
+        "diffusion": 0.4740000069141388
+      },
+      "evidence": {
+        "first_mention": 2023,
+        "takeoff_year": 2024,
+        "series": [
+          {
+            "year": 2022,
+            "count": 4,
+            "freq_per_million": 21.110000610351562
+          },
+          {
+            "year": 2023,
+            "count": 106,
+            "freq_per_million": 470.3399963378906
+          },
+          {
+            "year": 2024,
+            "count": 295,
+            "freq_per_million": 1122.6700439453125
+          },
+          {
+            "year": 2025,
+            "count": 877,
+            "freq_per_million": 2300.909912109375
+          },
+          {
+            "year": 2026,
+            "count": 1261,
+            "freq_per_million": 3511.219970703125
+          }
+        ],
+        "n_docs": 2543,
+        "n_countries": 89,
+        "n_orgs": null,
+        "n_patents": null
+      },
+      "sources": [],
+      "stage": "emerging",
+      "confidence": "high"
+    },
+    {
+      "trend_id": "t:golden:2026:07",
+      "rank": 7,
+      "title": "question answering",
+      "label_en": "question answering",
+      "aliases": [],
+      "emergence_score": 0.5011000037193298,
+      "components": {
+        "novelty": 0.6930000185966492,
+        "growth": 0.5090000033378601,
+        "accel": 0.9819999933242798,
+        "burst": 0.6840000152587891,
+        "diffusion": 0.42100000381469727
+      },
+      "evidence": {
+        "first_mention": 1990,
+        "takeoff_year": 2022,
+        "series": [
+          {
+            "year": 2022,
+            "count": 673,
+            "freq_per_million": 3552.139892578125
+          },
+          {
+            "year": 2023,
+            "count": 721,
+            "freq_per_million": 3199.169921875
+          },
+          {
+            "year": 2024,
+            "count": 822,
+            "freq_per_million": 3128.260009765625
+          },
+          {
+            "year": 2025,
+            "count": 1392,
+            "freq_per_million": 3652.070068359375
+          },
+          {
+            "year": 2026,
+            "count": 1680,
+            "freq_per_million": 4677.919921875
+          }
+        ],
+        "n_docs": 5288,
+        "n_countries": 86,
+        "n_orgs": null,
+        "n_patents": null
+      },
+      "sources": [],
+      "stage": "early_growth",
+      "confidence": "medium"
+    },
+    {
+      "trend_id": "t:golden:2026:08",
+      "rank": 8,
+      "title": "neural radiance field",
+      "label_en": "neural radiance field",
+      "aliases": [],
+      "emergence_score": 0.4950000047683716,
+      "components": {
+        "novelty": 0.7979999780654907,
+        "growth": 0.8069999814033508,
+        "accel": 0.03500000014901161,
+        "burst": 0.4909999966621399,
+        "diffusion": 0.08799999952316284
+      },
+      "evidence": {
+        "first_mention": 2021,
+        "takeoff_year": 2023,
+        "series": [
+          {
+            "year": 2022,
+            "count": 26,
+            "freq_per_million": 137.22999572753906
+          },
+          {
+            "year": 2023,
+            "count": 109,
+            "freq_per_million": 483.6499938964844
+          },
+          {
+            "year": 2024,
+            "count": 302,
+            "freq_per_million": 1149.31005859375
+          },
+          {
+            "year": 2025,
+            "count": 391,
+            "freq_per_million": 1025.8299560546875
+          },
+          {
+            "year": 2026,
+            "count": 287,
+            "freq_per_million": 799.1400146484375
+          }
+        ],
+        "n_docs": 1115,
+        "n_countries": 41,
+        "n_orgs": null,
+        "n_patents": null
+      },
+      "sources": [],
+      "stage": "emerging",
+      "confidence": "high"
+    },
+    {
+      "trend_id": "t:golden:2026:09",
+      "rank": 9,
+      "title": "vision-language model",
+      "label_en": "vision-language model",
+      "aliases": [],
+      "emergence_score": 0.48660001158714294,
+      "components": {
+        "novelty": 0.8859999775886536,
+        "growth": 0.9819999933242798,
+        "accel": 0.05299999937415123,
+        "burst": 0.9649999737739563,
+        "diffusion": 0.2809999883174896
+      },
+      "evidence": {
+        "first_mention": 2022,
+        "takeoff_year": 2024,
+        "series": [
+          {
+            "year": 2022,
+            "count": 6,
+            "freq_per_million": 31.670000076293945
+          },
+          {
+            "year": 2023,
+            "count": 38,
+            "freq_per_million": 168.61000061035156
+          },
+          {
+            "year": 2024,
+            "count": 224,
+            "freq_per_million": 852.469970703125
+          },
+          {
+            "year": 2025,
+            "count": 1053,
+            "freq_per_million": 2762.659912109375
+          },
+          {
+            "year": 2026,
+            "count": 1830,
+            "freq_per_million": 5095.58984375
+          }
+        ],
+        "n_docs": 3151,
+        "n_countries": 75,
+        "n_orgs": null,
+        "n_patents": null
+      },
+      "sources": [],
+      "stage": "emerging",
+      "confidence": "high"
+    },
+    {
+      "trend_id": "t:golden:2026:10",
+      "rank": 10,
+      "title": "time series forecasting",
+      "label_en": "time series forecasting",
+      "aliases": [],
+      "emergence_score": 0.47099998593330383,
+      "components": {
+        "novelty": 0.5260000228881836,
+        "growth": 0.5789999961853027,
+        "accel": 0.6489999890327454,
+        "burst": 0.5260000228881836,
+        "diffusion": 0.6489999890327454
+      },
+      "evidence": {
+        "first_mention": 1991,
+        "takeoff_year": 2021,
+        "series": [
+          {
+            "year": 2022,
+            "count": 493,
+            "freq_per_million": 2602.090087890625
+          },
+          {
+            "year": 2023,
+            "count": 604,
+            "freq_per_million": 2680.030029296875
+          },
+          {
+            "year": 2024,
+            "count": 767,
+            "freq_per_million": 2918.949951171875
+          },
+          {
+            "year": 2025,
+            "count": 1374,
+            "freq_per_million": 3604.840087890625
+          },
+          {
+            "year": 2026,
+            "count": 1249,
+            "freq_per_million": 3477.81005859375
+          }
+        ],
+        "n_docs": 4487,
+        "n_countries": 100,
+        "n_orgs": null,
+        "n_patents": null
+      },
+      "sources": [],
+      "stage": "early_growth",
+      "confidence": "medium"
+    },
+    {
+      "trend_id": "t:golden:2026:11",
+      "rank": 11,
+      "title": "causal inference",
+      "label_en": "causal inference",
+      "aliases": [],
+      "emergence_score": 0.46810001134872437,
+      "components": {
+        "novelty": 0.6930000185966492,
+        "growth": 0.4740000069141388,
+        "accel": 0.7720000147819519,
+        "burst": 0.5090000033378601,
+        "diffusion": 0.2980000078678131
+      },
+      "evidence": {
+        "first_mention": 1990,
+        "takeoff_year": 2022,
+        "series": [
+          {
+            "year": 2022,
+            "count": 473,
+            "freq_per_million": 2496.530029296875
+          },
+          {
+            "year": 2023,
+            "count": 540,
+            "freq_per_million": 2396.050048828125
+          },
+          {
+            "year": 2024,
+            "count": 625,
+            "freq_per_million": 2378.5400390625
+          },
+          {
+            "year": 2025,
+            "count": 1174,
+            "freq_per_million": 3080.1201171875
+          },
+          {
+            "year": 2026,
+            "count": 1090,
+            "freq_per_million": 3035.080078125
+          }
+        ],
+        "n_docs": 3902,
+        "n_countries": 76,
+        "n_orgs": null,
+        "n_patents": null
+      },
+      "sources": [],
+      "stage": "early_growth",
+      "confidence": "medium"
+    },
+    {
+      "trend_id": "t:golden:2026:12",
+      "rank": 12,
+      "title": "physics-informed neural network",
+      "label_en": "physics-informed neural network",
+      "aliases": [],
+      "emergence_score": 0.4519999921321869,
+      "components": {
+        "novelty": 0.6930000185966492,
+        "growth": 0.7369999885559082,
+        "accel": 0.2460000067949295,
+        "burst": 0.7020000219345093,
+        "diffusion": 0.5609999895095825
+      },
+      "evidence": {
+        "first_mention": 2019,
+        "takeoff_year": 2022,
+        "series": [
+          {
+            "year": 2022,
+            "count": 298,
+            "freq_per_million": 1572.8699951171875
+          },
+          {
+            "year": 2023,
+            "count": 568,
+            "freq_per_million": 2520.2900390625
+          },
+          {
+            "year": 2024,
+            "count": 954,
+            "freq_per_million": 3630.610107421875
+          },
+          {
+            "year": 2025,
+            "count": 1561,
+            "freq_per_million": 4095.4599609375
+          },
+          {
+            "year": 2026,
+            "count": 1582,
+            "freq_per_million": 4405.0400390625
+          }
+        ],
+        "n_docs": 4963,
+        "n_countries": 95,
+        "n_orgs": null,
+        "n_patents": null
+      },
+      "sources": [],
+      "stage": "early_growth",
+      "confidence": "high"
+    },
+    {
+      "trend_id": "t:golden:2026:13",
+      "rank": 13,
+      "title": "foundation model",
+      "label_en": "foundation model",
+      "aliases": [],
+      "emergence_score": 0.4404999911785126,
+      "components": {
+        "novelty": 0.8859999775886536,
+        "growth": 0.9120000004768372,
+        "accel": 0.08799999952316284,
+        "burst": 0.8949999809265137,
+        "diffusion": 0.5960000157356262
+      },
+      "evidence": {
+        "first_mention": 2002,
+        "takeoff_year": 2024,
+        "series": [
+          {
+            "year": 2022,
+            "count": 35,
+            "freq_per_million": 184.72999572753906
+          },
+          {
+            "year": 2023,
+            "count": 155,
+            "freq_per_million": 687.75
+          },
+          {
+            "year": 2024,
+            "count": 639,
+            "freq_per_million": 2431.820068359375
+          },
+          {
+            "year": 2025,
+            "count": 2060,
+            "freq_per_million": 5404.64013671875
+          },
+          {
+            "year": 2026,
+            "count": 3428,
+            "freq_per_million": 9545.1796875
+          }
+        ],
+        "n_docs": 6317,
+        "n_countries": 98,
+        "n_orgs": null,
+        "n_patents": null
+      },
+      "sources": [],
+      "stage": "emerging",
+      "confidence": "high"
+    },
+    {
+      "trend_id": "t:golden:2026:14",
+      "rank": 14,
+      "title": "diffusion model",
+      "label_en": "diffusion model",
+      "aliases": [],
+      "emergence_score": 0.414900004863739,
+      "components": {
+        "novelty": 0.7979999780654907,
+        "growth": 0.8420000076293945,
+        "accel": 0.15800000727176666,
+        "burst": 0.8420000076293945,
+        "diffusion": 0.5180000066757202
+      },
+      "evidence": {
+        "first_mention": 1990,
+        "takeoff_year": 2023,
+        "series": [
+          {
+            "year": 2022,
+            "count": 209,
+            "freq_per_million": 1103.1199951171875
+          },
+          {
+            "year": 2023,
+            "count": 502,
+            "freq_per_million": 2227.43994140625
+          },
+          {
+            "year": 2024,
+            "count": 1452,
+            "freq_per_million": 5525.830078125
+          },
+          {
+            "year": 2025,
+            "count": 3316,
+            "freq_per_million": 8699.900390625
+          },
+          {
+            "year": 2026,
+            "count": 3428,
+            "freq_per_million": 9545.1796875
+          }
+        ],
+        "n_docs": 8907,
+        "n_countries": 91,
+        "n_orgs": null,
+        "n_patents": null
+      },
+      "sources": [],
+      "stage": "emerging",
+      "confidence": "medium"
+    },
+    {
+      "trend_id": "t:golden:2026:15",
+      "rank": 15,
+      "title": "topic modeling",
+      "label_en": "topic modeling",
+      "aliases": [],
+      "emergence_score": 0.4106000065803528,
+      "components": {
+        "novelty": 0.6930000185966492,
+        "growth": 0.14000000059604645,
+        "accel": 0.9300000071525574,
+        "burst": 0.2460000067949295,
+        "diffusion": 0.38600000739097595
+      },
+      "evidence": {
+        "first_mention": 2004,
+        "takeoff_year": 2022,
+        "series": [
+          {
+            "year": 2022,
+            "count": 737,
+            "freq_per_million": 3889.93994140625
+          },
+          {
+            "year": 2023,
+            "count": 740,
+            "freq_per_million": 3283.469970703125
+          },
+          {
+            "year": 2024,
+            "count": 677,
+            "freq_per_million": 2576.43994140625
+          },
+          {
+            "year": 2025,
+            "count": 869,
+            "freq_per_million": 2279.919921875
+          },
+          {
+            "year": 2026,
+            "count": 831,
+            "freq_per_million": 2313.89990234375
+          }
+        ],
+        "n_docs": 3854,
+        "n_countries": 84,
+        "n_orgs": null,
+        "n_patents": null
+      },
+      "sources": [],
+      "stage": "early_growth",
+      "confidence": "medium"
+    }
+  ]
+}
