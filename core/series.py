@@ -3,6 +3,10 @@
 Считается SQL-джойном по parquet: DuckDB делает это на порядок быстрее, чем
 питон в цикле, и не требует поднимать сервер БД.
 
+Документы взвешиваются по лагу источника (см. core/lead.py): препринт весит
+больше журнальной статьи, потому что опережает её примерно на год. Без этого
+зарождающийся сигнал становится виден только тогда, когда он уже не слабый.
+
 Все значения передаются параметрами, а не подстановкой в строку запроса.
 DuckDB умеет читать произвольные файлы через read_parquet, поэтому склейка
 запроса из внешних данных - это чтение любого файла на диске, а не только
@@ -13,22 +17,26 @@ from pathlib import Path
 
 import duckdb
 
+from core.lead import sql_вес
+
 
 def _подключение() -> duckdb.DuckDBPyConnection:
     return duckdb.connect(database=":memory:")
 
 
 def year_counts(index_dir: str | Path, corpus_path: str | Path) -> dict[str, dict[int, int]]:
-    """{cand_id: {год: сколько документов}}"""
+    """{cand_id: {год: взвешенное число документов}}"""
     links = str(Path(index_dir) / "cand_docs.parquet")
-    строки = _подключение().execute("""
-        SELECT cd.cand_id, w.year, count(*) AS n
+    # sql_вес() собран из константы модуля, а не из данных — подстановка здесь
+    # безопасна, в отличие от значений, которые идут параметрами.
+    строки = _подключение().execute(f"""
+        SELECT cd.cand_id, w.year, sum({sql_вес()}) AS n
         FROM read_parquet(?) cd JOIN read_parquet(?) w USING (doc_id)
         GROUP BY 1, 2
     """, [links, str(corpus_path)]).fetchall()
     out: dict[str, dict[int, int]] = defaultdict(dict)
     for cand_id, year, n in строки:
-        out[cand_id][int(year)] = int(n)
+        out[cand_id][int(year)] = int(round(float(n)))
     return dict(out)
 
 
