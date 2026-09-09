@@ -9,7 +9,8 @@ from contracts.schemas import TRENDS, WORKS
 
 @pytest.fixture
 def index(tmp_path):
-    domain = tmp_path / "golden"
+    index_root = tmp_path / "index"
+    domain = index_root / "golden"
     domain.mkdir()
     rows = []
     for year, rank in [(2026, 3), (2021, 1), (2026, 1), (2026, 2)]:
@@ -32,7 +33,7 @@ def index(tmp_path):
         "domain": "artificial-intelligence", "harvested_at": "2026-09-08",
     }]
     pq.write_table(pa.Table.from_pylist(works, schema=WORKS), domain / "works.parquet")
-    return tmp_path
+    return index_root
 
 
 def test_snapshot_filters_sorts_and_preserves_native_values(index):
@@ -49,6 +50,7 @@ def test_snapshot_filters_sorts_and_preserves_native_values(index):
     assert store.trend("t:ai:2021:1")["as_of"] == 2021
     assert store.trend_domain("t:ai:2021:1") == "golden"
     assert store.n_works("golden") == 1
+    assert store.as_of_years("golden") == [2021, 2026]
     rows[0]["years"].append(9999)
     assert store.trend("t:ai:2026:1")["years"] == [2026]
     (index / "golden" / "trends.parquet").unlink()
@@ -79,6 +81,7 @@ def test_empty_index(tmp_path):
     assert store.trend("missing") is None
     assert store.trend_domain("missing") is None
     assert store.n_works("missing") == 0
+    assert store.as_of_years("missing") == []
 
 
 def test_corpus_location_has_priority(index):

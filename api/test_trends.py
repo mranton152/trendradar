@@ -47,6 +47,16 @@ def test_unknown_domain_and_trend_have_404(index):  # noqa: F811
     assert unknown_trend.status_code == 404
 
 
+def test_known_domain_without_requested_snapshot_has_actionable_error(index):  # noqa: F811
+    with TestClient(create_app(index)) as client:
+        response = client.post("/api/v1/trends", json={"domain": "golden", "as_of": 2023})
+    assert response.status_code == 422
+    assert response.json()["detail"] == (
+        "Домен 'golden' есть в индексе, но расчёта на срез 2023 нет. "
+        "Доступные срезы: 2021, 2026."
+    )
+
+
 def test_request_limits_and_resolve(index):  # noqa: F811
     with TestClient(create_app(index)) as client:
         invalid = client.post("/api/v1/trends", json={"domain": "golden", "top_n": 51})

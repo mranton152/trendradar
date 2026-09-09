@@ -4,8 +4,18 @@ from datetime import UTC, datetime
 
 from fastapi import APIRouter, HTTPException, Request
 
-from api.models import (Components, DomainInfo, Evidence, ResolveRequest, ResolveResponse,
-                        SeriesPoint, Source, Trend, TrendsRequest, TrendsResponse)
+from api.models import (
+    Components,
+    DomainInfo,
+    Evidence,
+    ResolveRequest,
+    ResolveResponse,
+    SeriesPoint,
+    Source,
+    Trend,
+    TrendsRequest,
+    TrendsResponse,
+)
 from api.store import Store
 
 router = APIRouter(prefix="/api/v1", tags=["trends"])
@@ -93,10 +103,17 @@ def resolve(body: ResolveRequest, request: Request) -> ResolveResponse:
 def trends(body: TrendsRequest, request: Request) -> TrendsResponse:
     store = _store(request)
     domain = _resolve_domain(body.domain, store)
-    rows = store.trends(domain, body.as_of, body.top_n) if domain else []
-    if not rows:
+    if domain is None:
         available = ", ".join(store.domains()) or "индекс пуст"
         raise HTTPException(404, f"Домен '{body.domain}' не найден. Доступно: {available}")
+    rows = store.trends(domain, body.as_of, body.top_n)
+    if not rows:
+        available_years = ", ".join(map(str, store.as_of_years(domain))) or "нет"
+        raise HTTPException(
+            422,
+            f"Домен '{domain}' есть в индексе, но расчёта на срез {body.as_of} нет. "
+            f"Доступные срезы: {available_years}.",
+        )
     return TrendsResponse(
         domain=DomainInfo(query=body.domain, resolved=domain, n_works=store.n_works(domain)),
         as_of=body.as_of,

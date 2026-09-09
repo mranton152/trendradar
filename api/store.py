@@ -87,6 +87,10 @@ class Store:
     def n_works(self, domain: str) -> int:
         return len(self._works.get(domain, {}))
 
+    def as_of_years(self, domain: str) -> list[int]:
+        """Срезы, для которых в загруженном домене есть хотя бы один тренд."""
+        return sorted({int(row["as_of"]) for row in self._trends.get(domain, [])})
+
     def works(self, domain: str, doc_ids: list[str]) -> list[dict]:
         """Источники в порядке запроса, без повторов и неизвестных идентификаторов."""
         documents = self._works.get(domain, {})
