@@ -40,6 +40,7 @@
 | [10-setup-macbook.md](docs/10-setup-macbook.md) | Перенос репозитория на мак и первый запуск |
 | [11-team-plan.md](docs/11-team-plan.md) | **План работы командой: роли, задачи по дням** |
 | [12-github-setup.md](docs/12-github-setup.md) | **Репозиторий и доступы: пошагово** |
+| [13-presentation.md](docs/13-presentation.md) | **Скелет презентации: 7 слайдов, измеренные числа** |
 
 ## Команда
 
