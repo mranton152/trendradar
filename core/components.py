@@ -9,6 +9,8 @@ radical novelty (N), fast growth (G), coherence, prominent impact, uncertainty.
 """
 import math
 
+from core.breakout import год_прорыва
+from core.homonym import есть_подозрение_на_тёзку, текущий_сегмент
 from core.normalize import frequencies
 
 ПОРОГ_ПЕРВОГО_УПОМИНАНИЯ = 5   # ниже — статистический шум и ошибки метаданных
@@ -64,7 +66,12 @@ def components(counts: dict[int, int], norm: dict[int, float],
 
     # N — новизна. Первый год упоминания в чистом виде не работает: у любого
     # термина найдутся единичные срабатывания 20-летней давности.
-    история = {y: c for y, c in counts.items() if y <= as_of}
+    #
+    # Считаем по НЫНЕШНЕЙ жизни термина. У строки бывает прошлая жизнь под тем
+    # же названием: «diffusion model» до 2010 — это физика диффузии, а не
+    # генеративные модели. Без разделения год взлёта уезжает на пятнадцать лет
+    # назад, возраст выходит за MAX_AGE, и фильтр выбрасывает тренд как старый.
+    история = текущий_сегмент(counts, as_of)
     пик = max(история.values()) if история else 0
     first_mention = takeoff = None
     for y in sorted(история):
@@ -73,6 +80,16 @@ def components(counts: dict[int, int], norm: dict[int, float],
         if takeoff is None and история[y] >= max(ПОРОГ_ПЕРВОГО_УПОМИНАНИЯ * 2,
                                                  ДОЛЯ_ПИКА_ДЛЯ_ВЗЛЁТА * пик):
             takeoff = y
+
+    # Второй случай тёзки: старый смысл не заглох, а публикуется параллельно.
+    # Разрыва нет, есть излом собственного тренда — его и ищем. Если он есть,
+    # именно он и считается началом нынешней жизни термина.
+    прорыв = год_прорыва(counts, as_of)
+    if прорыв is not None:
+        takeoff = прорыв
+        first_mention = min(first_mention or прорыв, прорыв)
+    тёзка = есть_подозрение_на_тёзку(counts, as_of) or прорыв is not None
+
     опорный = takeoff or first_mention
     age = (as_of - опорный) if опорный else 99
 
@@ -93,6 +110,7 @@ def components(counts: dict[int, int], norm: dict[int, float],
         "first_mention": first_mention,
         "takeoff_year": takeoff,
         "age": age,
+        "homonym_suspected": тёзка,
         "growth": growth,
         "accel": accel,
         "burst": burst,

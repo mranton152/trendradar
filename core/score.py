@@ -47,9 +47,15 @@ def стадия(comp: dict, maturity_pct: float) -> str:
 
 
 def уверенность(comp: dict, n_countries: int) -> str:
-    """Честный флаг вместо ложной точности: когда данных мало, так и пишем."""
+    """Честный флаг вместо ложной точности: когда данных мало, так и пишем.
+
+    Подозрение на тёзку опускает потолок до medium даже при обилии данных:
+    разделение жизней термина по форме ряда — эвристика, и мы не имеем права
+    выдавать её результат за высокую уверенность.
+    """
     if comp["counts_recent"] >= 200 and n_countries >= 15:
-        return "high"
+        высокая = not comp.get("homonym_suspected")
+        return "high" if высокая else "medium"
     if comp["counts_recent"] >= 50 and n_countries >= 8:
         return "medium"
     return "low"
