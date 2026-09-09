@@ -11,7 +11,7 @@ from contracts.schemas import TRENDS, WORKS
 def index(tmp_path):
     index_root = tmp_path / "index"
     domain = index_root / "golden"
-    domain.mkdir()
+    domain.mkdir(parents=True)
     rows = []
     for year, rank in [(2026, 3), (2021, 1), (2026, 1), (2026, 2)]:
         rows.append({
