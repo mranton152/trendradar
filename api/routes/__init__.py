@@ -1,0 +1,1 @@
+"""Маршруты TrendRadar API."""
