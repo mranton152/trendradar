@@ -1,0 +1,736 @@
+{
+  "domain": "artificial-intelligence",
+  "years": "2015-2026",
+  "sample": 5000,
+  "seed": 42,
+  "as_of": "2026-09-08",
+  "filter": "concepts.id:C154945302",
+  "source": "OpenAlex",
+  "concept_name": "Artificial intelligence",
+  "harvested_at": "2026-09-08T11:22:01.473580+00:00",
+  "n_works": 5000,
+  "counts_by_year": {
+    "2015": 417,
+    "2016": 417,
+    "2017": 417,
+    "2018": 417,
+    "2019": 417,
+    "2020": 417,
+    "2021": 417,
+    "2022": 417,
+    "2023": 416,
+    "2024": 416,
+    "2025": 416,
+    "2026": 416
+  },
+  "with_abstract": 3738,
+  "with_doi": 4355,
+  "with_countries": 3750,
+  "sha256": "bb89fb897e02dcb6601c8fded87050d7aef6e107c72bd0b480c4bb2f80d87275",
+  "bytes": 2806754,
+  "rejected": [
+    {
+      "id": "https://openalex.org/W2989576701",
+      "reason": "Исключён по сохранённому аудиту URL (GET 404/410)"
+    },
+    {
+      "id": "https://openalex.org/W2532005366",
+      "reason": "Исключён по сохранённому аудиту URL (GET 404/410)"
+    },
+    {
+      "id": "https://openalex.org/W2384103521",
+      "reason": "Недостаточные обязательные данные: W2384103521"
+    },
+    {
+      "id": "https://openalex.org/W1911573337",
+      "reason": "Исключён по сохранённому аудиту URL (GET 404/410)"
+    },
+    {
+      "id": "https://openalex.org/W2546226419",
+      "reason": "Недостаточные обязательные данные: W2546226419"
+    },
+    {
+      "id": "https://openalex.org/W1827808279",
+      "reason": "Недостаточные обязательные данные: W1827808279"
+    },
+    {
+      "id": "https://openalex.org/W2560704739",
+      "reason": "Исключён по сохранённому аудиту URL (GET 404/410)"
+    },
+    {
+      "id": "https://openalex.org/W2419494517",
+      "reason": "Исключён по сохранённому аудиту URL (GET 404/410)"
+    },
+    {
+      "id": "https://openalex.org/W2336200754",
+      "reason": "Исключён по сохранённому аудиту URL (GET 404/410)"
+    },
+    {
+      "id": "https://openalex.org/W1913454089",
+      "reason": "Исключён по сохранённому аудиту URL (GET 404/410)"
+    },
+    {
+      "id": "https://openalex.org/W4247152165",
+      "reason": "Исключён по сохранённому аудиту URL (GET 404/410)"
+    },
+    {
+      "id": "https://openalex.org/W2898659289",
+      "reason": "Исключён по сохранённому аудиту URL (GET 404/410)"
+    },
+    {
+      "id": "https://openalex.org/W2242201001",
+      "reason": "Недостаточные обязательные данные: W2242201001"
+    },
+    {
+      "id": "https://openalex.org/W2197747904",
+      "reason": "Исключён по сохранённому аудиту URL (GET 404/410)"
+    },
+    {
+      "id": "https://openalex.org/W2191137478",
+      "reason": "Исключён по сохранённому аудиту URL (GET 404/410)"
+    },
+    {
+      "id": "https://openalex.org/W2562670297",
+      "reason": "Исключён по сохранённому аудиту URL (GET 404/410)"
+    },
+    {
+      "id": "https://openalex.org/W3003319690",
+      "reason": "Исключён по сохранённому аудиту URL (GET 404/410)"
+    },
+    {
+      "id": "https://openalex.org/W3198174772",
+      "reason": "Исключён по сохранённому аудиту URL (GET 404/410)"
+    },
+    {
+      "id": "https://openalex.org/W2399896239",
+      "reason": "Исключён по сохранённому аудиту URL (GET 404/410)"
+    },
+    {
+      "id": "https://openalex.org/W91984787",
+      "reason": "Исключён по сохранённому аудиту URL (GET 404/410)"
+    },
+    {
+      "id": "https://openalex.org/W3007396056",
+      "reason": "Исключён по сохранённому аудиту URL (GET 404/410)"
+    },
+    {
+      "id": "https://openalex.org/W2996312313",
+      "reason": "Исключён по сохранённому аудиту URL (GET 404/410)"
+    },
+    {
+      "id": "https://openalex.org/W4407186273",
+      "reason": "Исключён по сохранённому аудиту URL (GET 404/410)"
+    },
+    {
+      "id": "https://openalex.org/W2905519795",
+      "reason": "Исключён по сохранённому аудиту URL (GET 404/410)"
+    },
+    {
+      "id": "https://openalex.org/W2911176918",
+      "reason": "Исключён по сохранённому аудиту URL (GET 404/410)"
+    },
+    {
+      "id": "https://openalex.org/W2599880414",
+      "reason": "Исключён по сохранённому аудиту URL (GET 404/410)"
+    },
+    {
+      "id": "https://openalex.org/W2968984071",
+      "reason": "Исключён по сохранённому аудиту URL (GET 404/410)"
+    },
+    {
+      "id": "https://openalex.org/W2774120285",
+      "reason": "Исключён по сохранённому аудиту URL (GET 404/410)"
+    },
+    {
+      "id": "https://openalex.org/W2598783045",
+      "reason": "Исключён по сохранённому аудиту URL (GET 404/410)"
+    },
+    {
+      "id": "https://openalex.org/W3139066942",
+      "reason": "Недостаточные обязательные данные: W3139066942"
+    },
+    {
+      "id": "https://openalex.org/W2573401113",
+      "reason": "Недостаточные обязательные данные: W2573401113"
+    },
+    {
+      "id": "https://openalex.org/W3194413727",
+      "reason": "Недостаточные обязательные данные: W3194413727"
+    },
+    {
+      "id": "https://openalex.org/W2561853568",
+      "reason": "Исключён по сохранённому аудиту URL (GET 404/410)"
+    },
+    {
+      "id": "https://openalex.org/W2604402816",
+      "reason": "Исключён по сохранённому аудиту URL (GET 404/410)"
+    },
+    {
+      "id": "https://openalex.org/W2410190473",
+      "reason": "Исключён по сохранённому аудиту URL (GET 404/410)"
+    },
+    {
+      "id": "https://openalex.org/W2543054495",
+      "reason": "Исключён по сохранённому аудиту URL (GET 404/410)"
+    },
+    {
+      "id": "https://openalex.org/W2598832791",
+      "reason": "Исключён по сохранённому аудиту URL (GET 404/410)"
+    },
+    {
+      "id": "https://openalex.org/W2605191122",
+      "reason": "Исключён по сохранённому аудиту URL (GET 404/410)"
+    },
+    {
+      "id": "https://openalex.org/W2906265519",
+      "reason": "Исключён по сохранённому аудиту URL (GET 404/410)"
+    },
+    {
+      "id": "https://openalex.org/W2968495338",
+      "reason": "Исключён по сохранённому аудиту URL (GET 404/410)"
+    },
+    {
+      "id": "https://openalex.org/W2590630689",
+      "reason": "Исключён по сохранённому аудиту URL (GET 404/410)"
+    },
+    {
+      "id": "https://openalex.org/W2761817502",
+      "reason": "Недостаточные обязательные данные: W2761817502"
+    },
+    {
+      "id": "https://openalex.org/W2885626959",
+      "reason": "Исключён по сохранённому аудиту URL (GET 404/410)"
+    },
+    {
+      "id": "https://openalex.org/W2946845930",
+      "reason": "Исключён по сохранённому аудиту URL (GET 404/410)"
+    },
+    {
+      "id": "https://openalex.org/W3005285192",
+      "reason": "Исключён по сохранённому аудиту URL (GET 404/410)"
+    },
+    {
+      "id": "https://openalex.org/W2613939043",
+      "reason": "Исключён по сохранённому аудиту URL (GET 404/410)"
+    },
+    {
+      "id": "https://openalex.org/W2727281514",
+      "reason": "Исключён по сохранённому аудиту URL (GET 404/410)"
+    },
+    {
+      "id": "https://openalex.org/W2607403120",
+      "reason": "Исключён по сохранённому аудиту URL (GET 404/410)"
+    },
+    {
+      "id": "https://openalex.org/W2969604321",
+      "reason": "Исключён по сохранённому аудиту URL (GET 404/410)"
+    },
+    {
+      "id": "https://openalex.org/W2759728186",
+      "reason": "Исключён по сохранённому аудиту URL (GET 404/410)"
+    },
+    {
+      "id": "https://openalex.org/W2760975797",
+      "reason": "Исключён по сохранённому аудиту URL (GET 404/410)"
+    },
+    {
+      "id": "https://openalex.org/W2804191625",
+      "reason": "Исключён по сохранённому аудиту URL (GET 404/410)"
+    },
+    {
+      "id": "https://openalex.org/W2980651594",
+      "reason": "Исключён по сохранённому аудиту URL (GET 404/410)"
+    },
+    {
+      "id": "https://openalex.org/W1487727854",
+      "reason": "Исключён по сохранённому аудиту URL (GET 404/410)"
+    },
+    {
+      "id": "https://openalex.org/W2891306365",
+      "reason": "Исключён по сохранённому аудиту URL (GET 404/410)"
+    },
+    {
+      "id": "https://openalex.org/W3190975151",
+      "reason": "Исключён по сохранённому аудиту URL (GET 404/410)"
+    },
+    {
+      "id": "https://openalex.org/W2896625385",
+      "reason": "Исключён по сохранённому аудиту URL (GET 404/410)"
+    },
+    {
+      "id": "https://openalex.org/W2968756570",
+      "reason": "Исключён по сохранённому аудиту URL (GET 404/410)"
+    },
+    {
+      "id": "https://openalex.org/W3024709007",
+      "reason": "Исключён по сохранённому аудиту URL (GET 404/410)"
+    },
+    {
+      "id": "https://openalex.org/W3161565190",
+      "reason": "Исключён по сохранённому аудиту URL (GET 404/410)"
+    },
+    {
+      "id": "https://openalex.org/W7210210241",
+      "reason": "Исключён по сохранённому аудиту URL (GET 404/410)"
+    },
+    {
+      "id": "https://openalex.org/W2971837835",
+      "reason": "Исключён по сохранённому аудиту URL (GET 404/410)"
+    },
+    {
+      "id": "https://openalex.org/W2905245272",
+      "reason": "Исключён по сохранённому аудиту URL (GET 404/410)"
+    },
+    {
+      "id": "https://openalex.org/W2916320192",
+      "reason": "Исключён по сохранённому аудиту URL (GET 404/410)"
+    },
+    {
+      "id": "https://openalex.org/W2995062830",
+      "reason": "Исключён по сохранённому аудиту URL (GET 404/410)"
+    },
+    {
+      "id": "https://openalex.org/W2807535220",
+      "reason": "Исключён по сохранённому аудиту URL (GET 404/410)"
+    },
+    {
+      "id": "https://openalex.org/W4256068326",
+      "reason": "Исключён по сохранённому аудиту URL (GET 404/410)"
+    },
+    {
+      "id": "https://openalex.org/W2895822743",
+      "reason": "Исключён по сохранённому аудиту URL (GET 404/410)"
+    },
+    {
+      "id": "https://openalex.org/W3156328064",
+      "reason": "Исключён по сохранённому аудиту URL (GET 404/410)"
+    },
+    {
+      "id": "https://openalex.org/W2900777624",
+      "reason": "Исключён по сохранённому аудиту URL (GET 404/410)"
+    },
+    {
+      "id": "https://openalex.org/W2910755416",
+      "reason": "Исключён по сохранённому аудиту URL (GET 404/410)"
+    },
+    {
+      "id": "https://openalex.org/W3135532947",
+      "reason": "Исключён по сохранённому аудиту URL (GET 404/410)"
+    },
+    {
+      "id": "https://openalex.org/W2938767641",
+      "reason": "Исключён по сохранённому аудиту URL (GET 404/410)"
+    },
+    {
+      "id": "https://openalex.org/W3194161239",
+      "reason": "Исключён по сохранённому аудиту URL (GET 404/410)"
+    },
+    {
+      "id": "https://openalex.org/W2957327519",
+      "reason": "Недостаточные обязательные данные: W2957327519"
+    },
+    {
+      "id": "https://openalex.org/W3109009083",
+      "reason": "Исключён по сохранённому аудиту URL (GET 404/410)"
+    },
+    {
+      "id": "https://openalex.org/W2921227422",
+      "reason": "Исключён по сохранённому аудиту URL (GET 404/410)"
+    },
+    {
+      "id": "https://openalex.org/W2883620954",
+      "reason": "Исключён по сохранённому аудиту URL (GET 404/410)"
+    },
+    {
+      "id": "https://openalex.org/W2967771407",
+      "reason": "Исключён по сохранённому аудиту URL (GET 404/410)"
+    },
+    {
+      "id": "https://openalex.org/W3122694457",
+      "reason": "Исключён по сохранённому аудиту URL (GET 404/410)"
+    },
+    {
+      "id": "https://openalex.org/W2981421619",
+      "reason": "Исключён по сохранённому аудиту URL (GET 404/410)"
+    },
+    {
+      "id": "https://openalex.org/W2973415370",
+      "reason": "Недостаточные обязательные данные: W2973415370"
+    },
+    {
+      "id": "https://openalex.org/W3177766365",
+      "reason": "Исключён по сохранённому аудиту URL (GET 404/410)"
+    },
+    {
+      "id": "https://openalex.org/W3092570014",
+      "reason": "Недостаточные обязательные данные: W3092570014"
+    },
+    {
+      "id": "https://openalex.org/W4287611522",
+      "reason": "Исключён по сохранённому аудиту URL (GET 404/410)"
+    },
+    {
+      "id": "https://openalex.org/W3046622627",
+      "reason": "Исключён по сохранённому аудиту URL (GET 404/410)"
+    },
+    {
+      "id": "https://openalex.org/W3035209270",
+      "reason": "Исключён по сохранённому аудиту URL (GET 404/410)"
+    },
+    {
+      "id": "https://openalex.org/W3034297147",
+      "reason": "Исключён по сохранённому аудиту URL (GET 404/410)"
+    },
+    {
+      "id": "https://openalex.org/W3005657298",
+      "reason": "Исключён по сохранённому аудиту URL (GET 404/410)"
+    },
+    {
+      "id": "https://openalex.org/W3007034419",
+      "reason": "Исключён по сохранённому аудиту URL (GET 404/410)"
+    },
+    {
+      "id": "https://openalex.org/W3090395970",
+      "reason": "Исключён по сохранённому аудиту URL (GET 404/410)"
+    },
+    {
+      "id": "https://openalex.org/W3088104778",
+      "reason": "Исключён по сохранённому аудиту URL (GET 404/410)"
+    },
+    {
+      "id": "https://openalex.org/W4287629752",
+      "reason": "Исключён по сохранённому аудиту URL (GET 404/410)"
+    },
+    {
+      "id": "https://openalex.org/W3038486472",
+      "reason": "Исключён по сохранённому аудиту URL (GET 404/410)"
+    },
+    {
+      "id": "https://openalex.org/W7130935857",
+      "reason": "Исключён по сохранённому аудиту URL (GET 404/410)"
+    },
+    {
+      "id": "https://openalex.org/W3046942712",
+      "reason": "Исключён по сохранённому аудиту URL (GET 404/410)"
+    },
+    {
+      "id": "https://openalex.org/W3107942978",
+      "reason": "Исключён по сохранённому аудиту URL (GET 404/410)"
+    },
+    {
+      "id": "https://openalex.org/W4285665984",
+      "reason": "Исключён по сохранённому аудиту URL (GET 404/410)"
+    },
+    {
+      "id": "https://openalex.org/W3024573442",
+      "reason": "Исключён по сохранённому аудиту URL (GET 404/410)"
+    },
+    {
+      "id": "https://openalex.org/W3209707520",
+      "reason": "Исключён по сохранённому аудиту URL (GET 404/410)"
+    },
+    {
+      "id": "https://openalex.org/W3020463221",
+      "reason": "Исключён по сохранённому аудиту URL (GET 404/410)"
+    },
+    {
+      "id": "https://openalex.org/W3044419539",
+      "reason": "Исключён по сохранённому аудиту URL (GET 404/410)"
+    },
+    {
+      "id": "https://openalex.org/W4290442268",
+      "reason": "Исключён по сохранённому аудиту URL (GET 404/410)"
+    },
+    {
+      "id": "https://openalex.org/W3202484989",
+      "reason": "Исключён по сохранённому аудиту URL (GET 404/410)"
+    },
+    {
+      "id": "https://openalex.org/W3199167622",
+      "reason": "Исключён по сохранённому аудиту URL (GET 404/410)"
+    },
+    {
+      "id": "https://openalex.org/W3183387017",
+      "reason": "Исключён по сохранённому аудиту URL (GET 404/410)"
+    },
+    {
+      "id": "https://openalex.org/W3211190467",
+      "reason": "Исключён по сохранённому аудиту URL (GET 404/410)"
+    },
+    {
+      "id": "https://openalex.org/W3193443941",
+      "reason": "Недостаточные обязательные данные: W3193443941"
+    },
+    {
+      "id": "https://openalex.org/W3160746866",
+      "reason": "Исключён по сохранённому аудиту URL (GET 404/410)"
+    },
+    {
+      "id": "https://openalex.org/W3162070414",
+      "reason": "Исключён по сохранённому аудиту URL (GET 404/410)"
+    },
+    {
+      "id": "https://openalex.org/W3160973726",
+      "reason": "Исключён по сохранённому аудиту URL (GET 404/410)"
+    },
+    {
+      "id": "https://openalex.org/W3183767953",
+      "reason": "Исключён по сохранённому аудиту URL (GET 404/410)"
+    },
+    {
+      "id": "https://openalex.org/W3177322100",
+      "reason": "Исключён по сохранённому аудиту URL (GET 404/410)"
+    },
+    {
+      "id": "https://openalex.org/W3118366662",
+      "reason": "Исключён по сохранённому аудиту URL (GET 404/410)"
+    },
+    {
+      "id": "https://openalex.org/W3210153202",
+      "reason": "Исключён по сохранённому аудиту URL (GET 404/410)"
+    },
+    {
+      "id": "https://openalex.org/W4288713686",
+      "reason": "Исключён по сохранённому аудиту URL (GET 404/410)"
+    },
+    {
+      "id": "https://openalex.org/W4280515190",
+      "reason": "Исключён по сохранённому аудиту URL (GET 404/410)"
+    },
+    {
+      "id": "https://openalex.org/W4229001829",
+      "reason": "Исключён по сохранённому аудиту URL (GET 404/410)"
+    },
+    {
+      "id": "https://openalex.org/W4387354880",
+      "reason": "Исключён по сохранённому аудиту URL (GET 404/410)"
+    },
+    {
+      "id": "https://openalex.org/W4392349856",
+      "reason": "Исключён по сохранённому аудиту URL (GET 404/410)"
+    },
+    {
+      "id": "https://openalex.org/W7131276100",
+      "reason": "Исключён по сохранённому аудиту URL (GET 404/410)"
+    },
+    {
+      "id": "https://openalex.org/W7117315670",
+      "reason": "Исключён по сохранённому аудиту URL (GET 404/410)"
+    },
+    {
+      "id": "https://openalex.org/W4409457830",
+      "reason": "Исключён по сохранённому аудиту URL (GET 404/410)"
+    },
+    {
+      "id": "https://openalex.org/W4412096141",
+      "reason": "Исключён по сохранённому аудиту URL (GET 404/410)"
+    },
+    {
+      "id": "https://openalex.org/W7131293414",
+      "reason": "Исключён по сохранённому аудиту URL (GET 404/410)"
+    },
+    {
+      "id": "https://openalex.org/W7115686273",
+      "reason": "Исключён по сохранённому аудиту URL (GET 404/410)"
+    },
+    {
+      "id": "https://openalex.org/W7106132220",
+      "reason": "Исключён по сохранённому аудиту URL (GET 404/410)"
+    },
+    {
+      "id": "https://openalex.org/W7111383233",
+      "reason": "Исключён по сохранённому аудиту URL (GET 404/410)"
+    },
+    {
+      "id": "https://openalex.org/W4405977375",
+      "reason": "Исключён по сохранённому аудиту URL (GET 404/410)"
+    },
+    {
+      "id": "https://openalex.org/W7104848288",
+      "reason": "Исключён по сохранённому аудиту URL (GET 404/410)"
+    },
+    {
+      "id": "https://openalex.org/W7115739480",
+      "reason": "Исключён по сохранённому аудиту URL (GET 404/410)"
+    },
+    {
+      "id": "https://openalex.org/W7139925984",
+      "reason": "Исключён по сохранённому аудиту URL (GET 404/410)"
+    },
+    {
+      "id": "https://openalex.org/W7151415523",
+      "reason": "Исключён по сохранённому аудиту URL (GET 404/410)"
+    },
+    {
+      "id": "https://openalex.org/W7151628872",
+      "reason": "Исключён по сохранённому аудиту URL (GET 404/410)"
+    },
+    {
+      "id": "https://openalex.org/W7127473225",
+      "reason": "Исключён по сохранённому аудиту URL (GET 404/410)"
+    },
+    {
+      "id": "https://openalex.org/W7151257911",
+      "reason": "Исключён по сохранённому аудиту URL (GET 404/410)"
+    },
+    {
+      "id": "https://openalex.org/W7151426107",
+      "reason": "Исключён по сохранённому аудиту URL (GET 404/410)"
+    },
+    {
+      "id": "https://openalex.org/W7151605542",
+      "reason": "Исключён по сохранённому аудиту URL (GET 404/410)"
+    },
+    {
+      "id": "https://openalex.org/W7204100069",
+      "reason": "Исключён по сохранённому аудиту URL (GET 404/410)"
+    },
+    {
+      "id": "https://openalex.org/W7125482582",
+      "reason": "Исключён по сохранённому аудиту URL (GET 404/410)"
+    },
+    {
+      "id": "https://openalex.org/W7137444853",
+      "reason": "Исключён по сохранённому аудиту URL (GET 404/410)"
+    }
+  ],
+  "sampling_pool_extra_per_year": 100,
+  "excluded_doc_ids": [
+    "openalex:W1487727854",
+    "openalex:W1911573337",
+    "openalex:W1913454089",
+    "openalex:W2191137478",
+    "openalex:W2197747904",
+    "openalex:W2336200754",
+    "openalex:W2399896239",
+    "openalex:W2410190473",
+    "openalex:W2419494517",
+    "openalex:W2532005366",
+    "openalex:W2543054495",
+    "openalex:W2560704739",
+    "openalex:W2561853568",
+    "openalex:W2562670297",
+    "openalex:W2590630689",
+    "openalex:W2598783045",
+    "openalex:W2598832791",
+    "openalex:W2599880414",
+    "openalex:W2604402816",
+    "openalex:W2605191122",
+    "openalex:W2607403120",
+    "openalex:W2613939043",
+    "openalex:W2727281514",
+    "openalex:W2759728186",
+    "openalex:W2760975797",
+    "openalex:W2774120285",
+    "openalex:W2804191625",
+    "openalex:W2807535220",
+    "openalex:W2883620954",
+    "openalex:W2885626959",
+    "openalex:W2891306365",
+    "openalex:W2895822743",
+    "openalex:W2896625385",
+    "openalex:W2898659289",
+    "openalex:W2900777624",
+    "openalex:W2905245272",
+    "openalex:W2905519795",
+    "openalex:W2906265519",
+    "openalex:W2910755416",
+    "openalex:W2911176918",
+    "openalex:W2916320192",
+    "openalex:W2921227422",
+    "openalex:W2938767641",
+    "openalex:W2946845930",
+    "openalex:W2967771407",
+    "openalex:W2968495338",
+    "openalex:W2968756570",
+    "openalex:W2968984071",
+    "openalex:W2969604321",
+    "openalex:W2971837835",
+    "openalex:W2980651594",
+    "openalex:W2981421619",
+    "openalex:W2989576701",
+    "openalex:W2995062830",
+    "openalex:W2996312313",
+    "openalex:W3003319690",
+    "openalex:W3005285192",
+    "openalex:W3005657298",
+    "openalex:W3007034419",
+    "openalex:W3007396056",
+    "openalex:W3020463221",
+    "openalex:W3024573442",
+    "openalex:W3024709007",
+    "openalex:W3034297147",
+    "openalex:W3035209270",
+    "openalex:W3038486472",
+    "openalex:W3044419539",
+    "openalex:W3046622627",
+    "openalex:W3046942712",
+    "openalex:W3088104778",
+    "openalex:W3090395970",
+    "openalex:W3107942978",
+    "openalex:W3109009083",
+    "openalex:W3118366662",
+    "openalex:W3122694457",
+    "openalex:W3135532947",
+    "openalex:W3156328064",
+    "openalex:W3160746866",
+    "openalex:W3160973726",
+    "openalex:W3161565190",
+    "openalex:W3162070414",
+    "openalex:W3177322100",
+    "openalex:W3177766365",
+    "openalex:W3183387017",
+    "openalex:W3183767953",
+    "openalex:W3190975151",
+    "openalex:W3194161239",
+    "openalex:W3198174772",
+    "openalex:W3199167622",
+    "openalex:W3202484989",
+    "openalex:W3209707520",
+    "openalex:W3210153202",
+    "openalex:W3211190467",
+    "openalex:W4229001829",
+    "openalex:W4247152165",
+    "openalex:W4256068326",
+    "openalex:W4280515190",
+    "openalex:W4285665984",
+    "openalex:W4287611522",
+    "openalex:W4287629752",
+    "openalex:W4288713686",
+    "openalex:W4290442268",
+    "openalex:W4387354880",
+    "openalex:W4392349856",
+    "openalex:W4405977375",
+    "openalex:W4407186273",
+    "openalex:W4409457830",
+    "openalex:W4412096141",
+    "openalex:W7104848288",
+    "openalex:W7106132220",
+    "openalex:W7111383233",
+    "openalex:W7115686273",
+    "openalex:W7115739480",
+    "openalex:W7117315670",
+    "openalex:W7125482582",
+    "openalex:W7127473225",
+    "openalex:W7130935857",
+    "openalex:W7131276100",
+    "openalex:W7131293414",
+    "openalex:W7137444853",
+    "openalex:W7139925984",
+    "openalex:W7151257911",
+    "openalex:W7151415523",
+    "openalex:W7151426107",
+    "openalex:W7151605542",
+    "openalex:W7151628872",
+    "openalex:W7204100069",
+    "openalex:W7210210241",
+    "openalex:W91984787"
+  ],
+  "sampling": "equal allocation by publication year; article; seed fixed",
+  "limitations": [
+    "Not a representative frequency estimate of the full corpus",
+    "2026 is partial through as_of",
+    "Abstract may be missing",
+    "Seed alone does not freeze changing OpenAlex data; retain cache"
+  ]
+}
