@@ -32,11 +32,27 @@ def make_mocks(as_of: int) -> None:
         )
         columns = [description[0] for description in result.description]
         rows = result.fetchall()
+        documents = {
+            doc_id: {
+                "doc_id": doc_id,
+                "title": title,
+                "url": url,
+                "year": int(year),
+                "type": doc_type,
+            }
+            for doc_id, title, url, year, doc_type in connection.execute(
+                """
+                SELECT doc_id, title, url, year, doc_type
+                FROM read_parquet(?)
+                """,
+                [str(WORKS_PATH)],
+            ).fetchall()
+        }
 
     if not rows:
         raise ValueError(f"В golden нет трендов для среза {as_of}")
 
-    trends = [_trend(dict(zip(columns, row, strict=True))) for row in rows]
+    trends = [_trend(dict(zip(columns, row, strict=True)), documents) for row in rows]
     payload = {
         "domain": {
             "query": "golden",
@@ -58,13 +74,11 @@ def make_mocks(as_of: int) -> None:
 
 def _n_works() -> int:
     with duckdb.connect(":memory:") as connection:
-        result = connection.execute(
-            "SELECT count(*) FROM read_parquet(?)", [str(WORKS_PATH)]
-        )
+        result = connection.execute("SELECT count(*) FROM read_parquet(?)", [str(WORKS_PATH)])
         return int(result.fetchone()[0])
 
 
-def _trend(row: dict[str, object]) -> dict[str, object]:
+def _trend(row: dict[str, object], documents: dict[str, dict[str, object]]) -> dict[str, object]:
     years = row["years"]
     counts = row["counts"]
     frequencies = row["freq_per_million"]
@@ -94,7 +108,11 @@ def _trend(row: dict[str, object]) -> dict[str, object]:
             "n_orgs": _optional_int(row["n_orgs"]),
             "n_patents": _optional_int(row["n_patents"]),
         },
-        "sources": [],
+        "sources": [
+            documents[doc_id]
+            for doc_id in row["top_doc_ids"]
+            if doc_id in documents and documents[doc_id]["url"]
+        ],
         "stage": row["stage"],
         "confidence": row["confidence"],
     }
