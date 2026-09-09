@@ -21,19 +21,24 @@ jobs:
           echo "Автор: $author"
           echo "Изменено:"; echo "$files"
 
-          # Владельцы папок. Логины подставить после создания репозитория.
+          # data/index/golden/ общий для всех троих: каждый кладёт туда свои
+          # файлы (works и candidates от Кости, trends от Антона, cards от
+          # Михаила). Границы там проходят по именам файлов, а не по папке.
+          GOLDEN='^data/index/golden/'
+
+          # Владельцы папок.
           case "$author" in
             # Антону принадлежат контракты, ядро и всё общее: зависимости,
             # сборка, CI. Правило «зависимости идут через Антона» — почему
             # uv.lock тоже здесь.
             mranton152)
-              allowed='^(contracts|core|validation|docs|team|spikes|\.githooks|\.github)/|^(AGENTS|CLAUDE|README)\.md$|^(Makefile|pyproject\.toml|uv\.lock|conftest\.py|\.gitignore)$' ;;
+              allowed="^(contracts|core|validation|docs|team|spikes|\.githooks|\.github)/|^(AGENTS|CLAUDE|README)\.md$|^(Makefile|pyproject\.toml|uv\.lock|conftest\.py|\.gitignore)$|$GOLDEN" ;;
             DockerDun)
-              allowed='^(ingest|semantic)/' ;;
+              allowed="^(ingest|semantic)/|$GOLDEN" ;;
             # docker-compose и .dockerignore в корне — часть задачи M-08,
             # поэтому входят в зону Михаила, хотя лежат не в его папке.
             quisinon-blip)
-              allowed='^(cards|api|web)/|^(docker-compose\.yml|\.dockerignore)$' ;;
+              allowed="^(cards|api|web)/|^(docker-compose\.yml|\.dockerignore)$|$GOLDEN" ;;
             *)      echo "::warning::неизвестный автор $author — проверка пропущена"; exit 0 ;;
           esac
 
