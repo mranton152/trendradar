@@ -17,13 +17,14 @@ const CONFIDENCE: Record<Trend["confidence"], string> = {
 type TrendCardProps = {
   trend: Trend;
   domain: string;
+  asOf: number;
 };
 
-export function TrendCard({ trend, domain }: TrendCardProps) {
+export function TrendCard({ trend, domain, asOf }: TrendCardProps) {
   return (
     <Link
       className="block rounded-xl border border-slate-200 bg-white p-5 shadow-sm transition hover:border-indigo-400 hover:shadow-md focus:outline-none focus:ring-4 focus:ring-indigo-100"
-      href={`/trends/${encodeURIComponent(domain)}/${encodeURIComponent(trend.trend_id)}`}
+      href={`/trends/${encodeURIComponent(domain)}/${encodeURIComponent(trend.trend_id)}?as_of=${asOf}`}
     >
       <div className="flex items-baseline gap-4">
         <span className="text-sm tabular-nums text-slate-400">#{trend.rank}</span>

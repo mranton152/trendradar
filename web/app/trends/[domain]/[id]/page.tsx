@@ -13,13 +13,21 @@ const STAGE_LABELS = {
 
 type TrendPageProps = {
   params: Promise<{ domain: string; id: string }>;
+  searchParams: Promise<{ as_of?: string }>;
 };
 
-export default async function TrendPage({ params }: TrendPageProps) {
+function selectedYear(value: string | undefined): number {
+  const year = Number(value ?? 2026);
+  return year === 2021 || year === 2026 ? year : 2026;
+}
+
+export default async function TrendPage({ params, searchParams }: TrendPageProps) {
   const { domain: encodedDomain, id: encodedId } = await params;
+  const { as_of: asOfParam } = await searchParams;
   const domain = decodeURIComponent(encodedDomain);
   const trendId = decodeURIComponent(encodedId);
-  const data = await getTrends(domain, 2026);
+  const asOf = selectedYear(asOfParam);
+  const data = await getTrends(domain, asOf);
   const trend = data.trends.find((item) => item.trend_id === trendId);
 
   if (!trend) {
@@ -28,7 +36,10 @@ export default async function TrendPage({ params }: TrendPageProps) {
 
   return (
     <main className="mx-auto max-w-3xl space-y-9 px-6 py-12">
-      <Link className="text-sm text-indigo-600 hover:underline" href={`/trends/${encodeURIComponent(domain)}`}>
+      <Link
+        className="text-sm text-indigo-600 hover:underline"
+        href={`/trends/${encodeURIComponent(domain)}?as_of=${data.as_of}`}
+      >
         ← К списку трендов
       </Link>
       <header>

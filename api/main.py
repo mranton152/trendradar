@@ -37,8 +37,10 @@ def create_app(index_root: str | Path = DEFAULT_INDEX_ROOT) -> FastAPI:
         return {"status": "ok", "indexed_domains": get_store(request).domains(),
                 "offline_mode": True}
 
+    from api.routes.methodology import router as methodology_router
     from api.routes.trends import router as trends_router
 
+    app.include_router(methodology_router)
     app.include_router(trends_router)
     return app
 

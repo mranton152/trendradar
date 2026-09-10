@@ -1,4 +1,5 @@
 import mockTrends from "../mocks/trends.json";
+import mockTrends2021 from "../mocks/trends-2021.json";
 
 export type Trend = {
   trend_id: string;
@@ -53,10 +54,11 @@ export async function getTrends(
   const apiUrl = process.env.NEXT_PUBLIC_API_URL;
 
   if (!apiUrl) {
+    const mock = asOf === 2021 ? mockTrends2021 : mockTrends;
     return {
-      ...(mockTrends as TrendsResponse),
+      ...(mock as TrendsResponse),
       domain: {
-        ...(mockTrends as TrendsResponse).domain,
+        ...(mock as TrendsResponse).domain,
         query: domainId,
       },
     };
