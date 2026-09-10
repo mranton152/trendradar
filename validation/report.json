@@ -1,0 +1,121 @@
+{
+  "version": "1.0",
+  "as_of": 2021,
+  "до_года": 2026,
+  "на_чём_измерено": "фиксированный пул кандидатов (validation/reference.py + validation/pool.py); меряет качество ранжирования, не генерацию кандидатов",
+  "weights": {
+    "novelty": 0.2,
+    "growth": 0.32,
+    "accel": 0.23,
+    "burst": 0.15,
+    "diffusion": 0.1
+  },
+  "filters": {
+    "MAX_AGE": 8,
+    "MIN_EVIDENCE": 20,
+    "MIN_COUNTRIES": 5,
+    "MIN_ACTIVE_YEARS": 3,
+    "MAX_LAST_YEAR_SHARE": 0.8,
+    "MIN_COUNTRIES_ДЛЯ_ВСПЛЕСКА": 10,
+    "MAX_MATURITY_PCT": 0.9
+  },
+  "n_trends": 15,
+  "размер_пула": 56,
+  "precision_at_15": 0.467,
+  "доля_мейнстрима_в_топе": 0.067,
+  "доля_выросших_после_среза": 0.933,
+  "медианный_lead_time": 6,
+  "тренды": [
+    {
+      "rank": 1,
+      "label": "vision transformer",
+      "takeoff_year": 2021,
+      "рост_после_среза": 65.02
+    },
+    {
+      "rank": 2,
+      "label": "differentiable rendering",
+      "takeoff_year": 2021,
+      "рост_после_среза": 2.67
+    },
+    {
+      "rank": 3,
+      "label": "contrastive learning",
+      "takeoff_year": 2020,
+      "рост_после_среза": 20.37
+    },
+    {
+      "rank": 4,
+      "label": "self-supervised learning",
+      "takeoff_year": 2019,
+      "рост_после_среза": 5.65
+    },
+    {
+      "rank": 5,
+      "label": "physics-informed neural network",
+      "takeoff_year": 2020,
+      "рост_после_среза": 11.23
+    },
+    {
+      "rank": 6,
+      "label": "neural architecture search",
+      "takeoff_year": 2019,
+      "рост_после_среза": 1.88
+    },
+    {
+      "rank": 7,
+      "label": "meta learning",
+      "takeoff_year": 2018,
+      "рост_после_среза": 3.5
+    },
+    {
+      "rank": 8,
+      "label": "continual learning",
+      "takeoff_year": 2018,
+      "рост_после_среза": 6.6
+    },
+    {
+      "rank": 9,
+      "label": "covid-19 pandemic",
+      "takeoff_year": 2020,
+      "рост_после_среза": 0.99
+    },
+    {
+      "rank": 10,
+      "label": "knowledge distillation",
+      "takeoff_year": 2019,
+      "рост_после_среза": 6.7
+    },
+    {
+      "rank": 11,
+      "label": "graph neural network",
+      "takeoff_year": 2020,
+      "рост_после_среза": 6.67
+    },
+    {
+      "rank": 12,
+      "label": "bayesian optimization",
+      "takeoff_year": 2017,
+      "рост_после_среза": 3.99
+    },
+    {
+      "rank": 13,
+      "label": "time series forecasting",
+      "takeoff_year": 2020,
+      "рост_после_среза": 3.41
+    },
+    {
+      "rank": 14,
+      "label": "model compression",
+      "takeoff_year": 2018,
+      "рост_после_среза": 4.03
+    },
+    {
+      "rank": 15,
+      "label": "transformer",
+      "takeoff_year": 2021,
+      "рост_после_среза": 11.12
+    }
+  ],
+  "собран": "2026-09-10"
+}
