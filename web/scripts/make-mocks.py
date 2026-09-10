@@ -12,7 +12,12 @@ import duckdb
 ROOT = Path(__file__).resolve().parents[2]
 INDEX_PATH = ROOT / "data" / "index" / "golden" / "trends.parquet"
 WORKS_PATH = ROOT / "data" / "index" / "golden" / "works.parquet"
-OUTPUT_PATH = ROOT / "web" / "mocks" / "trends.json"
+
+
+def output_path(as_of: int) -> Path:
+    """Сохраняет основной срез в прежний файл, исторические — в отдельные."""
+    filename = "trends.json" if as_of == 2026 else f"trends-{as_of}.json"
+    return ROOT / "web" / "mocks" / filename
 
 
 def make_mocks(as_of: int) -> None:
@@ -65,8 +70,9 @@ def make_mocks(as_of: int) -> None:
         "trends": trends,
     }
 
-    OUTPUT_PATH.parent.mkdir(parents=True, exist_ok=True)
-    OUTPUT_PATH.write_text(
+    path = output_path(as_of)
+    path.parent.mkdir(parents=True, exist_ok=True)
+    path.write_text(
         json.dumps(payload, ensure_ascii=False, indent=2) + "\n",
         encoding="utf-8",
     )
