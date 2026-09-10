@@ -58,6 +58,52 @@ def собрать_отчёт(index_dir: str | Path, corpus_path: str | Path,
     }
 
 
+def собрать_по_пулу(as_of: int, до_года: int) -> dict:
+    """Отчёт по фиксированному пулу кандидатов вместо индекса конвейера.
+
+    Нужен, пока стадия semantic не выдаёт настоящих кандидатов: ряды берутся
+    из кэша замера (validation/probe_cache.json), поэтому цифры настоящие,
+    но относятся к качеству ранжирования, а не всей системы. Это записано
+    в поле `на_чём_измерено`, чтобы отчёт нельзя было принять за большее.
+    """
+    from validation.scoring_probe import загрузить_кэш, прогнать
+
+    итог = прогнать(as_of)
+    кэш = загрузить_кэш()
+    ряды = {т: {int(y): n for y, n in с.items()}
+            for т, с in кэш.items() if not т.startswith("страны:")}
+
+    метки = [r["label"] for r in итог["топ15"]]
+    выросли = [(r["label"], рост_после_среза(ряды.get(r["label"], {}), as_of, до_года))
+               for r in итог["топ15"]]
+    лаги = [x for x in (lead_time(r["c"]["takeoff_year"], ряды.get(r["label"], {}))
+                        for r in итог["топ15"]) if x is not None]
+
+    return {
+        "version": ВЕРСИЯ_МЕТОДОЛОГИИ,
+        "as_of": as_of,
+        "до_года": до_года,
+        "на_чём_измерено": ("фиксированный пул кандидатов "
+                            "(validation/reference.py + validation/pool.py); "
+                            "меряет качество ранжирования, не генерацию кандидатов"),
+        "weights": ВЕСА,
+        "filters": ПОРОГИ,
+        "n_trends": len(итог["топ15"]),
+        "размер_пула": len(итог["строки"]) + len(итог["отсеяны"]),
+        "precision_at_15": round(precision_at_k(метки, ЭТАЛОН_ИИ_2021, k=15), 3),
+        "доля_мейнстрима_в_топе": round(
+            precision_at_k(метки, АНТИЭТАЛОН_ИИ_2021, k=15), 3),
+        "доля_выросших_после_среза": round(
+            sum(1 for _, x in выросли if x > ПОРОГ_РОСТА) / max(1, len(выросли)), 3),
+        "медианный_lead_time": sorted(лаги)[len(лаги) // 2] if лаги else None,
+        "тренды": [{"rank": i, "label": r["label"],
+                    "takeoff_year": r["c"]["takeoff_year"], "рост_после_среза": рост}
+                   for i, (r, (_, рост)) in enumerate(
+                       zip(итог["топ15"], выросли, strict=True), 1)],
+        "собран": dt.date.today().isoformat(),
+    }
+
+
 def написать_markdown(отчёт: dict, md_path: str | Path, json_path: str | Path) -> None:
     md_path, json_path = Path(md_path), Path(json_path)
     json_path.parent.mkdir(parents=True, exist_ok=True)
@@ -111,10 +157,19 @@ def написать_markdown(отчёт: dict, md_path: str | Path, json_path: 
 
 def main() -> None:
     ap = argparse.ArgumentParser()
-    ap.add_argument("--domain", required=True)
+    ap.add_argument("--domain", default="golden")
     ap.add_argument("--as-of", type=int, default=2021)
     ap.add_argument("--until", type=int, default=dt.date.today().year)
+    ap.add_argument("--source", choices=["index", "pool"], default="index",
+                    help="index — по кандидатам конвейера; pool — по фиксированному пулу")
     args = ap.parse_args()
+
+    if args.source == "pool":
+        отчёт = собрать_по_пулу(args.as_of, args.until)
+        написать_markdown(отчёт, "validation/REPORT.md", "validation/report.json")
+        print(json.dumps({k: v for k, v in отчёт.items() if k != "тренды"},
+                         ensure_ascii=False, indent=2))
+        return
 
     index_dir = Path("data/index") / args.domain
     corpus = Path("data/corpus") / args.domain / "works.parquet"
