@@ -53,7 +53,13 @@ export async function getTrends(
   const apiUrl = process.env.NEXT_PUBLIC_API_URL;
 
   if (!apiUrl) {
-    return mockTrends as TrendsResponse;
+    return {
+      ...(mockTrends as TrendsResponse),
+      domain: {
+        ...(mockTrends as TrendsResponse).domain,
+        query: domainId,
+      },
+    };
   }
 
   const response = await fetch(`${apiUrl}/api/v1/trends`, {
