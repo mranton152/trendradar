@@ -5,6 +5,12 @@ import { ScoreBreakdown } from "@/components/ScoreBreakdown";
 import { TimeSeriesChart } from "@/components/TimeSeriesChart";
 import { getTrends } from "@/lib/api";
 
+const STAGE_LABELS = {
+  emerging: "зарождение",
+  early_growth: "ранний рост",
+  scaling: "масштабирование",
+} as const;
+
 type TrendPageProps = {
   params: Promise<{ domain: string; id: string }>;
 };
@@ -27,7 +33,7 @@ export default async function TrendPage({ params }: TrendPageProps) {
       </Link>
       <header>
         <p className="text-sm font-semibold uppercase tracking-[0.2em] text-indigo-600">
-          #{trend.rank} · {trend.stage}
+          #{trend.rank} · {STAGE_LABELS[trend.stage]}
         </p>
         <h1 className="mt-3 text-3xl font-bold tracking-tight text-slate-950">
           {trend.title}
