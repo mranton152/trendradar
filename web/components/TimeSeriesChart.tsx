@@ -40,6 +40,7 @@ export function TimeSeriesChart({ series, takeoff }: TimeSeriesChartProps) {
           <Line
             dataKey="count"
             dot={false}
+            isAnimationActive={false}
             stroke="#4f46e5"
             strokeWidth={2}
             type="monotone"
