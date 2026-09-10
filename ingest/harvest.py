@@ -10,6 +10,7 @@ import pyarrow as pa
 import pyarrow.parquet as pq
 
 from contracts.schemas import WORKS
+from ingest.domain import resolve_concept
 from ingest.http import Client
 from ingest.sources.openalex import sample_year, select_valid
 
@@ -17,6 +18,7 @@ from ingest.sources.openalex import sample_year, select_valid
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--domain", default="artificial-intelligence")
+    parser.add_argument("--concept-id", help="Проверенный концепт OpenAlex, например C58053490")
     parser.add_argument("--years", default="2015-2026")
     parser.add_argument("--sample", type=int, default=5000)
     parser.add_argument("--seed", type=int, default=42)
@@ -35,10 +37,7 @@ def main():
         parser.error("Неверные годы или слишком маленькая выборка")
     client = Client(args.cache, offline=args.offline)
     query = args.domain.replace("-", " ")
-    concepts = client.get("/concepts", {"search": query, "per_page": 5})["results"]
-    concept = next((c for c in concepts if c["display_name"].lower() == query.lower()), None)
-    if concept is None:
-        raise ValueError(f"Не найден точный концепт: {query}")
+    concept = resolve_concept(client, query, args.concept_id)
     domain_filter = "concepts.id:" + concept["id"].rsplit("/", 1)[-1]
     config = {"domain": args.domain, "years": args.years, "sample": args.sample,
               "seed": args.seed, "as_of": args.as_of, "filter": domain_filter}
