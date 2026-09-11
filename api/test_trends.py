@@ -1,8 +1,11 @@
 """Контрактные проверки маршрутов M-02 на независимом мини-индексе."""
+import pyarrow as pa
+import pyarrow.parquet as pq
 from fastapi.testclient import TestClient
 
 from api.main import create_app
 from api.test_store import index  # noqa: F401
+from contracts.schemas import CARDS
 
 
 def test_trends_response_contains_evidence_and_sources(index):  # noqa: F811
@@ -36,6 +39,31 @@ def test_single_trend_keeps_index_folder_for_source_lookup(index):  # noqa: F811
         response = client.get("/api/v1/trends/t:ai:2021:1")
     assert response.status_code == 200
     assert response.json()["sources"][0]["doc_id"] == "openalex:W1"
+
+
+def test_trend_includes_generated_motivation_and_case(index):  # noqa: F811
+    cards = [{
+        "trend_id": "t:ai:2026:1", "title_ru": "Тестовый тренд",
+        "problem": "Проблема", "problem_docs": ["openalex:W1"],
+        "advantage": "Преимущество", "advantage_docs": ["openalex:W1"],
+        "case_type": "research", "case_name": "Исследование", "case_text": "Кейс",
+        "case_docs": ["openalex:W1"], "fintech_note": None, "citation_coverage": 1.0,
+        "model": "test", "generated_at": "2026-09-11T00:00:00+00:00",
+    }]
+    pq.write_table(
+        pa.Table.from_pylist(cards, schema=CARDS), index / "golden" / "cards.parquet"
+    )
+    with TestClient(create_app(index)) as client:
+        response = client.get("/api/v1/trends/t:ai:2026:1")
+
+    assert response.status_code == 200
+    assert response.json()["motivation"] == {
+        "problem": "Проблема", "advantage": "Преимущество", "sources": ["openalex:W1"],
+    }
+    assert response.json()["case_example"] == {
+        "type": "research", "name": "Исследование", "description": "Кейс",
+        "source": "openalex:W1",
+    }
 
 
 def test_unknown_domain_and_trend_have_404(index):  # noqa: F811

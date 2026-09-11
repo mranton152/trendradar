@@ -24,6 +24,17 @@ export type Trend = {
     n_orgs: number | null;
     n_patents: number | null;
   };
+  motivation?: {
+    problem: string;
+    advantage: string;
+    sources: string[];
+  } | null;
+  case_example?: {
+    type: "research" | "company";
+    name: string;
+    description: string;
+    source: string | null;
+  } | null;
   sources: Array<{
     doc_id: string;
     title: string;
