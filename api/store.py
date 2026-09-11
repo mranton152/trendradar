@@ -25,6 +25,7 @@ class Store:
         self._by_id: dict[str, dict] = {}
         self._trend_domains: dict[str, str] = {}
         self._works: dict[str, dict[str, dict]] = {}
+        self._cards: dict[str, dict[str, dict]] = {}
         if not self.root.exists():
             return
         with duckdb.connect(database=":memory:") as con:
@@ -54,6 +55,19 @@ class Store:
                     continue
                 self._trends[directory.name] = rows
                 self._works[directory.name] = documents
+                cards_path = directory / "cards.parquet"
+                if self._safe_file(cards_path, self.root):
+                    try:
+                        cards = self._read(con, cards_path)
+                        self._cards[directory.name] = {
+                            card["trend_id"]: card for card in cards
+                        }
+                    except (duckdb.Error, KeyError, TypeError, ValueError) as exc:
+                        log.warning(
+                            "Карточки домена %s пропущены: не удалось загрузить: %s",
+                            directory.name,
+                            exc,
+                        )
                 self._by_id.update(zip(ids, rows, strict=True))
                 self._trend_domains.update(dict.fromkeys(ids, directory.name))
 
@@ -95,3 +109,7 @@ class Store:
         """Источники в порядке запроса, без повторов и неизвестных идентификаторов."""
         documents = self._works.get(domain, {})
         return deepcopy([documents[i] for i in dict.fromkeys(doc_ids) if i in documents])
+
+    def card(self, domain: str, trend_id: str) -> dict | None:
+        """Возвращает текстовую карточку тренда, если она собрана для этого среза."""
+        return deepcopy(self._cards.get(domain, {}).get(trend_id))

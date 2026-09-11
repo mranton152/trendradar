@@ -4,7 +4,7 @@ import pyarrow.parquet as pq
 import pytest
 
 from api.store import Store
-from contracts.schemas import TRENDS, WORKS
+from contracts.schemas import CARDS, TRENDS, WORKS
 
 
 @pytest.fixture
@@ -82,6 +82,28 @@ def test_empty_index(tmp_path):
     assert store.trend_domain("missing") is None
     assert store.n_works("missing") == 0
     assert store.as_of_years("missing") == []
+
+
+def test_cards_are_loaded_separately_from_trends(index):
+    cards = [{
+        "trend_id": "t:ai:2026:1", "title_ru": "Тестовый тренд",
+        "problem": "Проблема", "problem_docs": ["openalex:W1"],
+        "advantage": "Преимущество", "advantage_docs": ["openalex:W1"],
+        "case_type": "research", "case_name": "Исследование", "case_text": "Кейс",
+        "case_docs": ["openalex:W1"], "fintech_note": None, "citation_coverage": 1.0,
+        "model": "test", "generated_at": "2026-09-11T00:00:00+00:00",
+    }]
+    pq.write_table(
+        pa.Table.from_pylist(cards, schema=CARDS), index / "golden" / "cards.parquet"
+    )
+
+    store = Store(index)
+    card = store.card("golden", "t:ai:2026:1")
+    assert card is not None
+    assert card["problem_docs"] == ["openalex:W1"]
+    card["problem_docs"].append("changed")
+    assert store.card("golden", "t:ai:2026:1")["problem_docs"] == ["openalex:W1"]
+    assert store.card("golden", "t:ai:2021:1") is None
 
 
 def test_corpus_location_has_priority(index):

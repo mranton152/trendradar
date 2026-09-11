@@ -5,9 +5,11 @@ from datetime import UTC, datetime
 from fastapi import APIRouter, HTTPException, Request
 
 from api.models import (
+    CaseExample,
     Components,
     DomainInfo,
     Evidence,
+    Motivation,
     ResolveRequest,
     ResolveResponse,
     SeriesPoint,
@@ -43,6 +45,25 @@ def _resolve_domain(query: str, store: Store) -> str | None:
 
 def _as_model(row: dict, store: Store, domain: str) -> Trend:
     documents = store.works(domain, list(row["top_doc_ids"]))
+    card = store.card(domain, row["trend_id"])
+    motivation = None
+    case_example = None
+    if card is not None:
+        problem = card["problem"]
+        advantage = card["advantage"]
+        if problem or advantage:
+            motivation = Motivation(
+                problem=problem,
+                advantage=advantage,
+                sources=list(dict.fromkeys(card["problem_docs"] + card["advantage_docs"])),
+            )
+        if card["case_name"] and card["case_text"]:
+            case_example = CaseExample(
+                type=card["case_type"],
+                name=card["case_name"],
+                description=card["case_text"],
+                source=card["case_docs"][0] if card["case_docs"] else None,
+            )
     return Trend(
         trend_id=row["trend_id"],
         rank=int(row["rank"]),
@@ -80,6 +101,8 @@ def _as_model(row: dict, store: Store, domain: str) -> Trend:
             )
             for document in documents
         ],
+        motivation=motivation,
+        case_example=case_example,
         stage=row["stage"],
         confidence=row["confidence"],
     )

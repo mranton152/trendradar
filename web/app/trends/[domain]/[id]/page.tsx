@@ -3,7 +3,7 @@ import { notFound } from "next/navigation";
 
 import { ScoreBreakdown } from "@/components/ScoreBreakdown";
 import { TimeSeriesChart } from "@/components/TimeSeriesChart";
-import { getTrends } from "@/lib/api";
+import { getTrends, type Trend } from "@/lib/api";
 
 const STAGE_LABELS = {
   emerging: "зарождение",
@@ -19,6 +19,29 @@ type TrendPageProps = {
 function selectedYear(value: string | undefined): number {
   const year = Number(value ?? 2026);
   return year === 2021 || year === 2026 ? year : 2026;
+}
+
+function Citations({ ids, sources }: { ids: string[]; sources: Trend["sources"] }) {
+  const citedSources = sources.filter((source) => ids.includes(source.doc_id));
+  if (citedSources.length === 0) return null;
+
+  return (
+    <p className="mt-3 text-sm text-slate-500">
+      Источники: {citedSources.map((source, index) => (
+        <span key={source.doc_id}>
+          {index > 0 && ", "}
+          <a
+            className="text-indigo-600 underline decoration-indigo-300 underline-offset-2 hover:text-indigo-700"
+            href={source.url}
+            rel="noreferrer"
+            target="_blank"
+          >
+            {source.title}
+          </a>
+        </span>
+      ))}
+    </p>
+  );
 }
 
 export default async function TrendPage({ params, searchParams }: TrendPageProps) {
@@ -68,6 +91,36 @@ export default async function TrendPage({ params, searchParams }: TrendPageProps
         <h2 className="mb-4 text-lg font-semibold text-slate-900">Из чего сложился скор</h2>
         <ScoreBreakdown components={trend.components} />
       </section>
+
+      {(trend.motivation || trend.case_example) && (
+        <section className="space-y-6 rounded-xl border border-slate-200 bg-white p-6 shadow-sm">
+          {trend.motivation && (
+            <div>
+              <h2 className="text-lg font-semibold text-slate-900">Зачем это нужно</h2>
+              {trend.motivation.problem && (
+                <p className="mt-3 text-slate-700">{trend.motivation.problem}</p>
+              )}
+              {trend.motivation.advantage && (
+                <p className="mt-3 text-slate-700">{trend.motivation.advantage}</p>
+              )}
+              <Citations ids={trend.motivation.sources} sources={trend.sources} />
+            </div>
+          )}
+          {trend.case_example && (
+            <div>
+              <h2 className="text-lg font-semibold text-slate-900">Кейс-пример</h2>
+              <p className="mt-3 font-medium text-slate-900">
+                {trend.case_example.type === "company" ? "Компания" : "Исследование"}: {trend.case_example.name}
+              </p>
+              <p className="mt-2 text-slate-700">{trend.case_example.description}</p>
+              <Citations
+                ids={trend.case_example.source ? [trend.case_example.source] : []}
+                sources={trend.sources}
+              />
+            </div>
+          )}
+        </section>
+      )}
 
       <section>
         <h2 className="mb-3 text-lg font-semibold text-slate-900">
