@@ -39,18 +39,22 @@ from validation.scoring_probe import прогнать
 МАКС_ДОКУМЕНТОВ = 20
 
 
-def документы(термин: str, as_of: int, con: duckdb.DuckDBPyConnection) -> list[str]:
+def документы(термин: str, as_of: int, con: duckdb.DuckDBPyConnection,
+              since: int | None = None) -> list[str]:
     """Документы снапшота, где термин встречается в заголовке или аннотации.
 
-    Свежие и цитируемые вперёд — их и увидит пользователь в списке источников.
+    Только из нынешней волны (year >= since): иначе к state space model
+    приходят статьи по теории управления, и карточка описывает не то,
+    по чему посчитана оценка. Свежие и цитируемые вперёд.
     """
     шаблон = f"%{термин.lower()}%"
     строки = con.execute(
         "SELECT doc_id FROM read_parquet(?) "
-        "WHERE year <= ? AND (lower(title) LIKE ? "
+        "WHERE year <= ? AND year >= ? AND (lower(title) LIKE ? "
         "   OR lower(coalesce(abstract, '')) LIKE ?) "
         "ORDER BY year DESC, cited_by DESC NULLS LAST LIMIT ?",
-        [str(КОРПУС), int(as_of), шаблон, шаблон, МАКС_ДОКУМЕНТОВ]).fetchall()
+        [str(КОРПУС), int(as_of), int(since or 0), шаблон, шаблон,
+         МАКС_ДОКУМЕНТОВ]).fetchall()
     return [r[0] for r in строки]
 
 
@@ -58,7 +62,7 @@ def собрать(as_of: int, con: duckdb.DuckDBPyConnection) -> list[dict]:
     итог = прогнать(as_of)
     строки, ранг = [], 0
     for r in итог["строки"]:
-        doc_ids = документы(r["label"], as_of, con)
+        doc_ids = документы(r["label"], as_of, con, since=r["c"]["takeoff_year"])
         if not doc_ids:
             continue          # карточка без ссылок ломает главное свойство продукта
         ранг += 1

@@ -73,3 +73,27 @@ def test_препринты_весят_больше_статей(tmp_path):
     ряды = year_counts(tmp_path, tmp_path / "works.parquet")
     assert ряды["препринты"][2024] == 3     # 2 x 1.4 = 2.8
     assert ряды["статьи"][2024] == 2        # 2 x 1.0
+
+
+def test_документы_берутся_из_нынешней_волны_термина(tmp_path):
+    """У state space model старая жизнь — теория управления, новая — Mamba.
+    Скоринг нашёл взлёт 2025 (Mamba), а документы по строке приходили из
+    2018 года про угольную электростанцию. Карточка описывала не то,
+    что оценка. Отбор документов обязан начинаться с года взлёта."""
+    def работа(doc_id, year):
+        return {"doc_id": doc_id, "source": "openalex", "doc_type": "article",
+                "title": "state space model", "abstract": None, "year": year,
+                "date": None, "lang": "en", "doi": None, "url": "u", "cited_by": 5,
+                "countries": ["RU"], "institutions": [], "authors": [],
+                "concepts": [], "domain": "d", "harvested_at": "2026-09-09"}
+
+    works = [работа("старый", 2018), работа("новый", 2025), работа("новее", 2026)]
+    links = [{"cand_id": "ssm", "doc_id": d["doc_id"], "weight": 1.0} for d in works]
+    pq.write_table(pa.Table.from_pylist(works, schema=WORKS), tmp_path / "works.parquet")
+    pq.write_table(pa.Table.from_pylist(links, schema=CAND_DOCS),
+                   tmp_path / "cand_docs.parquet")
+
+    все = top_docs(tmp_path, tmp_path / "works.parquet", "ssm")
+    assert "старый" in все
+    волна = top_docs(tmp_path, tmp_path / "works.parquet", "ssm", since=2025)
+    assert волна == ["новее", "новый"]
