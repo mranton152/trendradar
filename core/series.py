@@ -60,14 +60,22 @@ def country_spread(index_dir: str | Path, corpus_path: str | Path,
 
 
 def top_docs(index_dir: str | Path, corpus_path: str | Path,
-             cand_id: str, limit: int = 20) -> list[str]:
-    """Документы кандидата для RAG и ссылок: свежие и цитируемые вперёд."""
+             cand_id: str, limit: int = 20, since: int | None = None) -> list[str]:
+    """Документы кандидата для RAG и ссылок: свежие и цитируемые вперёд.
+
+    `since` — год взлёта нынешней волны. У термина бывает прошлая жизнь:
+    state space model до Mamba — это теория управления, и по строке к тренду
+    приходили статьи про угольную электростанцию 2018 года. Скоринг при этом
+    описывал взлёт 2025-го. Карточка и оценка говорили о разном.
+    Документы обязаны браться из той же волны, по которой посчитана оценка.
+    """
     links = str(Path(index_dir) / "cand_docs.parquet")
     строки = _подключение().execute("""
         SELECT w.doc_id
         FROM read_parquet(?) cd JOIN read_parquet(?) w USING (doc_id)
-        WHERE cd.cand_id = ?
+        WHERE cd.cand_id = ? AND w.year >= ?
         ORDER BY w.year DESC, w.cited_by DESC NULLS LAST
         LIMIT ?
-    """, [links, str(corpus_path), cand_id, int(limit)]).fetchall()
+    """, [links, str(corpus_path), cand_id,
+          int(since) if since is not None else 0, int(limit)]).fetchall()
     return [r[0] for r in строки]
