@@ -7,6 +7,7 @@ from __future__ import annotations
 
 import argparse
 import datetime as dt
+import json
 import sys
 from pathlib import Path
 from typing import Any
@@ -21,6 +22,7 @@ from cards.verify import проверить_цитаты
 from contracts.schemas import CARDS
 
 ROOT = Path(__file__).resolve().parents[1]
+TITLE_RU_OVERRIDES = {"foundation model": "Фундаментальные модели"}
 
 
 def _index_dir(domain: str) -> Path:
@@ -69,7 +71,7 @@ def _card_row(
     case_type = card.get("case_type")
     return {
         "trend_id": trend["trend_id"],
-        "title_ru": card.get("title_ru") or trend["label"],
+        "title_ru": TITLE_RU_OVERRIDES.get(trend["label"], card.get("title_ru") or trend["label"]),
         "problem": card.get("problem", ""),
         "problem_docs": card.get("problem_docs", []),
         "advantage": card.get("advantage", ""),
@@ -103,7 +105,14 @@ def build(domain: str, as_of: int, llm: LLM | None = None) -> int:
     with duckdb.connect(":memory:") as connection:
         for trend in _read_trends(connection, index_dir, as_of):
             documents = _read_documents(connection, works_path, list(trend["top_doc_ids"]))
-            raw_card = model.json(собрать(trend, documents))
+            prompt = собрать(trend, documents)
+            try:
+                raw_card = model.json(prompt)
+            except (json.JSONDecodeError, ValueError) as exc:
+                sys.stderr.write(
+                    f"[cards] {trend['label'][:40]:<40} повтор: некорректный JSON ({exc})\n"
+                )
+                raw_card = model.json(prompt)
             clean_card, coverage = проверить_цитаты(
                 raw_card, {document["doc_id"] for document in documents}
             )
@@ -111,7 +120,11 @@ def build(domain: str, as_of: int, llm: LLM | None = None) -> int:
             rows.append(_card_row(trend, clean_card, coverage, model))
 
     output_path = index_dir / "cards.parquet"
-    pq.write_table(pa.Table.from_pylist(rows, schema=CARDS), output_path, compression="zstd")
+    existing_rows = pq.read_table(output_path).to_pylist() if output_path.is_file() else []
+    new_ids = {row["trend_id"] for row in rows}
+    preserved_rows = [row for row in existing_rows if row["trend_id"] not in new_ids]
+    all_rows = preserved_rows + rows
+    pq.write_table(pa.Table.from_pylist(all_rows, schema=CARDS), output_path, compression="zstd")
     average_coverage = sum(row["citation_coverage"] for row in rows) / max(1, len(rows))
     sys.stderr.write(f"[готово] {len(rows)} карточек, среднее покрытие {average_coverage:.0%}\n")
     return len(rows)
