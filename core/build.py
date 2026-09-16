@@ -18,7 +18,7 @@ import numpy as np
 import pyarrow as pa
 import pyarrow.parquet as pq
 
-from contracts.schemas import TRENDS
+from contracts.schemas import REJECTED, TRENDS
 from core.components import components
 from core.dedup import dedup, mmr
 from core.filters import ПОРОГИ, причина_отказа
@@ -29,8 +29,22 @@ from core.series import country_spread, top_docs, year_counts
 
 def построить(index_dir: Path, corpus_path: Path, domain: str,
               as_of: int, top: int = 15) -> list[dict]:
+    """Только тренды. Отсеянные — через построить_с_отсеянными."""
+    return построить_с_отсеянными(index_dir, corpus_path, domain, as_of, top)[0]
+
+
+def построить_с_отсеянными(index_dir: Path, corpus_path: Path, domain: str,
+                          as_of: int, top: int = 15) -> tuple[list[dict], list[dict]]:
+    """Тренды и отсеянные кандидаты с причинами.
+
+    ТЗ требует показывать причины исключения зрелых технологий и нерелевантных
+    кандидатов. Раньше причины считались в Counter и печатались в stderr -
+    теперь каждая сохраняется и уезжает на экран. lynching tree с нулём стран
+    должен быть виден: это наш аргумент, а не наш позор.
+    """
     index_dir, corpus_path = Path(index_dir), Path(corpus_path)
-    ряды = year_counts(index_dir, corpus_path)
+    полные_ряды = year_counts(index_dir, corpus_path)
+    ряды = полные_ряды
     страны = country_spread(index_dir, corpus_path, as_of - 2, as_of)
     подписи = {r[0]: (r[1], r[2]) for r in duckdb.connect().execute(
         "SELECT cand_id, label, emb_row FROM read_parquet(?)",
@@ -41,7 +55,7 @@ def построить(index_dir: Path, corpus_path: Path, domain: str,
     окно = list(range(as_of - 6, as_of + 1))
     norm = peer_normalizer(list(ряды.values()), окно)
 
-    строки, отказы = [], Counter()
+    строки, отказы, отсеянные = [], Counter(), []
     for cand_id, counts in ряды.items():
         if cand_id not in подписи:
             continue
@@ -49,6 +63,9 @@ def построить(index_dir: Path, corpus_path: Path, domain: str,
         причина = причина_отказа(comp, страны.get(cand_id, 0))
         if причина:
             отказы[причина] += 1
+            отсеянные.append({"cand_id": cand_id, "label": подписи[cand_id][0],
+                              "domain": domain, "reason": причина,
+                              "n_docs": comp["counts_recent"], "as_of": as_of})
             continue
         label, emb_row = подписи[cand_id]
         строки.append({"cand_id": cand_id, "label": label, "emb_row": emb_row,
@@ -57,9 +74,12 @@ def построить(index_dir: Path, corpus_path: Path, domain: str,
 
     строки = emergence_scores(строки)
     строки = dedup(строки)
-    до_зрелости = len(строки)
+    зрелые = [r for r in строки if r["maturity_pct"] >= ПОРОГИ["MAX_MATURITY_PCT"]]
     строки = [r for r in строки if r["maturity_pct"] < ПОРОГИ["MAX_MATURITY_PCT"]]
-    отказы["уже мейнстрим"] = до_зрелости - len(строки)
+    отказы["уже мейнстрим"] = len(зрелые)
+    отсеянные.extend({"cand_id": r["cand_id"], "label": r["label"], "domain": domain,
+                      "reason": "уже мейнстрим", "n_docs": r["c"]["counts_recent"],
+                      "as_of": as_of} for r in зрелые)
 
     эмб_путь = index_dir / "embeddings.npy"
     эмб = np.load(эмб_путь) if эмб_путь.exists() else np.zeros((0, 1))
@@ -72,6 +92,9 @@ def построить(index_dir: Path, corpus_path: Path, domain: str,
     итог = []
     for ранг, r in enumerate(строки, 1):
         c = r["c"]
+        # бэктест: что тренд сделал ПОСЛЕ среза. Только для среза в прошлом;
+        # берём полные ряды, срезанные будущего не знают.
+        бт = _бэктест(полные_ряды.get(r["cand_id"], {}), as_of)
         итог.append({
             "trend_id": f"t:{domain}:{as_of}:{ранг:02d}",
             "domain": domain, "as_of": as_of, "rank": ранг,
@@ -94,8 +117,20 @@ def построить(index_dir: Path, corpus_path: Path, domain: str,
             "stage": стадия(c, r["maturity_pct"]),
             "confidence": уверенность(c, r["countries"]),
             "methodology_version": ВЕРСИЯ_МЕТОДОЛОГИИ,
+            **бт,
         })
-    return итог
+    return итог, отсеянные
+
+
+def _бэктест(counts: dict[int, int], as_of: int) -> dict:
+    """Что было после среза. При срезе в текущем году будущего нет - все None."""
+    текущий = dt.date.today().year
+    if as_of >= текущий or not counts:
+        return {"bt_at_cutoff": None, "bt_peak_after": None, "bt_growth_x": None}
+    на_срезе = int(counts.get(as_of, 0))
+    после = max((int(n) for y, n in counts.items() if y > as_of), default=0)
+    return {"bt_at_cutoff": на_срезе, "bt_peak_after": после,
+            "bt_growth_x": round((после + 1) / (на_срезе + 1), 2)}
 
 
 def main() -> None:
@@ -112,9 +147,12 @@ def main() -> None:
     if not corpus.exists():
         raise SystemExit(f"нет корпуса: ни data/corpus/{args.domain}/, ни {index_dir}")
 
-    строки = построить(index_dir, corpus, args.domain, args.as_of, args.top)
+    строки, отсеянные = построить_с_отсеянными(index_dir, corpus, args.domain,
+                                                args.as_of, args.top)
     путь = index_dir / "trends.parquet"
     pq.write_table(pa.Table.from_pylist(строки, schema=TRENDS), путь, compression="zstd")
+    pq.write_table(pa.Table.from_pylist(отсеянные, schema=REJECTED),
+                   index_dir / "rejected.parquet", compression="zstd")
 
     meta = index_dir / "meta.json"
     m = json.loads(meta.read_text()) if meta.exists() else {}

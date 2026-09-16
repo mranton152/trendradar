@@ -28,6 +28,7 @@
 | `embeddings.npy` | `data/index/{domain}/` | Константин | Антон (MMR, дедуп) |
 | `trends.parquet` | `data/index/{domain}/` | Антон | Михаил |
 | `cards.parquet` | `data/index/{domain}/` | Михаил | Михаил (api) |
+| `rejected.parquet` | `data/index/{domain}/` | Антон | Михаил — «причины исключения» по ТЗ |
 | `meta.json` | `data/index/{domain}/` | кто последний считал стадию | все |
 
 `{domain}` — slug домена: `artificial-intelligence`, `quantum-computing`.
@@ -54,6 +55,18 @@
   "methodology_version": "1.0"
 }
 ```
+
+## Изменения 16.09 под ТЗ
+
+Все новые поля nullable — старые файлы читаются без пересборки, валидатор
+пропускает отсутствующие необязательные колонки.
+
+- `WORKS` += `source_type`, `trust_level` (trusted|indicator|unknown), `summary_ru`,
+  `summary_model` — карточка источника по ТЗ; резюме с обязательной пометкой модели.
+- `TRENDS` += `bt_at_cutoff`, `bt_peak_after`, `bt_growth_x` — что было после среза,
+  заполняются только при `as_of` в прошлом.
+- `REJECTED` — новая таблица отсеянных с причинами.
+- `meta.json` += `n_sources_polled`, `n_candidates`, `n_rejected` — счётчики в шапку.
 
 ## Проверка перед PR
 

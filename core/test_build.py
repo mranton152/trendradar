@@ -89,3 +89,26 @@ def test_бэктест_не_видит_будущего(индекс):
     c1 = next(r for r in строки if r["label"] == "physics-informed neural network")
     assert max(c1["years"]) == 2023
     assert sum(c1["counts"]) == 48   # 2021:8 + 2022:15 + 2023:25, и ничего после
+
+
+def test_отсеянные_возвращаются_с_причиной(индекс):
+    """ТЗ: показывать причины исключения. lynching tree с нулём стран обязан
+    быть виден, а не молча пропасть."""
+    from core.build import построить_с_отсеянными
+    строки, отсеянные = построить_с_отсеянными(
+        индекс, индекс / "works.parquet", "test", as_of=2026)
+    метки = {r["label"]: r["reason"] for r in отсеянные}
+    assert "lynching tree" in метки
+    assert метки["lynching tree"] == "всплеск одного года"
+    assert all({"cand_id", "label", "domain", "reason", "n_docs", "as_of"} <= set(r) for r in отсеянные)
+
+
+def test_бэктест_заполняется_только_для_прошлого(индекс):
+    строки_2026 = построить(индекс, индекс / "works.parquet", "test", as_of=2026)
+    assert all(r["bt_growth_x"] is None for r in строки_2026)
+
+    строки_2023 = построить(индекс, индекс / "works.parquet", "test", as_of=2023)
+    c1 = next(r for r in строки_2023 if r["label"] == "physics-informed neural network")
+    assert c1["bt_at_cutoff"] == 25       # 2023
+    assert c1["bt_peak_after"] == 120     # 2026
+    assert c1["bt_growth_x"] > 4

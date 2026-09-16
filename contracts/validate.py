@@ -25,6 +25,8 @@ def check(path: str, name: str) -> list:
 
     for fname, f in exp_fields.items():
         if fname not in act_fields:
+            if f.nullable:
+                continue   # поле добавлено в контракт позже файла - допустимо, читается как null
             problems.append(f"нет обязательной колонки '{fname}' ({f.type})")
             continue
         if not f.type.equals(act_fields[fname].type):

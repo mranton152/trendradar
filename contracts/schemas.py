@@ -31,6 +31,12 @@ WORKS = pa.schema([
     pa.field("concepts",     pa.list_(pa.string()), nullable=True),      # темы/концепты источника
     pa.field("domain",       pa.string(), nullable=False),   # какой домен харвестили: "artificial-intelligence"
     pa.field("harvested_at", pa.string(), nullable=False),   # ISO дата сбора - нужна для воспроизводимости
+    # --- поля по ТЗ (16.09.2026): для каждого источника показывать тип, язык, доверенность ---
+    # Все nullable: золотой снапшот собран до ТЗ и обязан читаться без пересборки.
+    pa.field("source_type",  pa.string(), nullable=True),    # article|preprint|patent|news|blog|repo|model|report|aggregator|press_release
+    pa.field("trust_level",  pa.string(), nullable=True),    # trusted|indicator|unknown - по правилам ТЗ, см. ingest/trust.py
+    pa.field("summary_ru",   pa.string(), nullable=True),    # русское резюме зарубежного источника; ТЗ требует пометку, что сгенерировано
+    pa.field("summary_model", pa.string(), nullable=True),   # какой моделью сгенерировано резюме - обязательная пометка по ТЗ
 ])
 
 # ----------------------------------------------------------- candidates
@@ -99,6 +105,27 @@ TRENDS = pa.schema([
     pa.field("stage",           pa.string(), nullable=False),   # emerging|early_growth|scaling
     pa.field("confidence",      pa.string(), nullable=False),   # high|medium|low
     pa.field("methodology_version", pa.string(), nullable=False),
+    # --- бэктест: что тренд сделал ПОСЛЕ среза. Заполняется только при as_of в прошлом ---
+    pa.field("bt_at_cutoff",    pa.int32(),   nullable=True),   # документов в год среза
+    pa.field("bt_peak_after",   pa.int32(),   nullable=True),   # пик после среза
+    pa.field("bt_growth_x",     pa.float32(), nullable=True),   # во сколько раз вырос
+])
+
+# ------------------------------------------------------------- rejected
+# Кто пишет: core/ (Антон)
+# Кто читает: api/ (Михаил)
+# Гранулярность: одна строка = кандидат, не прошедший фильтры, с причиной
+# Путь: data/index/{domain}/rejected.parquet
+# ТЗ требует показывать "причины исключения зрелых технологий или нерелевантных
+# кандидатов". И это наш аргумент: lynching tree с нулём стран должен быть виден.
+
+REJECTED = pa.schema([
+    pa.field("cand_id", pa.string(), nullable=False),
+    pa.field("label",   pa.string(), nullable=False),
+    pa.field("domain",  pa.string(), nullable=False),
+    pa.field("reason",  pa.string(), nullable=False),   # текст из core/filters.py, как есть
+    pa.field("n_docs",  pa.int32(),  nullable=False),
+    pa.field("as_of",   pa.int32(),  nullable=False),
 ])
 
 # ---------------------------------------------------------------- cards
@@ -132,4 +159,5 @@ SCHEMAS = {
     "cand_docs": CAND_DOCS,
     "trends": TRENDS,
     "cards": CARDS,
+    "rejected": REJECTED,
 }
