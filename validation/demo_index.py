@@ -28,9 +28,10 @@ import duckdb
 import pyarrow as pa
 import pyarrow.parquet as pq
 
-from contracts.schemas import TRENDS
+from contracts.schemas import REJECTED, TRENDS
+from core.build import _бэктест
 from core.score import ВЕРСИЯ_МЕТОДОЛОГИИ, стадия, уверенность
-from validation.scoring_probe import прогнать
+from validation.scoring_probe import загрузить_кэш, прогнать
 
 ИНДЕКС = Path("data/index/golden")
 КОРПУС = ИНДЕКС / "works.parquet"
@@ -58,15 +59,22 @@ def документы(термин: str, as_of: int, con: duckdb.DuckDBPyConnec
     return [r[0] for r in строки]
 
 
-def собрать(as_of: int, con: duckdb.DuckDBPyConnection) -> list[dict]:
+def собрать(as_of: int, con: duckdb.DuckDBPyConnection) -> tuple[list[dict], list[dict]]:
     итог = прогнать(as_of)
+    кэш = загрузить_кэш()
     строки, ранг = [], 0
+    отсеянные = [{"cand_id": f"c:{ДОМЕН}:{т.replace(' ', '-')}", "label": т, "domain": ДОМЕН,
+                  "reason": п.split(" (стран")[0], "as_of": as_of,
+                  "n_docs": sum(n for y, n in кэш.get(т, {}).items()
+                                if as_of - 4 <= int(y) <= as_of)}
+                 for т, п in итог["отсеяны"].items()]
     for r in итог["строки"]:
         doc_ids = документы(r["label"], as_of, con, since=r["c"]["takeoff_year"])
         if not doc_ids:
             continue          # карточка без ссылок ломает главное свойство продукта
         ранг += 1
         c = r["c"]
+        бт = _бэктест({int(y): n for y, n in кэш.get(r["label"], {}).items()}, as_of)
         строки.append({
             "trend_id": f"t:{ДОМЕН}:{as_of}:{ранг:02d}",
             "domain": ДОМЕН, "as_of": as_of, "rank": ранг,
@@ -88,10 +96,11 @@ def собрать(as_of: int, con: duckdb.DuckDBPyConnection) -> list[dict]:
             "stage": стадия(c, r["maturity_pct"]),
             "confidence": уверенность(c, r["countries"]),
             "methodology_version": ВЕРСИЯ_МЕТОДОЛОГИИ,
+            **бт,
         })
         if ранг >= 15:
             break
-    return строки
+    return строки, отсеянные
 
 
 def main() -> None:
@@ -99,10 +108,12 @@ def main() -> None:
         raise SystemExit(f"нет {КОРПУС} — сначала нужен золотой снапшот")
 
     con = duckdb.connect()
-    все = []
+    все, все_отсеянные = [], []
     for as_of in СРЕЗЫ:
-        строки = собрать(as_of, con)
+        строки, отсеянные = собрать(as_of, con)
         все.extend(строки)
+        все_отсеянные.extend(отсеянные)
+        print(f"   отсеяно {len(отсеянные)}")
         print(f"срез {as_of}: {len(строки)} трендов")
         for r in строки[:5]:
             print(f"   {r['rank']:>2} {r['emergence_score']:.3f}  {r['label']:<40}"
@@ -110,6 +121,8 @@ def main() -> None:
 
     pq.write_table(pa.Table.from_pylist(все, schema=TRENDS),
                    ИНДЕКС / "trends.parquet", compression="zstd")
+    pq.write_table(pa.Table.from_pylist(все_отсеянные, schema=REJECTED),
+                   ИНДЕКС / "rejected.parquet", compression="zstd")
 
     (ИНДЕКС / "TRENDS_PROVENANCE.json").write_text(json.dumps({
         "источник": "validation/demo_index.py",
