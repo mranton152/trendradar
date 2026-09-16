@@ -100,7 +100,8 @@ def test_отсеянные_возвращаются_с_причиной(инд�
     метки = {r["label"]: r["reason"] for r in отсеянные}
     assert "lynching tree" in метки
     assert метки["lynching tree"] == "всплеск одного года"
-    assert all({"cand_id", "label", "domain", "reason", "n_docs", "as_of"} <= set(r) for r in отсеянные)
+    поля = {"cand_id", "label", "domain", "reason", "n_docs", "as_of"}
+    assert all(поля <= set(r) for r in отсеянные)
 
 
 def test_бэктест_заполняется_только_для_прошлого(индекс):
