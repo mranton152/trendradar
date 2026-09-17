@@ -30,8 +30,8 @@ def test_prompt_lists_allowed_document_ids_for_literal_copying() -> None:
     assert "копируй ID только из блока" in prompt
     assert "описывай технологию «demo trend»" in prompt
     assert "Не выдавай частный случай за суть технологии." in prompt
-    assert "Если подан только один документ, будь скромен" in prompt
     assert "Количество документов: 2" in prompt
+    assert "Не используй фразу «В единственном представленном исследовании»" in prompt
 
 
 def test_prompt_requires_modest_scope_for_one_document() -> None:
@@ -54,4 +54,4 @@ def test_prompt_requires_modest_scope_for_one_document() -> None:
 
     assert "Подан РОВНО ОДИН документ" in prompt
     assert "описывай только задачу и результат этого конкретного исследования" in prompt
-    assert "problem` обязан начинаться с «В единственном представленном исследовании»" in prompt
+    assert "`problem` обязан начинаться с «В единственном представленном исследовании»" in prompt
