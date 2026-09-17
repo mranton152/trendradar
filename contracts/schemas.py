@@ -105,6 +105,8 @@ TRENDS = pa.schema([
     pa.field("stage",           pa.string(), nullable=False),   # emerging|early_growth|scaling
     pa.field("confidence",      pa.string(), nullable=False),   # high|medium|low
     pa.field("methodology_version", pa.string(), nullable=False),
+    # --- живой режим: ряды по месяцам, а не по годам. null = year (индексный режим) ---
+    pa.field("series_granularity", pa.string(), nullable=True),  # year|month; при month в years лежат YYYYMM
     # --- бэктест: что тренд сделал ПОСЛЕ среза. Заполняется только при as_of в прошлом ---
     pa.field("bt_at_cutoff",    pa.int32(),   nullable=True),   # документов в год среза
     pa.field("bt_peak_after",   pa.int32(),   nullable=True),   # пик после среза

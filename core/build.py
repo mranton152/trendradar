@@ -138,7 +138,25 @@ def main() -> None:
     ap.add_argument("--domain", required=True)
     ap.add_argument("--as-of", type=int, default=dt.date.today().year)
     ap.add_argument("--top", type=int, default=15)
+    ap.add_argument("--live", metavar="DIR",
+                    help="живой режим: каталог с works/candidates/cand_docs, собранный по запросу; "
+                         "ряды по месяцам, без эмбеддингов, за секунды")
     args = ap.parse_args()
+
+    if args.live:
+        from core.live import построить_live
+        live_dir = Path(args.live)
+        строки, отсеянные = построить_live(live_dir, live_dir / "works.parquet",
+                                           args.domain, top=args.top)
+        pq.write_table(pa.Table.from_pylist(строки, schema=TRENDS),
+                       live_dir / "trends.parquet", compression="zstd")
+        pq.write_table(pa.Table.from_pylist(отсеянные, schema=REJECTED),
+                       live_dir / "rejected.parquet", compression="zstd")
+        print(f"живой режим: {len(строки)} трендов, отсеяно {len(отсеянные)} -> {live_dir}")
+        for r in строки:
+            print(f"{r['rank']:>2} {r['emergence_score']:>6.3f} {r['label'][:44]:<44} "
+                  f"источников {r['n_countries']:>3}  док. {r['n_docs']:>4}")
+        return
 
     index_dir = Path("data/index") / args.domain
     corpus = Path("data/corpus") / args.domain / "works.parquet"
