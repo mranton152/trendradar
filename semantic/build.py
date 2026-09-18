@@ -63,6 +63,20 @@ def validate_index(candidates, links, embeddings, doc_ids):
         raise ValueError("Эмбеддинги не нормированы")
 
 
+def sample_provenance(works, corpus_hash, n_docs, domain, as_of):
+    path = Path(works).with_name('manifest.json')
+    if not path.exists():
+        return None
+    meta = json.loads(path.read_text(encoding='utf-8'))
+    if meta.get('corpus_scope') != 'sample':
+        return None
+    if (meta.get('status') != 'complete' or meta.get('sha256') != corpus_hash
+            or meta.get('n_works') != n_docs or meta.get('config', {}).get('domain') != domain
+            or meta.get('config', {}).get('as_of') != as_of):
+        raise ValueError('Sample manifest does not match the input corpus')
+    return meta
+
+
 def fingerprint(path):
     digest = hashlib.sha256()
     with Path(path).open("rb") as stream:
@@ -104,6 +118,8 @@ def main():
     if any(r["domain"] != args.domain or r["year"] > args.as_of for r in rows):
         parser.error("Домен или год корпуса не соответствует параметрам")
     corpus_hash = fingerprint(args.works)
+    provenance = (sample_provenance(args.works, corpus_hash, n_docs, args.domain, args.as_of)
+                  if args.scope == 'sample' else None)
     if args.scope == "full":
         validate_full_manifest(args.works.parent / "manifest.json", corpus_hash,
                                len(rows), args.domain, args.as_of)
@@ -171,6 +187,16 @@ def main():
             "terms": terms_meta, "cluster_comparison": comparison,
             "rejected_clusters": rejected_clusters, "packages": packages,
             "python": platform.python_version(), "filter_method": "lexical-heuristic-v1"}
+    if provenance:
+        meta['sample_manifest'] = provenance
+        meta['cluster_membership_scope'] = 'sample_only'
+        stats_path = args.works.with_name('corpus_stats.json')
+        if stats_path.exists():
+            stats = json.loads(stats_path.read_text(encoding='utf-8'))
+            if (stats.get('source_sha256') != provenance.get('source_sha256')
+                    or stats.get('n_works') != provenance.get('source_n_works')):
+                raise ValueError('Corpus statistics do not match sample provenance')
+            meta['full_corpus_statistics'] = stats
     stage = args.output.with_name(args.output.name + ".building-" + uuid.uuid4().hex[:8])
     stage.mkdir(parents=True)
     try:

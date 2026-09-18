@@ -31,7 +31,9 @@ def finalize(output, state):
     count = 0
     counts = {}
     with duckdb.connect() as connection:
-        connection.execute("SET memory_limit = '512MB'")
+        connection.execute("SET memory_limit = '4GB'")
+        connection.execute("SET threads = 2")
+        connection.execute("SET preserve_insertion_order = false")
         connection.execute("SET temp_directory = ?", [str(output / "duckdb-tmp")])
         with pq.ParquetWriter(temp, WORKS, compression="zstd") as writer:
             if paths:

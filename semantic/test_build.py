@@ -7,6 +7,18 @@ import pytest
 from semantic.build import cluster_technology_reason, validate_full_manifest, validate_index
 
 
+def test_sample_provenance_is_bound_to_input_and_retained(tmp_path):
+    from semantic.build import sample_provenance
+    works = tmp_path / 'works.parquet'
+    meta = dict(status='complete', corpus_scope='sample', sha256='samplehash', n_works=5,
+                source_sha256='fullhash', source_n_works=100,
+                config=dict(domain='ai', as_of=2026), selection='deterministic')
+    works.with_name('manifest.json').write_text(json.dumps(meta))
+    assert sample_provenance(works, 'samplehash', 5, 'ai', 2026) == meta
+    with pytest.raises(ValueError):
+        sample_provenance(works, 'wronghash', 5, 'ai', 2026)
+
+
 def test_dangling_document_is_rejected():
     c = [{"cand_id": "c1", "kind": "term", "emb_row": None, "n_docs": 1}]
     links = [{"cand_id": "c1", "doc_id": "missing"}]
