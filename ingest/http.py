@@ -2,11 +2,12 @@
 import hashlib
 import json
 import os
+import ssl
 import time
 import urllib.error
 import urllib.parse
 import urllib.request
-from http.client import IncompleteRead
+from http.client import IncompleteRead, RemoteDisconnected
 from pathlib import Path
 
 
@@ -47,7 +48,10 @@ class Client:
                 retry_after = error.headers.get("Retry-After", "")
                 delay = float(retry_after) if retry_after.isdigit() else 2 ** attempt
                 time.sleep(min(delay, 60))
-            except (urllib.error.URLError, TimeoutError, json.JSONDecodeError, IncompleteRead):
+            except ssl.SSLCertVerificationError:
+                raise
+            except (urllib.error.URLError, TimeoutError, json.JSONDecodeError,
+                    IncompleteRead, RemoteDisconnected, ssl.SSLError):
                 if attempt == 4:
                     raise
                 time.sleep(2 ** attempt)
