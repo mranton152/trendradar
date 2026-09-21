@@ -1,11 +1,12 @@
 openapi: 3.1.0
 info:
   title: TrendRadar API
-  version: 0.1.0-draft
+  version: 0.2.0
   description: >
-    Черновик до открытия ТЗ (15.09.2026). Фиксируется в первый день после ТЗ.
-    Сервис ничего не считает в реальном времени: он читает предрассчитанный
-    индекс из data/index/{domain}/. Поэтому целевое время ответа < 1 с.
+    Контракт после ТЗ (обновлён 21.09.2026). Два режима: индексный - чтение
+    предрассчитанного data/index/{domain}/ за < 1 с; живой - запрос по домену,
+    которого нет в индексе, запускает сбор и скоринг как фоновую задачу
+    и отдаёт прогресс. Всё, что видит жюри, описано здесь.
 
 servers:
   - url: http://localhost:8000
@@ -104,6 +105,54 @@ paths:
                     type: object
                     description: Результаты бэктеста - Precision@15, lead time, сравнение с baseline
 
+  /api/v1/live:
+    post:
+      summary: Живой режим - домена нет в индексе, запускаем сбор и скоринг
+      description: >
+        Запускает ingest.live и core.build --live как фоновый процесс.
+        Не ждёт результата - возвращает job_id. Результат кэшируется
+        в data/index/ как обычный домен, повторный запрос отдаётся мгновенно.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required: [query]
+              properties:
+                query:  { type: string, example: "слабые сигналы в области кибербезопасности" }
+                budget_s: { type: integer, default: 180, description: "бюджет сбора в секундах" }
+      responses:
+        "202":
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  job_id: { type: string }
+                  domain: { type: string, description: "slug, под которым появится в индексе" }
+
+  /api/v1/live/{job_id}:
+    get:
+      summary: Прогресс живого режима - для экрана ожидания
+      parameters:
+        - { name: job_id, in: path, required: true, schema: { type: string } }
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status: { type: string, enum: [collecting, candidates, scoring, cards, done, failed] }
+                  stage_text: { type: string, example: "Собираем источники… 214 документов" }
+                  n_docs: { type: integer }
+                  n_sources_polled: { type: integer }
+                  n_candidates: { type: integer }
+                  elapsed_s: { type: number }
+                  domain: { type: string, nullable: true, description: "заполнен при done" }
+                  error: { type: string, nullable: true }
+
   /api/v1/export:
     post:
       summary: Выгрузка ТОП-N в файл
@@ -135,9 +184,26 @@ components:
         as_of: { type: integer }
         methodology_version: { type: string }
         generated_at: { type: string }
+        stats:
+          type: object
+          description: "счётчики в шапку - как на макете в ТЗ"
+          properties:
+            n_sources_polled: { type: integer, description: "обработано источников" }
+            n_candidates:     { type: integer, description: "найдено кандидатов" }
+            n_rejected:       { type: integer }
+            n_confident:      { type: integer, description: "сигналов с уверенностью > 75%" }
         trends:
           type: array
           items: { $ref: "#/components/schemas/Trend" }
+        rejected:
+          type: array
+          description: "«причины исключения зрелых технологий» по ТЗ; из rejected.parquet"
+          items:
+            type: object
+            properties:
+              label:  { type: string }
+              reason: { type: string }
+              n_docs: { type: integer }
 
     Trend:
       type: object
@@ -198,6 +264,13 @@ components:
               type:   { type: string }
         stage:      { type: string, enum: [emerging, early_growth, scaling] }
         confidence: { type: string, enum: [high, medium, low] }
+        confidence_pct:
+          type: integer
+          description: "emergence_score × 100, целое - ТЗ называет это «уверенность модели»"
+        series_granularity:
+          type: string
+          enum: [year, month]
+          description: "month - живой режим; тогда series[].year содержит YYYYMM"
         backtest:
           type: object
           nullable: true
@@ -206,3 +279,12 @@ components:
             at_cutoff:  { type: integer }
             peak_after: { type: integer }
             growth_x:   { type: number }
+        predictors:
+          type: array
+          description: "«ключевые предикторы» по ТЗ - те же components, но фразами для человека"
+          items:
+            type: object
+            properties:
+              name:  { type: string, example: "ускорение" }
+              value: { type: number }
+              text:  { type: string, example: "в топ-5% по ускорению: рост резко усилился в последние два года" }

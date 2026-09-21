@@ -155,6 +155,45 @@ CARDS = pa.schema([
     pa.field("generated_at",   pa.string(), nullable=False),
 ])
 
+# ------------------------------------------------------------- features
+# Кто пишет: ingest/ (Константин, K-14)
+# Кто читает: classifier/ (Антон, A-12)
+# Гранулярность: одна строка = один кандидат (или технология из датасета заказчика)
+# Путь: data/features/{domain}/features.parquet  и  data/dataset/features.parquet
+#
+# Признаки для обучаемого классификатора этапа 1. Каждый признак должен быть
+# объясним фразой аналитику - они пойдут в отчёт как "предикторы".
+# Источники разные и могут отсутствовать, поэтому всё после label - nullable.
+# Окно новостей - 24 месяца до as_of, публикаций - 10 лет.
+
+FEATURES = pa.schema([
+    pa.field("cand_id",     pa.string(), nullable=False),
+    pa.field("label",       pa.string(), nullable=False),
+    pa.field("domain",      pa.string(), nullable=False),
+    pa.field("as_of",       pa.string(), nullable=False),   # "YYYY-MM"
+    # --- новости и индустрия (ingest.live) ---
+    pa.field("news_mentions_24m",      pa.int32(), nullable=True),           # документов за 24 месяца
+    pa.field("news_mentions_by_month", pa.list_(pa.int32()), nullable=True), # ровно 24 значения, старые первыми
+    pa.field("news_first_month",       pa.string(), nullable=True),          # "YYYY-MM" первого упоминания
+    pa.field("n_domains",              pa.int32(), nullable=True),           # разных сайтов
+    pa.field("trusted_share",          pa.float32(), nullable=True),         # доля trusted среди источников
+    pa.field("n_companies",            pa.int32(), nullable=True),           # разных компаний в заголовках
+    pa.field("funding_mentions",       pa.int32(), nullable=True),           # raises|series|seed|stealth|pilot|launch
+    pa.field("langs",                  pa.list_(pa.string()), nullable=True),# языки источников
+    # --- код и модели ---
+    pa.field("github_repos",           pa.int32(), nullable=True),
+    pa.field("github_stars_max",       pa.int32(), nullable=True),
+    pa.field("hf_models",              pa.int32(), nullable=True),
+    # --- публикации (точечный OpenAlex по годам) ---
+    pa.field("pub_counts_by_year",     pa.list_(pa.int32()), nullable=True), # ровно 10 значений, старые первыми
+    pa.field("pub_countries",          pa.int32(), nullable=True),
+    pa.field("pub_company_share",      pa.float32(), nullable=True),         # доля работ с корпоративной аффилиацией
+    # --- разметка (только для обучающей выборки) ---
+    pa.field("is_weak_signal",         pa.bool_(), nullable=True),           # 100 из xlsx = true; наши отрицательные = false
+    pa.field("dataset_score",          pa.int32(), nullable=True),           # "Балл (стадия+тренд)" 3..7 из xlsx
+    pa.field("dataset_stage",          pa.string(), nullable=True),          # "Стадия развития" как в xlsx
+])
+
 SCHEMAS = {
     "works": WORKS,
     "candidates": CANDIDATES,
@@ -162,4 +201,5 @@ SCHEMAS = {
     "trends": TRENDS,
     "cards": CARDS,
     "rejected": REJECTED,
+    "features": FEATURES,
 }
