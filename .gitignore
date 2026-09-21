@@ -23,3 +23,6 @@ build/
 .DS_Store
 *.log
 .ipynb_checkpoints/
+
+# Классификатор: сырые признаки и отчёт пересобираются, в git едут кэши и код
+classifier/features_v1.json

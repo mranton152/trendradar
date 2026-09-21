@@ -25,6 +25,17 @@ from core.normalize import peer_normalizer
 КЭШ = Path("classifier/features_cache.json")
 ПОЧТА = "flesha98@gmail.com"
 ЛЕТ = 10
+# OpenAlex с 2026 считает дневной бюджет на IP без ключа; ключ бесплатный.
+# Без него на 200 технологий x 5 запросов бюджета не хватает: первый прогон
+# получил 441 отказ 429 из 1176, и нули в признаках выглядели как "нет
+# публикаций". Ключ - в OPENALEX_API_KEY.
+OPENALEX_KEY = os.getenv("OPENALEX_API_KEY")
+
+
+class ОтказИсточника(RuntimeError):
+    """Источник ответил ошибкой. Не кэшируем и не подменяем нулём: ноль
+    «нет публикаций» и ноль «ответа не было» - разные вещи, а модель этого
+    не различит."""
 
 ОПИСАНИЯ = {
     "pub_total_10y": "сколько научных работ упоминают технологию за 10 лет",
@@ -70,15 +81,22 @@ class Сборщик:
             timeout=60, follow_redirects=True,
             headers={"User-Agent": f"trendradar/0.2 (+mailto:{ПОЧТА})"})
         self.год = dt.date.today().year
+        self.отказов = 0
         tok = _github_token()
         self.gh_headers = {"Authorization": f"Bearer {tok}"} if tok else {}
 
     # ---------- сырые запросы, каждый кэшируется по ключу
     def _get(self, ключ: str, url: str, params: dict, headers: dict | None = None) -> dict:
-        if ключ in self.кэш:
-            return self.кэш[ключ]
+        готово = self.кэш.get(ключ)
+        if готово is not None and "_error" not in готово:
+            return готово
+        if "openalex" in url and OPENALEX_KEY:
+            params = {**params, "api_key": OPENALEX_KEY}
         r = self.client.get(url, params=params, headers=headers or {})
-        d = r.json() if r.status_code == 200 else {"_error": r.status_code}
+        if r.status_code != 200:
+            self.отказов += 1
+            raise ОтказИсточника(f"{r.status_code} {url.split('/')[2]}: {ключ[:60]}")
+        d = r.json()
         self.кэш[ключ] = d
         return d
 
@@ -147,14 +165,24 @@ class Сборщик:
 def собрать_признаки(выборка: list[dict], запросы: dict[str, dict]) -> list[dict]:
     """Признаки для всей выборки. Peer-нормировка - по пулу всей выборки."""
     сб = Сборщик()
-    ряды = {s["label"]: сб.openalex_годы(запросы[s["label"]]["query_en"]) for s in выборка}
+    try:
+        ряды = {s["label"]: сб.openalex_годы(запросы[s["label"]]["query_en"]) for s in выборка}
+    except ОтказИсточника as e:
+        _сохранить(сб.кэш)
+        raise SystemExit(f"источник отказал: {e}. Кэш сохранён, повторный запуск продолжит "
+                         f"с этого места. Для OpenAlex нужен OPENALEX_API_KEY.") from e
     _сохранить(сб.кэш)
     годы_окна = list(range(сб.год - 6, сб.год + 1))
     norm = peer_normalizer(list(ряды.values()), годы_окна)
     out = []
     for i, s in enumerate(выборка, 1):
         q = запросы[s["label"]]["query_en"]
-        f = сб.признаки(q, norm)
+        try:
+            f = сб.признаки(q, norm)
+        except ОтказИсточника as e:
+            _сохранить(сб.кэш)
+            raise SystemExit(f"источник отказал на «{s['label'][:40]}»: {e}. "
+                             f"Кэш сохранён ({i - 1}/{len(выборка)} готово).") from e
         out.append({**s, "query_en": q, **f})
         if i % 20 == 0:
             _сохранить(сб.кэш)
