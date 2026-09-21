@@ -21,7 +21,8 @@ def test_кэш_не_даёт_ходить_в_сеть_дважды():
         вызовов["n"] += 1
         return httpx.Response(200, json={"group_by": [{"key": "2025", "count": 7}]})
     сб = Сборщик(кэш={}, client=_mock(h))
-    сб.openalex_годы("q"); сб.openalex_годы("q")
+    сб.openalex_годы("q")
+    сб.openalex_годы("q")
     assert вызовов["n"] == 1
 
 

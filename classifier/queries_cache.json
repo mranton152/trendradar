@@ -1,0 +1,822 @@
+{
+ "3D-стековая память-вычислитель как альтернатива HBM (3DIMC, стековый DRAM)": {
+  "keyphrases": [
+   "3D stacked memory",
+   "3D DRAM",
+   "stacked memory computing"
+  ],
+  "model": "ollama:qwen2.5:7b",
+  "query_en": "3D memory computing"
+ },
+ "App Store для роботов: маркетплейсы навыков/движений": {
+  "keyphrases": [
+   "bot capability exchange",
+   "AI action platform",
+   "smart device app store"
+  ],
+  "model": "ollama:qwen2.5:7b",
+  "query_en": "robot skill marketplace"
+ },
+ "CAD-native «engineering intelligence»: ИИ-суррогаты физики + генеративное проектирование деталей под производимость": {
+  "keyphrases": [
+   "AI-generated design",
+   "Production-aware design",
+   "Physically informed AI"
+  ],
+  "model": "ollama:qwen2.5:7b",
+  "query_en": "CAD-native AI-driven engineering"
+ },
+ "Confidential computing на слабых edge-устройствах (TEE + удалённая аттестация на Cortex-M)": {
+  "keyphrases": [
+   "secure edge computation",
+   "remote attestation",
+   "trusted execution environment"
+  ],
+  "model": "ollama:qwen2.5:7b",
+  "query_en": "confidential inference on TEE"
+ },
+ "Edge-to-cloud оркестрация инференса (телеком-грид, on-device offload)": {
+  "keyphrases": [
+   "on-device inference",
+   "cloud edge collaboration",
+   "fringe computing"
+  ],
+  "model": "ollama:qwen2.5:7b",
+  "query_en": "edge cloud inference orchestration"
+ },
+ "Foundation-модели промышленных временных рядов (S-E-F-C: setpoint/effort/feedback/context) и предобучающие корпуса заводских данных": {
+  "keyphrases": [
+   "industrial foundation models",
+   "industrial contextual models",
+   "industrial time series models"
+  ],
+  "model": "ollama:qwen2.5:7b",
+  "query_en": "industrial S-E-F-C models"
+ },
+ "Identity & access management для ИИ-агентов (agent identity, scoped permissions)": {
+  "keyphrases": [
+   "agent identity management",
+   "AI entity permissions"
+  ],
+  "model": "ollama:qwen2.5:7b",
+  "query_en": "AI agent IAM"
+ },
+ "Know Your Agent (KYA) — верифицируемая идентичность и делегированные полномочия ИИ-агентов": {
+  "keyphrases": [
+   "AI Agent Verification",
+   "Delegated AI Authority",
+   "Trustworthy AI Agents"
+  ],
+  "model": "ollama:qwen2.5:7b",
+  "query_en": "Verifiable AI Agent Identity"
+ },
+ "LLM-генерация кода ПЛК на IEC 61131-3 Structured Text с замыканием на компилятор и формальную верификацию": {
+  "keyphrases": [
+   "PLC code autogeneration",
+   "Industrial AI coding",
+   "Formal verification for LLM"
+  ],
+  "model": "ollama:qwen2.5:7b",
+  "query_en": "LLM for PLC code generation"
+ },
+ "LLM-файрволы на сетевом/edge-уровне (AI runtime gateway)": {
+  "keyphrases": [
+   "AI protection gateway",
+   "Edge AI security"
+  ],
+  "model": "ollama:qwen2.5:7b",
+  "query_en": "AI runtime firewall"
+ },
+ "Machine unlearning как средство ремедиации рисков модели (удаление данных/поведения без переобучения)": {
+  "keyphrases": [
+   "Data deletion methods",
+   "Privacy-preserving mechanisms",
+   "GDPR compliance strategies"
+  ],
+  "model": "ollama:qwen2.5:7b",
+  "query_en": "Machine unlearning techniques"
+ },
+ "NPU внутри батарейных MCU/SoC для массового IoT (не для AI PC)": {
+  "keyphrases": [
+   "inexpensive NPU",
+   "budget-friendly NPU",
+   "affordable NPU"
+  ],
+  "model": "ollama:qwen2.5:7b",
+  "query_en": "low-cost NPU in battery MCU"
+ },
+ "Purpose-Bound Money (PBM) — программируемые целевые/условные деньги": {
+  "keyphrases": [
+   "smart currency",
+   "digital tokens",
+   "conditional payment"
+  ],
+  "model": "ollama:qwen2.5:7b",
+  "query_en": "programmable money"
+ },
+ "Robotics foundation models, обучаемые на данных внутри действующих заводов (а не в лабораториях/на публичных датасетах)": {
+  "keyphrases": [
+   "factory floor AI",
+   "on-site robotics learning",
+   "live plant ML"
+  ],
+  "model": "ollama:qwen2.5:7b",
+  "query_en": "industrial robotics training"
+ },
+ "Simulation-first стеки с zero-shot переносом (обучение полностью в симуляции)": {
+  "keyphrases": [
+   "virtual training",
+   "simulated learning",
+   "pre-trained robots"
+  ],
+  "model": "ollama:qwen2.5:7b",
+  "query_en": "simulation-first robotics"
+ },
+ "Vision foundation models для контроля качества, где задача задаётся естественным языком (без разметки под каждый дефект)": {
+  "keyphrases": [
+   "text-to-inspection",
+   "natural language QA inspection"
+  ],
+  "model": "ollama:qwen2.5:7b",
+  "query_en": "language-guided quality inspection"
+ },
+ "Wafer-scale нового поколения: 3D-стек SRAM/DRAM поверх пластины": {
+  "keyphrases": [
+   "3D wafer-scale",
+   "stacked memory",
+   "vertical integration"
+  ],
+  "model": "ollama:qwen2.5:7b",
+  "query_en": "3D stacked SRAM/DRAM"
+ },
+ "«Мягкие робо-клетки»: физический интеллект, вшитый в сам материал": {
+  "keyphrases": [
+   "flexible AI",
+   "smart materials",
+   "physical AI",
+   "reconfigurable robots"
+  ],
+  "model": "ollama:qwen2.5:7b",
+  "query_en": "soft robotic cells"
+ },
+ "«Робот-геолог»: сенсорная фьюжн-платформа (гиперспектр + XRF + LIBS + 3D) с ML для поиска и оценки руды": {
+  "keyphrases": [
+   "automated ore exploration",
+   "geoanalytical robot",
+   "intelligent mineral surveyor"
+  ],
+  "model": "ollama:qwen2.5:7b",
+  "query_en": "mining robotic geologist"
+ },
+ "«Самозалечивающаяся» защита от prompt injection для агентных систем": {
+  "keyphrases": [
+   "auto-repairing prompt protection",
+   "self-restoring prompt safeguard"
+  ],
+  "model": "ollama:qwen2.5:7b",
+  "query_en": "self-healing prompt defense"
+ },
+ "Ёмкостно-ориентированный инференс: CXL-пулы памяти и LPDDR вместо HBM": {
+  "keyphrases": [
+   "CXL-based inference",
+   "Memory pooling for AI"
+  ],
+  "model": "ollama:qwen2.5:7b",
+  "query_en": "CXL memory pools"
+ },
+ "Автоматизация AI-governance и compliance под EU AI Act (AI-GRC как код)": {
+  "keyphrases": [
+   "AI compliance tools",
+   "AI risk management",
+   "EU AI Act compliance"
+  ],
+  "model": "ollama:qwen2.5:7b",
+  "query_en": "AI governance solutions"
+ },
+ "Автоматизированный red-teaming ИИ-моделей как услуга (continuous AI red teaming)": {
+  "keyphrases": [
+   "automated AI red teaming",
+   "continuous AI security testing",
+   "AI ethical hacking"
+  ],
+  "model": "ollama:qwen2.5:7b",
+  "query_en": "AI red teaming service"
+ },
+ "Автономные агенты закупок и цепей поставок, работающие в ERP/e-mail/мессенджерах как «цифровые снабженцы»": {
+  "keyphrases": [
+   "smart procurement assistants",
+   "automated supply chain agents"
+  ],
+  "model": "ollama:qwen2.5:7b",
+  "query_en": "digital procurement agents"
+ },
+ "Агентная генерация технологической документации: P&ID и схемы процессов из текстового описания в машиночитаемом DEXPI": {
+  "keyphrases": [
+   "automated P&ID generation",
+   "smart P&ID creation"
+  ],
+  "model": "ollama:qwen2.5:7b",
+  "query_en": "AI-generated P&ID"
+ },
+ "Агентные (multi-step) AI-workflow, исполняемые локально на NPU ПК": {
+  "keyphrases": [
+   "Edge AI workflows",
+   "NPU-based AI agents",
+   "On-device AI processes"
+  ],
+  "model": "ollama:qwen2.5:7b",
+  "query_en": "Local multi-step AI workflows"
+ },
+ "Агентный ИИ, действующий внутри стека OT (PLC/SCADA/MES/ERP) с журналируемыми действиями и «approval gate» оператора": {
+  "keyphrases": [
+   "Smart Factory Assistant",
+   "Operational Automation Bot",
+   ".Factory AI"
+  ],
+  "model": "ollama:qwen2.5:7b",
+  "query_en": "Industrial IIoT Agent"
+ },
+ "Адаптивная автономная сварка: нейросетевое зрение вместо предварительного сканирования и репрограммирования робота": {
+  "keyphrases": [
+   "AI welding",
+   "Autonomous welding",
+   "Smart welding"
+  ],
+  "model": "ollama:qwen2.5:7b",
+  "query_en": "Neural vision welding"
+ },
+ "Акустическая диагностика оборудования на edge: слияние звука, вибрации и режима работы без облака": {
+  "keyphrases": [
+   "On-site predictive maintenance",
+   "Real-time asset health",
+   "Local vibration analysis"
+  ],
+  "model": "ollama:qwen2.5:7b",
+  "query_en": "Edge acoustic equipment monitoring"
+ },
+ "Аналоговые compute-in-memory чипы для edge-инференса": {
+  "keyphrases": [
+   "Edge AI chips",
+   "Analog edge inference",
+   "On-chip computing"
+  ],
+  "model": "ollama:qwen2.5:7b",
+  "query_en": "Analog compute-in-memory chips"
+ },
+ "Аналоговые вычисления в памяти (analog in-memory computing)": {
+  "keyphrases": [
+   "AI analog accelerators",
+   "analogue in-memory computing",
+   "analog memory computing"
+  ],
+  "model": "ollama:qwen2.5:7b",
+  "query_en": "analog in-memory computing"
+ },
+ "Бенчмарки и стресс-тесты LLM-агентов для трейдинга (в т.ч. состязательные рынки)": {
+  "keyphrases": [
+   "AI trader stress tests",
+   "Chatbot trading assessments",
+   "Machine learning finance tests"
+  ],
+  "model": "ollama:qwen2.5:7b",
+  "query_en": "LLM trading benchmarks"
+ },
+ "Браузерно-нативные автономные ИИ-агенты комплаенса (KYC/AML «агентная рабочая сила»)": {
+  "keyphrases": [
+   "KYC/AML automation",
+   "compliance AI agents",
+   "native browser agents"
+  ],
+  "model": "ollama:qwen2.5:7b",
+  "query_en": "browser-native AI compliance agents"
+ },
+ "Внутрикристальное микрофлюидное охлаждение (каналы, вытравленные в кремнии)": {
+  "keyphrases": [
+   "On-chip microfluidic cooling",
+   "Integrated microfluidic cooling",
+   "Microscale cooling within chip"
+  ],
+  "model": "ollama:qwen2.5:7b",
+  "query_en": "Chip-integrated microfluidic cooling"
+ },
+ "Гибридные event-based сенсоры зрения в серийном автопроме": {
+  "keyphrases": [
+   "sensory event cameras",
+   "spatial event sensing",
+   "e-sensors"
+  ],
+  "model": "ollama:qwen2.5:7b",
+  "query_en": "event-based vision sensors"
+ },
+ "Голосовые ИИ-агенты для взыскания и обслуживания долга на развивающихся рынках": {
+  "keyphrases": [
+   "automated debt recovery",
+   "voicebot collections",
+   "AI-powered催收"
+  ],
+  "model": "ollama:qwen2.5:7b",
+  "query_en": "AI debt collection"
+ },
+ "Дексterity-кисти как самостоятельный компонентный рынок (не часть гуманоида)": {
+  "keyphrases": [
+   "advanced robotic grippers",
+   "high-dof manipulation arms",
+   "flexible industrial telerobots"
+  ],
+  "model": "ollama:qwen2.5:7b",
+  "query_en": "non-humanoid dexterous hands"
+ },
+ "Депозитные токены банков на публичных блокчейнах": {
+  "keyphrases": [
+   "commercial bank tokens",
+   "digital deposit securities",
+   "bank digital certificates"
+  ],
+  "model": "ollama:qwen2.5:7b",
+  "query_en": "bank issued digital deposits"
+ },
+ "Децентрализованные / распределённые сети инференса": {
+  "keyphrases": [
+   "Distributed inference networks",
+   "Decentralized AI inference",
+   "Distributed AI inference"
+  ],
+  "model": "ollama:qwen2.5:7b",
+  "query_en": "Decentralized inference networks"
+ },
+ "Дешёвые массовые автономные подводные аппараты как «постоянная сеть» океана": {
+  "keyphrases": [
+   "massive underwater robots",
+   "autonomous marine fleet",
+   "ocean monitoring network"
+  ],
+  "model": "ollama:qwen2.5:7b",
+  "query_en": "cheap ocean drones swarm"
+ },
+ "Дифференциально-приватные синтетические данные как контроль безопасности обучения ИИ": {
+  "keyphrases": [
+   "differentially private synthetic data",
+   "privacy-focused AI training"
+  ],
+  "model": "ollama:qwen2.5:7b",
+  "query_en": "AI privacy-preserving data"
+ },
+ "Дообучение и мульти-LoRA персонализация прямо на смартфоне": {
+  "keyphrases": [
+   "On-device retraining",
+   "Mobile personalization",
+   "Client-side adaptation"
+  ],
+  "model": "ollama:qwen2.5:7b",
+  "query_en": "Edge fine-tuning"
+ },
+ "Защита онбординга от инъекционных атак и дипфейков (NFC-anchor + двухшаговая liveness)": {
+  "keyphrases": [
+   "NFC liveness",
+   "Proactive authentication"
+  ],
+  "model": "ollama:qwen2.5:7b",
+  "query_en": "NFC-based liveness detection"
+ },
+ "ИИ-native банковские ядра (core banking OS с агентами внутри)": {
+  "keyphrases": [
+   "intelligent core banking platforms",
+   "next-gen core banking solutions",
+   "modernized core banking infrastructures"
+  ],
+  "model": "ollama:qwen2.5:7b",
+  "query_en": "AI-native core banking systems"
+ },
+ "ИИ-компиляторы и автоматическая оптимизация инференса как отдельная категория": {
+  "keyphrases": [
+   "AI inference compilation",
+   "automated AI optimization",
+   "AI inferencing acceleration"
+  ],
+  "model": "ollama:qwen2.5:7b",
+  "query_en": "AI compiler optimization"
+ },
+ "ИИ-операторы виртуальных электростанций: автоматическое трейдинг-планирование BESS на нескольких рынках": {
+  "keyphrases": [
+   "BESS automation",
+   "AI-driven BESS trading",
+   "Smart BESS scheduling"
+  ],
+  "model": "ollama:qwen2.5:7b",
+  "query_en": "AI operators for BESS trading"
+ },
+ "ИИ-управление процессами в полупроводниковом фабе и новые ИИ-сенсоры процесса (плазменная спектроскопия, in-line метрология)": {
+  "keyphrases": [
+   "smart fab processes",
+   "automated semiconductor manufacturing",
+   "advanced process monitoring"
+  ],
+  "model": "ollama:qwen2.5:7b",
+  "query_en": "AI process control in semiconductor fab"
+ },
+ "Интерпретируемость как операционный защитный контроль (interpretability-based safeguards)": {
+  "keyphrases": [
+   "explainable AI defense",
+   "transparent AI protection",
+   "interpretability-based safety"
+  ],
+  "model": "ollama:qwen2.5:7b",
+  "query_en": "interpretable AI security"
+ },
+ "Квантово-инспирированное сжатие моделей для запуска LLM на edge-железе": {
+  "keyphrases": [
+   "compressed quantum models",
+   "edge AI compression",
+   "model pruning techniques"
+  ],
+  "model": "ollama:qwen2.5:7b",
+  "query_en": "quantum-inspired model compression"
+ },
+ "Конфиденциальный инференс в TEE с удалённой аттестацией и подписанными «receipts»": {
+  "keyphrases": [
+   "secure AI inference",
+   "privacy-preserving inference",
+   "TEE-based AI"
+  ],
+  "model": "ollama:qwen2.5:7b",
+  "query_en": "confidential AI inference"
+ },
+ "Кремний, спроектированный под агентный ИИ (длинный контекст, KV-cache, low-latency decode)": {
+  "keyphrases": [
+   "Agent-centric AI",
+   "AI silicon specializations"
+  ],
+  "model": "ollama:qwen2.5:7b",
+  "query_en": "Silicon agent AI"
+ },
+ "Криптографическая верификация трафика агентов (Web Bot Auth, signed agents)": {
+  "keyphrases": [
+   "Signed Agent Verification",
+   "Traffic Authentication"
+  ],
+  "model": "ollama:qwen2.5:7b",
+  "query_en": "Web Bot Auth"
+ },
+ "Криптографическая подпись моделей и AI-SBOM (провенанс цепочки поставок моделей)": {
+  "keyphrases": [
+   "AI model signature",
+   "AI-SBOM",
+   "model provenance"
+  ],
+  "model": "ollama:qwen2.5:7b",
+  "query_en": "AI model provenance"
+ },
+ "Локальные SLM-рантаймы как «анти-Big-Tech» альтернатива на ноутбуках и смартфонах": {
+  "keyphrases": [
+   "local SLM execution",
+   "on-device SLM"
+  ],
+  "model": "ollama:qwen2.5:7b",
+  "query_en": "edge SLM runtime"
+ },
+ "Малые модульные реакторы (SMR) как выделенный источник питания ИИ-ЦОД": {
+  "keyphrases": [
+   "Modular nuclear reactors for AI infrastructure",
+   "Nuclear SMRs as AI data center power source"
+  ],
+  "model": "ollama:qwen2.5:7b",
+  "query_en": "SMR-powered AI data centers"
+ },
+ "Маршрутизирующий слой «устройство ↔ облако» как отдельный продукт (hybrid inference routing)": {
+  "keyphrases": [
+   "device-to-cloud routing",
+   "edge inference routing",
+   "cloud-agnostic routing"
+  ],
+  "model": "ollama:qwen2.5:7b",
+  "query_en": "hybrid inference routing"
+ },
+ "Массовые квадропеды-инспекторы вне «премиум»-сегмента (метро, геотермия, НПЗ)": {
+  "keyphrases": [
+   "multi-legged inspection robots",
+   "quadruped industrial bots",
+   "metro inspection robots"
+  ],
+  "model": "ollama:qwen2.5:7b",
+  "query_en": "quadped robots for non-standard environments"
+ },
+ "Машинные микроплатежи по HTTP 402 (оплата за API-вызов, стриминговые платежи)": {
+  "keyphrases": [
+   "microtransaction HTTP",
+   "pay-per API call",
+   "streaming subscriptions"
+  ],
+  "model": "ollama:qwen2.5:7b",
+  "query_en": "HTTP 402 micropayments"
+ },
+ "Медицинские микророботы, доходящие до клиники": {
+  "keyphrases": [
+   "medicinal nanobots",
+   "therapeutic microrobots",
+   "miniature medical robots"
+  ],
+  "model": "ollama:qwen2.5:7b",
+  "query_en": "clinical microbots"
+ },
+ "Мониторинг chain-of-thought для детекции обмана и «scheming» моделей": {
+  "keyphrases": [
+   "thought-chain detection",
+   "reasoning trace analysis",
+   "logic flow inspection"
+  ],
+  "model": "ollama:qwen2.5:7b",
+  "query_en": "chain-of-thought monitoring"
+ },
+ "Нейроморфные (brain-inspired) чипы для ИИ-нагрузок": {
+  "keyphrases": [
+   "neuromorphic chips",
+   "neuromorphics"
+  ],
+  "model": "ollama:qwen2.5:7b",
+  "query_en": "brain-inspired chips"
+ },
+ "Нейроморфные edge-процессоры, встраиваемые в стандартные EDA/дизайн-потоки": {
+  "keyphrases": [
+   "neuromorphic IP licensing",
+   "neuromorphic design flows"
+  ],
+  "model": "ollama:qwen2.5:7b",
+  "query_en": "neuromorphic EDA integration"
+ },
+ "Нейроморфные/событийные edge-чипы для непрерывного мониторинга промышленного оборудования (мВт-класс, без облака)": {
+  "keyphrases": [
+   "event-driven processors",
+   "analog computing chips"
+  ],
+  "model": "ollama:qwen2.5:7b",
+  "query_en": "neuromorphic edge chips"
+ },
+ "Ончейн-скоринг и рейтинги для необеспеченного/недообеспеченного кредитования": {
+  "keyphrases": [
+   "Crypto credit assessment",
+   "Decentralized lending metrics",
+   "Blockchain risk evaluation"
+  ],
+  "model": "ollama:qwen2.5:7b",
+  "query_en": "Blockchain scoring and ratings for unsecured lending"
+ },
+ "Оптическая коммутация каналов (OCS) в ИИ-фабриках вместо пакетных свитчей": {
+  "keyphrases": [
+   "OCS for AI Infra",
+   "AI Optic Fabric",
+   "Optic Switching in AI"
+  ],
+  "model": "ollama:qwen2.5:7b",
+  "query_en": "Optical Channel Switching AI Fabric"
+ },
+ "Орбитальные дата-центры / инференс в космосе": {
+  "keyphrases": [
+   "space AI data centers",
+   "cloud computing in orbit",
+   "AI inference satellites"
+  ],
+  "model": "ollama:qwen2.5:7b",
+  "query_en": "orbital AI infrastructure"
+ },
+ "Орбитальный edge-компьютинг: инференс на спутниках": {
+  "keyphrases": [
+   "Space edge computing",
+   "Orbital on-site processing"
+  ],
+  "model": "ollama:qwen2.5:7b",
+  "query_en": "Satellite edge inference"
+ },
+ "Оркестрация Edge AI на парках из тысяч устройств (control plane для edge-флотов)": {
+  "keyphrases": [
+   "Edge IoT management",
+   "Edge MLOps",
+   "Edge device orchestration"
+  ],
+  "model": "ollama:qwen2.5:7b",
+  "query_en": "Edge AI management"
+ },
+ "Переиспользуемые ZK-верифицируемые credentials для KYC (zk-KYC)": {
+  "keyphrases": [
+   "zk-verified reusable credentials",
+   "privacy-preserving KYC",
+   "zero-knowledge KYC"
+  ],
+  "model": "ollama:qwen2.5:7b",
+  "query_en": "reusable ZK-KYC credentials"
+ },
+ "Проактивные ИИ-агенты теплового управления: упреждающее охлаждение ЦОД/AI-фабрик по прогнозу нагрузки, а не по факту нагрева": {
+  "keyphrases": [
+   "Predictive thermal management",
+   "Anticipatory HVAC",
+   "Load-based cooling"
+  ],
+  "model": "ollama:qwen2.5:7b",
+  "query_en": "Proactive AI cooling"
+ },
+ "Протоколы авторизации платежей ИИ-агентов (x402 / AP2 / ACP / MPP)": {
+  "keyphrases": [
+   "x402 protocol",
+   "AP2 protocol",
+   "ACP protocol",
+   "MPP protocol"
+  ],
+  "model": "ollama:qwen2.5:7b",
+  "query_en": "AI payment auth protocols"
+ },
+ "Роевая робототехника выходит из лаборатории (сортировка, полевые работы)": {
+  "keyphrases": [
+   "agricultural swarms",
+   "field swarm robots",
+   "farm swarm technology"
+  ],
+  "model": "ollama:qwen2.5:7b",
+  "query_en": "swarm robotics in agriculture"
+ },
+ "Самообучающиеся контуры управления: RL прямо на промышленном контроллере/в живом цеху (а не в симуляторе)": {
+  "keyphrases": [
+   "real-time industrial RL",
+   "live industrial RL deployment",
+   "on-site RL training"
+  ],
+  "model": "ollama:qwen2.5:7b",
+  "query_en": "industrial RL on-the-fly"
+ },
+ "Сверхпроводящие / криогенные вычисления для ИИ-ЦОД": {
+  "keyphrases": [
+   "cryogenic computing",
+   "high-field computing",
+   "quantum-assisted AI"
+  ],
+  "model": "ollama:qwen2.5:7b",
+  "query_en": "superconducting AI infrastructure"
+ },
+ "Сертификация безопасности физического ИИ как «узкое горлышко» внедрения": {
+  "keyphrases": [
+   "safety accreditation constraint",
+   "biomechanical model limitation"
+  ],
+  "model": "ollama:qwen2.5:7b",
+  "query_en": "security certification bottleneck"
+ },
+ "Сертифицированная защита от отравления памяти агентов и RAG-хранилищ (memory poisoning defense)": {
+  "keyphrases": [
+   "agent-based memory protection",
+   "RAG-memory safeguard"
+  ],
+  "model": "ollama:qwen2.5:7b",
+  "query_en": "memory poisoning defense"
+ },
+ "Сканеры безопасности MCP-серверов и защита от tool poisoning": {
+  "keyphrases": [
+   "security of MCP servers",
+   "MCP server protection",
+   "MCP safety"
+  ],
+  "model": "ollama:qwen2.5:7b",
+  "query_en": "MCP server security"
+ },
+ "Сканирование бэкдоров в open-weight LLM «в масштабе» (backdoored model detection)": {
+  "keyphrases": [
+   "backdoor embedding",
+   "LLM security"
+  ],
+  "model": "ollama:qwen2.5:7b",
+  "query_en": "backdoored LLM detection"
+ },
+ "Специализированный edge-кремний под инференс VLA-моделей на борту робота": {
+  "keyphrases": [
+   "on-board inference silicon",
+   "robotic edge computing",
+   "embedded VLA processing"
+  ],
+  "model": "ollama:qwen2.5:7b",
+  "query_en": "edge silicon for VLA inference"
+ },
+ "Статистические водяные знаки для ТЕКСТА LLM под требования EU AI Act": {
+  "keyphrases": [
+   "textual statistical markers",
+   "watermarking for AI text"
+  ],
+  "model": "ollama:qwen2.5:7b",
+  "query_en": "statistical watermarks text LLM"
+ },
+ "Стейблкоины локальных валют (не-USD) и ончейн-FX между корридорами": {
+  "keyphrases": [
+   "crypto-local",
+   "onchain FX corridors"
+  ],
+  "model": "ollama:qwen2.5:7b",
+  "query_en": "local currency stablecoins"
+ },
+ "Страхование ответственности за действия ИИ-агентов (новый класс полиса)": {
+  "keyphrases": [
+   "robotic process error coverage",
+   "digital risk insurance"
+  ],
+  "model": "ollama:qwen2.5:7b",
+  "query_en": "AI liability insurance"
+ },
+ "Страхование роботов и андеррайтинг по телеметрии; RaaS-контракты с SLA по аптайму": {
+  "keyphrases": [
+   "robot telematics",
+   "remote robot monitoring"
+  ],
+  "model": "ollama:qwen2.5:7b",
+  "query_en": "robot insurance telemetry"
+ },
+ "Суверенные ИИ-облака, работающие в полностью отключённом (disconnected/air-gapped) режиме": {
+  "keyphrases": [
+   "air-gapped sovereign AI infrastructure",
+   "fully offline sovereign AI environments"
+  ],
+  "model": "ollama:qwen2.5:7b",
+  "query_en": "sovereign AI clouds in disconnected mode"
+ },
+ "Тактильно-обусловленные VLA-модели (touch-in-the-loop манипуляция)": {
+  "keyphrases": [
+   "tactile-in-loop control",
+   "haptic-in-loop interaction"
+  ],
+  "model": "ollama:qwen2.5:7b",
+  "query_en": "touch-in-the-loop manipulation"
+ },
+ "Телеоперационные данные как отдельная индустрия (data-as-a-service для роботов)": {
+  "keyphrases": [
+   "RaaS",
+   "robot data service",
+   "automated data provision"
+  ],
+  "model": "ollama:qwen2.5:7b",
+  "query_en": "robotic data-as-a-service"
+ },
+ "Тиринг KV-кэша: выгрузка контекста в DRAM/NVMe/параллельные ФС": {
+  "keyphrases": [
+   "context offload",
+   "parallel storage caching",
+   "KV-cache offload"
+  ],
+  "model": "ollama:qwen2.5:7b",
+  "query_en": "DRAM/NVMe parallel storage context offloading"
+ },
+ "Токенизированные паи денежных фондов (MMF) как мобильное обеспечение": {
+  "keyphrases": [
+   "digital MMF shares",
+   "cryptocurrency MMF",
+   "digitized money market funds"
+  ],
+  "model": "ollama:qwen2.5:7b",
+  "query_en": "tokenized MMF tokens"
+ },
+ "Федеративное обучение для межбанковского AML/антифрода (без обмена сырыми данными)": {
+  "keyphrases": [
+   "Collaborative AML",
+   "Decentralized AML"
+  ],
+  "model": "ollama:qwen2.5:7b",
+  "query_en": "Federated AML"
+ },
+ "Федеративное обучение как инфраструктура «суверенного» приватного развёртывания": {
+  "keyphrases": [
+   "secure edge deployment",
+   "privately federated learning",
+   "edge privacy preservation"
+  ],
+  "model": "ollama:qwen2.5:7b",
+  "query_en": "federated edge learning"
+ },
+ "Федеративное обучение между площадками/предприятиями: модели учатся на данных нескольких заводов без их передачи": {
+  "keyphrases": [
+   "Multi-site federated learning",
+   "Enterprise federated learning"
+  ],
+  "model": "ollama:qwen2.5:7b",
+  "query_en": "Cross-site federated learning"
+ },
+ "Фотонные (оптические) процессоры инференса для компактных SWaP-ограниченных систем": {
+  "keyphrases": [
+   "Optical processors",
+   "Fiber-optic computing",
+   "Photonic accelerators"
+  ],
+  "model": "ollama:qwen2.5:7b",
+  "query_en": "Photonics inference engines"
+ },
+ "Фотонные/оптические процессоры для инференса (вычисления светом)": {
+  "keyphrases": [
+   "optical AI computing",
+   "light-based inference",
+   "photonics for AI"
+  ],
+  "model": "ollama:qwen2.5:7b",
+  "query_en": "photonic AI inference"
+ },
+ "Эгоцентрическое человеческое видео как «дешёвый» источник обучающих данных (human-to-robot transfer)": {
+  "keyphrases": [
+   "first-person training data",
+   "self-centered human footage",
+   "human-centric video"
+  ],
+  "model": "ollama:qwen2.5:7b",
+  "query_en": "ego-centric human video"
+ }
+}

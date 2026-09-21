@@ -4,7 +4,8 @@ from classifier.queries import ЗапросыКэш, _разобрать
 
 
 def test_ответ_модели_разбирается_в_запрос_и_фразы():
-    сырой = '{"query_en": "agent identity access management", "keyphrases": ["agent IAM", "AI agent identity", "scoped permissions for agents"]}'
+    сырой = ('{"query_en": "agent identity access management", '
+             '"keyphrases": ["agent IAM", "AI agent identity", "scoped permissions for agents"]}')
     q = _разобрать(сырой)
     assert q["query_en"] == "agent identity access management"
     assert len(q["keyphrases"]) == 3
@@ -18,7 +19,9 @@ def test_мусор_вокруг_json_не_ломает_разбор():
 def test_кэш_переживает_перезапуск_и_помнит_модель(tmp_path):
     p = tmp_path / "q.json"
     к = ЗапросыКэш(p)
-    к.положить("Роботы-газонокосилки", {"query_en": "robotic lawn mower", "keyphrases": ["robot mower"]}, "ollama:qwen2.5:7b")
+    к.положить("Роботы-газонокосилки",
+               {"query_en": "robotic lawn mower", "keyphrases": ["robot mower"]},
+               "ollama:qwen2.5:7b")
     к2 = ЗапросыКэш(p)
     z = к2.взять("Роботы-газонокосилки")
     assert z["query_en"] == "robotic lawn mower"

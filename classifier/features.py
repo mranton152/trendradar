@@ -66,8 +66,9 @@ def _github_token() -> str | None:
 class Сборщик:
     def __init__(self, кэш: dict | None = None, client: httpx.Client | None = None):
         self.кэш = кэш if кэш is not None else _кэш()
-        self.client = client or httpx.Client(timeout=60, follow_redirects=True,
-                                             headers={"User-Agent": f"trendradar/0.2 (+mailto:{ПОЧТА})"})
+        self.client = client or httpx.Client(
+            timeout=60, follow_redirects=True,
+            headers={"User-Agent": f"trendradar/0.2 (+mailto:{ПОЧТА})"})
         self.год = dt.date.today().year
         tok = _github_token()
         self.gh_headers = {"Authorization": f"Bearer {tok}"} if tok else {}
@@ -89,19 +90,23 @@ class Сборщик:
                 if str(g["key"]).isdigit() and self.год - ЛЕТ < int(g["key"]) <= self.год}
 
     def openalex_страны(self, q: str) -> int:
+        окно = f"publication_year:{self.год - 2}-{self.год}"
         d = self._get(f"oa:countries:{q}", "https://api.openalex.org/works",
-                      {"filter": f'title_and_abstract.search:"{q}",publication_year:{self.год-2}-{self.год}',
-                       "group_by": "authorships.institutions.country_code", "per-page": 200, "mailto": ПОЧТА})
+                      {"filter": f'title_and_abstract.search:"{q}",{окно}',
+                       "group_by": "authorships.institutions.country_code",
+                       "per-page": 200, "mailto": ПОЧТА})
         return len([g for g in d.get("group_by", []) if g.get("count", 0) >= 2])
 
     def openalex_компании(self, q: str) -> float:
+        окно = f"publication_year:{self.год - 2}-{self.год}"
+        базовый = f'title_and_abstract.search:"{q}",{окно}'
         общ = self._get(f"oa:total3:{q}", "https://api.openalex.org/works",
-                        {"filter": f'title_and_abstract.search:"{q}",publication_year:{self.год-2}-{self.год}',
-                         "per-page": 1, "mailto": ПОЧТА}).get("meta", {}).get("count", 0)
+                        {"filter": базовый, "per-page": 1, "mailto": ПОЧТА}
+                        ).get("meta", {}).get("count", 0)
         комп = self._get(f"oa:company3:{q}", "https://api.openalex.org/works",
-                         {"filter": f'title_and_abstract.search:"{q}",publication_year:{self.год-2}-{self.год},'
-                                    'authorships.institutions.type:company',
-                          "per-page": 1, "mailto": ПОЧТА}).get("meta", {}).get("count", 0)
+                         {"filter": f"{базовый},authorships.institutions.type:company",
+                          "per-page": 1, "mailto": ПОЧТА}
+                         ).get("meta", {}).get("count", 0)
         return комп / общ if общ else 0.0
 
     def github(self, q: str) -> dict:

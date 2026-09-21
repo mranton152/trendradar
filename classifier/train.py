@@ -16,8 +16,13 @@ from pathlib import Path
 import numpy as np
 from sklearn.ensemble import GradientBoostingClassifier
 from sklearn.linear_model import LogisticRegression
-from sklearn.metrics import (accuracy_score, confusion_matrix, f1_score,
-                             precision_score, recall_score)
+from sklearn.metrics import (
+    accuracy_score,
+    confusion_matrix,
+    f1_score,
+    precision_score,
+    recall_score,
+)
 from sklearn.model_selection import StratifiedKFold, cross_val_predict
 from sklearn.pipeline import make_pipeline
 from sklearn.preprocessing import StandardScaler
@@ -111,8 +116,10 @@ def отчёт_md(и: dict) -> str:
                      for p in lg["важность"])
     абл = "\n".join(f"| {a['без']} | {a['accuracy']:.0%} | {a['потеря']:+.3f} |"
                     for a in и["абляция_logreg"][:8])
-    ош = "\n".join(f"| {e['label'][:60]} | {e['domain']} | {'сигнал' if e['истина'] else 'зрелая'} → "
-                   f"{'сигнал' if e['предсказано'] else 'зрелая'} |" for e in lg["ошибки"][:15])
+    def _ярлык(b):
+        return "сигнал" if b else "зрелая"
+    ош = "\n".join(f"| {e['label'][:60]} | {e['domain']} | {_ярлык(e['истина'])} → "
+                   f"{_ярлык(e['предсказано'])} |" for e in lg["ошибки"][:15])
     return f"""# Отчёт классификатора — этап 1 ТЗ
 
 Выборка: {и['n']} технологий — {и['n_pos']} слабых сигналов из датасета заказчика
@@ -172,9 +179,10 @@ def main() -> None:
     выборка = собрать_выборку(xlsx)
     кэш = ЗапросыКэш()
     запросы = {s["label"]: кэш.взять(s["label"]) for s in выборка}
-    нет = [l for l, q in запросы.items() if not q]
+    нет = [имя for имя, q in запросы.items() if not q]
     if нет:
-        raise SystemExit(f"нет запросов для {len(нет)} технологий — сначала python -m classifier.queries")
+        raise SystemExit(f"нет запросов для {len(нет)} технологий — "
+                         "сначала python -m classifier.queries")
 
     print("собираю признаки…")
     строки = собрать_признаки(выборка, запросы)
@@ -186,7 +194,8 @@ def main() -> None:
                                               encoding="utf-8")
     Path("classifier/REPORT.md").write_text(отчёт_md(и), encoding="utf-8")
     for имя, m in и["модели"].items():
-        print(f"{имя}: acc={m['accuracy']:.0%} P={m['precision']:.2f} R={m['recall']:.2f} F1={m['f1']:.2f}")
+        print(f"{имя}: acc={m['accuracy']:.0%} P={m['precision']:.2f} "
+              f"R={m['recall']:.2f} F1={m['f1']:.2f}")
     print("выбор:", и["выбор"])
 
 
