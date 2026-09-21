@@ -1,0 +1,1324 @@
+{
+  "dataset_filename": "100_слабых_технологических_сигналов_сентябрь_2026.xlsx",
+  "dataset_sha256": "1349a208671cf9db9b036d9d137036fc8471297b6ec04fce0fc864e75e02ed03",
+  "source_column": "J",
+  "technology_rows": 100,
+  "link_count": 285,
+  "domains": [
+    {
+      "domain": "1kosmos.com",
+      "urls": [
+        "https://www.1kosmos.com/resources/blog/kyc-kye-kya-framework-evolution"
+      ]
+    },
+    {
+      "domain": "1x.tech",
+      "urls": [
+        "https://www.1x.tech/discover/neos-hands"
+      ]
+    },
+    {
+      "domain": "abovea.tech",
+      "urls": [
+        "https://abovea.tech/insights-strategies/neuromorphic-computing-startups/"
+      ]
+    },
+    {
+      "domain": "accessnewswire.com",
+      "urls": [
+        "https://www.accessnewswire.com/newsroom/en/computers-technology-and-internet/indicio-brings-seamless-data-sharing-and-trusted-identity-verifica-742382"
+      ]
+    },
+    {
+      "domain": "agentfacts.org",
+      "urls": [
+        "https://agentfacts.org/kya/"
+      ]
+    },
+    {
+      "domain": "agenticindex.io",
+      "urls": [
+        "https://agenticindex.io/vendors/nexus-industrial"
+      ]
+    },
+    {
+      "domain": "agentmarketcap.ai",
+      "urls": [
+        "https://agentmarketcap.ai/blog/2026/04/15/ai-agent-error-insurance-lloyds-aig-beazley-hallucination-liability"
+      ]
+    },
+    {
+      "domain": "ai.google.dev",
+      "urls": [
+        "https://ai.google.dev/responsible/docs/safeguards/synthid"
+      ]
+    },
+    {
+      "domain": "aiche.confex.com",
+      "urls": [
+        "https://aiche.confex.com/aiche/s26/prelim.cgi/Paper/725200"
+      ]
+    },
+    {
+      "domain": "aisecurityandsafety.org",
+      "urls": [
+        "https://aisecurityandsafety.org/en/guides/ai-supply-chain-security/"
+      ]
+    },
+    {
+      "domain": "akamai.com",
+      "urls": [
+        "https://www.akamai.com/products/firewall-for-ai"
+      ]
+    },
+    {
+      "domain": "allaboutcircuits.com",
+      "urls": [
+        "https://www.allaboutcircuits.com/news/nordics-integrated-soc-simplify-edge-ai-for-battery-powered-iot/"
+      ]
+    },
+    {
+      "domain": "allenai.org",
+      "urls": [
+        "https://allenai.org/blog/molmobot"
+      ]
+    },
+    {
+      "domain": "amd.com",
+      "urls": [
+        "https://www.amd.com/en/developer/resources/technical-articles/2026/ai-model-deployment-using-windows-ml-on-amd-npu.html"
+      ]
+    },
+    {
+      "domain": "amlintelligence.com",
+      "urls": [
+        "https://www.amlintelligence.com/2026/02/latest-sphinx-raises-7-1m-to-scale-ai-compliance-agents/"
+      ]
+    },
+    {
+      "domain": "amlnetwork.org",
+      "urls": [
+        "https://amlnetwork.org/aml-news/diligent-ai-secures-e2-1-million-seed-funding-to-automate-kyc-and-aml-compliance-workflows-with-ai-agents/"
+      ]
+    },
+    {
+      "domain": "anthropic.com",
+      "urls": [
+        "https://www.anthropic.com/research/next-generation-constitutional-classifiers"
+      ]
+    },
+    {
+      "domain": "apolloresearch.ai",
+      "urls": [
+        "https://www.apolloresearch.ai/science/chain-of-thought-monitorability-a-new-and-fragile-opportunity-for-ai-safety"
+      ]
+    },
+    {
+      "domain": "app.fundz.net",
+      "urls": [
+        "https://app.fundz.net/fundings/beex-funding-round-series-a-f9ff20"
+      ]
+    },
+    {
+      "domain": "appsecsanta.com",
+      "urls": [
+        "https://appsecsanta.com/research/mcp-server-security-audit-2026"
+      ]
+    },
+    {
+      "domain": "ar5iv.labs.arxiv.org",
+      "urls": [
+        "https://ar5iv.labs.arxiv.org/html/2412.02410"
+      ]
+    },
+    {
+      "domain": "arxiv.org",
+      "urls": [
+        "https://arxiv.org/html/2604.24447v1",
+        "https://arxiv.org/html/2605.09081v1",
+        "https://arxiv.org/html/2606.17200v1",
+        "https://arxiv.org/html/2512.08211v1",
+        "https://arxiv.org/html/2604.18655v1",
+        "https://arxiv.org/html/2606.12703",
+        "https://arxiv.org/html/2605.22842v1",
+        "https://arxiv.org/html/2410.22159v3",
+        "https://arxiv.org/html/2412.12898v1",
+        "https://arxiv.org/html/2605.31044v1",
+        "https://arxiv.org/html/2604.26073v1",
+        "https://arxiv.org/abs/2603.00285",
+        "https://arxiv.org/abs/2510.11695",
+        "https://arxiv.org/abs/2605.28359",
+        "https://arxiv.org/html/2606.07470v1",
+        "https://arxiv.org/html/2605.03213v1",
+        "https://arxiv.org/html/2605.16786v1",
+        "https://arxiv.org/html/2506.09397v4"
+      ]
+    },
+    {
+      "domain": "asia.ccb.com",
+      "urls": [
+        "https://www.asia.ccb.com/hongkong/doc/about_us/newsroom/20251028-press.pdf"
+      ]
+    },
+    {
+      "domain": "awesomeagents.ai",
+      "urls": [
+        "https://awesomeagents.ai/tools/best-llm-firewalls-2026/"
+      ]
+    },
+    {
+      "domain": "biometricupdate.com",
+      "urls": [
+        "https://www.biometricupdate.com/202509/ai-agents-prompt-new-approaches-to-identity-and-access-management"
+      ]
+    },
+    {
+      "domain": "bits-chips.com",
+      "urls": [
+        "https://bits-chips.com/article/innatera-bags-e15m-for-mass-production-of-brain-inspired-processor/"
+      ]
+    },
+    {
+      "domain": "blog.cloudflare.com",
+      "urls": [
+        "https://blog.cloudflare.com/signed-agents/"
+      ]
+    },
+    {
+      "domain": "blog.digitalasset.com",
+      "urls": [
+        "https://blog.digitalasset.com/news/digital-asset-and-kinexys-by-j.p.-morgan-bring-usd-jpm-coin-jpmd-natively-to-canton"
+      ]
+    },
+    {
+      "domain": "blog.zk.me",
+      "urls": [
+        "https://blog.zk.me/"
+      ]
+    },
+    {
+      "domain": "blogs.cisco.com",
+      "urls": [
+        "https://blogs.cisco.com/?p=495626"
+      ]
+    },
+    {
+      "domain": "blogs.microsoft.com",
+      "urls": [
+        "https://blogs.microsoft.com/blog/2026/02/24/microsoft-sovereign-cloud-adds-governance-productivity-and-support-for-large-ai-models-securely-running-even-when-completely-disconnected/"
+      ]
+    },
+    {
+      "domain": "businesswire.com",
+      "urls": [
+        "https://www.businesswire.com/news/home/20260316829602/en/ZEDEDA-Unveils-the-Industrys-First-Edge-Intelligence-Platform-to-Create-Secure-and-Operate-Edge-Physical-AI-at-Scale",
+        "https://www.businesswire.com/news/home/20260602211043/en/morph-Launches-the-Worlds-First-Shapeshifting-Soft-Robotics-Cells-Platform-to-Bring-Physical-AI-into-Real-World-Applications"
+      ]
+    },
+    {
+      "domain": "calcalistech.com",
+      "urls": [
+        "https://www.calcalistech.com/ctechnews/article/hkx8pismkg"
+      ]
+    },
+    {
+      "domain": "capaloai.com",
+      "urls": [
+        "https://capaloai.com/news/capalo-ai-raises-500-000e-and-maximizes-the-revenues-of-exilions-66-mwh-bess/"
+      ]
+    },
+    {
+      "domain": "celent.com",
+      "urls": [
+        "https://www.celent.com/en/insights/kinexys-by-j-p-morgan-jpm-coin"
+      ]
+    },
+    {
+      "domain": "cftc.gov",
+      "urls": [
+        "https://www.cftc.gov/PressRoom/PressReleases/9146-25"
+      ]
+    },
+    {
+      "domain": "cgap.org",
+      "urls": [
+        "https://www.cgap.org/blog/local-currency-stablecoins-revolution-not-yet"
+      ]
+    },
+    {
+      "domain": "chinadaily.com.cn",
+      "urls": [
+        "https://www.chinadaily.com.cn/a/202512/12/WS693b6d05a310d6866eb2e404.html"
+      ]
+    },
+    {
+      "domain": "cignal.ai",
+      "urls": [
+        "https://cignal.ai/2026/07/optical-component-startup-tracker/"
+      ]
+    },
+    {
+      "domain": "cirt.gy",
+      "urls": [
+        "https://cirt.gy/static/3140d52c3ae63621ea3becce8189b304/AL2026_01-Deepfakes-and-Injection-Attacks-Undermine-Identity-Verification-Systems-March-2nd-2026.pdf"
+      ]
+    },
+    {
+      "domain": "citigroup.com",
+      "urls": [
+        "https://www.citigroup.com/global/insights/how-programmable-money-will-redefine-compliance-and-control"
+      ]
+    },
+    {
+      "domain": "cloud.google.com",
+      "urls": [
+        "https://cloud.google.com/blog/topics/developers-practitioners/scaling-llm-inference-multi-node-kv-cache-offloading-with-gke-managed-lustre",
+        "https://cloud.google.com/events/sovereign-ai-summit-26",
+        "https://cloud.google.com/blog/products/identity-security/google-cloud-and-swift-pioneer-advanced-ai-and-federated-learning-tech",
+        "https://cloud.google.com/blog/products/ai-machine-learning/announcing-agents-to-payments-ap2-protocol"
+      ]
+    },
+    {
+      "domain": "coinpaprika.com",
+      "urls": [
+        "https://coinpaprika.com/education/zero-knowledge-proofs-rwa/"
+      ]
+    },
+    {
+      "domain": "computeexpresslink.org",
+      "urls": [
+        "https://computeexpresslink.org/blog/increasing-tokens-per-dollar-with-cxl-fms-2026-recap-4788/"
+      ]
+    },
+    {
+      "domain": "computerfraudsecurity.com",
+      "urls": [
+        "https://computerfraudsecurity.com/index.php/journal/article/download/1027/735/2038"
+      ]
+    },
+    {
+      "domain": "confidential.ai",
+      "urls": [
+        "https://confidential.ai/"
+      ]
+    },
+    {
+      "domain": "consilient.com",
+      "urls": [
+        "https://consilient.com/our-products/core-aml-cft-model"
+      ]
+    },
+    {
+      "domain": "corsound.ai",
+      "urls": [
+        "https://www.corsound.ai/blog-posts/how-a-5-dollar-deepfake-beats-your-kyc"
+      ]
+    },
+    {
+      "domain": "credora.network",
+      "urls": [
+        "https://www.credora.network/"
+      ]
+    },
+    {
+      "domain": "credprotocol.com",
+      "urls": [
+        "https://credprotocol.com/"
+      ]
+    },
+    {
+      "domain": "crossmint.com",
+      "urls": [
+        "https://www.crossmint.com/learn/agentic-payments-protocols-compared"
+      ]
+    },
+    {
+      "domain": "crowdfundinsider.com",
+      "urls": [
+        "https://www.crowdfundinsider.com/2026/02/264497-south-koreas-rlwrld-raises-26m-funding-to-scale-industrial-robotics-ai/"
+      ]
+    },
+    {
+      "domain": "cryptodaily.co.uk",
+      "urls": [
+        "https://cryptodaily.co.uk/2026/08/top-5-decentralized-ai-compute-networks-to-watch-in-2026"
+      ]
+    },
+    {
+      "domain": "cryptomathic.com",
+      "urls": [
+        "https://www.cryptomathic.com/a-bankers-guide-to-quantum-safe-cryptography-part-3-roadmap-to-pqc-migration-for-financial-institutions-cryptomathic"
+      ]
+    },
+    {
+      "domain": "datacenterdynamics.com",
+      "urls": [
+        "https://www.datacenterdynamics.com/en/news/neuromorphic-compute-startup-unconventional-ai-raises-475m-in-seed-funding/",
+        "https://www.datacenterdynamics.com/en/news/amd-extends-acquisition-run-brings-software-optimization-firm-brium-and-staff-from-recently-shuttered-untether-ai-into-the-fold/",
+        "https://www.datacenterdynamics.com/en/news/encharge-ai-closes-oversubscribed-100m-series-b-funding-round-for-development-of-analog-in-memory-chips/"
+      ]
+    },
+    {
+      "domain": "datacenterfrontier.com",
+      "urls": [
+        "https://www.datacenterfrontier.com/cooling/article/55326929/microsofts-in-chip-microfluidics-technology-resets-the-limits-of-ai-cooling"
+      ]
+    },
+    {
+      "domain": "dbs.com",
+      "urls": [
+        "https://www.dbs.com/newsroom/DBS_Introduces_Singapore_First_Programmable_Money_Live_Pilot_For_Government_Vouchers"
+      ]
+    },
+    {
+      "domain": "deploymentsafety.openai.com",
+      "urls": [
+        "https://deploymentsafety.openai.com/gpt-5-2/cve-bench"
+      ]
+    },
+    {
+      "domain": "develop3d.com",
+      "urls": [
+        "https://develop3d.com/cad/infinitform-sees-seed-round-investment-from-vcs-yamaha-ex-autodesk-ceo/"
+      ]
+    },
+    {
+      "domain": "developers.cloudflare.com",
+      "urls": [
+        "https://developers.cloudflare.com/bots/reference/bot-verification/web-bot-auth/"
+      ]
+    },
+    {
+      "domain": "dhs.gov",
+      "urls": [
+        "https://www.dhs.gov/science-and-technology/news/2024/10/08/st-awards-contracts-four-startups-develop-privacy-enhancing-synthetic-data-generation-capabilities"
+      ]
+    },
+    {
+      "domain": "discoveryalert.com",
+      "urls": [
+        "https://discoveryalert.com/ai-transforming-mining-exploration-2025/"
+      ]
+    },
+    {
+      "domain": "docs.phala.com",
+      "urls": [
+        "https://docs.phala.com/phala-cloud/confidential-ai/confidential-model/confidential-ai-api"
+      ]
+    },
+    {
+      "domain": "dutchstartup.ai",
+      "urls": [
+        "https://www.dutchstartup.ai/en/news/around-brainport-a-cluster-of-chip-startups-is-taking-on-the-battle-for"
+      ]
+    },
+    {
+      "domain": "economictimes.com",
+      "urls": [
+        "https://economictimes.com/epaper/delhicapital/2026/aug/27/startup-awards/micro-robots-score-mega-win/articleshow/133550982.cms"
+      ]
+    },
+    {
+      "domain": "edge-ai-vision.com",
+      "urls": [
+        "https://www.edge-ai-vision.com/2026/07/brainchip-akd1500-edge-ai-co-processor-demo-ultra-low-power-ai-inference-at-the-edge/",
+        "https://www.edge-ai-vision.com/2026/07/brainchip-partners-with-celus-to-bring-its-neuromorphic-edge-ai-processor-to-the-celus-design-platform/"
+      ]
+    },
+    {
+      "domain": "eetimes.com",
+      "urls": [
+        "https://www.eetimes.com/korean-startup-takes-on-cost-and-latency-with-llm-specific-chip/",
+        "https://www.eetimes.com/mythic-rises-from-the-ashes-with-125-million-funding-round/",
+        "https://www.eetimes.com/mythic-rises-from-the-ashes-with-125-million-funding-round/"
+      ]
+    },
+    {
+      "domain": "elib.uni-stuttgart.de",
+      "urls": [
+        "https://elib.uni-stuttgart.de/server/api/core/bitstreams/6b88c400-64d0-4616-8e1b-d6aeb3890ae7/content"
+      ]
+    },
+    {
+      "domain": "embodiedglobal.com",
+      "urls": [
+        "https://embodiedglobal.com/en/article/safety-compliance-embodied-ai-2026"
+      ]
+    },
+    {
+      "domain": "en.alpsentek.com",
+      "urls": [
+        "https://en.alpsentek.com/news/"
+      ]
+    },
+    {
+      "domain": "en.wowtale.net",
+      "urls": [
+        "https://en.wowtale.net/2025/08/13/231893/"
+      ]
+    },
+    {
+      "domain": "eu-startups.com",
+      "urls": [
+        "https://www.eu-startups.com/2025/07/ai-agents-hit-the-supply-chain-british-ai-startup-magentic-raises-e4-6-million-to-scale-enterprise-automation/",
+        "https://www.eu-startups.com/2026/02/growing-pressure-on-europes-electricity-grids-drives-e11-million-for-capalo-ai-to-scale-virtual-power-plant-operations/"
+      ]
+    },
+    {
+      "domain": "europol.europa.eu",
+      "urls": [
+        "https://www.europol.europa.eu/media-press/newsroom/news/joint-report-outlines-practical-approach-to-prioritising-post-quantum-cryptography-migration-in-financial-services",
+        "https://www.europol.europa.eu/cms/sites/default/files/documents/Post-quantum-cryptography-report.pdf"
+      ]
+    },
+    {
+      "domain": "f6s.com",
+      "urls": [
+        "https://www.f6s.com/company/silmaril-yc-p26"
+      ]
+    },
+    {
+      "domain": "finance-commerce.com",
+      "urls": [
+        "https://finance-commerce.com/2026/04/big-tech-small-nuclear-reactors-ai-data-centers/"
+      ]
+    },
+    {
+      "domain": "finance.yahoo.com",
+      "urls": [
+        "https://finance.yahoo.com/technology/ai/articles/syspro-launches-torque-industrial-ai-120000712.html",
+        "https://finance.yahoo.com/news/circle-co-founder-build-ai-151439915.html"
+      ]
+    },
+    {
+      "domain": "fintech.global",
+      "urls": [
+        "https://fintech.global/2026/08/04/maximum-lands-30m-to-rip-out-banks-legacy-cores/"
+      ]
+    },
+    {
+      "domain": "flagright.com",
+      "urls": [
+        "https://www.flagright.com/post/flagright-raises-4-3-million-in-seed-funding-to-advance-ai-native-aml-compliance-and-risk-management-solutions"
+      ]
+    },
+    {
+      "domain": "fluix.ai",
+      "urls": [
+        "https://www.fluix.ai/case-studies"
+      ]
+    },
+    {
+      "domain": "fortune.com",
+      "urls": [
+        "https://fortune.com/2025/07/23/ai-agent-insurance-startup-aiuc-stealth-15-million-seed-nat-friedman/",
+        "https://fortune.com/2025/01/13/exclusive-robeaute-venture-capital-funding-28-million-microrobot-brain-surgery/"
+      ]
+    },
+    {
+      "domain": "frontiersin.org",
+      "urls": [
+        "https://www.frontiersin.org/journals/robotics-and-ai/articles/10.3389/frobt.2025.1607978/full"
+      ]
+    },
+    {
+      "domain": "geekwire.com",
+      "urls": [
+        "https://www.geekwire.com/2026/backed-by-nvidia-seattles-phaidra-targets-data-center-overheating-with-proactive-ai/",
+        "https://www.geekwire.com/2025/seattle-startup-loopr-raises-cash-for-ai-software-that-aims-to-boost-quality-control-in-manufacturing/",
+        "https://www.geekwire.com/2022/seattle-startup-tignis-raises-7-2m-to-fuel-use-of-ai-process-control-in-semiconductor-manufacturing/"
+      ]
+    },
+    {
+      "domain": "geo.sig.ai",
+      "urls": [
+        "https://geo.sig.ai/brands/encharge-ai"
+      ]
+    },
+    {
+      "domain": "github.com",
+      "urls": [
+        "https://github.com/sigstore/model-transparency",
+        "https://github.com/protectai/modelscan",
+        "https://github.com/Luoji-zju/Agents4PLC_release/blob/master/readme.md"
+      ]
+    },
+    {
+      "domain": "gizmodo.com",
+      "urls": [
+        "https://gizmodo.com/microsoft-backed-startup-hits-a-milestone-in-the-race-to-power-ai-2000684401"
+      ]
+    },
+    {
+      "domain": "globenewswire.com",
+      "urls": [
+        "https://www.globenewswire.com/news-release/2026/06/17/3313261/0/en/4bittorrent-launches-bttinfergrid-the-decentralized-infrastructure-layer-for-scalable-ai-inference.html"
+      ]
+    },
+    {
+      "domain": "gmacouncil.org",
+      "urls": [
+        "https://gmacouncil.org/news/mandel-ai-raises-e3-6m-seed-to-deploy-autonomous-agents-automating-supplier-quotes-order-tracking-and-disruption-alerts-across-erp-email-and-whatsapp-channels"
+      ]
+    },
+    {
+      "domain": "help.zededa.com",
+      "urls": [
+        "https://help.zededa.com/hc/en-us/articles/34420958616987-Deploy-Edge-AI-Applications-to-a-Fleet-of-Devices-A-Use-Case"
+      ]
+    },
+    {
+      "domain": "highways.today",
+      "urls": [
+        "https://highways.today/2026/08/13/physical-ai-certification/"
+      ]
+    },
+    {
+      "domain": "hirundo.io",
+      "urls": [
+        "https://www.hirundo.io/"
+      ]
+    },
+    {
+      "domain": "huggingface.co",
+      "urls": [
+        "https://huggingface.co/sandeep1337/modelscan-bypass-research"
+      ]
+    },
+    {
+      "domain": "hypertrends.com",
+      "urls": [
+        "https://www.hypertrends.com/2026/04/agentic-payments-x402-acp-ap2-tap-comparison/"
+      ]
+    },
+    {
+      "domain": "ibecbarcelona.eu",
+      "urls": [
+        "https://ibecbarcelona.eu/biohybrid-robotics-muscles-and-tendons-for-robots/"
+      ]
+    },
+    {
+      "domain": "idc.com",
+      "urls": [
+        "https://www.idc.com/resource-center/blog/the-high-cost-of-sovereignty-in-the-age-of-ai/"
+      ]
+    },
+    {
+      "domain": "ijiemjournal.uns.ac.rs",
+      "urls": [
+        "https://ijiemjournal.uns.ac.rs/index.php/ijiem/article/view/1721"
+      ]
+    },
+    {
+      "domain": "imt-starter.fr",
+      "urls": [
+        "https://www.imt-starter.fr/en/startup/label4-ai-2"
+      ]
+    },
+    {
+      "domain": "indianstartupnews.com",
+      "urls": [
+        "https://indianstartupnews.com/funding/kissht-co-founders-ai-lending-tech-startup-rezolv-raises-125-million-in-series-a-funding-12391814"
+      ]
+    },
+    {
+      "domain": "infohub.delltechnologies.com",
+      "urls": [
+        "https://infohub.delltechnologies.com/en-uk/p/scaling-multi-turn-llm-inference-with-kv-cache-storage-offload-and-dell-rdma-accelerated-architecture/"
+      ]
+    },
+    {
+      "domain": "insidedeeptech.com",
+      "urls": [
+        "https://www.insidedeeptech.com/small-modular-reactors-nuclear-power-ai-data-centers/"
+      ]
+    },
+    {
+      "domain": "intelcapital.com",
+      "urls": [
+        "https://www.intelcapital.com/sambanova-unveils-fastest-chip-for-agentic-ai-collaborates-with-intel-and-raises-350m/"
+      ]
+    },
+    {
+      "domain": "interestingengineering.com",
+      "urls": [
+        "https://interestingengineering.com/ai-robotics/uk-morph-shapeshifting-soft-robotics-platform"
+      ]
+    },
+    {
+      "domain": "invariantlabs.ai",
+      "urls": [
+        "https://invariantlabs.ai/blog/introducing-mcp-scan"
+      ]
+    },
+    {
+      "domain": "investor.nvidia.com",
+      "urls": [
+        "https://investor.nvidia.com/news/press-release-details/2026/NVIDIA-Announces-Halos-for-Robotics-the-Industrys-First-Full-Stack-Safety-System-for-Physical-AI/default.aspx"
+      ]
+    },
+    {
+      "domain": "invezz.com",
+      "urls": [
+        "https://invezz.com/news/2026/07/27/mento-brings-its-fx-protocol-to-polygon/"
+      ]
+    },
+    {
+      "domain": "ioplus.nl",
+      "urls": [
+        "https://ioplus.nl/en/posts/euclyd-promises-an-exascale-token-factory-with-minimal-power-draw"
+      ]
+    },
+    {
+      "domain": "is.mpg.de",
+      "urls": [
+        "https://is.mpg.de/rm/news/blog-ultralight-artificial-muscles-for-agile-soft-robots-b9a94394-d65c-473d-99ec-24e7535f1191"
+      ]
+    },
+    {
+      "domain": "jobswithstartups.com",
+      "urls": [
+        "https://jobswithstartups.com/startups/allus-ai"
+      ]
+    },
+    {
+      "domain": "jpmorgan.com",
+      "urls": [
+        "https://www.jpmorgan.com/insights/payments/blockchain-digital-assets/blockchain-kinexys-asset-tokenization",
+        "https://www.jpmorgan.com/kinexys/jpm-coin"
+      ]
+    },
+    {
+      "domain": "kamiwaza.ai",
+      "urls": [
+        "https://www.kamiwaza.ai/edge-ai-orchestration"
+      ]
+    },
+    {
+      "domain": "labs.snyk.io",
+      "urls": [
+        "https://labs.snyk.io/resources/detect-tool-poisoning-mcp-server-security/"
+      ]
+    },
+    {
+      "domain": "leaderobot.com",
+      "urls": [
+        "https://www.leaderobot.com/news/7743"
+      ]
+    },
+    {
+      "domain": "marianaminerals.com",
+      "urls": [
+        "https://marianaminerals.com/news/series-a-announcement"
+      ]
+    },
+    {
+      "domain": "marvell.com",
+      "urls": [
+        "https://www.marvell.com/company/newsroom/marvell-next-gen-cxl-switch-memory-pooling-breaks-ai-memory-wall.html"
+      ]
+    },
+    {
+      "domain": "mdpi.com",
+      "urls": [
+        "https://www.mdpi.com/1996-1073/18/13/3325",
+        "https://www.mdpi.com/1424-8220/26/13/4079"
+      ]
+    },
+    {
+      "domain": "micro-insurance.yas.com.hk",
+      "urls": [
+        "https://micro-insurance.yas.com.hk/en/robotics/"
+      ]
+    },
+    {
+      "domain": "microsoft.com",
+      "urls": [
+        "https://www.microsoft.com/en-us/security/blog/2026/02/04/detecting-backdoored-language-models-at-scale/"
+      ]
+    },
+    {
+      "domain": "momenta.vc",
+      "urls": [
+        "https://momenta.vc/insights/abb_invests_in_octaipipe"
+      ]
+    },
+    {
+      "domain": "mpp.dev",
+      "urls": [
+        "https://mpp.dev/advanced/discovery"
+      ]
+    },
+    {
+      "domain": "nature.com",
+      "urls": [
+        "https://www.nature.com/articles/s41598-025-28904-8",
+        "https://www.nature.com/articles/s44335-025-00040-6",
+        "https://www.nature.com/articles/s44335-025-00029-1",
+        "https://www.nature.com/articles/s44182-025-00049-w",
+        "https://www.nature.com/articles/s41467-024-51568-3"
+      ]
+    },
+    {
+      "domain": "networkworld.com",
+      "urls": [
+        "https://www.networkworld.com/article/4162764/space-data-center-news-roundup-of-extraterrestrial-ai-endeavors.html"
+      ]
+    },
+    {
+      "domain": "neuromorphiccore.ai",
+      "urls": [
+        "https://neuromorphiccore.ai/insights/polyn-technology/"
+      ]
+    },
+    {
+      "domain": "neuronfeed.com",
+      "urls": [
+        "https://neuronfeed.com/startups/unbox-robotics"
+      ]
+    },
+    {
+      "domain": "neutronrise.com",
+      "urls": [
+        "https://neutronrise.com/can-smrs-power-ai-data-centers/"
+      ]
+    },
+    {
+      "domain": "newmarketpitch.com",
+      "urls": [
+        "https://newmarketpitch.com/blogs/news/ai-governance-funding-analysis"
+      ]
+    },
+    {
+      "domain": "news.microsoft.com",
+      "urls": [
+        "https://news.microsoft.com/source/features/innovation/microfluidics-liquid-cooling-ai-chips/"
+      ]
+    },
+    {
+      "domain": "nextplatform.com",
+      "urls": [
+        "https://www.nextplatform.com/connect/2026/07/22/salience-labs-wants-to-scale-up-ai-with-silicon-photonics-optical-switch/5276643"
+      ]
+    },
+    {
+      "domain": "nordicsemi.com",
+      "urls": [
+        "https://www.nordicsemi.com/Nordic-news/2026/01/nRF54L-Series-SoC-with-NPU-and-Nordic-Edge-AI-Lab-make-on-device-intelligence-easily-accessible"
+      ]
+    },
+    {
+      "domain": "novarctech.com",
+      "urls": [
+        "https://www.novarctech.com/company/press-releases/novarc-raises-50-million-series-b-to-expand-its-ai-powered-machine-vision-novai-for-automated-welding-solutions/"
+      ]
+    },
+    {
+      "domain": "nvidianews.nvidia.com",
+      "urls": [
+        "http://nvidianews.nvidia.com/news/space-computing"
+      ]
+    },
+    {
+      "domain": "openai.com",
+      "urls": [
+        "https://openai.com/index/openai-o1-system-card/"
+      ]
+    },
+    {
+      "domain": "openfort.io",
+      "urls": [
+        "https://www.openfort.io/use-cases/micro-transactions"
+      ]
+    },
+    {
+      "domain": "oxmaint.com",
+      "urls": [
+        "https://oxmaint.com/article/best-quadruped-robots-industrial-maintenance-2026"
+      ]
+    },
+    {
+      "domain": "pandaily.com",
+      "urls": [
+        "https://pandaily.com/unitree-unistore-worlds-first-robot-app-store",
+        "https://pandaily.com/yuejia-dynamics-quadruped-robot-shenzhen-metro-10000-capacity-sep2026",
+        "https://pandaily.com/psi-bot-raises-280-m-to-accelerate-embodied-ai-data-collection-and-logistics-deployment"
+      ]
+    },
+    {
+      "domain": "patsnap.com",
+      "urls": [
+        "https://www.patsnap.com/resources/blog/rd-blog/neuromorphic-event-based-vision-sensor-patents-2026/"
+      ]
+    },
+    {
+      "domain": "phala.com",
+      "urls": [
+        "https://phala.com/learn/Confidential-Edge-AI"
+      ]
+    },
+    {
+      "domain": "pi.website",
+      "urls": [
+        "https://www.pi.website/research/human_to_robot"
+      ]
+    },
+    {
+      "domain": "picmagazine.net",
+      "urls": [
+        "https://picmagazine.net/article/123311/Neurophos_raises_110m_to_push_photonic_AI_chips_into_data_centers"
+      ]
+    },
+    {
+      "domain": "pmc.ncbi.nlm.nih.gov",
+      "urls": [
+        "https://pmc.ncbi.nlm.nih.gov/articles/PMC12786329/"
+      ]
+    },
+    {
+      "domain": "polygon.technology",
+      "urls": [
+        "https://polygon.technology/blog/brazils-real-now-moves-across-borders-without-touching-dollars-as-brl1-joins-capas-onchain-fx-stack"
+      ]
+    },
+    {
+      "domain": "premisys.ai",
+      "urls": [
+        "https://premisys.ai/"
+      ]
+    },
+    {
+      "domain": "prnewswire.com",
+      "urls": [
+        "https://www.prnewswire.com/news-releases/earth-ai-closes-oversubscribed-round-raising-20m-for-ai-driven-mineral-exploration-302360289.html",
+        "https://www.prnewswire.com/news-releases/ai-lab-goodfire-raises-150m-at-1-25b-valuation-to-design-models-with-interpretability-302680120.html",
+        "https://www.prnewswire.com/news-releases/verkor-launches-industrys-first-turboquant-llm-inference-accelerator-silicon-ip-302776044.html",
+        "https://www.prnewswire.com/news-releases/artimus-robotics-is-launching-next-generation-artificial-muscles-and-seeking-partners-to-evaluate-the-technology-in-markets-requiring-dexterous-robotic-manipulation-302689585.html"
+      ]
+    },
+    {
+      "domain": "prophesee.ai",
+      "urls": [
+        "https://www.prophesee.ai/event-based-vision-automotive/"
+      ]
+    },
+    {
+      "domain": "pubs.rsc.org",
+      "urls": [
+        "https://pubs.rsc.org/en/content/articlelanding/2026/mh/d6mh00434b"
+      ]
+    },
+    {
+      "domain": "pulse2.com",
+      "urls": [
+        "https://pulse2.com/keycard-launched-with-38-million-to-transform-identity-and-access-for-ai-agents/",
+        "https://pulse2.com/nixtla-16-million-raised-for-time-series-intelligence-platform/"
+      ]
+    },
+    {
+      "domain": "qualcomm.com",
+      "urls": [
+        "https://www.qualcomm.com/developer/blog/2026/05/local-agentic-ai-with-llmware-on-pcs-with-snapdragon-x-series"
+      ]
+    },
+    {
+      "domain": "radware.com",
+      "urls": [
+        "https://www.radware.com/products/llm-firewall/"
+      ]
+    },
+    {
+      "domain": "recodex.pro",
+      "urls": [
+        "https://recodex.pro/xylo-labs-raises-133k-seed-to-bring-ai-sound-diagnostics-to-industrial-maintenance-from-ports/"
+      ]
+    },
+    {
+      "domain": "reuters.com",
+      "urls": [
+        "https://www.reuters.com/business/spains-ipronics-raises-125-million-nvidia-others-data-center-networking-chips-2026-09-02/",
+        "https://www.reuters.com/business/snowcap-compute-raises-23-million-superconducting-ai-chips-2025-06-23/"
+      ]
+    },
+    {
+      "domain": "roboticsandautomationnews.com",
+      "urls": [
+        "https://roboticsandautomationnews.com/2026/02/02/openmind-launches-app-store-for-robots/98554/",
+        "https://roboticsandautomationnews.com/2025/10/02/swarmfarm-robotics-raises-30-million-to-scale-farm-bot-fleet-and-expand-into-north-america/95107/",
+        "https://roboticsandautomationnews.com/2026/06/22/interview-with-sharpas-alicia-veneziani-dexterous-manipulation-is-the-key-to-useful-humanoid-robots/102683/"
+      ]
+    },
+    {
+      "domain": "robotsatlas.com",
+      "urls": [
+        "https://robotsatlas.com/tags/tactile-sensing"
+      ]
+    },
+    {
+      "domain": "runtimewire.com",
+      "urls": [
+        "https://runtimewire.com/article/flower-labs-endeavor-1-frontier-ai-private-deployment",
+        "https://runtimewire.com/article/lightwheel-egosuite-open100k-robot-training-data"
+      ]
+    },
+    {
+      "domain": "science.org",
+      "urls": [
+        "https://www.science.org/doi/10.1126/science.adx1708"
+      ]
+    },
+    {
+      "domain": "securityscientist.net",
+      "urls": [
+        "https://www.securityscientist.net/blog/rag-poisoning/"
+      ]
+    },
+    {
+      "domain": "securityweek.com",
+      "urls": [
+        "https://www.securityweek.com/cyata-emerges-from-stealth-with-8-5-million-in-funding/"
+      ]
+    },
+    {
+      "domain": "seedlist.com",
+      "urls": [
+        "https://seedlist.com/startups/secludy.html"
+      ]
+    },
+    {
+      "domain": "sei.cmu.edu",
+      "urls": [
+        "https://www.sei.cmu.edu/blog/3-recommendations-for-machine-unlearning-evaluation-challenges/"
+      ]
+    },
+    {
+      "domain": "semiai.ai",
+      "urls": [
+        "https://semiai.ai/en/news/wowtale-2025-11-29"
+      ]
+    },
+    {
+      "domain": "semiwiki.com",
+      "urls": [
+        "https://semiwiki.com/forum/threads/edgeai-licensed-andes-technology-cpu-ip-to-power-next-generation-edge-ai-neuromorphic-solution.25382/"
+      ]
+    },
+    {
+      "domain": "sharpa.com",
+      "urls": [
+        "https://www.sharpa.com/blogs/news/singapores-sharpa-wins-ces-2026-innovation-award-for-groundbreak-ai-robotic-hand-sharpawave"
+      ]
+    },
+    {
+      "domain": "sherpa.ai",
+      "urls": [
+        "https://sherpa.ai/ai-in-manufacturing/"
+      ]
+    },
+    {
+      "domain": "siliconangle.com",
+      "urls": [
+        "https://siliconangle.com/2026/07/28/ai-model-compression-startup-multiverse-raises-570m-1-7b-valuation/",
+        "https://siliconangle.com/2025/04/03/red-teaming-startup-yrikka-launches-pre-seed-funding-secure-critical-ai-systems/",
+        "https://siliconangle.com/2025/07/29/promptfoo-raises-18-4m-build-ai-security-evaluation-platform/",
+        "https://siliconangle.com/2026/03/23/ai-inference-gains-10x-boost-kv-cache-offloading-nvidiagtcai/",
+        "https://siliconangle.com/2026/04/27/sereact-raises-110m-scale-ai-robotic-brain-expand-us/",
+        "https://siliconangle.com/2026/02/05/goodfire-raises-150m-funding-enhance-ai-interpretability-platform/",
+        "https://siliconangle.com/2026/02/11/photonic-ai-chip-startup-olix-nabs-220m-investment/",
+        "https://siliconangle.com/2025/11/12/chip-startup-d-matrix-raises-275m-speed-inference-memory-compute/"
+      ]
+    },
+    {
+      "domain": "snu.elsevierpure.com",
+      "urls": [
+        "https://snu.elsevierpure.com/en/publications/self-healing-soft-robots-materials-sensors-and-integrated-systems/"
+      ]
+    },
+    {
+      "domain": "speedrun.a16z.com",
+      "urls": [
+        "https://speedrun.a16z.com/companies/sourcerer"
+      ]
+    },
+    {
+      "domain": "startup-seeker.com",
+      "urls": [
+        "https://startup-seeker.com/company/mecagent~com"
+      ]
+    },
+    {
+      "domain": "startupfundraising.com",
+      "urls": [
+        "https://startupfundraising.com/ai-small-language-models-on-device-inference-sovereign-fine-tunes-fundraising"
+      ]
+    },
+    {
+      "domain": "startupresearcher.com",
+      "urls": [
+        "https://www.startupresearcher.com/news/naaia-raises-6-million-series-a-to-manage-ai-compliance"
+      ]
+    },
+    {
+      "domain": "startupticker.ch",
+      "urls": [
+        "https://www.startupticker.ch/en/news/modulos-raises-chf-8-7m-pre-series-a-to-scale-ai-governance-platform"
+      ]
+    },
+    {
+      "domain": "stellagent.ai",
+      "urls": [
+        "https://stellagent.ai/insights/cloudflare-web-bot-auth-agent-verification"
+      ]
+    },
+    {
+      "domain": "stlpartners.com",
+      "urls": [
+        "https://stlpartners.com/articles/edge-computing/50-edge-computing-companies-to-watch-in-2026/"
+      ]
+    },
+    {
+      "domain": "stocktitan.net",
+      "urls": [
+        "https://www.stocktitan.net/news/CEVA/ceva-extends-its-smart-edge-ip-leadership-adding-new-tiny-ml-i0xn4vk58obk.html"
+      ]
+    },
+    {
+      "domain": "streamanalyze.com",
+      "urls": [
+        "https://www.streamanalyze.com/stream-analyze-ab-blog/stream-analyze-secures-new-investment-from-moor-holding-and-brings-in-new-leadership-to-scale-edge-ai-globally"
+      ]
+    },
+    {
+      "domain": "swift.com",
+      "urls": [
+        "https://www.swift.com/news-events/press-releases/swift-ai-innovation-creates-blueprint-banks-stop-fraud-faster-through-cross-border-collaboration"
+      ]
+    },
+    {
+      "domain": "syncrobotic.ai",
+      "urls": [
+        "https://syncrobotic.ai/syncrobotics-quadruped-robot-completes-autonomous-inspection-validation-at-geothermal-site/"
+      ]
+    },
+    {
+      "domain": "tamradar.com",
+      "urls": [
+        "https://www.tamradar.com/funding-rounds/mindgard-series-a-30m"
+      ]
+    },
+    {
+      "domain": "tech.yahoo.com",
+      "urls": [
+        "https://tech.yahoo.com/ai/articles/3d-stacked-memory-tech-seeks-100000116.html"
+      ]
+    },
+    {
+      "domain": "techbeat.ca",
+      "urls": [
+        "https://techbeat.ca/funding/yasp-raises-5m-seed-funding/"
+      ]
+    },
+    {
+      "domain": "techcrunch.com",
+      "urls": [
+        "https://techcrunch.com/2026/09/04/xdof-just-three-months-out-of-stealth-is-in-talks-for-a-series-b-at-a-1-2b-valuation/",
+        "https://techcrunch.com/2026/06/17/collecting-robot-training-data-is-dirty-unglamorous-work-some-ai-labs-are-already-paying-xdof-to-do-it/",
+        "https://techcrunch.com/2026/08/21/starcloud-raises-200-million-for-orbital-data-centers-as-launch-options-dry-up/",
+        "https://techcrunch.com/2026/08/11/anthropic-says-it-will-watermark-text-generated-by-its-ai-models/",
+        "https://techcrunch.com/2025/03/19/cleargrid-armed-with-10m-uses-ai-to-fix-debt-collection-in-mena/",
+        "https://techcrunch.com/2026/01/22/from-invisibility-cloaks-to-ai-chips-neurophos-raises-110m-to-build-tiny-optical-processors-for-inferencing/",
+        "https://techcrunch.com/2026/03/30/starcloud-raises-170-million-series-ato-build-data-centers-in-space/",
+        "https://techcrunch.com/2026/04/13/the-largest-orbital-compute-cluster-is-open-for-business/",
+        "https://techcrunch.com/2026/06/09/how-an-e-scooter-founder-raised-5-million-to-build-space-data-centers/",
+        "https://techcrunch.com/2026/01/22/from-invisibility-cloaks-to-ai-chips-neurophos-raises-110m-to-build-tiny-optical-processors-for-inferencing/",
+        "https://techcrunch.com/2026/02/04/apeiron-labs-gets-95m-to-flood-the-oceans-with-autonomous-underwater-robots/"
+      ]
+    },
+    {
+      "domain": "techfundingnews.com",
+      "urls": [
+        "https://techfundingnews.com/sirenopt-raises-6-5m-to-scale-ai-powered-plasmasens-manufacturing-intelligence/",
+        "https://techfundingnews.com/nobodywho-2m-pre-seed-local-slms-ai/"
+      ]
+    },
+    {
+      "domain": "techpowerup.com",
+      "urls": [
+        "https://www.techpowerup.com/forums/threads/intel-reportedly-preparing-hbm-alternative-for-ai-accelerators.337554/"
+      ]
+    },
+    {
+      "domain": "techradar.com",
+      "urls": [
+        "https://www.techradar.com/pro/startup-swaps-costly-ai-gpus-for-arm-cores-and-up-to-128tb-of-cheap-lpddr6-ram-instead-of-expensive-hbm-to-smash-through-the-memory-wall"
+      ]
+    },
+    {
+      "domain": "techstartups.com",
+      "urls": [
+        "https://techstartups.com/2026/04/14/neye-ai-raises-80m-to-scale-optical-circuit-switching-for-ai-data-centers/"
+      ]
+    },
+    {
+      "domain": "techxplore.com",
+      "urls": [
+        "https://techxplore.com/news/2026-03-robot-propelled-lab-grown-muscle.html"
+      ]
+    },
+    {
+      "domain": "tempo.xyz",
+      "urls": [
+        "https://tempo.xyz/learn/microtransactions/"
+      ]
+    },
+    {
+      "domain": "theaiinsider.tech",
+      "urls": [
+        "https://theaiinsider.tech/2026/08/11/tetragen-robotics-raises-can1-8m-in-seed-funding-to-expand-autonomous-welding-systems/",
+        "https://theaiinsider.tech/2025/12/02/luminal-receives-5-3m-to-advance-ai-compute-optimization-and-simplify-developer-access-to-high-performance-hardware/",
+        "https://theaiinsider.tech/2026/06/29/proception-raises-11m-in-seed-funding-introduces-dexterous-robotic-hand/",
+        "https://theaiinsider.tech/2026/07/28/applied-computing-raises-20m-to-build-ai-foundation-model-for-oil-and-gas-industry/",
+        "https://theaiinsider.tech/2026/02/24/mirai-announces-10m-to-advance-on-device-ai-performance-for-consumer-devices/",
+        "https://theaiinsider.tech/2026/04/22/swiss-startup-bubble-robotics-raises-5m-in-pre-seed-funding-to-develop-autonomous-ocean-workforce/",
+        "https://theaiinsider.tech/2026/04/30/searchdoc-raises-2-1m-to-bring-ai-document-analysis-to-construction-and-engineering/"
+      ]
+    },
+    {
+      "domain": "theasianbanker.com",
+      "urls": [
+        "https://www.theasianbanker.com/updates-and-articles/vanguard-and-wellington-test-tokenised-collateral-cimb-pilots-sukuk-settlement"
+      ]
+    },
+    {
+      "domain": "theblock.co",
+      "urls": [
+        "https://www.theblock.co/post/332678/zk-powered-onchain-credit-analytics-startup-accountable-raises-2-3-million-seed-round",
+        "https://www.theblock.co/news/business/2026-07-14-distributed-compute-startup-boundless-gpus-zk-to-ai-408213"
+      ]
+    },
+    {
+      "domain": "thedeeptech.in",
+      "urls": [
+        "https://thedeeptech.in/article/switchon-pre-series-b-physical-ai-manufacturing-inspection"
+      ]
+    },
+    {
+      "domain": "thehumanoidrace.com",
+      "urls": [
+        "https://thehumanoidrace.com/news/price-safety-software-the-commercial-levers-that-will-decide-which-humanoid-plat-mpqimzhd"
+      ]
+    },
+    {
+      "domain": "theinnovator.news",
+      "urls": [
+        "https://theinnovator.news/startup-of-the-week-flower-labs-2/"
+      ]
+    },
+    {
+      "domain": "theregister.com",
+      "urls": [
+        "https://www.theregister.com/software/2025/02/17/startup-gets-100m-funding-for-low-power-analog-ai-chips/1127862"
+      ]
+    },
+    {
+      "domain": "theroboticlife.com",
+      "urls": [
+        "https://theroboticlife.com/humanoid-robot-app-stores/"
+      ]
+    },
+    {
+      "domain": "therobotreport.com",
+      "urls": [
+        "https://www.therobotreport.com/path-robotics-raises-100m-to-automate-welding/",
+        "https://www.therobotreport.com/soft-robotic-cells-from-morph-embed-physical-ai-into-hardware/"
+      ]
+    },
+    {
+      "domain": "thesaasnews.com",
+      "urls": [
+        "https://www.thesaasnews.com/news/rekord-raises-2-1-million-pre-seed-round/",
+        "https://www.thesaasnews.com/news/rotomate-raises-2-1m-pre-seed/"
+      ]
+    },
+    {
+      "domain": "tianpan.co",
+      "urls": [
+        "https://tianpan.co/blog/2026-04-10-hybrid-cloud-edge-llm-architecture-routing-inference"
+      ]
+    },
+    {
+      "domain": "tinfoil.sh",
+      "urls": [
+        "https://tinfoil.sh/inference"
+      ]
+    },
+    {
+      "domain": "tomshardware.com",
+      "urls": [
+        "https://www.tomshardware.com/tech-industry/artificial-intelligence/hot-chips-2026-cerebras-lays-out-the-future-of-wafer-scale-ai-nexus-system-architecture-triples-rack-scale-performance-cs-6-wafer-to-incorporate-stacked-dram",
+        "https://www.tomshardware.com/pc-components/liquid-cooling/microsoft-develops-breakthrough-chip-cooling-method-microfluidic-channels-can-cut-peak-temps-by-up-to-65-percent-outperform-conventional-cold-plates-by-up-to-3x"
+      ]
+    },
+    {
+      "domain": "trysignalbase.com",
+      "urls": [
+        "https://www.trysignalbase.com/news/funding/codeintegrity-raises-50m-seed-round"
+      ]
+    },
+    {
+      "domain": "unite.ai",
+      "urls": [
+        "https://www.unite.ai/hirundo-raises-8m-to-tackle-ai-hallucinations-with-machine-unlearning/"
+      ]
+    },
+    {
+      "domain": "veea.com",
+      "urls": [
+        "https://www.veea.com/news/press-releases/item/208407081638"
+      ]
+    },
+    {
+      "domain": "venturelab.swiss",
+      "urls": [
+        "https://www.venturelab.swiss/Neural-Concept-closes-USD-100M-Series-C-to-scale-AInative-engineering"
+      ]
+    },
+    {
+      "domain": "wccftech.com",
+      "urls": [
+        "https://wccftech.com/cerebras-cs-4-30x-uplift-ai-2026-next-gen-rack-solutions-cs-5-10k-tps-2027-cs-6-3d-wafer-scale-sram/"
+      ]
+    },
+    {
+      "domain": "x.com",
+      "urls": [
+        "https://x.com/NVIDIARobotics/article/2060027923038634329"
+      ]
+    },
+    {
+      "domain": "ycombinator.com",
+      "urls": [
+        "https://www.ycombinator.com/companies/altur",
+        "https://www.ycombinator.com/companies/klaimee"
+      ]
+    },
+    {
+      "domain": "yespress.io",
+      "urls": [
+        "https://yespress.io/groundup-ai"
+      ]
+    },
+    {
+      "domain": "zylos.ai",
+      "urls": [
+        "https://zylos.ai/en/research/2026-05-10-local-first-ai-agents-hybrid-cloud-edge-architectures/"
+      ]
+    },
+    {
+      "domain": "zyphe.com",
+      "urls": [
+        "https://www.zyphe.com/resources/blog/deepfake-detection-kyc-2026"
+      ]
+    }
+  ]
+}
