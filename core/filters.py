@@ -37,6 +37,30 @@
 }
 
 
+# Стоп-слова на краю подписи или артикль внутри - это кусок заголовка,
+# а не название технологии. С полного корпуса такие обрывки заняли весь
+# ТОП-15: 'algorithms for fault', 'reduction and deep learning',
+# 'management a machine learning'. Генератор терминов их пропустил;
+# ядро обязано быть устойчиво к любому генератору.
+СТОП_КРАЯ = {"a", "an", "the", "of", "for", "and", "or", "in", "on", "to", "with",
+             "by", "from", "using", "based", "via", "as", "at", "is", "are", "its",
+             "their", "our", "this", "that", "new", "towards", "toward", "into",
+             "through", "under", "over", "between", "during", "without", "within"}
+# Внутри подписи: артикль или союз. Предлог внутри допустим - 'mixture of experts',
+# 'retrieval augmented generation' настоящие; а 'reduction and deep learning' - два
+# куска заголовка, у названий технологий союзов почти не бывает.
+ВНУТРИ_НЕЛЬЗЯ = {"a", "an", "the", "and", "or", "but", "vs", "versus"}
+
+
+def обрывок_фразы(label: str) -> bool:
+    слова = label.lower().split()
+    if len(слова) < 2:
+        return True
+    if слова[0] in СТОП_КРАЯ or слова[-1] in СТОП_КРАЯ:
+        return True
+    return any(w in ВНУТРИ_НЕЛЬЗЯ for w in слова[1:-1])
+
+
 def причина_отказа(comp: dict, n_countries: int) -> str | None:
     """Возвращает текст причины или None, если кандидат прошёл.
 

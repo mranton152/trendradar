@@ -50,3 +50,19 @@ def test_у_каждого_порога_есть_человеческая_под
     ничего не говорит, поэтому подпись обязательна для каждого."""
     assert set(ОПИСАНИЯ_ПОРОГОВ) == set(ПОРОГИ)
     assert all(len(т) > 20 for т in ОПИСАНИЯ_ПОРОГОВ.values())
+
+
+def test_обрывки_фраз_отсекаются_по_форме():
+    """С полного корпуса в ТОП-15 пришли 'algorithms for fault', 'reduction and
+    deep learning', 'management a machine learning'. Это не технологии, это
+    куски заголовков. Режем по форме: стоп-слово на краю или артикль внутри."""
+    from core.filters import обрывок_фразы
+    for плохой in ("reduction and deep learning", "management a machine learning",
+                   "for structural health", "learning surrogates and", "the machine learning"):
+        assert обрывок_фразы(плохой), плохой
+    # 'algorithms for fault' и 'learning to map' по форме неотличимы от
+    # 'mixture of experts': предлог в середине. Без разбора синтаксиса
+    # их не поймать, и правило этого не обещает - их снимает порог доказательств.
+    for хороший in ("vision transformer", "physics-informed neural network",
+                    "state space model", "mixture of experts", "retrieval augmented generation"):
+        assert not обрывок_фразы(хороший), хороший
