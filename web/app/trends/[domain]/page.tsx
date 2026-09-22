@@ -41,6 +41,20 @@ export default async function TrendsPage({
       <p className="mt-2 text-sm text-slate-500">
         срез {data.as_of} · методология {data.methodology_version}
       </p>
+      <dl className="mt-6 grid gap-3 sm:grid-cols-3">
+        <div className="rounded-xl border border-slate-200 bg-white p-4">
+          <dt className="text-sm text-slate-500">Обработано источников</dt>
+          <dd className="mt-1 text-2xl font-semibold text-slate-950">{data.stats.n_sources_polled}</dd>
+        </div>
+        <div className="rounded-xl border border-slate-200 bg-white p-4">
+          <dt className="text-sm text-slate-500">Найдено кандидатов</dt>
+          <dd className="mt-1 text-2xl font-semibold text-slate-950">{data.stats.n_candidates}</dd>
+        </div>
+        <div className="rounded-xl border border-slate-200 bg-white p-4">
+          <dt className="text-sm text-slate-500">Сигналов с уверенностью &gt;75%</dt>
+          <dd className="mt-1 text-2xl font-semibold text-slate-950">{data.stats.n_confident}</dd>
+        </div>
+      </dl>
       <div className="mt-5">
         <AsOfSwitch current={data.as_of} domain={domain} years={AVAILABLE_YEARS} />
       </div>
@@ -49,6 +63,29 @@ export default async function TrendsPage({
           <TrendCard asOf={data.as_of} domain={domain} key={trend.trend_id} trend={trend} />
         ))}
       </div>
+      {data.rejected.length > 0 && (
+        <details className="mt-8 rounded-xl border border-slate-200 bg-white p-5">
+          <summary className="cursor-pointer font-semibold text-slate-900">
+            Исключено: {data.rejected.length} кандидатов
+          </summary>
+          <div className="mt-4 overflow-x-auto">
+            <table className="w-full text-left text-sm">
+              <thead className="border-b border-slate-200 text-slate-500">
+                <tr><th className="pb-2 pr-4 font-medium">Кандидат</th><th className="pb-2 pr-4 font-medium">Причина</th><th className="pb-2 font-medium">Документов</th></tr>
+              </thead>
+              <tbody>
+                {data.rejected.map((candidate) => (
+                  <tr className="border-b border-slate-100 last:border-0" key={`${candidate.label}-${candidate.reason}`}>
+                    <td className="py-3 pr-4 font-medium text-slate-900">{candidate.label}</td>
+                    <td className="py-3 pr-4 text-slate-600">{candidate.reason}</td>
+                    <td className="py-3 tabular-nums text-slate-600">{candidate.n_docs}</td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
+        </details>
+      )}
     </main>
   );
 }

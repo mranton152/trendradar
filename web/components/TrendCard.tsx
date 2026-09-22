@@ -30,7 +30,7 @@ export function TrendCard({ trend, domain, asOf }: TrendCardProps) {
         <span className="text-sm tabular-nums text-slate-400">#{trend.rank}</span>
         <h2 className="flex-1 text-lg font-semibold text-slate-950">{trend.title}</h2>
         <span className="text-sm tabular-nums text-slate-600">
-          ES {trend.emergence_score.toFixed(3)}
+          уверенность {trend.confidence_pct}%
         </span>
       </div>
       <div className="mt-3 flex flex-wrap gap-x-4 gap-y-1 text-sm text-slate-600">
