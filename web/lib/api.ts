@@ -8,6 +8,7 @@ export type Trend = {
   label_en: string;
   aliases: string[];
   emergence_score: number;
+  confidence_pct: number;
   components: {
     novelty: number;
     growth: number;
@@ -41,9 +42,14 @@ export type Trend = {
     url: string;
     year: number;
     type: string;
+    date: string | null;
+    source_type: string | null;
+    lang: string | null;
+    trust_level: "trusted" | "indicator" | "unknown" | null;
   }>;
   stage: "emerging" | "early_growth" | "scaling";
   confidence: "high" | "medium" | "low";
+  series_granularity: "year" | "month";
 };
 
 export type TrendsResponse = {
@@ -55,7 +61,14 @@ export type TrendsResponse = {
   as_of: number;
   generated_at: string;
   methodology_version: string;
+  stats: {
+    n_sources_polled: number;
+    n_candidates: number;
+    n_rejected: number;
+    n_confident: number;
+  };
   trends: Trend[];
+  rejected: Array<{ label: string; reason: string; n_docs: number }>;
 };
 
 export async function getTrends(

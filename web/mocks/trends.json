@@ -5,8 +5,14 @@
     "n_works": 5000
   },
   "as_of": 2026,
-  "generated_at": "2026-09-09T12:25:11.863903+00:00",
+  "generated_at": "2026-09-22T06:06:11.408004+00:00",
   "methodology_version": "1.0",
+  "stats": {
+    "n_sources_polled": 5000,
+    "n_candidates": 18,
+    "n_rejected": 3,
+    "n_confident": 0
+  },
   "trends": [
     {
       "trend_id": "t:golden:2026:01",
@@ -15,6 +21,7 @@
       "label_en": "mixture of experts",
       "aliases": [],
       "emergence_score": 0.7021999955177307,
+      "confidence_pct": 70,
       "components": {
         "novelty": 0.8859999775886536,
         "growth": 0.8600000143051147,
@@ -63,11 +70,16 @@
           "title": "A Lightweight MAMNet Model for Ship-Radiated Noise Recognition",
           "url": "https://doi.org/10.1109/taes.2026.3690425",
           "year": 2026,
-          "type": "article"
+          "type": "article",
+          "date": "2026-01-01",
+          "source_type": "article",
+          "lang": null,
+          "trust_level": null
         }
       ],
       "stage": "emerging",
-      "confidence": "high"
+      "confidence": "high",
+      "series_granularity": "year"
     },
     {
       "trend_id": "t:golden:2026:02",
@@ -76,6 +88,7 @@
       "label_en": "continual learning",
       "aliases": [],
       "emergence_score": 0.6119999885559082,
+      "confidence_pct": 61,
       "components": {
         "novelty": 0.5260000228881836,
         "growth": 0.718999981880188,
@@ -124,32 +137,49 @@
           "title": "Intrinsic Preservation of Plasticity in Continual Quantum Learning",
           "url": "https://doi.org/10.1103/ry52-85ll",
           "year": 2026,
-          "type": "article"
+          "type": "article",
+          "date": "2026-05-21",
+          "source_type": "article",
+          "lang": "en",
+          "trust_level": null
         },
         {
           "doc_id": "openalex:W4409344016",
           "title": "From large language models to artificial general intelligence: Evolution pathways in clinical healthcare",
           "url": "https://doi.org/10.30574/wjarr.2025.26.1.1086",
           "year": 2025,
-          "type": "article"
+          "type": "article",
+          "date": "2025-04-10",
+          "source_type": "article",
+          "lang": "en",
+          "trust_level": null
         },
         {
           "doc_id": "openalex:W4411446671",
           "title": "Boosting LLM’s Continual Sentiment Understanding for Low-Resource Languages",
           "url": "https://doi.org/10.1109/taslpro.2025.3581018",
           "year": 2025,
-          "type": "article"
+          "type": "article",
+          "date": "2025-01-01",
+          "source_type": "article",
+          "lang": "en",
+          "trust_level": null
         },
         {
           "doc_id": "openalex:W4405527175",
           "title": "Overcoming catastrophic forgetting in molecular property prediction using continual learning of sequential episodes",
           "url": "https://doi.org/10.1016/j.eswa.2024.125997",
           "year": 2024,
-          "type": "article"
+          "type": "article",
+          "date": "2024-12-18",
+          "source_type": "article",
+          "lang": "en",
+          "trust_level": null
         }
       ],
       "stage": "early_growth",
-      "confidence": "medium"
+      "confidence": "medium",
+      "series_granularity": "year"
     },
     {
       "trend_id": "t:golden:2026:03",
@@ -158,6 +188,7 @@
       "label_en": "state space model",
       "aliases": [],
       "emergence_score": 0.588100016117096,
+      "confidence_pct": 59,
       "components": {
         "novelty": 0.9819999933242798,
         "growth": 0.6320000290870667,
@@ -206,46 +237,38 @@
           "title": "GenMapping: Unveiling the Potential of Inverse Perspective Mapping for Robust Online HD Map Construction",
           "url": "https://doi.org/10.1109/ojits.2026.3705400",
           "year": 2026,
-          "type": "article"
+          "type": "article",
+          "date": "2026-01-01",
+          "source_type": "article",
+          "lang": "en",
+          "trust_level": null
         },
         {
           "doc_id": "openalex:W7166855694",
           "title": "Frequency-Enhanced and Multimodal Fusion Visual State Space Model for Tree Crown Segmentation Using UAV Remote Sensing Images",
           "url": "https://doi.org/10.1109/jstars.2026.3708750",
           "year": 2026,
-          "type": "article"
+          "type": "article",
+          "date": "2026-01-01",
+          "source_type": "article",
+          "lang": "en",
+          "trust_level": null
         },
         {
           "doc_id": "openalex:W4408297771",
           "title": "System Identification for Small Flying-Wing Unmanned Aircraft Using Open-Loop and Closed-Loop Flight Data",
           "url": "https://doi.org/10.2514/1.c038147",
           "year": 2025,
-          "type": "article"
-        },
-        {
-          "doc_id": "openalex:W4405274849",
-          "title": "State space model: a magical tool for state prediction in Nonlinear systems",
-          "url": "https://doi.org/10.1007/s11071-024-10730-8",
-          "year": 2024,
-          "type": "article"
-        },
-        {
-          "doc_id": "openalex:W4389961167",
-          "title": "A Unifying View of Multivariate State Space Models for Soft Sensors in Industrial Processes",
-          "url": "https://doi.org/10.1109/access.2023.3344932",
-          "year": 2023,
-          "type": "article"
-        },
-        {
-          "doc_id": "openalex:W2790451514",
-          "title": "Nonlinear Modeling and Inferential Multi-Model Predictive Control of a Pulverizing System in a Coal-Fired Power Plant Based on Moving Horizon Estimation",
-          "url": "https://doi.org/10.3390/en11030589",
-          "year": 2018,
-          "type": "article"
+          "type": "article",
+          "date": "2025-03-10",
+          "source_type": "article",
+          "lang": "en",
+          "trust_level": null
         }
       ],
       "stage": "emerging",
-      "confidence": "medium"
+      "confidence": "medium",
+      "series_granularity": "year"
     },
     {
       "trend_id": "t:golden:2026:04",
@@ -254,6 +277,7 @@
       "label_en": "sparse attention",
       "aliases": [],
       "emergence_score": 0.5680999755859375,
+      "confidence_pct": 57,
       "components": {
         "novelty": 0.6930000185966492,
         "growth": 0.824999988079071,
@@ -302,11 +326,16 @@
           "title": "Sparse attention and graph matching network for multi-view vehicle detection in collaborative perception systems",
           "url": "https://doi.org/10.1007/s11760-025-04535-4",
           "year": 2025,
-          "type": "article"
+          "type": "article",
+          "date": "2025-07-30",
+          "source_type": "article",
+          "lang": "en",
+          "trust_level": null
         }
       ],
       "stage": "early_growth",
-      "confidence": "high"
+      "confidence": "high",
+      "series_granularity": "year"
     },
     {
       "trend_id": "t:golden:2026:05",
@@ -315,6 +344,7 @@
       "label_en": "differentiable rendering",
       "aliases": [],
       "emergence_score": 0.5370000004768372,
+      "confidence_pct": 54,
       "components": {
         "novelty": 0.5260000228881836,
         "growth": 0.4390000104904175,
@@ -363,11 +393,16 @@
           "title": "Fiber-level Woven Fabric Capture from a Single Microscopic Image",
           "url": "https://doi.org/10.1145/3816036",
           "year": 2026,
-          "type": "article"
+          "type": "article",
+          "date": "2026-05-18",
+          "source_type": "article",
+          "lang": "en",
+          "trust_level": null
         }
       ],
       "stage": "early_growth",
-      "confidence": "high"
+      "confidence": "high",
+      "series_granularity": "year"
     },
     {
       "trend_id": "t:golden:2026:06",
@@ -376,6 +411,7 @@
       "label_en": "prompt engineering",
       "aliases": [],
       "emergence_score": 0.5196999907493591,
+      "confidence_pct": 52,
       "components": {
         "novelty": 0.8859999775886536,
         "growth": 0.9300000071525574,
@@ -424,11 +460,16 @@
           "title": "LLM powered echocardiography report structuring: a step towards precision medicine",
           "url": "https://doi.org/10.1093/eurheartj/ehaf784.4498",
           "year": 2025,
-          "type": "article"
+          "type": "article",
+          "date": "2025-11-01",
+          "source_type": "article",
+          "lang": "en",
+          "trust_level": null
         }
       ],
       "stage": "emerging",
-      "confidence": "high"
+      "confidence": "high",
+      "series_granularity": "year"
     },
     {
       "trend_id": "t:golden:2026:07",
@@ -437,6 +478,7 @@
       "label_en": "question answering",
       "aliases": [],
       "emergence_score": 0.5011000037193298,
+      "confidence_pct": 50,
       "components": {
         "novelty": 0.6930000185966492,
         "growth": 0.5090000033378601,
@@ -485,25 +527,27 @@
           "title": "Question-aware dynamic scene graph of local semantic representation learning for visual question answering",
           "url": "https://doi.org/10.1016/j.patrec.2023.04.014",
           "year": 2023,
-          "type": "article"
+          "type": "article",
+          "date": "2023-04-24",
+          "source_type": "article",
+          "lang": "en",
+          "trust_level": null
         },
         {
           "doc_id": "openalex:W4376867052",
           "title": "Structure Enhanced Path Reasoning for Knowledge Graph Completion",
           "url": "https://doi.org/10.1155/2023/3022539",
           "year": 2023,
-          "type": "article"
-        },
-        {
-          "doc_id": "openalex:W3085927637",
-          "title": "Advancement of Textual Answer Triggering: Cognitive Boosting",
-          "url": "https://doi.org/10.1109/tetc.2020.3022731",
-          "year": 2020,
-          "type": "article"
+          "type": "article",
+          "date": "2023-01-01",
+          "source_type": "article",
+          "lang": "en",
+          "trust_level": null
         }
       ],
       "stage": "early_growth",
-      "confidence": "medium"
+      "confidence": "medium",
+      "series_granularity": "year"
     },
     {
       "trend_id": "t:golden:2026:08",
@@ -512,6 +556,7 @@
       "label_en": "neural radiance field",
       "aliases": [],
       "emergence_score": 0.4950000047683716,
+      "confidence_pct": 50,
       "components": {
         "novelty": 0.7979999780654907,
         "growth": 0.8069999814033508,
@@ -560,11 +605,16 @@
           "title": "SA3D-L: A lightweight model for 3D object segmentation using neural radiance fields",
           "url": "https://doi.org/10.1016/j.neucom.2025.129420",
           "year": 2025,
-          "type": "article"
+          "type": "article",
+          "date": "2025-01-14",
+          "source_type": "article",
+          "lang": "en",
+          "trust_level": null
         }
       ],
       "stage": "emerging",
-      "confidence": "high"
+      "confidence": "high",
+      "series_granularity": "year"
     },
     {
       "trend_id": "t:golden:2026:09",
@@ -573,6 +623,7 @@
       "label_en": "vision-language model",
       "aliases": [],
       "emergence_score": 0.48660001158714294,
+      "confidence_pct": 49,
       "components": {
         "novelty": 0.8859999775886536,
         "growth": 0.9819999933242798,
@@ -621,18 +672,27 @@
           "title": "Bidirectional Prototype-Reward Co-Evolution for Test-Time Adaptation of Vision-Language Models",
           "url": "https://doi.org/10.1109/tmm.2026.3694557",
           "year": 2026,
-          "type": "article"
+          "type": "article",
+          "date": "2026-01-01",
+          "source_type": "article",
+          "lang": "en",
+          "trust_level": null
         },
         {
           "doc_id": "openalex:W7135395245",
           "title": "Report Generation System for Slit-Lamp Image Interpretation Using Vision-Language Models",
           "url": "https://doi.org/10.1007/s40123-026-01352-x",
           "year": 2026,
-          "type": "article"
+          "type": "article",
+          "date": "2026-03-14",
+          "source_type": "article",
+          "lang": "en",
+          "trust_level": null
         }
       ],
       "stage": "emerging",
-      "confidence": "high"
+      "confidence": "high",
+      "series_granularity": "year"
     },
     {
       "trend_id": "t:golden:2026:10",
@@ -641,6 +701,7 @@
       "label_en": "time series forecasting",
       "aliases": [],
       "emergence_score": 0.47099998593330383,
+      "confidence_pct": 47,
       "components": {
         "novelty": 0.5260000228881836,
         "growth": 0.5789999961853027,
@@ -689,39 +750,49 @@
           "title": "IMPROVING MULTI-VARIATE TIME SERIES FORECASTING WITH DYNAMIC MULTI-HEAD ATTENTION ADJACENCY MATRIX",
           "url": "http://hdl.handle.net/10342/14041",
           "year": 2025,
-          "type": "article"
+          "type": "article",
+          "date": "2025-05-01",
+          "source_type": "article",
+          "lang": null,
+          "trust_level": null
         },
         {
           "doc_id": "openalex:W4390742050",
           "title": "Strong (α, k)-cut and computational-based segmentation based novel hesitant fuzzy time series forecasting model",
           "url": "https://doi.org/10.1016/j.asoc.2024.111251",
           "year": 2024,
-          "type": "article"
+          "type": "article",
+          "date": "2024-01-11",
+          "source_type": "article",
+          "lang": "en",
+          "trust_level": null
         },
         {
           "doc_id": "openalex:W4382771793",
           "title": "Intelligent Hybrid ARIMA-NARNET Time Series Model to Forecast Coconut Price",
           "url": "https://doi.org/10.1109/access.2023.3275534",
           "year": 2023,
-          "type": "article"
+          "type": "article",
+          "date": "2023-01-01",
+          "source_type": "article",
+          "lang": "en",
+          "trust_level": null
         },
         {
           "doc_id": "openalex:W4365129054",
           "title": "A Novel Centralized Load Shedding Approach to Assess Short-Term Voltage Stability: A Model-Free Using Time Series Forecasting",
           "url": "https://doi.org/10.1109/tpwrd.2023.3266265",
           "year": 2023,
-          "type": "article"
-        },
-        {
-          "doc_id": "openalex:W3033022543",
-          "title": "Modeling of Coronavirus Behavior to Predict it’s Spread",
-          "url": "https://doi.org/10.14569/ijacsa.2020.0110552",
-          "year": 2020,
-          "type": "article"
+          "type": "article",
+          "date": "2023-04-11",
+          "source_type": "article",
+          "lang": "en",
+          "trust_level": null
         }
       ],
       "stage": "early_growth",
-      "confidence": "medium"
+      "confidence": "medium",
+      "series_granularity": "year"
     },
     {
       "trend_id": "t:golden:2026:11",
@@ -730,6 +801,7 @@
       "label_en": "causal inference",
       "aliases": [],
       "emergence_score": 0.46810001134872437,
+      "confidence_pct": 47,
       "components": {
         "novelty": 0.6930000185966492,
         "growth": 0.4740000069141388,
@@ -778,53 +850,49 @@
           "title": "Mendelian Randomization Methods for Causal Inference: Estimands, Identification and Inference",
           "url": "https://doi.org/10.1002/sim.70394",
           "year": 2026,
-          "type": "article"
+          "type": "article",
+          "date": "2026-01-01",
+          "source_type": "article",
+          "lang": "en",
+          "trust_level": null
         },
         {
           "doc_id": "openalex:W7127610413",
           "title": "A Tutorial on Optimal Dynamic Treatment Regimes",
           "url": "https://doi.org/10.1002/sim.70395",
           "year": 2026,
-          "type": "article"
+          "type": "article",
+          "date": "2026-02-01",
+          "source_type": "article",
+          "lang": "en",
+          "trust_level": null
         },
         {
           "doc_id": "openalex:W7165193980",
           "title": "A causal inference framework to bridge association and mechanism in the gut-brain axis",
           "url": "https://doi.org/10.1016/j.pnpbp.2026.111797",
           "year": 2026,
-          "type": "article"
+          "type": "article",
+          "date": "2026-06-18",
+          "source_type": "article",
+          "lang": "en",
+          "trust_level": null
         },
         {
           "doc_id": "openalex:W4409344016",
           "title": "From large language models to artificial general intelligence: Evolution pathways in clinical healthcare",
           "url": "https://doi.org/10.30574/wjarr.2025.26.1.1086",
           "year": 2025,
-          "type": "article"
-        },
-        {
-          "doc_id": "openalex:W3112350512",
-          "title": "Assessing environmental epidemiology questions in practice with a causal inference pipeline: An investigation of the air pollution‐multiple sclerosis relapses relationship",
-          "url": "https://doi.org/10.1002/sim.8843",
-          "year": 2020,
-          "type": "article"
-        },
-        {
-          "doc_id": "openalex:W2507733103",
-          "title": "Estimating the Malaria Attributable Fever Fraction Accounting for Parasites Being Killed by Fever and Measurement Error",
-          "url": "https://doi.org/10.1080/01621459.2018.1469989",
-          "year": 2018,
-          "type": "article"
-        },
-        {
-          "doc_id": "openalex:W2327926591",
-          "title": "Measuring the Political Salience of Supreme Court Cases",
-          "url": "https://doi.org/10.1086/679111",
-          "year": 2015,
-          "type": "article"
+          "type": "article",
+          "date": "2025-04-10",
+          "source_type": "article",
+          "lang": "en",
+          "trust_level": null
         }
       ],
       "stage": "early_growth",
-      "confidence": "medium"
+      "confidence": "medium",
+      "series_granularity": "year"
     },
     {
       "trend_id": "t:golden:2026:12",
@@ -833,6 +901,7 @@
       "label_en": "physics-informed neural network",
       "aliases": [],
       "emergence_score": 0.4519999921321869,
+      "confidence_pct": 45,
       "components": {
         "novelty": 0.6930000185966492,
         "growth": 0.7369999885559082,
@@ -881,32 +950,49 @@
           "title": "Progress and Perils of PINNs: Perspectives on Applying Physics-Informed Neural Networks to Science and Engineering Problems",
           "url": "https://doi.org/10.1109/mcse.2026.3675465",
           "year": 2026,
-          "type": "article"
+          "type": "article",
+          "date": "2026-01-01",
+          "source_type": "article",
+          "lang": "en",
+          "trust_level": null
         },
         {
           "doc_id": "openalex:W4404092094",
           "title": "Step-by-step time discrete Physics-Informed Neural Networks with application to a sustainability PDE model",
           "url": "https://doi.org/10.1016/j.matcom.2024.10.043",
           "year": 2024,
-          "type": "article"
+          "type": "article",
+          "date": "2024-11-06",
+          "source_type": "article",
+          "lang": "en",
+          "trust_level": null
         },
         {
           "doc_id": "openalex:W4320482431",
           "title": "A physics-informed neural network based on mixed data sampling for solving modified diffusion equations",
           "url": "https://doi.org/10.1038/s41598-023-29822-3",
           "year": 2023,
-          "type": "article"
+          "type": "article",
+          "date": "2023-02-13",
+          "source_type": "article",
+          "lang": "en",
+          "trust_level": null
         },
         {
           "doc_id": "openalex:W4313420351",
           "title": "Reconstruction of hydrofoil cavitation flow based on the chain-style physics-informed neural network",
           "url": "https://doi.org/10.1016/j.engappai.2022.105724",
           "year": 2022,
-          "type": "article"
+          "type": "article",
+          "date": "2022-12-22",
+          "source_type": "article",
+          "lang": "en",
+          "trust_level": null
         }
       ],
       "stage": "early_growth",
-      "confidence": "high"
+      "confidence": "high",
+      "series_granularity": "year"
     },
     {
       "trend_id": "t:golden:2026:13",
@@ -915,6 +1001,7 @@
       "label_en": "foundation model",
       "aliases": [],
       "emergence_score": 0.4404999911785126,
+      "confidence_pct": 44,
       "components": {
         "novelty": 0.8859999775886536,
         "growth": 0.9120000004768372,
@@ -963,32 +1050,49 @@
           "title": "SAGE-FM: A lightweight and interpretable spatial transcriptomics foundation model",
           "url": "https://doi.org/10.48550/arxiv.2601.15504",
           "year": 2026,
-          "type": "article"
+          "type": "article",
+          "date": "2026-01-21",
+          "source_type": "article",
+          "lang": "en",
+          "trust_level": null
         },
         {
           "doc_id": "openalex:W7147515741",
           "title": "MULTIMODAL SENSOR FUSION FOR AUTONOMOUS DRIVING USING LARGE-SCALE MACHINE LEARNING MODELS",
           "url": "https://doi.org/10.5121/ijgca.2026.17106",
           "year": 2026,
-          "type": "article"
+          "type": "article",
+          "date": "2026-03-28",
+          "source_type": "article",
+          "lang": null,
+          "trust_level": null
         },
         {
           "doc_id": "openalex:W4414165838",
           "title": "Online Location Planning for AI-Defined Vehicles: Optimizing Joint Tasks of Order Serving and Spatio-Temporal Heterogeneous Model Fine-Tuning",
           "url": "https://doi.org/10.1109/tmc.2025.3608179",
           "year": 2025,
-          "type": "article"
+          "type": "article",
+          "date": "2025-09-09",
+          "source_type": "article",
+          "lang": "en",
+          "trust_level": null
         },
         {
           "doc_id": "openalex:W7115185258",
           "title": "Artificial Intelligence in Healthcare Imaging: A Survey on Foundation Models, Fairness, and Explainability",
           "url": "https://doi.org/10.5281/zenodo.17926693",
           "year": 2025,
-          "type": "article"
+          "type": "article",
+          "date": "2025-01-01",
+          "source_type": "article",
+          "lang": null,
+          "trust_level": null
         }
       ],
       "stage": "emerging",
-      "confidence": "high"
+      "confidence": "high",
+      "series_granularity": "year"
     },
     {
       "trend_id": "t:golden:2026:14",
@@ -997,6 +1101,7 @@
       "label_en": "diffusion model",
       "aliases": [],
       "emergence_score": 0.414900004863739,
+      "confidence_pct": 41,
       "components": {
         "novelty": 0.7979999780654907,
         "growth": 0.8420000076293945,
@@ -1045,18 +1150,16 @@
           "title": "Enhanced image super-resolution via two-stage latent probabilistic diffusion model",
           "url": "https://doi.org/10.1088/2631-8695/ae6d7e",
           "year": 2026,
-          "type": "article"
-        },
-        {
-          "doc_id": "openalex:W3011449975",
-          "title": "On the convexification of the Perona–Malik diffusion model",
-          "url": "https://doi.org/10.1007/s11760-020-01663-x",
-          "year": 2020,
-          "type": "article"
+          "type": "article",
+          "date": "2026-05-01",
+          "source_type": "article",
+          "lang": null,
+          "trust_level": null
         }
       ],
       "stage": "emerging",
-      "confidence": "medium"
+      "confidence": "medium",
+      "series_granularity": "year"
     },
     {
       "trend_id": "t:golden:2026:15",
@@ -1065,6 +1168,7 @@
       "label_en": "topic modeling",
       "aliases": [],
       "emergence_score": 0.4106000065803528,
+      "confidence_pct": 41,
       "components": {
         "novelty": 0.6930000185966492,
         "growth": 0.14000000059604645,
@@ -1113,32 +1217,44 @@
           "title": "Topic Modeling and Sentiment Analysis of YouTube Podcast “Susahnya Jadi Perempuan” Using LDA and SVM Algorithms",
           "url": "https://doi.org/10.19184/informal.v9i3.166",
           "year": 2024,
-          "type": "article"
+          "type": "article",
+          "date": "2024-12-31",
+          "source_type": "article",
+          "lang": "en",
+          "trust_level": null
         },
         {
           "doc_id": "openalex:W4306730885",
           "title": "The Real-World Experiences of Persons With Multiple Sclerosis During the First COVID-19 Lockdown: Application of Natural Language Processing",
           "url": "https://doi.org/10.2196/37945",
           "year": 2022,
-          "type": "article"
-        },
-        {
-          "doc_id": "openalex:W3157575185",
-          "title": "Evaluation of clustering and topic modeling methods over health-related tweets and emails",
-          "url": "https://doi.org/10.1016/j.artmed.2021.102096",
-          "year": 2021,
-          "type": "article"
-        },
-        {
-          "doc_id": "openalex:W3170145683",
-          "title": "Genre analysis of movies using a topic model of plot summaries",
-          "url": "https://doi.org/10.1002/asi.24525",
-          "year": 2021,
-          "type": "article"
+          "type": "article",
+          "date": "2022-10-17",
+          "source_type": "article",
+          "lang": "en",
+          "trust_level": null
         }
       ],
       "stage": "early_growth",
-      "confidence": "medium"
+      "confidence": "medium",
+      "series_granularity": "year"
+    }
+  ],
+  "rejected": [
+    {
+      "label": "cloud computing",
+      "reason": "слишком старый термин",
+      "n_docs": 6781
+    },
+    {
+      "label": "active learning",
+      "reason": "слишком старый термин",
+      "n_docs": 6536
+    },
+    {
+      "label": "speech recognition",
+      "reason": "слишком старый термин",
+      "n_docs": 6373
     }
   ]
 }

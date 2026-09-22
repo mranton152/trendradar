@@ -41,6 +41,23 @@ class Source(BaseModel):
     url: str
     year: int
     type: str
+    date: str | None = None
+    source_type: str | None = None
+    lang: str | None = None
+    trust_level: Literal["trusted", "indicator", "unknown"] | None = None
+
+
+class Stats(BaseModel):
+    n_sources_polled: int = Field(ge=0)
+    n_candidates: int = Field(ge=0)
+    n_rejected: int = Field(ge=0)
+    n_confident: int = Field(ge=0)
+
+
+class RejectedCandidate(BaseModel):
+    label: str
+    reason: str
+    n_docs: int = Field(ge=0)
 
 
 class Motivation(BaseModel):
@@ -76,6 +93,8 @@ class Trend(BaseModel):
     sources: list[Source] = Field(default_factory=list)
     stage: Literal["emerging", "early_growth", "scaling"]
     confidence: Literal["high", "medium", "low"]
+    confidence_pct: int = Field(ge=0, le=100)
+    series_granularity: Literal["year", "month"] = "year"
     backtest: Backtest | None = None
 
 
@@ -91,7 +110,9 @@ class TrendsResponse(BaseModel):
     as_of: int
     methodology_version: str
     generated_at: datetime
+    stats: Stats
     trends: list[Trend]
+    rejected: list[RejectedCandidate] = Field(default_factory=list)
 
 
 class ResolveRequest(BaseModel):

@@ -30,9 +30,22 @@ def index(tmp_path):
     works = [{
         "doc_id": "openalex:W1", "source": "openalex", "doc_type": "article",
         "title": "Источник", "year": 2020, "url": "https://example.org/paper",
+        "date": "2020-04-15", "lang": "en", "source_type": "article",
+        "trust_level": "trusted",
         "domain": "artificial-intelligence", "harvested_at": "2026-09-08",
     }]
     pq.write_table(pa.Table.from_pylist(works, schema=WORKS), domain / "works.parquet")
+    pq.write_table(
+        pa.table({
+            "cand_id": ["c-rejected"], "label": ["Зрелая технология"],
+            "domain": ["artificial-intelligence"], "reason": ["слишком зрелая"],
+            "n_docs": [42], "as_of": [2026],
+        }),
+        domain / "rejected.parquet",
+    )
+    (domain / "meta.json").write_text(
+        '{"n_sources_polled": 120, "n_candidates": 34, "n_rejected": 7}', encoding="utf-8"
+    )
     return index_root
 
 
@@ -51,6 +64,9 @@ def test_snapshot_filters_sorts_and_preserves_native_values(index):
     assert store.trend_domain("t:ai:2021:1") == "golden"
     assert store.n_works("golden") == 1
     assert store.as_of_years("golden") == [2021, 2026]
+    assert store.rejected("golden", 2026)[0]["label"] == "Зрелая технология"
+    assert store.rejected("golden", 2021) == []
+    assert store.meta("golden")["n_sources_polled"] == 120
     rows[0]["years"].append(9999)
     assert store.trend("t:ai:2026:1")["years"] == [2026]
     (index / "golden" / "trends.parquet").unlink()

@@ -10,10 +10,12 @@ from api.models import (
     DomainInfo,
     Evidence,
     Motivation,
+    RejectedCandidate,
     ResolveRequest,
     ResolveResponse,
     SeriesPoint,
     Source,
+    Stats,
     Trend,
     TrendsRequest,
     TrendsResponse,
@@ -98,6 +100,10 @@ def _as_model(row: dict, store: Store, domain: str) -> Trend:
                 url=document["url"],
                 year=int(document["year"]),
                 type=document["doc_type"],
+                date=document.get("date"),
+                source_type=document.get("source_type") or document["doc_type"],
+                lang=document.get("lang"),
+                trust_level=document.get("trust_level"),
             )
             for document in documents
         ],
@@ -105,6 +111,26 @@ def _as_model(row: dict, store: Store, domain: str) -> Trend:
         case_example=case_example,
         stage=row["stage"],
         confidence=row["confidence"],
+        confidence_pct=round(float(row["emergence_score"]) * 100),
+        series_granularity=row.get("series_granularity") or "year",
+    )
+
+
+def _stats(store: Store, domain: str, as_of: int) -> Stats:
+    """Счётчики для шапки; meta.json точнее, fallback сохраняет работу старого индекса."""
+    rows = store.trends(domain, as_of, top=50)
+    rejected = store.rejected(domain, as_of)
+    meta = store.meta(domain)
+
+    def meta_count(key: str, fallback: int) -> int:
+        value = meta.get(key)
+        return value if isinstance(value, int) and value >= 0 else fallback
+
+    return Stats(
+        n_sources_polled=meta_count("n_sources_polled", store.n_works(domain)),
+        n_candidates=meta_count("n_candidates", len(rows) + len(rejected)),
+        n_rejected=meta_count("n_rejected", len(rejected)),
+        n_confident=sum(float(row["emergence_score"]) > 0.75 for row in rows),
     )
 
 
@@ -142,7 +168,12 @@ def trends(body: TrendsRequest, request: Request) -> TrendsResponse:
         as_of=body.as_of,
         methodology_version=rows[0]["methodology_version"],
         generated_at=datetime.now(UTC),
+        stats=_stats(store, domain, body.as_of),
         trends=[_as_model(row, store, domain) for row in rows],
+        rejected=[
+            RejectedCandidate(label=row["label"], reason=row["reason"], n_docs=row["n_docs"])
+            for row in store.rejected(domain, body.as_of)
+        ],
     )
 
 
