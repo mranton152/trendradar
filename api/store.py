@@ -1,4 +1,5 @@
 """Неизменяемый снимок индекса в памяти: Parquet читается только при создании."""
+import json
 import logging
 import re
 from copy import deepcopy
@@ -26,6 +27,8 @@ class Store:
         self._trend_domains: dict[str, str] = {}
         self._works: dict[str, dict[str, dict]] = {}
         self._cards: dict[str, dict[str, dict]] = {}
+        self._rejected: dict[str, list[dict]] = {}
+        self._meta: dict[str, dict] = {}
         if not self.root.exists():
             return
         with duckdb.connect(database=":memory:") as con:
@@ -68,6 +71,25 @@ class Store:
                             directory.name,
                             exc,
                         )
+                rejected_path = directory / "rejected.parquet"
+                if self._safe_file(rejected_path, self.root):
+                    try:
+                        self._rejected[directory.name] = self._read(con, rejected_path)
+                    except (duckdb.Error, KeyError, TypeError, ValueError) as exc:
+                        log.warning(
+                            "Отсеянные кандидаты домена %s пропущены: не удалось загрузить: %s",
+                            directory.name,
+                            exc,
+                        )
+                meta_path = directory / "meta.json"
+                if self._safe_file(meta_path, self.root):
+                    try:
+                        with meta_path.open(encoding="utf-8") as meta_file:
+                            meta = json.load(meta_file)
+                        if isinstance(meta, dict):
+                            self._meta[directory.name] = meta
+                    except (OSError, ValueError) as exc:
+                        log.warning("Метаданные домена %s пропущены: %s", directory.name, exc)
                 self._by_id.update(zip(ids, rows, strict=True))
                 self._trend_domains.update(dict.fromkeys(ids, directory.name))
 
@@ -113,3 +135,13 @@ class Store:
     def card(self, domain: str, trend_id: str) -> dict | None:
         """Возвращает текстовую карточку тренда, если она собрана для этого среза."""
         return deepcopy(self._cards.get(domain, {}).get(trend_id))
+
+    def rejected(self, domain: str, as_of: int) -> list[dict]:
+        """Кандидаты, не прошедшие фильтры на запрошенном срезе."""
+        return deepcopy([
+            row for row in self._rejected.get(domain, []) if row.get("as_of") == as_of
+        ])
+
+    def meta(self, domain: str) -> dict:
+        """Метаданные последней стадии, если она их записала."""
+        return deepcopy(self._meta.get(domain, {}))

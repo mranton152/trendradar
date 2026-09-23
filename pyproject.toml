@@ -19,8 +19,10 @@ dependencies = [
     "uvicorn[standard]>=0.32",
     "pydantic>=2.9",
     "pydantic-settings>=2.6",
-    # экспорт
+    # экспорт и датасет заказчика
     "openpyxl>=3.1",
+    # классификатор этапа 1
+    "scikit-learn>=1.5",
 ]
 
 [project.optional-dependencies]
@@ -56,5 +58,5 @@ select = ["E", "F", "I", "UP", "B"]
 "contracts/schemas.py" = ["E501"]
 
 [tool.pytest.ini_options]
-testpaths = ["core", "ingest", "semantic", "cards", "api", "validation", "contracts"]
+testpaths = ["core", "ingest", "semantic", "cards", "api", "validation", "contracts", "classifier"]
 python_files = ["test_*.py"]

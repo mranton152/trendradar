@@ -21,7 +21,7 @@ import pyarrow.parquet as pq
 from contracts.schemas import REJECTED, TRENDS
 from core.components import components
 from core.dedup import dedup, mmr
-from core.filters import ПОРОГИ, причина_отказа
+from core.filters import ПОРОГИ, обрывок_фразы, причина_отказа
 from core.normalize import peer_normalizer
 from core.score import ВЕРСИЯ_МЕТОДОЛОГИИ, emergence_scores, стадия, уверенность
 from core.series import country_spread, top_docs, year_counts
@@ -60,7 +60,8 @@ def построить_с_отсеянными(index_dir: Path, corpus_path: Pat
         if cand_id not in подписи:
             continue
         comp = components(counts, norm, as_of)
-        причина = причина_отказа(comp, страны.get(cand_id, 0))
+        причина = ("обрывок фразы, не термин" if обрывок_фразы(подписи[cand_id][0])
+                   else причина_отказа(comp, страны.get(cand_id, 0)))
         if причина:
             отказы[причина] += 1
             отсеянные.append({"cand_id": cand_id, "label": подписи[cand_id][0],
@@ -69,7 +70,7 @@ def построить_с_отсеянными(index_dir: Path, corpus_path: Pat
             continue
         label, emb_row = подписи[cand_id]
         строки.append({"cand_id": cand_id, "label": label, "emb_row": emb_row,
-                       "c": comp, "counts": counts,
+                       "c": comp, "counts": counts, "n_docs": comp["counts_recent"],
                        "countries": страны.get(cand_id, 0)})
 
     строки = emergence_scores(строки)

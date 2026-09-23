@@ -12,6 +12,7 @@ import duckdb
 ROOT = Path(__file__).resolve().parents[2]
 INDEX_PATH = ROOT / "data" / "index" / "golden" / "trends.parquet"
 WORKS_PATH = ROOT / "data" / "index" / "golden" / "works.parquet"
+REJECTED_PATH = ROOT / "data" / "index" / "golden" / "rejected.parquet"
 
 
 def output_path(as_of: int) -> Path:
@@ -25,6 +26,7 @@ def make_mocks(as_of: int) -> None:
     if not INDEX_PATH.is_file():
         raise FileNotFoundError(f"Не найден демонстрационный индекс: {INDEX_PATH}")
 
+    rejected: list[dict[str, object]] = []
     with duckdb.connect(":memory:") as connection:
         result = connection.execute(
             """
@@ -37,22 +39,32 @@ def make_mocks(as_of: int) -> None:
         )
         columns = [description[0] for description in result.description]
         rows = result.fetchall()
-        documents = {
-            doc_id: {
-                "doc_id": doc_id,
-                "title": title,
-                "url": url,
-                "year": int(year),
-                "type": doc_type,
+        works = connection.execute("SELECT * FROM read_parquet(?)", [str(WORKS_PATH)])
+        work_columns = [description[0] for description in works.description]
+        documents = {}
+        for values in works.fetchall():
+            work = dict(zip(work_columns, values, strict=True))
+            documents[work["doc_id"]] = {
+                "doc_id": work["doc_id"],
+                "title": work["title"],
+                "url": work["url"],
+                "year": int(work["year"]),
+                "type": work["doc_type"],
+                "date": work.get("date"),
+                "source_type": work.get("source_type") or work["doc_type"],
+                "lang": work.get("lang"),
+                "trust_level": work.get("trust_level"),
             }
-            for doc_id, title, url, year, doc_type in connection.execute(
-                """
-                SELECT doc_id, title, url, year, doc_type
-                FROM read_parquet(?)
-                """,
-                [str(WORKS_PATH)],
-            ).fetchall()
-        }
+        if REJECTED_PATH.is_file():
+            rejected_result = connection.execute(
+                "SELECT label, reason, n_docs FROM read_parquet(?) WHERE as_of = ?",
+                [str(REJECTED_PATH), as_of],
+            )
+            rejected_columns = [description[0] for description in rejected_result.description]
+            rejected = [
+                dict(zip(rejected_columns, values, strict=True))
+                for values in rejected_result.fetchall()
+            ]
 
     if not rows:
         raise ValueError(f"В golden нет трендов для среза {as_of}")
@@ -67,7 +79,14 @@ def make_mocks(as_of: int) -> None:
         "as_of": as_of,
         "generated_at": datetime.now(UTC).isoformat(),
         "methodology_version": "1.0",
+        "stats": {
+            "n_sources_polled": _n_works(),
+            "n_candidates": len(trends) + len(rejected),
+            "n_rejected": len(rejected),
+            "n_confident": sum(trend["confidence_pct"] > 75 for trend in trends),
+        },
         "trends": trends,
+        "rejected": rejected,
     }
 
     path = output_path(as_of)
@@ -95,6 +114,7 @@ def _trend(row: dict[str, object], documents: dict[str, dict[str, object]]) -> d
         "label_en": row["label"],
         "aliases": list(row["aliases"] or []),
         "emergence_score": float(row["emergence_score"]),
+        "confidence_pct": round(float(row["emergence_score"]) * 100),
         "components": {
             "novelty": float(row["c_novelty"]),
             "growth": float(row["c_growth"]),
@@ -121,6 +141,7 @@ def _trend(row: dict[str, object], documents: dict[str, dict[str, object]]) -> d
         ],
         "stage": row["stage"],
         "confidence": row["confidence"],
+        "series_granularity": row.get("series_granularity") or "year",
     }
 
 

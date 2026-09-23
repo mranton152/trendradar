@@ -21,17 +21,26 @@ def test_trends_response_contains_evidence_and_sources(index):  # noqa: F811
     assert len(body["trends"]) == 2
     trend = body["trends"][0]
     assert trend["rank"] == 1
+    assert trend["confidence_pct"] == 50
+    assert trend["series_granularity"] == "year"
     assert set(trend["components"]) == {"novelty", "growth", "accel", "burst", "diffusion"}
     assert trend["evidence"]["series"] == [{
         "year": 2026, "count": 20, "freq_per_million": 1.0,
     }]
     assert trend["sources"] == [{
         "doc_id": "openalex:W1", "title": "Источник", "url": "https://example.org/paper",
-        "year": 2020, "type": "article",
+        "year": 2020, "type": "article", "date": "2020-04-15",
+        "source_type": "article", "lang": "en", "trust_level": "trusted",
     }]
     assert trend["motivation"] is None
     assert trend["case_example"] is None
     assert trend["backtest"] is None
+    assert body["stats"] == {
+        "n_sources_polled": 120, "n_candidates": 34, "n_rejected": 7, "n_confident": 0,
+    }
+    assert body["rejected"] == [{
+        "label": "Зрелая технология", "reason": "слишком зрелая", "n_docs": 42,
+    }]
 
 
 def test_single_trend_keeps_index_folder_for_source_lookup(index):  # noqa: F811

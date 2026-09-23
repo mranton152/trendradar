@@ -42,7 +42,8 @@
 | [12-github-setup.md](docs/12-github-setup.md) | **Репозиторий и доступы: пошагово** |
 | [13-presentation.md](docs/13-presentation.md) | Скелет презентации: 7 слайдов, измеренные числа |
 | [14-tz-delta.md](docs/14-tz-delta.md) | **ТЗ открыто: что изменилось, что решать** |
-| [plans/2026-09-16-phase1.md](docs/plans/2026-09-16-phase1.md) | **Действующий план: 16–28 сентября** |
+| [plans/2026-09-16-phase1.md](docs/plans/2026-09-16-phase1.md) | План Фазы 1 |
+| [15-finish-plan.md](docs/15-finish-plan.md) | **План до сдачи: что осталось по людям** |
 
 ## Команда
 

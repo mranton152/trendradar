@@ -11,6 +11,40 @@ const STAGE_LABELS = {
   scaling: "масштабирование",
 } as const;
 
+const SOURCE_TYPE_LABELS: Record<string, string> = {
+  article: "статья",
+  preprint: "препринт",
+  patent: "патент",
+  news: "новость",
+  blog: "блог",
+  repo: "репозиторий",
+  model: "модель",
+  report: "отчёт",
+  aggregator: "агрегатор",
+  press_release: "пресс-релиз",
+};
+
+const TRUST_LEVELS = {
+  trusted: {
+    label: "доверенный источник",
+    className: "bg-emerald-50 text-emerald-800 ring-emerald-200",
+  },
+  indicator: {
+    label: "только индикатор",
+    className: "bg-amber-50 text-amber-800 ring-amber-200",
+  },
+  unknown: {
+    label: "доверенность не определена",
+    className: "bg-slate-100 text-slate-700 ring-slate-200",
+  },
+} as const;
+
+function languageLabel(lang: string | null): string {
+  if (lang === "ru") return "русский";
+  if (lang === "en") return "английский";
+  return lang ?? "не указан";
+}
+
 type TrendPageProps = {
   params: Promise<{ domain: string; id: string }>;
   searchParams: Promise<{ as_of?: string }>;
@@ -73,7 +107,7 @@ export default async function TrendPage({ params, searchParams }: TrendPageProps
           {trend.title}
         </h1>
         <p className="mt-3 text-sm text-slate-500">
-          Emergence Score {trend.emergence_score.toFixed(3)} · взлёт{" "}
+          Уверенность модели {trend.confidence_pct}% · взлёт{" "}
           {trend.evidence.takeoff_year ?? "—"} · первое упоминание{" "}
           {trend.evidence.first_mention ?? "—"}
         </p>
@@ -129,18 +163,34 @@ export default async function TrendPage({ params, searchParams }: TrendPageProps
         {trend.sources.length === 0 ? (
           <p className="text-sm text-slate-500">Для этого тренда источники пока не собраны.</p>
         ) : (
-          <ul className="space-y-2 text-sm">
+          <ul className="space-y-3 text-sm">
             {trend.sources.map((source) => (
-              <li key={source.doc_id}>
-                <a
-                  className="text-slate-900 underline decoration-indigo-300 underline-offset-2 hover:text-indigo-700"
-                  href={source.url}
-                  rel="noreferrer"
-                  target="_blank"
-                >
-                  {source.title}
-                </a>
-                <span className="ml-2 tabular-nums text-slate-400">{source.year}</span>
+              <li className="rounded-lg border border-slate-200 bg-white p-4" key={source.doc_id}>
+                <div className="flex flex-wrap items-baseline gap-x-3 gap-y-2">
+                  <a
+                    className="font-medium text-slate-900 underline decoration-indigo-300 underline-offset-2 hover:text-indigo-700"
+                    href={source.url}
+                    rel="noreferrer"
+                    target="_blank"
+                  >
+                    {source.title}
+                  </a>
+                  {source.trust_level && (
+                    <span
+                      className={`rounded-full px-2 py-0.5 text-xs font-medium ring-1 ring-inset ${TRUST_LEVELS[source.trust_level].className}`}
+                    >
+                      {TRUST_LEVELS[source.trust_level].label}
+                    </span>
+                  )}
+                </div>
+                <p className="mt-2 text-slate-600">
+                  Опубликовано: {source.date ?? source.year} · Тип: {SOURCE_TYPE_LABELS[source.source_type ?? source.type] ?? source.source_type ?? source.type} · Язык: {languageLabel(source.lang)}
+                </p>
+                {source.trust_level === "indicator" && (
+                  <p className="mt-2 text-amber-800">
+                    Этот источник не может быть единственным основанием для вывода.
+                  </p>
+                )}
               </li>
             ))}
           </ul>
