@@ -37,6 +37,11 @@ class ОтказИсточника(RuntimeError):
     «нет публикаций» и ноль «ответа не было» - разные вещи, а модель этого
     не различит."""
 
+# Слова, по которым индустрия сигналит о ранней стадии. Из датасета заказчика:
+# там обоснование почти всегда - раунд, выход из stealth, первый пилот.
+СЛОВА_РАУНДОВ = ("raises", "raised", "funding", "series a", "series b", "seed",
+                 "stealth", "launches", "pilot", "startup", "acquires", "unveils")
+
 ОПИСАНИЯ = {
     "pub_total_10y": "сколько научных работ упоминают технологию за 10 лет",
     "pub_last_3y_share": "какая доля этих работ вышла за последние 3 года",
@@ -52,6 +57,15 @@ class ОтказИсточника(RuntimeError):
     "hf_models": "сколько моделей на Hugging Face по запросу",
     "log_pub_total": "логарифм числа публикаций - чтобы масштаб не давил остальные",
 }
+
+# Признаки Hacker News исключены из набора после замера: они ухудшают точность
+# (76% -> 74%) и направление у них обратное - у сигналов упоминаний МЕНЬШЕ,
+# чем у зрелых (медиана 0 против 3). Причина: поиск по фразе меряет
+# известность названия, а не новизну технологии. "Kubernetes" обсуждают
+# постоянно, а "AI agent IAM" - это наше сгенерированное название, которого
+# в индустрии не пишут. Код сбора оставлен: он понадобится, когда появятся
+# настоящие новостные кандидаты с именами компаний и продуктов (K-11..K-13).
+HN_ПРИЗНАКИ = ("hn_mentions_12m", "hn_recent_share", "hn_funding_mentions", "hn_points_max")
 
 
 def _кэш() -> dict:
@@ -82,6 +96,8 @@ class Сборщик:
             headers={"User-Agent": f"trendradar/0.2 (+mailto:{ПОЧТА})"})
         self.год = dt.date.today().year
         self.отказов = 0
+        # какой запрос реально дал данные - в отчёт, чтобы цифры можно было проверить
+        self.использованный_запрос: dict[str, str] = {}
         tok = _github_token()
         self.gh_headers = {"Authorization": f"Bearer {tok}"} if tok else {}
 
@@ -100,24 +116,37 @@ class Сборщик:
         self.кэш[ключ] = d
         return d
 
-    def openalex_годы(self, q: str) -> dict[int, int]:
+    def _годы_одного(self, q: str) -> dict[int, int]:
+        # Без кавычек: И-связка слов, а не точная фраза. Точная фраза давала ноль
+        # у 63 сигналов из 100 - многословные названия технологий никто не пишет
+        # дословно. "AI agent IAM" в кавычках - 0 работ, без кавычек - 136.
         d = self._get(f"oa:years:{q}", "https://api.openalex.org/works",
-                      {"filter": f'title_and_abstract.search:"{q}"', "group_by": "publication_year",
-                       "mailto": ПОЧТА})
+                      {"filter": f"title_and_abstract.search:{q}",
+                       "group_by": "publication_year", "mailto": ПОЧТА})
         return {int(g["key"]): g["count"] for g in d.get("group_by", [])
                 if str(g["key"]).isdigit() and self.год - ЛЕТ < int(g["key"]) <= self.год}
+
+    def openalex_годы(self, q: str, алиасы: list[str] | None = None) -> dict[int, int]:
+        """Годовой ряд. При пустом результате пробуем альтернативные названия."""
+        for кандидат in [q, *(алиасы or [])]:
+            годы = self._годы_одного(кандидат)
+            if годы:
+                self.использованный_запрос[q] = кандидат
+                return годы
+        self.использованный_запрос[q] = q
+        return {}
 
     def openalex_страны(self, q: str) -> int:
         окно = f"publication_year:{self.год - 2}-{self.год}"
         d = self._get(f"oa:countries:{q}", "https://api.openalex.org/works",
-                      {"filter": f'title_and_abstract.search:"{q}",{окно}',
+                      {"filter": f"title_and_abstract.search:{q},{окно}",
                        "group_by": "authorships.institutions.country_code",
                        "per-page": 200, "mailto": ПОЧТА})
         return len([g for g in d.get("group_by", []) if g.get("count", 0) >= 2])
 
     def openalex_компании(self, q: str) -> float:
         окно = f"publication_year:{self.год - 2}-{self.год}"
-        базовый = f'title_and_abstract.search:"{q}",{окно}'
+        базовый = f"title_and_abstract.search:{q},{окно}"
         общ = self._get(f"oa:total3:{q}", "https://api.openalex.org/works",
                         {"filter": базовый, "per-page": 1, "mailto": ПОЧТА}
                         ).get("meta", {}).get("count", 0)
@@ -137,13 +166,36 @@ class Сборщик:
                 "github_new_share": (sum(1 for i in items if (i.get("created_at") or "") >= порог)
                                      / len(items)) if items else 0.0}
 
+    def hackernews(self, q: str) -> dict:
+        """Индустриальные упоминания через Hacker News Algolia - без ключа, с датами.
+
+        Публикационные признаки не отличают нейроморфные чипы (наука с 1980-х,
+        индустрия с 2025) от зрелых технологий. Новостной сигнал отличает.
+        """
+        d = self._get(f"hn:{q}", "https://hn.algolia.com/api/v1/search",
+                      {"query": q, "tags": "story", "hitsPerPage": 100})
+        hits = d.get("hits", []) or []
+        if not hits:
+            return {"hn_mentions_12m": 0, "hn_recent_share": 0.0,
+                    "hn_funding_mentions": 0, "hn_points_max": 0}
+        порог = dt.datetime.now(dt.UTC).timestamp() - 365 * 24 * 3600
+        свежие = [h for h in hits if (h.get("created_at_i") or 0) >= порог]
+        раунды = sum(1 for h in hits
+                     if any(w in (h.get("title") or "").lower() for w in СЛОВА_РАУНДОВ))
+        return {"hn_mentions_12m": len(свежие),
+                "hn_recent_share": len(свежие) / len(hits),
+                "hn_funding_mentions": раунды,
+                "hn_points_max": max((h.get("points") or 0) for h in hits)}
+
     def hf(self, q: str) -> int:
         d = self._get(f"hf:{q}", "https://huggingface.co/api/models", {"search": q, "limit": 100})
         return len(d) if isinstance(d, list) else 0
 
     # ---------- признаки одной технологии
-    def признаки(self, q: str, norm: dict[int, float] | None = None) -> dict:
-        годы = self.openalex_годы(q)
+    def признаки(self, q: str, norm: dict[int, float] | None = None,
+                 алиасы: list[str] | None = None) -> dict:
+        годы = self.openalex_годы(q, алиасы)
+        q = self.использованный_запрос.get(q, q)   # дальше считаем тем же запросом
         norm = norm or {y: 1.0 for y in range(self.год - ЛЕТ + 1, self.год + 1)}
         c = components(годы, norm, as_of=self.год)
         всего = sum(годы.values())
@@ -159,6 +211,7 @@ class Сборщик:
             **gh,
             "hf_models": self.hf(q),
             "log_pub_total": math.log1p(всего),
+            **self.hackernews(q),   # собираем, но в ОПИСАНИЯ не входят - см. HN_ПРИЗНАКИ
         }
 
 
@@ -166,7 +219,9 @@ def собрать_признаки(выборка: list[dict], запросы: 
     """Признаки для всей выборки. Peer-нормировка - по пулу всей выборки."""
     сб = Сборщик()
     try:
-        ряды = {s["label"]: сб.openalex_годы(запросы[s["label"]]["query_en"]) for s in выборка}
+        ряды = {s["label"]: сб.openalex_годы(запросы[s["label"]]["query_en"],
+                                             запросы[s["label"]].get("keyphrases"))
+                for s in выборка}
     except ОтказИсточника as e:
         _сохранить(сб.кэш)
         raise SystemExit(f"источник отказал: {e}. Кэш сохранён, повторный запуск продолжит "
@@ -178,12 +233,13 @@ def собрать_признаки(выборка: list[dict], запросы: 
     for i, s in enumerate(выборка, 1):
         q = запросы[s["label"]]["query_en"]
         try:
-            f = сб.признаки(q, norm)
+            f = сб.признаки(q, norm, запросы[s["label"]].get("keyphrases"))
         except ОтказИсточника as e:
             _сохранить(сб.кэш)
             raise SystemExit(f"источник отказал на «{s['label'][:40]}»: {e}. "
                              f"Кэш сохранён ({i - 1}/{len(выборка)} готово).") from e
-        out.append({**s, "query_en": q, **f})
+        out.append({**s, "query_en": q,
+                    "query_used": сб.использованный_запрос.get(q, q), **f})
         if i % 20 == 0:
             _сохранить(сб.кэш)
             print(f"  {i}/{len(выборка)}")
