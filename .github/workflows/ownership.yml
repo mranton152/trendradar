@@ -32,7 +32,7 @@ jobs:
             # сборка, CI. Правило «зависимости идут через Антона» — почему
             # uv.lock тоже здесь.
             mranton152)
-              allowed="^(contracts|core|validation|docs|team|spikes|\.githooks|\.github)/|^(AGENTS|CLAUDE|README)\.md$|^(Makefile|pyproject\.toml|uv\.lock|conftest\.py|\.gitignore)$|$GOLDEN" ;;
+              allowed="^(contracts|core|classifier|storage|validation|docs|team|spikes|\.githooks|\.github)/|^(AGENTS|CLAUDE|README)\.md$|^(Makefile|pyproject\.toml|uv\.lock|conftest\.py|\.gitignore)$|$GOLDEN" ;;
             DockerDun)
               allowed="^(ingest|semantic)/|$GOLDEN" ;;
             # docker-compose и .dockerignore в корне — часть задачи M-08,

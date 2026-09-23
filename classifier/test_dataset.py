@@ -1,12 +1,19 @@
 import collections
+import pathlib
 
 import pytest
 
 from classifier.dataset import ОБЛАСТИ, ОТРИЦАТЕЛЬНЫЕ, загрузить_положительные, собрать_выборку
 
+# Датасет заказчика лежит вне репозитория: он не наш, чтобы его публиковать.
+# Тесты, которым он нужен, пропускаются там, где его нет (CI). Отрицательные
+# примеры живут в коде и проверяются всегда - они наша работа.
 XLSX = "../tz/Датасет/Датасет/100_слабых_технологических_сигналов_сентябрь_2026.xlsx"
+нужен_датасет = pytest.mark.skipif(not pathlib.Path(XLSX).exists(),
+                                   reason="датасет заказчика доступен только локально")
 
 
+@нужен_датасет
 def test_положительных_ровно_сто():
     п = загрузить_положительные(XLSX)
     assert len(п) == 100
@@ -31,12 +38,14 @@ def test_у_каждого_отрицательного_есть_обоснов�
         assert x["is_weak_signal"] is False
 
 
+@нужен_датасет
 def test_названия_не_пересекаются_с_положительными():
     п = {x["label"].lower() for x in загрузить_положительные(XLSX)}
     о = {x["label"].lower() for x in ОТРИЦАТЕЛЬНЫЕ}
     assert not (п & о)
 
 
+@нужен_датасет
 def test_выборка_сбалансирована_и_помечена():
     в = собрать_выборку(XLSX)
     метки = collections.Counter(x["is_weak_signal"] for x in в)
@@ -48,6 +57,7 @@ def metки_ok(c):
     return c[True] == 100 and c[False] >= 90
 
 
+@нужен_датасет
 @pytest.mark.parametrize("поле", ["label", "domain", "is_weak_signal", "cand_id", "why"])
 def test_общие_поля_есть_у_всех(поле):
     for x in собрать_выборку(XLSX):
