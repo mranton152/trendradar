@@ -5,8 +5,14 @@
     "n_works": 5000
   },
   "as_of": 2021,
-  "generated_at": "2026-09-10T10:35:44.215156+00:00",
+  "generated_at": "2026-09-22T06:06:12.094261+00:00",
   "methodology_version": "1.0",
+  "stats": {
+    "n_sources_polled": 5000,
+    "n_candidates": 32,
+    "n_rejected": 17,
+    "n_confident": 0
+  },
   "trends": [
     {
       "trend_id": "t:golden:2021:01",
@@ -15,6 +21,7 @@
       "label_en": "self-supervised learning",
       "aliases": [],
       "emergence_score": 0.6825000047683716,
+      "confidence_pct": 68,
       "components": {
         "novelty": 0.6859999895095825,
         "growth": 0.8600000143051147,
@@ -63,11 +70,16 @@
           "title": "Domain adaptation and self-supervised learning for surgical margin detection",
           "url": "https://doi.org/10.1007/s11548-021-02381-6",
           "year": 2021,
-          "type": "article"
+          "type": "article",
+          "date": "2021-05-01",
+          "source_type": "article",
+          "lang": "en",
+          "trust_level": null
         }
       ],
       "stage": "emerging",
-      "confidence": "medium"
+      "confidence": "medium",
+      "series_granularity": "year"
     },
     {
       "trend_id": "t:golden:2021:02",
@@ -76,6 +88,7 @@
       "label_en": "covid-19 pandemic",
       "aliases": [],
       "emergence_score": 0.5188999772071838,
+      "confidence_pct": 52,
       "components": {
         "novelty": 0.8489999771118164,
         "growth": 1.0,
@@ -124,143 +137,124 @@
           "title": "A model predictive control approach to optimally devise a two‐dose vaccination rollout: A case study on COVID‐19 in Italy",
           "url": "https://doi.org/10.1002/rnc.5728",
           "year": 2021,
-          "type": "article"
+          "type": "article",
+          "date": "2021-08-25",
+          "source_type": "article",
+          "lang": "en",
+          "trust_level": null
         },
         {
           "doc_id": "openalex:W3132232792",
           "title": "Corporate Social Responsibility and Family Business in the Time of COVID-19: Changing Strategy?",
           "url": "https://doi.org/10.3390/su13042041",
           "year": 2021,
-          "type": "article"
+          "type": "article",
+          "date": "2021-02-14",
+          "source_type": "article",
+          "lang": "en",
+          "trust_level": null
         },
         {
           "doc_id": "openalex:W3182735550",
           "title": "Acceptance of MOOCs as an alternative for internship for management students during COVID-19 pandemic: an Indian perspective",
           "url": "https://doi.org/10.1108/ijem-03-2021-0085",
           "year": 2021,
-          "type": "article"
+          "type": "article",
+          "date": "2021-07-05",
+          "source_type": "article",
+          "lang": "en",
+          "trust_level": null
         },
         {
           "doc_id": "openalex:W3169335465",
           "title": "Digital Orientation of Health Systems in the Post–COVID-19 “New Normal” in the United States: Cross-sectional Survey",
           "url": "https://doi.org/10.2196/30453",
           "year": 2021,
-          "type": "article"
+          "type": "article",
+          "date": "2021-06-16",
+          "source_type": "article",
+          "lang": "en",
+          "trust_level": null
         },
         {
           "doc_id": "openalex:W3147821859",
           "title": "The Learning Effect of Blended Learning Based on Google Class Room and Initial Mathematics on Mathematic Representation and Resilience of Students in the Covid-19 Pandemic",
           "url": "https://doi.org/10.33258/biolae.v3i1.410",
           "year": 2021,
-          "type": "article"
+          "type": "article",
+          "date": "2021-03-24",
+          "source_type": "article",
+          "lang": "en",
+          "trust_level": null
         },
         {
           "doc_id": "openalex:W3198081560",
           "title": "Development of interactive multimedia based on blended learning to improve student science literacy during the covid-19 pandemic",
           "url": "https://doi.org/10.29303/jpm.v16i4.1678",
           "year": 2021,
-          "type": "article"
+          "type": "article",
+          "date": "2021-09-04",
+          "source_type": "article",
+          "lang": "en",
+          "trust_level": null
         },
         {
           "doc_id": "openalex:W3159911938",
           "title": "Penggunaan Kosanoge Melalui Media WhatsApp dalam Pembelajaran Bahasa Jepang Di SMK Kesehatan Sadewa Yogyakarta",
           "url": "https://doi.org/10.22146/jla.64714",
           "year": 2021,
-          "type": "article"
+          "type": "article",
+          "date": "2021-03-31",
+          "source_type": "article",
+          "lang": "en",
+          "trust_level": null
         },
         {
           "doc_id": "openalex:W3083864010",
           "title": "Unsupervised Anomaly Detection in Multivariate Spatio-Temporal Data Using Deep Learning: Early Detection of COVID-19 Outbreak in Italy",
           "url": "https://doi.org/10.1109/access.2020.3022366",
           "year": 2020,
-          "type": "article"
+          "type": "article",
+          "date": "2020-01-01",
+          "source_type": "article",
+          "lang": "en",
+          "trust_level": null
         },
         {
           "doc_id": "openalex:W3094295499",
           "title": "Using Big and Open Data to Generate Content for an Educational Game to Increase Student Performance and Interest",
           "url": "https://doi.org/10.3390/bdcc4040030",
           "year": 2020,
-          "type": "article"
+          "type": "article",
+          "date": "2020-10-22",
+          "source_type": "article",
+          "lang": "en",
+          "trust_level": null
         },
         {
           "doc_id": "openalex:W3092499747",
           "title": "Comments on psychological impact of COVID-19 lockdown: An online survey from India",
           "url": "https://doi.org/10.4103/psychiatry.indianjpsychiatry_1086_20",
           "year": 2020,
-          "type": "article"
+          "type": "article",
+          "date": "2020-01-01",
+          "source_type": "article",
+          "lang": "en",
+          "trust_level": null
         }
       ],
       "stage": "emerging",
-      "confidence": "medium"
+      "confidence": "medium",
+      "series_granularity": "year"
     },
     {
       "trend_id": "t:golden:2021:03",
       "rank": 3,
-      "title": "graph neural network",
-      "label_en": "graph neural network",
-      "aliases": [],
-      "emergence_score": 0.503600001335144,
-      "components": {
-        "novelty": 0.8489999771118164,
-        "growth": 0.9070000052452087,
-        "accel": 0.20900000631809235,
-        "burst": 0.9070000052452087,
-        "diffusion": 0.32600000500679016
-      },
-      "evidence": {
-        "first_mention": 2018,
-        "takeoff_year": 2020,
-        "series": [
-          {
-            "year": 2017,
-            "count": 4,
-            "freq_per_million": 117.54000091552734
-          },
-          {
-            "year": 2018,
-            "count": 16,
-            "freq_per_million": 307.70001220703125
-          },
-          {
-            "year": 2019,
-            "count": 74,
-            "freq_per_million": 921.8099975585938
-          },
-          {
-            "year": 2020,
-            "count": 332,
-            "freq_per_million": 2828.159912109375
-          },
-          {
-            "year": 2021,
-            "count": 885,
-            "freq_per_million": 5676.06005859375
-          }
-        ],
-        "n_docs": 1311,
-        "n_countries": 48,
-        "n_orgs": null,
-        "n_patents": null
-      },
-      "sources": [
-        {
-          "doc_id": "openalex:W2798895698",
-          "title": "Surface Networks",
-          "url": "http://ieeexplore.ieee.org/xpls/abs_all.jsp?arnumber=8578367",
-          "year": 2018,
-          "type": "article"
-        }
-      ],
-      "stage": "emerging",
-      "confidence": "high"
-    },
-    {
-      "trend_id": "t:golden:2021:04",
-      "rank": 4,
       "title": "bayesian optimization",
       "label_en": "bayesian optimization",
       "aliases": [],
       "emergence_score": 0.47909998893737793,
+      "confidence_pct": 48,
       "components": {
         "novelty": 0.3490000069141388,
         "growth": 0.5809999704360962,
@@ -309,33 +303,47 @@
           "title": "Top-k Ranking Bayesian Optimization",
           "url": "https://doi.org/10.1609/aaai.v35i10.17103",
           "year": 2021,
-          "type": "article"
+          "type": "article",
+          "date": "2021-05-18",
+          "source_type": "article",
+          "lang": "en",
+          "trust_level": null
         },
         {
           "doc_id": "openalex:W2952814346",
           "title": "Research data supporting \"Crowdsourcing Interface Feature Design with Bayesian Optimization\"",
           "url": "https://doi.org/10.17863/cam.34781",
           "year": 2019,
-          "type": "article"
+          "type": "article",
+          "date": "2019-05-02",
+          "source_type": "article",
+          "lang": "en",
+          "trust_level": null
         },
         {
           "doc_id": "openalex:W3031408512",
           "title": "GNR structure design for thermoelectric application via Bayesian optimization",
           "url": "https://confit.atlas.jp/guide/event/jsap2017s/subject/15p-F206-7/detail",
           "year": 2017,
-          "type": "article"
+          "type": "article",
+          "date": "2017-02-03",
+          "source_type": "article",
+          "lang": "en",
+          "trust_level": null
         }
       ],
       "stage": "early_growth",
-      "confidence": "high"
+      "confidence": "high",
+      "series_granularity": "year"
     },
     {
-      "trend_id": "t:golden:2021:05",
-      "rank": 5,
+      "trend_id": "t:golden:2021:04",
+      "rank": 4,
       "title": "time series forecasting",
       "label_en": "time series forecasting",
       "aliases": [],
       "emergence_score": 0.47040000557899475,
+      "confidence_pct": 47,
       "components": {
         "novelty": 0.8489999771118164,
         "growth": 0.32600000500679016,
@@ -384,19 +392,25 @@
           "title": "Modeling of Coronavirus Behavior to Predict it’s Spread",
           "url": "https://doi.org/10.14569/ijacsa.2020.0110552",
           "year": 2020,
-          "type": "article"
+          "type": "article",
+          "date": "2020-01-01",
+          "source_type": "article",
+          "lang": "en",
+          "trust_level": null
         }
       ],
       "stage": "emerging",
-      "confidence": "medium"
+      "confidence": "medium",
+      "series_granularity": "year"
     },
     {
-      "trend_id": "t:golden:2021:06",
-      "rank": 6,
+      "trend_id": "t:golden:2021:05",
+      "rank": 5,
       "title": "transformer",
       "label_en": "transformer",
       "aliases": [],
       "emergence_score": 0.4431000053882599,
+      "confidence_pct": 44,
       "components": {
         "novelty": 0.9649999737739563,
         "growth": 0.3490000069141388,
@@ -445,68 +459,25 @@
           "title": "When BERT meets Bilbo: a learning curve analysis of pretrained language model on disease classification",
           "url": "https://doi.org/10.1186/s12911-022-01829-2",
           "year": 2021,
-          "type": "article"
-        },
-        {
-          "doc_id": "openalex:W3082351741",
-          "title": "Intelligent fault diagnosis algorithm for fiber optic current transformer",
-          "url": "https://doi.org/10.3233/jae-209301",
-          "year": 2020,
-          "type": "article"
-        },
-        {
-          "doc_id": "openalex:W3142935546",
-          "title": "신경망기계번역 기술 진화와 번역품질 분석",
-          "url": "http://kiss.kstudy.com/thesis/thesis-view.asp?key=3819706",
-          "year": 2020,
-          "type": "article"
-        },
-        {
-          "doc_id": "openalex:W2892864594",
-          "title": "Distribution asset management through coordinated microgrid scheduling",
-          "url": "https://doi.org/10.1049/iet-stg.2018.0076",
-          "year": 2018,
-          "type": "article"
-        },
-        {
-          "doc_id": "openalex:W2520168786",
-          "title": "Insulation condition ranking of transformers through principal component analysis and analytic hierarchy process",
-          "url": "https://doi.org/10.1049/iet-gtd.2016.0589",
-          "year": 2016,
-          "type": "article"
-        },
-        {
-          "doc_id": "openalex:W2478015115",
-          "title": "Suppressing Noise for an HTS Amorphous Metal Core Transformer by Using Microperforated Panel Absorber",
-          "url": "https://doi.org/10.1109/tasc.2016.2594813",
-          "year": 2016,
-          "type": "article"
-        },
-        {
-          "doc_id": "openalex:W3138987037",
-          "title": "Classification of partial discharges of power transformers with neural network applications",
-          "url": "https://doi.org/10.25549/usctheses-c16-126501",
-          "year": 2016,
-          "type": "article"
-        },
-        {
-          "doc_id": "openalex:W2559209616",
-          "title": "NEURAL BASED ALGORITHM FOR FAULT DETECTION IN A TRANSFORMER",
-          "url": "https://doi.org/10.17654/ecsv3pii16591",
-          "year": 2016,
-          "type": "article"
+          "type": "article",
+          "date": "2021-11-01",
+          "source_type": "article",
+          "lang": "en",
+          "trust_level": null
         }
       ],
       "stage": "emerging",
-      "confidence": "medium"
+      "confidence": "medium",
+      "series_granularity": "year"
     },
     {
-      "trend_id": "t:golden:2021:07",
-      "rank": 7,
+      "trend_id": "t:golden:2021:06",
+      "rank": 6,
       "title": "named entity recognition",
       "label_en": "named entity recognition",
       "aliases": [],
       "emergence_score": 0.3822000026702881,
+      "confidence_pct": 38,
       "components": {
         "novelty": 0.6859999895095825,
         "growth": 0.2329999953508377,
@@ -555,40 +526,25 @@
           "title": "Ancient Chinese Named Entity Recognition Based on Deeping Learning",
           "url": "https://doi.org/10.12677/csa.2020.107140",
           "year": 2020,
-          "type": "article"
-        },
-        {
-          "doc_id": "openalex:W4406587052",
-          "title": "ОБЛАЧНЫЕ СЕРВИСЫ ДЛЯ ОБРАБОТКИ ТЕКСТОВ НА ЕСТЕСТВЕННОМ ЯЗЫКЕ",
-          "url": "https://doi.org/10.25559/sitito.14.201804.872-880",
-          "year": 2018,
-          "type": "article"
-        },
-        {
-          "doc_id": "openalex:W842810586",
-          "title": "Information Extraction in the Medical Domain",
-          "url": "https://doi.org/10.4018/jitr.2015040101",
-          "year": 2015,
-          "type": "article"
-        },
-        {
-          "doc_id": "openalex:W1834784352",
-          "title": "Hybrid Approach for Named Entity Recognition",
-          "url": "https://doi.org/10.5120/20713-3048",
-          "year": 2015,
-          "type": "article"
+          "type": "article",
+          "date": "2020-01-01",
+          "source_type": "article",
+          "lang": "en",
+          "trust_level": null
         }
       ],
       "stage": "emerging",
-      "confidence": "medium"
+      "confidence": "medium",
+      "series_granularity": "year"
     },
     {
-      "trend_id": "t:golden:2021:08",
-      "rank": 8,
+      "trend_id": "t:golden:2021:07",
+      "rank": 7,
       "title": "semantic segmentation",
       "label_en": "semantic segmentation",
       "aliases": [],
       "emergence_score": 0.36340001225471497,
+      "confidence_pct": 36,
       "components": {
         "novelty": 0.5,
         "growth": 0.7210000157356262,
@@ -637,94 +593,47 @@
           "title": "EDSSA: An Encoder-Decoder Semantic Segmentation Networks Accelerator on OpenCL-Based FPGA Platform",
           "url": "https://doi.org/10.3390/s20143969",
           "year": 2020,
-          "type": "article"
+          "type": "article",
+          "date": "2020-07-17",
+          "source_type": "article",
+          "lang": "en",
+          "trust_level": null
         },
         {
           "doc_id": "openalex:W2995969896",
           "title": "HsgNet: A Road Extraction Network Based on Global Perception of High-Order Spatial Information",
           "url": "https://doi.org/10.3390/ijgi8120571",
           "year": 2019,
-          "type": "article"
+          "type": "article",
+          "date": "2019-12-10",
+          "source_type": "article",
+          "lang": "en",
+          "trust_level": null
         },
         {
           "doc_id": "openalex:W2978088842",
           "title": "Pointwise geometric and semantic learning network on 3D point clouds",
           "url": "https://doi.org/10.3233/ica-190608",
           "year": 2019,
-          "type": "article"
+          "type": "article",
+          "date": "2019-10-01",
+          "source_type": "article",
+          "lang": "en",
+          "trust_level": null
         }
       ],
       "stage": "emerging",
-      "confidence": "high"
+      "confidence": "high",
+      "series_granularity": "year"
     },
     {
-      "trend_id": "t:golden:2021:09",
-      "rank": 9,
-      "title": "question answering",
-      "label_en": "question answering",
-      "aliases": [],
-      "emergence_score": 0.36070001125335693,
-      "components": {
-        "novelty": 0.9649999737739563,
-        "growth": 0.1860000044107437,
-        "accel": 0.5580000281333923,
-        "burst": 0.16300000250339508,
-        "diffusion": 0.44200000166893005
-      },
-      "evidence": {
-        "first_mention": 1990,
-        "takeoff_year": 2021,
-        "series": [
-          {
-            "year": 2017,
-            "count": 254,
-            "freq_per_million": 7463.56005859375
-          },
-          {
-            "year": 2018,
-            "count": 312,
-            "freq_per_million": 6000.1201171875
-          },
-          {
-            "year": 2019,
-            "count": 410,
-            "freq_per_million": 5107.31982421875
-          },
-          {
-            "year": 2020,
-            "count": 481,
-            "freq_per_million": 4097.419921875
-          },
-          {
-            "year": 2021,
-            "count": 545,
-            "freq_per_million": 3495.429931640625
-          }
-        ],
-        "n_docs": 2002,
-        "n_countries": 62,
-        "n_orgs": null,
-        "n_patents": null
-      },
-      "sources": [
-        {
-          "doc_id": "openalex:W3085927637",
-          "title": "Advancement of Textual Answer Triggering: Cognitive Boosting",
-          "url": "https://doi.org/10.1109/tetc.2020.3022731",
-          "year": 2020,
-          "type": "article"
-        }
-      ],
-      "stage": "emerging",
-      "confidence": "medium"
-    },
-    {
-      "trend_id": "t:golden:2021:10",
-      "rank": 10,
+      "trend_id": "t:golden:2021:08",
+      "rank": 8,
       "title": "domain adaptation",
       "label_en": "domain adaptation",
       "aliases": [],
       "emergence_score": 0.3580000102519989,
+      "confidence_pct": 36,
       "components": {
         "novelty": 0.25600001215934753,
         "growth": 0.6050000190734863,
@@ -773,26 +682,36 @@
           "title": "Domain adaptation and self-supervised learning for surgical margin detection",
           "url": "https://doi.org/10.1007/s11548-021-02381-6",
           "year": 2021,
-          "type": "article"
+          "type": "article",
+          "date": "2021-05-01",
+          "source_type": "article",
+          "lang": "en",
+          "trust_level": null
         },
         {
           "doc_id": "openalex:W2887923316",
           "title": "Unsupervised Generation of Free-Form and Parameterized Avatars",
           "url": "https://doi.org/10.1109/tpami.2018.2863282",
           "year": 2018,
-          "type": "article"
+          "type": "article",
+          "date": "2018-08-06",
+          "source_type": "article",
+          "lang": "en",
+          "trust_level": null
         }
       ],
       "stage": "early_growth",
-      "confidence": "medium"
+      "confidence": "medium",
+      "series_granularity": "year"
     },
     {
-      "trend_id": "t:golden:2021:11",
-      "rank": 11,
+      "trend_id": "t:golden:2021:09",
+      "rank": 9,
       "title": "object detection",
       "label_en": "object detection",
       "aliases": [],
       "emergence_score": 0.35109999775886536,
+      "confidence_pct": 35,
       "components": {
         "novelty": 0.6859999895095825,
         "growth": 0.4650000035762787,
@@ -841,75 +760,69 @@
           "title": "Efficient 3D Object Detection of Indoor Scenes Based on RGB-D Video Stream",
           "url": "https://doi.org/10.3724/sp.j.1089.2021.18630",
           "year": 2021,
-          "type": "article"
+          "type": "article",
+          "date": "2021-07-01",
+          "source_type": "article",
+          "lang": "en",
+          "trust_level": null
         },
         {
           "doc_id": "openalex:W3046929311",
           "title": "Abandoned Object Detection using Frame Differencing and Background Subtraction",
           "url": "https://doi.org/10.14569/ijacsa.2020.0110781",
           "year": 2020,
-          "type": "article"
+          "type": "article",
+          "date": "2020-01-01",
+          "source_type": "article",
+          "lang": "en",
+          "trust_level": null
         },
         {
           "doc_id": "openalex:W3089312591",
           "title": "LiDAR-Camera Fusion for 3D Object Detection",
           "url": "https://doi.org/10.2352/issn.2470-1173.2020.16.avm-257",
           "year": 2020,
-          "type": "article"
+          "type": "article",
+          "date": "2020-01-26",
+          "source_type": "article",
+          "lang": "en",
+          "trust_level": null
         },
         {
           "doc_id": "openalex:W3031907701",
           "title": "Fusion based feature reinforcement component for remote sensing image object detection",
           "url": "https://doi.org/10.1007/s11042-020-08876-9",
           "year": 2020,
-          "type": "article"
+          "type": "article",
+          "date": "2020-05-30",
+          "source_type": "article",
+          "lang": "en",
+          "trust_level": null
         },
         {
           "doc_id": "openalex:W3022726760",
           "title": "Detection of Militia Object in Libya by Using YOLO Transfer Learning",
           "url": "https://doi.org/10.26905/jtmi.v6i1.4025",
           "year": 2020,
-          "type": "article"
-        },
-        {
-          "doc_id": "openalex:W2901017177",
-          "title": "RGB-‘D’ Saliency Detection With Pseudo Depth",
-          "url": "https://doi.org/10.1109/tip.2018.2882156",
-          "year": 2018,
-          "type": "article"
-        },
-        {
-          "doc_id": "openalex:W7113627933",
-          "title": "Interactive guidance and real-time fault recognition for manual operations through a stationary AR system and visual object detection",
-          "url": "https://opus.hs-furtwangen.de/frontdoor/index/index/docId/12101",
-          "year": 2017,
-          "type": "article"
-        },
-        {
-          "doc_id": "openalex:W2486722903",
-          "title": "A Universal Framework for Salient Object Detection",
-          "url": "https://doi.org/10.1109/tmm.2016.2592325",
-          "year": 2016,
-          "type": "article"
-        },
-        {
-          "doc_id": "openalex:W2557921480",
-          "title": "A Novel Approach to Automatic Road-Accident Detection using Machine Vision Techniques",
-          "url": "https://doi.org/10.14569/ijacsa.2016.071130",
-          "year": 2016,
-          "type": "article"
+          "type": "article",
+          "date": "2020-04-28",
+          "source_type": "article",
+          "lang": "en",
+          "trust_level": null
         }
       ],
       "stage": "emerging",
-      "confidence": "medium"
+      "confidence": "medium",
+      "series_granularity": "year"
     },
     {
-      "trend_id": "t:golden:2021:12",
-      "rank": 12,
+      "trend_id": "t:golden:2021:10",
+      "rank": 10,
       "title": "attention mechanism",
       "label_en": "attention mechanism",
       "aliases": [],
       "emergence_score": 0.3449000120162964,
+      "confidence_pct": 34,
       "components": {
         "novelty": 0.5,
         "growth": 0.8140000104904175,
@@ -958,87 +871,36 @@
           "title": "Attribute Network Representation Learning Based on Global Attention",
           "url": "https://doi.org/10.11896/jsjkx.210100203",
           "year": 2021,
-          "type": "article"
+          "type": "article",
+          "date": "2021-12-01",
+          "source_type": "article",
+          "lang": "en",
+          "trust_level": null
         },
         {
           "doc_id": "openalex:W3142935546",
           "title": "신경망기계번역 기술 진화와 번역품질 분석",
           "url": "http://kiss.kstudy.com/thesis/thesis-view.asp?key=3819706",
           "year": 2020,
-          "type": "article"
+          "type": "article",
+          "date": "2020-08-01",
+          "source_type": "article",
+          "lang": "ko",
+          "trust_level": null
         }
       ],
       "stage": "emerging",
-      "confidence": "medium"
+      "confidence": "medium",
+      "series_granularity": "year"
     },
     {
-      "trend_id": "t:golden:2021:13",
-      "rank": 13,
-      "title": "multi-task learning",
-      "label_en": "multi-task learning",
-      "aliases": [],
-      "emergence_score": 0.33889999985694885,
-      "components": {
-        "novelty": 0.3490000069141388,
-        "growth": 0.5350000262260437,
-        "accel": 0.3019999861717224,
-        "burst": 0.4650000035762787,
-        "diffusion": 0.3019999861717224
-      },
-      "evidence": {
-        "first_mention": 2005,
-        "takeoff_year": 2017,
-        "series": [
-          {
-            "year": 2017,
-            "count": 89,
-            "freq_per_million": 2615.18994140625
-          },
-          {
-            "year": 2018,
-            "count": 149,
-            "freq_per_million": 2865.43994140625
-          },
-          {
-            "year": 2019,
-            "count": 226,
-            "freq_per_million": 2815.25
-          },
-          {
-            "year": 2020,
-            "count": 366,
-            "freq_per_million": 3117.7900390625
-          },
-          {
-            "year": 2021,
-            "count": 436,
-            "freq_per_million": 2796.340087890625
-          }
-        ],
-        "n_docs": 1266,
-        "n_countries": 46,
-        "n_orgs": null,
-        "n_patents": null
-      },
-      "sources": [
-        {
-          "doc_id": "openalex:W2274158210",
-          "title": "Machine Learning in Fine Wine Price Prediction",
-          "url": "https://doi.org/10.1017/jwe.2015.17",
-          "year": 2015,
-          "type": "article"
-        }
-      ],
-      "stage": "early_growth",
-      "confidence": "medium"
-    },
-    {
-      "trend_id": "t:golden:2021:14",
-      "rank": 14,
+      "trend_id": "t:golden:2021:11",
+      "rank": 11,
       "title": "anomaly detection",
       "label_en": "anomaly detection",
       "aliases": [],
       "emergence_score": 0.32580000162124634,
+      "confidence_pct": 33,
       "components": {
         "novelty": 0.5,
         "growth": 0.3720000088214874,
@@ -1087,54 +949,80 @@
           "title": "Detecting Anomalous Transactions via an IoT Based Application: A Machine Learning Approach for Horse Racing Betting",
           "url": "https://doi.org/10.3390/s21062039",
           "year": 2021,
-          "type": "article"
+          "type": "article",
+          "date": "2021-03-13",
+          "source_type": "article",
+          "lang": "en",
+          "trust_level": null
         },
         {
           "doc_id": "openalex:W3043766109",
           "title": "Gearbox oil temperature anomaly detection for wind turbine based on sparse Bayesian probability estimation",
           "url": "https://doi.org/10.1016/j.ijepes.2020.106233",
           "year": 2020,
-          "type": "article"
+          "type": "article",
+          "date": "2020-07-13",
+          "source_type": "article",
+          "lang": "en",
+          "trust_level": null
         },
         {
           "doc_id": "openalex:W3083864010",
           "title": "Unsupervised Anomaly Detection in Multivariate Spatio-Temporal Data Using Deep Learning: Early Detection of COVID-19 Outbreak in Italy",
           "url": "https://doi.org/10.1109/access.2020.3022366",
           "year": 2020,
-          "type": "article"
+          "type": "article",
+          "date": "2020-01-01",
+          "source_type": "article",
+          "lang": "en",
+          "trust_level": null
         },
         {
           "doc_id": "openalex:W3113372121",
           "title": "An Area-Efficient Recurrent Neural Network Core for Unsupervised Time-Series Anomaly Detection",
           "url": "https://doi.org/10.1587/transele.2020lhp0003",
           "year": 2020,
-          "type": "article"
+          "type": "article",
+          "date": "2020-12-14",
+          "source_type": "article",
+          "lang": "en",
+          "trust_level": null
         },
         {
           "doc_id": "openalex:W2912204801",
           "title": "Leveraging deep neural networks for anomaly‐based web application firewall",
           "url": "https://doi.org/10.1049/iet-ifs.2018.5404",
           "year": 2019,
-          "type": "article"
+          "type": "article",
+          "date": "2019-01-21",
+          "source_type": "article",
+          "lang": "en",
+          "trust_level": null
         },
         {
           "doc_id": "openalex:W2948515990",
           "title": "CLOUD-BASED SOLUTION FOR NATIONWIDE POWER LINE MAPPING",
           "url": "https://doi.org/10.5194/isprs-archives-xlii-2-w13-119-2019",
           "year": 2019,
-          "type": "article"
+          "type": "article",
+          "date": "2019-06-04",
+          "source_type": "article",
+          "lang": "en",
+          "trust_level": null
         }
       ],
       "stage": "emerging",
-      "confidence": "medium"
+      "confidence": "medium",
+      "series_granularity": "year"
     },
     {
-      "trend_id": "t:golden:2021:15",
-      "rank": 15,
+      "trend_id": "t:golden:2021:12",
+      "rank": 12,
       "title": "pose estimation",
       "label_en": "pose estimation",
       "aliases": [],
       "emergence_score": 0.3163999915122986,
+      "confidence_pct": 32,
       "components": {
         "novelty": 0.6859999895095825,
         "growth": 0.25600001215934753,
@@ -1183,32 +1071,392 @@
           "title": "A Novel Method for Estimating Distances from a Robot to Humans Using Egocentric RGB Camera",
           "url": "https://doi.org/10.3390/s19143142",
           "year": 2019,
-          "type": "article"
+          "type": "article",
+          "date": "2019-07-17",
+          "source_type": "article",
+          "lang": "en",
+          "trust_level": null
         },
         {
           "doc_id": "openalex:W2952579833",
           "title": "A System Development for Autonomous Driving of Mini-Tram",
           "url": "https://doi.org/10.5302/j.icros.2019.19.0038",
           "year": 2019,
-          "type": "article"
-        },
-        {
-          "doc_id": "openalex:W2735729504",
-          "title": "Study of pose estimation based on multiple feature points topological determination",
-          "url": "https://doi.org/10.3788/irla201746.0517001",
-          "year": 2017,
-          "type": "article"
-        },
-        {
-          "doc_id": "openalex:W2492483053",
-          "title": "Driver Assistance System for Integration Interpretation of Driver’s Gaze and Selective Attention Model",
-          "url": "https://doi.org/10.7236/jiibc.2016.16.3.115",
-          "year": 2016,
-          "type": "article"
+          "type": "article",
+          "date": "2019-06-17",
+          "source_type": "article",
+          "lang": "en",
+          "trust_level": null
         }
       ],
       "stage": "emerging",
-      "confidence": "medium"
+      "confidence": "medium",
+      "series_granularity": "year"
+    },
+    {
+      "trend_id": "t:golden:2021:13",
+      "rank": 13,
+      "title": "image captioning",
+      "label_en": "image captioning",
+      "aliases": [],
+      "emergence_score": 0.3070000112056732,
+      "confidence_pct": 31,
+      "components": {
+        "novelty": 0.25600001215934753,
+        "growth": 0.44200000166893005,
+        "accel": 0.27900001406669617,
+        "burst": 0.3720000088214874,
+        "diffusion": 0.17399999499320984
+      },
+      "evidence": {
+        "first_mention": 2009,
+        "takeoff_year": 2016,
+        "series": [
+          {
+            "year": 2017,
+            "count": 46,
+            "freq_per_million": 1351.6700439453125
+          },
+          {
+            "year": 2018,
+            "count": 86,
+            "freq_per_million": 1653.8800048828125
+          },
+          {
+            "year": 2019,
+            "count": 144,
+            "freq_per_million": 1793.7900390625
+          },
+          {
+            "year": 2020,
+            "count": 163,
+            "freq_per_million": 1388.52001953125
+          },
+          {
+            "year": 2021,
+            "count": 215,
+            "freq_per_million": 1378.9300537109375
+          }
+        ],
+        "n_docs": 654,
+        "n_countries": 32,
+        "n_orgs": null,
+        "n_patents": null
+      },
+      "sources": [
+        {
+          "doc_id": "openalex:W3035965780",
+          "title": "TensorFlow for R: Attention-based Image Captioning with Keras",
+          "url": "https://blogs.rstudio.com/tensorflow/posts/2018-09-17-eager-captioning/",
+          "year": 2018,
+          "type": "article",
+          "date": "2018-09-17",
+          "source_type": "article",
+          "lang": "en",
+          "trust_level": null
+        }
+      ],
+      "stage": "early_growth",
+      "confidence": "high",
+      "series_granularity": "year"
+    },
+    {
+      "trend_id": "t:golden:2021:14",
+      "rank": 14,
+      "title": "transfer learning",
+      "label_en": "transfer learning",
+      "aliases": [],
+      "emergence_score": 0.3052000105381012,
+      "confidence_pct": 31,
+      "components": {
+        "novelty": 0.1979999989271164,
+        "growth": 0.6740000247955322,
+        "accel": 0.3490000069141388,
+        "burst": 0.6510000228881836,
+        "diffusion": 0.8140000104904175
+      },
+      "evidence": {
+        "first_mention": 2003,
+        "takeoff_year": 2015,
+        "series": [
+          {
+            "year": 2017,
+            "count": 328,
+            "freq_per_million": 9637.990234375
+          },
+          {
+            "year": 2018,
+            "count": 701,
+            "freq_per_million": 13481.0302734375
+          },
+          {
+            "year": 2019,
+            "count": 1409,
+            "freq_per_million": 17551.73046875
+          },
+          {
+            "year": 2020,
+            "count": 2372,
+            "freq_per_million": 20205.98046875
+          },
+          {
+            "year": 2021,
+            "count": 3662,
+            "freq_per_million": 23486.69921875
+          }
+        ],
+        "n_docs": 8472,
+        "n_countries": 98,
+        "n_orgs": null,
+        "n_patents": null
+      },
+      "sources": [
+        {
+          "doc_id": "openalex:W3207202955",
+          "title": "Deep Learning-Based Magnetic Resonance Imaging Features in Diagnosis of Perianal Abscess and Fistula Formation",
+          "url": "https://doi.org/10.1155/2021/9066128",
+          "year": 2021,
+          "type": "article",
+          "date": "2021-10-22",
+          "source_type": "article",
+          "lang": "en",
+          "trust_level": null
+        },
+        {
+          "doc_id": "openalex:W3082129780",
+          "title": "Landslide detection by deep learning of non-nadiral and crowdsourced optical images",
+          "url": "https://doi.org/10.1007/s10346-020-01513-4",
+          "year": 2020,
+          "type": "article",
+          "date": "2020-09-02",
+          "source_type": "article",
+          "lang": "en",
+          "trust_level": null
+        },
+        {
+          "doc_id": "openalex:W3101242696",
+          "title": "Meta-Transfer Learning Driven Tensor-Shot Detector for the Autonomous Localization and Recognition of Concealed Baggage Threats",
+          "url": "https://doi.org/10.3390/s20226450",
+          "year": 2020,
+          "type": "article",
+          "date": "2020-11-12",
+          "source_type": "article",
+          "lang": "en",
+          "trust_level": null
+        },
+        {
+          "doc_id": "openalex:W3097744988",
+          "title": "Automated Pterygium Detection Using Deep Neural Network",
+          "url": "https://doi.org/10.1109/access.2020.3030787",
+          "year": 2020,
+          "type": "article",
+          "date": "2020-01-01",
+          "source_type": "article",
+          "lang": "en",
+          "trust_level": null
+        },
+        {
+          "doc_id": "openalex:W3022726760",
+          "title": "Detection of Militia Object in Libya by Using YOLO Transfer Learning",
+          "url": "https://doi.org/10.26905/jtmi.v6i1.4025",
+          "year": 2020,
+          "type": "article",
+          "date": "2020-04-28",
+          "source_type": "article",
+          "lang": "en",
+          "trust_level": null
+        },
+        {
+          "doc_id": "openalex:W2970362668",
+          "title": "Structural Damage Detection using Deep Convolutional Neural Network and Transfer Learning",
+          "url": "https://doi.org/10.1007/s12205-019-0437-z",
+          "year": 2019,
+          "type": "article",
+          "date": "2019-08-27",
+          "source_type": "article",
+          "lang": "en",
+          "trust_level": null
+        }
+      ],
+      "stage": "early_growth",
+      "confidence": "medium",
+      "series_granularity": "year"
+    },
+    {
+      "trend_id": "t:golden:2021:15",
+      "rank": 15,
+      "title": "gaussian process",
+      "label_en": "gaussian process",
+      "aliases": [],
+      "emergence_score": 0.27889999747276306,
+      "confidence_pct": 28,
+      "components": {
+        "novelty": 0.5,
+        "growth": 0.20900000631809235,
+        "accel": 0.5350000262260437,
+        "burst": 0.2329999953508377,
+        "diffusion": 0.5580000281333923
+      },
+      "evidence": {
+        "first_mention": 1990,
+        "takeoff_year": 2018,
+        "series": [
+          {
+            "year": 2017,
+            "count": 450,
+            "freq_per_million": 13222.849609375
+          },
+          {
+            "year": 2018,
+            "count": 571,
+            "freq_per_million": 10980.98046875
+          },
+          {
+            "year": 2019,
+            "count": 689,
+            "freq_per_million": 8582.7802734375
+          },
+          {
+            "year": 2020,
+            "count": 990,
+            "freq_per_million": 8433.3603515625
+          },
+          {
+            "year": 2021,
+            "count": 1121,
+            "freq_per_million": 7189.68017578125
+          }
+        ],
+        "n_docs": 3821,
+        "n_countries": 72,
+        "n_orgs": null,
+        "n_patents": null
+      },
+      "sources": [
+        {
+          "doc_id": "openalex:W3208770186",
+          "title": "Energy-Efficient Ground Traversability Mapping Based on UAV-UGV Collaborative System",
+          "url": "https://doi.org/10.1109/tgcn.2021.3107291",
+          "year": 2021,
+          "type": "article",
+          "date": "2021-08-24",
+          "source_type": "article",
+          "lang": "en",
+          "trust_level": null
+        },
+        {
+          "doc_id": "openalex:W3031848966",
+          "title": "Skew Gaussian processes for classification",
+          "url": "https://doi.org/10.1007/s10994-020-05906-3",
+          "year": 2020,
+          "type": "article",
+          "date": "2020-09-01",
+          "source_type": "article",
+          "lang": "en",
+          "trust_level": null
+        },
+        {
+          "doc_id": "openalex:W2964320221",
+          "title": "Feedback Capacity of Stationary Gaussian Channels Further Examined",
+          "url": "https://doi.org/10.1109/tit.2018.2876897",
+          "year": 2018,
+          "type": "article",
+          "date": "2018-10-22",
+          "source_type": "article",
+          "lang": "en",
+          "trust_level": null
+        }
+      ],
+      "stage": "emerging",
+      "confidence": "medium",
+      "series_granularity": "year"
+    }
+  ],
+  "rejected": [
+    {
+      "label": "diffusion model",
+      "reason": "слишком старый термин",
+      "n_docs": 897
+    },
+    {
+      "label": "foundation model",
+      "reason": "слишком старый термин",
+      "n_docs": 59
+    },
+    {
+      "label": "large language model",
+      "reason": "нет географического распространения",
+      "n_docs": 35
+    },
+    {
+      "label": "prompt engineering",
+      "reason": "мало данных",
+      "n_docs": 2
+    },
+    {
+      "label": "retrieval augmented generation",
+      "reason": "мало данных",
+      "n_docs": 3
+    },
+    {
+      "label": "mixture of experts",
+      "reason": "слишком старый термин",
+      "n_docs": 139
+    },
+    {
+      "label": "state space model",
+      "reason": "слишком старый термин",
+      "n_docs": 2212
+    },
+    {
+      "label": "neural radiance field",
+      "reason": "мало данных",
+      "n_docs": 12
+    },
+    {
+      "label": "vision-language model",
+      "reason": "мало данных",
+      "n_docs": 3
+    },
+    {
+      "label": "low-rank adaptation",
+      "reason": "мало данных",
+      "n_docs": 0
+    },
+    {
+      "label": "vector database",
+      "reason": "нет географического распространения",
+      "n_docs": 22
+    },
+    {
+      "label": "neural operator",
+      "reason": "мало данных",
+      "n_docs": 7
+    },
+    {
+      "label": "curriculum learning",
+      "reason": "слишком старый термин",
+      "n_docs": 304
+    },
+    {
+      "label": "reinforcement learning from human feedback",
+      "reason": "мало данных",
+      "n_docs": 0
+    },
+    {
+      "label": "speech recognition",
+      "reason": "слишком старый термин",
+      "n_docs": 4184
+    },
+    {
+      "label": "quantization aware training",
+      "reason": "мало данных",
+      "n_docs": 14
+    },
+    {
+      "label": "sparse attention",
+      "reason": "нет географического распространения",
+      "n_docs": 30
     }
   ]
 }

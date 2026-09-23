@@ -38,3 +38,37 @@ def test_mmr_не_берёт_две_близкие_темы_подряд():
             {"label": "b", "es": 0.85, "emb_row": 1},
             {"label": "c", "es": 0.5, "emb_row": 2}]
     assert [r["label"] for r in mmr(rows, emb, k=2)] == ["a", "c"]
+
+
+def test_специализация_не_поглощает_общий_термин():
+    """Настоящий случай с полного корпуса: vision transformer (3919 документов)
+    был поглощён как алиас у обрывка 'networks and vision transformers' (57).
+    Обрывок новее и мельче, поэтому ES у него выше, и правило «подмножество
+    слов - слить в тот, у кого ES выше» съедало общий термин, у которого
+    доказательств в сто раз больше. Вложенность - алиас только при
+    сопоставимом числе документов."""
+    rows = [{"label": "networks and vision transformers", "es": 0.70, "n_docs": 57},
+            {"label": "vision transformer", "es": 0.45, "n_docs": 3919}]
+    итог = dedup(rows)
+    assert len(итог) == 2
+
+
+def test_настоящие_варианты_с_похожим_объёмом_сливаются():
+    rows = [{"label": "vision transformers", "es": 0.50, "n_docs": 3800},
+            {"label": "vision transformer", "es": 0.45, "n_docs": 3919}]
+    assert len(dedup(rows)) == 1
+
+
+def test_без_n_docs_старое_поведение_сохраняется():
+    rows = [{"label": "explainable machine learning", "es": 0.80},
+            {"label": "explainable machine", "es": 0.47}]
+    assert len(dedup(rows)) == 1
+
+
+def test_жаккар_тоже_не_сливает_при_разном_объёме():
+    """'federated self-supervised learning' против 'self-supervised learning':
+    Жаккар 0.67 проходит порог, но это специализация с 50 документами
+    против 3910. Сопоставимость объёма - для любого пути слияния."""
+    rows = [{"label": "federated self-supervised learning", "es": 0.70, "n_docs": 50},
+            {"label": "self-supervised learning", "es": 0.45, "n_docs": 3910}]
+    assert len(dedup(rows)) == 2
