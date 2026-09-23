@@ -24,5 +24,6 @@ build/
 *.log
 .ipynb_checkpoints/
 
-# Классификатор: сырые признаки и отчёт пересобираются, в git едут кэши и код
-classifier/features_v1.json
+# Классификатор: сырой кэш ответов API - 70 МБ, в git не едет.
+# Воспроизводимость даёт features_v1.json: по нему обучение повторяется офлайн.
+classifier/features_cache.json
