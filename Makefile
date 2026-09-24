@@ -66,5 +66,12 @@ pg-status:
 requirements:
 	uv export --no-hashes --no-dev --no-emit-project --format requirements-txt -o requirements.txt -q
 
+# Локальный plantuml (brew install plantuml), иначе — через Docker.
 diagrams:
-	docker run --rm -v "$(CURDIR)/docs/diagrams:/data" plantuml/plantuml -tsvg /data/*.puml
+	@if command -v plantuml >/dev/null; then \
+	  plantuml -tsvg -charset UTF-8 docs/diagrams/*.puml && \
+	  plantuml -tpng -charset UTF-8 docs/diagrams/*.puml; \
+	else \
+	  docker run --rm -v "$(CURDIR)/docs/diagrams:/data" plantuml/plantuml -tsvg -charset UTF-8 /data/*.puml && \
+	  docker run --rm -v "$(CURDIR)/docs/diagrams:/data" plantuml/plantuml -tpng -charset UTF-8 /data/*.puml; \
+	fi
