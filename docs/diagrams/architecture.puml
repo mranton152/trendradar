@@ -44,16 +44,13 @@ code --> http
 http --> conn
 conn --> trust
 trust --> PQ : works.parquet
-PQ --> sem
-sem --> PQ : candidates,\ncand_docs
-PQ --> core
-core --> PQ : trends,\nrejected
-PQ --> clf
-PQ --> cards
-llm --> cards : только формулировка
-cards --> PQ : cards.parquet
+PQ <--> sem : candidates,\ncand_docs
+PQ <--> core : trends,\nrejected
+PQ --> clf : признаки
+PQ <--> cards : cards.parquet
+llm -right-> cards : только\nформулировка
 PQ --> PG : storage/load.py\nпосле расчёта
 PQ --> api
 api --> web
-user --> web
+web <-left- user
 @enduml

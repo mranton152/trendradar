@@ -9,7 +9,7 @@ participant "web/" as web
 participant "api/\nPOST /api/v1/live" as api
 participant "ingest/\nживой сбор" as ing
 participant "semantic/\nкандидаты" as sem
-participant "core/\nbuild --live" as core
+participant "core/\nbuild ~--live" as core
 participant "cards/" as cards
 
 u -> web : направление\nсвободным текстом
