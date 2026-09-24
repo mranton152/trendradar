@@ -1,0 +1,59 @@
+@startuml architecture
+' Компоненты TrendRadar и границы между ними.
+' Слои связаны не импортами, а файлами по контрактам (contracts/schemas.py).
+title TrendRadar — архитектура
+skinparam componentStyle rectangle
+skinparam defaultFontName Arial
+skinparam shadowing false
+
+cloud "Открытые источники\n(без ключей)" as SRC {
+  [OpenAlex] as oa
+  [arXiv] as arx
+  [RSS / Hacker News /\nGoogle News] as news
+  [GitHub / Hugging Face] as code
+}
+
+package "Парсинг (ingest/)" as ING {
+  [HTTP-клиент\nретраи 429/5xx, Retry-After] as http
+  [Коннекторы источников] as conn
+  [Уровень доверенности\ntrusted / indicator] as trust
+}
+
+package "Аналитика" as AN {
+  [semantic/\nкандидаты: термины, кластеры] as sem
+  [core/\nEmergence Score, фильтры,\nдедупликация, бэктест] as core
+  [classifier/\nRandomForest, 13 признаков] as clf
+  [cards/\nкарточки с цитатами doc_id] as cards
+}
+
+database "data/ — parquet\n(формат расчёта)" as PQ
+database "PostgreSQL 16\n(хранилище сырых\nданных и выдачи)" as PG
+
+package "Интерфейс" as UI {
+  [api/ — FastAPI\nread-only] as api
+  [web/ — Next.js 15] as web
+}
+
+actor "Аналитик" as user
+node "Ollama\n(локальная LLM)" as llm
+
+oa --> http
+arx --> http
+news --> http
+code --> http
+http --> conn
+conn --> trust
+trust --> PQ : works.parquet
+PQ --> sem
+sem --> PQ : candidates,\ncand_docs
+PQ --> core
+core --> PQ : trends,\nrejected
+PQ --> clf
+PQ --> cards
+llm --> cards : только формулировка
+cards --> PQ : cards.parquet
+PQ --> PG : storage/load.py\nпосле расчёта
+PQ --> api
+api --> web
+user --> web
+@enduml

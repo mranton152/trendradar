@@ -1,112 +1,149 @@
-# TrendRadar — сервис детекции зарождающихся технологических трендов
+# TrendRadar — детектор зарождающихся технологических трендов
 
-Заготовка под задачу ЛЦТ-2026 «Сервис для автоматизированного сбора и анализа
-зарождающихся трендов (слабые сигналы) в научно-технологических отраслях»
-(заказчик — Департамент Аналитики и Внедрения Технологий, Газпромбанк).
+Решение кейса Газпромбанк.Тех на ЛЦТ-2026: сервис находит **слабые сигналы** —
+технологии, которые ещё не стали мейнстримом, — и для каждого показывает
+мотивацию, кейс, первоисточник и доказательство того, что тренд именно
+зарождается: год взлёта, динамику публикаций, распространение.
 
-**Статус: ТЗ открыто 15.09.2026, дельта к плану — в [docs/14-tz-delta.md](docs/14-tz-delta.md). Сдача 29.09 23:59 МСК.** Код в репозитории — не финальное
-решение, а проверенные заранее «кирпичи», которые понадобятся при любой редакции ТЗ:
-коннекторы к источникам, ядро метрик и работающий прототип методологии.
+Числа считает статистика по открытым источникам, LLM только формулирует текст
+по найденным документам и не утверждает ничего без ссылки на источник.
 
-## Что требуется по открытой формулировке
-
-Ввод: технологическое направление (например, «технологии в ИИ»).
-Вывод: **ТОП-15 зарождающихся трендов**, для каждого —
-
-| Поле | Требование заказчика |
+| Что проверяли | Результат |
 |---|---|
-| Мотивация | какую проблему решает, какое даёт преимущество |
-| Кейс-пример | исследование или компания, ведущая разработку |
-| Источник | ссылка на первоисточник |
-| Методология | почему это признано зарождающимся: год первого упоминания, число публикаций и т.д. |
+| Классификатор на датасете заказчика (5-fold CV) | **79%** accuracy, F1 0,81 — [отчёт](classifier/REPORT.md) |
+| Бэктест: считаем по данным до 2021, смотрим, что стало к 2026 | **93%** трендов выросли, фора до пика **6 лет** — [отчёт](validation/REPORT.md) |
+| Первый в ТОПе среза 2021 — `vision transformer` | вырос к 2026 в **65 раз** |
 
-Ключевая мысль: **побеждает не «LLM придумала 15 трендов», а измеримый и
-воспроизводимый детектор с доказательствами.** Подробности — в [docs/00-task-analysis.md](docs/00-task-analysis.md).
+## Быстрый старт (Docker)
 
-## Документы
+Нужно: Docker Desktop или Docker Engine с Compose **2.20+** (`docker compose version`),
+~5 ГБ на диске, свободные порты **3000**, **8000**, **55432**. Ключи API не нужны.
 
-| Файл | О чём |
+```bash
+git clone https://github.com/mranton152/trendradar.git
+cd trendradar
+docker compose up --build -d
+```
+
+Первая сборка — около 10 минут (скачиваются образы), дальше — секунды.
+
+| Адрес | Что там |
 |---|---|
-| [00-task-analysis.md](docs/00-task-analysis.md) | Разбор задачи, критерии победы, неявные требования |
-| [01-methodology.md](docs/01-methodology.md) | Научная методология детекции слабых сигналов, формулы, валидация |
-| [02-data-sources.md](docs/02-data-sources.md) | Источники данных: что проверено, лимиты, ключи |
-| [03-architecture.md](docs/03-architecture.md) | Архитектура сервиса |
-| [04-stack.md](docs/04-stack.md) | Стек и обоснование выбора |
-| [05-backlog.md](docs/05-backlog.md) | Бэклог: неделя подготовки + 2 недели разработки |
-| [06-risks.md](docs/06-risks.md) | Риски и способы их снять |
-| [07-demo-and-pitch.md](docs/07-demo-and-pitch.md) | Сценарий демо и структура питча |
-| [08-open-questions.md](docs/08-open-questions.md) | Вопросы организаторам |
-| [09-infrastructure.md](docs/09-infrastructure.md) | Железо: что есть, чего не хватает |
-| [10-setup-macbook.md](docs/10-setup-macbook.md) | Перенос репозитория на мак и первый запуск |
-| [11-team-plan.md](docs/11-team-plan.md) | **План работы командой: роли, задачи по дням** |
-| [12-github-setup.md](docs/12-github-setup.md) | **Репозиторий и доступы: пошагово** |
-| [13-presentation.md](docs/13-presentation.md) | Скелет презентации: 7 слайдов, измеренные числа |
-| [14-tz-delta.md](docs/14-tz-delta.md) | **ТЗ открыто: что изменилось, что решать** |
-| [plans/2026-09-16-phase1.md](docs/plans/2026-09-16-phase1.md) | План Фазы 1 |
-| [15-finish-plan.md](docs/15-finish-plan.md) | **План до сдачи: что осталось по людям** |
+| http://localhost:3000 | веб-интерфейс |
+| http://localhost:8000/docs | API, интерактивная документация (Swagger) |
+| `localhost:55432` | PostgreSQL: `trendradar` / `trendradar`, база `trendradar` |
+
+Проверить, что всё поднялось:
+
+```bash
+docker compose ps
+curl http://localhost:8000/api/v1/health
+```
+
+Что запускается:
+
+| Сервис | Что делает |
+|---|---|
+| `api` | FastAPI, отдаёт тренды, карточки, методологию |
+| `web` | Next.js 15, интерфейс аналитика |
+| `postgres` | PostgreSQL 16 — хранилище сырых данных и выдачи |
+| `pg-load` | разово заливает в базу золотой снапшот и завершается |
+
+Остановить: `docker compose down`. Удалить и данные базы: `docker compose down -v`.
+
+**Если порт занят** — например, 3000 уже слушает другой проект, — поменяйте
+левую часть `"3000:3000"` в `docker-compose.yml` на свободный порт. Порт
+Postgres задаётся переменной: `TRENDRADAR_PG_PORT=55433 docker compose up -d`.
+
+## Запросы к базе
+
+После `docker compose up` в Postgres уже лежит золотой снапшот. Например, ТОП-15:
+
+```bash
+docker compose exec postgres psql -U trendradar -c \
+  "SELECT rank, label, round(emergence_score::numeric, 2) AS score, takeoff_year, stage
+   FROM trends WHERE dataset = 'golden' AND as_of = 2026 ORDER BY rank;"
+```
+
+Первоисточники тренда, бэктест, причины отсева — [storage/README.md](storage/README.md).
+
+## Без Docker
+
+Нужны Python 3.12 и [uv](https://docs.astral.sh/uv/) (или pip), Node.js 20+.
+
+```bash
+uv sync                          # или: pip install -r requirements.txt
+uv run uvicorn api.main:app      # API на :8000
+
+cd web && npm ci && NEXT_PUBLIC_API_URL=http://localhost:8000 npm run dev   # веб на :3000
+```
+
+Зависимости: [pyproject.toml](pyproject.toml) и [uv.lock](uv.lock) — точные
+версии; [requirements.txt](requirements.txt) — то же для pip, CI проверяет,
+что файлы не разошлись. Фронтенд — [web/package.json](web/package.json).
+
+## Воспроизвести результаты
+
+Все команды работают на чистом клоне без сети.
+
+```bash
+uv run python -m classifier.train --offline     # классификатор: 79%, пишет classifier/REPORT.md
+uv run python -m validation.report --source pool # бэктест на срезе 2021: 93%, фора 6 лет
+uv run pytest -q                                # 247 тестов
+```
+
+`--offline` обучает по закоммиченному снимку признаков `classifier/features_v1.json`.
+Без флага признаки собираются заново из OpenAlex, GitHub и Hugging Face — для
+этого нужен датасет заказчика (путь — `--xlsx`) и около часа из-за лимитов API.
+
+Полный конвейер на своём домене. Золотой снапшот содержит только результаты,
+поэтому пересчёт начинается со сбора:
+
+```bash
+uv run python -m ingest.harvest  --domain <домен> --as-of 2026-09-01   # сбор, нужна сеть
+uv run python -m semantic.build  --domain <домен> ...                  # кандидаты, см. --help
+uv run python -m core.build      --domain <домен> --as-of 2026         # ряды, скоринг, фильтры
+uv run python -m cards.build     --domain <домен> --as-of 2026         # карточки, нужна Ollama
+uv run python -m storage.load    --dataset <домен>                     # копия в Postgres
+```
+
+## Как устроено
+
+```
+ingest/    сбор из открытых источников     → data/corpus/{d}/works.parquet
+semantic/  кандидаты: термины и кластеры   → data/index/{d}/candidates.parquet
+core/      ряды, скоринг, фильтры          → data/index/{d}/trends.parquet, rejected.parquet
+cards/     карточки со ссылками            → data/index/{d}/cards.parquet
+storage/   хранилище                       → PostgreSQL
+api/ web/  выдача                          ← читают data/index/, ничего не считают
+```
+
+Парсинг, аналитика и интерфейс разделены: каждая стадия — отдельная команда,
+слои связаны файлами, формат которых описан в [contracts/schemas.py](contracts/schemas.py)
+и проверяется в CI.
+
+| Документ | О чём |
+|---|---|
+| [docs/16-technical.md](docs/16-technical.md) | **техническая документация**: пайплайн, отбор признаков, фильтрация шума, отказоустойчивость |
+| [docs/diagrams/](docs/diagrams/) | схемы архитектуры, конвейера и живого запроса (PlantUML) |
+| [docs/01-methodology.md](docs/01-methodology.md) | методология детекции: формулы, обоснования, литература |
+| [classifier/REPORT.md](classifier/REPORT.md) | отчёт классификатора: метрики, веса признаков, абляция, ошибки |
+| [validation/REPORT.md](validation/REPORT.md) | бэктест на срезе 2021 |
+| [validation/FULL_CORPUS_FINDINGS.md](validation/FULL_CORPUS_FINDINGS.md) | что не сработало на 6,3 млн работ и почему |
+
+## Стек
+
+Python 3.12 · DuckDB + Parquet · scikit-learn · sentence-transformers
+(`multilingual-e5-large`) + UMAP + HDBSCAN · FastAPI · Next.js 15 + TypeScript +
+Recharts · PostgreSQL 16 · Ollama (локальная LLM) · Docker Compose · uv · ruff + pytest.
 
 ## Команда
 
 | Кто | Роль | Папки |
 |---|---|---|
-| Антон | капитан, ядро методологии, интеграция | `core/`, `validation/`, `contracts/`, `docs/` |
-| Константин | данные и семантика, тяжёлые прогоны | `ingest/`, `semantic/` |
-| Михаил | продукт: API, фронт, карточки | `cards/`, `api/`, `web/` |
+| Антон Загитов | капитан, методология, ядро, классификатор, хранилище | `core/`, `classifier/`, `storage/`, `validation/`, `contracts/` |
+| Константин | сбор данных, семантика | `ingest/`, `semantic/` |
+| Михаил Алексеев | API, веб-интерфейс, карточки, Docker | `api/`, `web/`, `cards/` |
 
-Каждый работает **только в своих папках**; стык между людьми — не код, а формат
-файлов, описанный в [contracts/](contracts/README.md). Личные брифы —
-[team/](team/), процесс — [team/WORKFLOW.md](team/WORKFLOW.md).
-
-## Как устроена система
-
-Набор CLI-стадий, которые пишут parquet-файлы, плюс read-only API поверх них.
-Никакого сервера БД и очереди задач: индекс — это файлы, поэтому демо работает
-без сети по построению.
-
-```
-ingest/    → data/corpus/{domain}/works.parquet              Константин
-semantic/  → data/index/{domain}/candidates.parquet + .npy   Константин
-core/      → data/index/{domain}/trends.parquet              Антон
-cards/     → data/index/{domain}/cards.parquet               Михаил
-api/ web/  → читают data/index/, ничего не считают           Михаил
-```
-
-```bash
-make setup    # поставить зависимости
-make check    # линт + тесты + валидация контрактов — перед каждым PR
-make demo     # сквозной прогон от сбора данных до браузера
-```
-
-## Быстрый старт: прототип методологии
-
-Зависимостей нет — только стандартная библиотека Python 3.12.
-
-```bash
-python3 spikes/openalex_probe.py --domain "artificial intelligence" --top 15
-```
-
-Бэктест (считаем на данных до 2021 года и смотрим, что термины сделали после —
-проверка предсказательной силы):
-
-```bash
-python3 spikes/openalex_probe.py --domain "artificial intelligence" --cutoff 2021 --top 15
-```
-
-Ответы кэшируются в `data/cache/`, повторный прогон бесплатный и мгновенный.
-
-## Ключевые сроки
-
-| Дата | Этап |
-|---|---|
-| 15.09.2026 | Открытие ТЗ |
-| 15.09 — 30.09.2026 | Разработка (2 недели) |
-| 30.09 — 15.10.2026 | Предварительная экспертиза |
-| 16.10.2026 | Публикация финалистов |
-| 23–24.10.2026 | Питч-сессии |
-| 30–31.10.2026 | Результаты (офлайн) |
-
-Призовой фонд: 1 000 000 / 600 000 / 400 000 ₽.
-
-## Рабочее название
-
-`TrendRadar` — рабочее, не финальное. Альтернативы под питч обсуждаются отдельно.
+Как мы работали втроём без конфликтов — [team/WORKFLOW.md](team/WORKFLOW.md).
+Для разработчиков: `make help`, `make check` перед каждым пулл-реквестом.

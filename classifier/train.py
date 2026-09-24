@@ -10,6 +10,7 @@
 не берётся, отчёт говорит почему, а не подкручивает: точность, натянутая
 на 196 примерах, на закрытой выборке заказчика развалится.
 """
+import argparse
 import json
 from pathlib import Path
 
@@ -204,24 +205,39 @@ def отчёт_md(и: dict) -> str:
 """
 
 
-def main() -> None:
-    from classifier.dataset import собрать_выборку
-    from classifier.features import собрать_признаки
-    from classifier.queries import ЗапросыКэш
+СНИМОК = Path("classifier/features_v1.json")
 
-    xlsx = "../tz/Датасет/Датасет/100_слабых_технологических_сигналов_сентябрь_2026.xlsx"
-    выборка = собрать_выборку(xlsx)
-    кэш = ЗапросыКэш()
-    запросы = {s["label"]: кэш.взять(s["label"]) for s in выборка}
-    нет = [имя for имя, q in запросы.items() if not q]
-    if нет:
-        raise SystemExit(f"нет запросов для {len(нет)} технологий — "
-                         "сначала python -m classifier.queries")
 
-    print("собираю признаки…")
-    строки = собрать_признаки(выборка, запросы)
-    Path("classifier/features_v1.json").write_text(
-        json.dumps(строки, ensure_ascii=False, indent=1), encoding="utf-8")
+def main(argv: list[str] | None = None) -> None:
+    ap = argparse.ArgumentParser(
+        description="Обучение классификатора этапа 1 и отчёт classifier/REPORT.md")
+    ap.add_argument("--offline", action="store_true",
+                    help=f"обучить по закоммиченному снимку признаков {СНИМОК}: "
+                         "без сети и без датасета заказчика")
+    ap.add_argument("--xlsx", default="../tz/Датасет/Датасет/"
+                    "100_слабых_технологических_сигналов_сентябрь_2026.xlsx",
+                    help="датасет заказчика (лежит вне репозитория)")
+    args = ap.parse_args(argv)
+
+    if args.offline:
+        строки = json.loads(СНИМОК.read_text(encoding="utf-8"))
+        print(f"признаки из снимка {СНИМОК}: {len(строки)} технологий")
+    else:
+        from classifier.dataset import собрать_выборку
+        from classifier.features import собрать_признаки
+        from classifier.queries import ЗапросыКэш
+
+        выборка = собрать_выборку(args.xlsx)
+        кэш = ЗапросыКэш()
+        запросы = {s["label"]: кэш.взять(s["label"]) for s in выборка}
+        нет = [имя for имя, q in запросы.items() if not q]
+        if нет:
+            raise SystemExit(f"нет запросов для {len(нет)} технологий — "
+                             "сначала python -m classifier.queries")
+
+        print("собираю признаки…")
+        строки = собрать_признаки(выборка, запросы)
+        СНИМОК.write_text(json.dumps(строки, ensure_ascii=False, indent=1), encoding="utf-8")
 
     и = главное(строки)
     Path("classifier/report.json").write_text(json.dumps(и, ensure_ascii=False, indent=1),
