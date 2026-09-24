@@ -1,0 +1,2353 @@
+{
+  "1kosmos.com": {
+    "trust_level": "trusted",
+    "source_type": null,
+    "reason": "Официальный сайт разработчика: описание собственного технологического продукта.",
+    "evidence": [
+      "https://www.1kosmos.com/"
+    ],
+    "review_status": "reviewed_first_party",
+    "reviewed_on": "2026-09-19",
+    "audit_result": "HTTP 200",
+    "source_category": "developer_company"
+  },
+  "1x.tech": {
+    "trust_level": "trusted",
+    "source_type": null,
+    "reason": "Официальный сайт разработчика: описание собственного технологического продукта.",
+    "evidence": [
+      "https://www.1x.tech/"
+    ],
+    "review_status": "reviewed_first_party",
+    "reviewed_on": "2026-09-19",
+    "audit_result": "HTTP 200",
+    "source_category": "developer_company"
+  },
+  "abovea.tech": {
+    "trust_level": "unknown",
+    "source_type": null,
+    "reason": "Описание сайта недостаточно для однозначного отнесения к доверенной категории ТЗ.",
+    "evidence": [
+      "https://abovea.tech"
+    ],
+    "review_status": "unresolved_identity",
+    "reviewed_on": "2026-09-19",
+    "audit_result": "HTTP 200"
+  },
+  "accessnewswire.com": {
+    "trust_level": "indicator",
+    "source_type": "press_release",
+    "reason": "Сервис распространения пресс-релизов; по ТЗ только индикатор.",
+    "evidence": [
+      "https://www.accessnewswire.com/"
+    ],
+    "review_status": "verified_service_type"
+  },
+  "agentfacts.org": {
+    "trust_level": "unknown",
+    "source_type": null,
+    "reason": "Описание сайта недостаточно для однозначного отнесения к доверенной категории ТЗ.",
+    "evidence": [
+      "https://agentfacts.org"
+    ],
+    "review_status": "unresolved_identity",
+    "reviewed_on": "2026-09-19",
+    "audit_result": "HTTP 200"
+  },
+  "agenticindex.io": {
+    "trust_level": "indicator",
+    "source_type": "aggregator",
+    "reason": "Каталог, агрегатор новостей или база сигналов; требуется ссылка на первоисточник.",
+    "evidence": [
+      "https://agenticindex.io"
+    ],
+    "review_status": "reviewed_first_party",
+    "reviewed_on": "2026-09-19",
+    "audit_result": "HTTP 200",
+    "source_category": "aggregator"
+  },
+  "agentmarketcap.ai": {
+    "trust_level": "indicator",
+    "source_type": "aggregator",
+    "reason": "Каталог, агрегатор новостей или база сигналов; требуется ссылка на первоисточник.",
+    "evidence": [
+      "https://agentmarketcap.ai"
+    ],
+    "review_status": "reviewed_first_party",
+    "reviewed_on": "2026-09-19",
+    "audit_result": "HTTP 200",
+    "source_category": "aggregator"
+  },
+  "ai.google.dev": {
+    "trust_level": "trusted",
+    "source_type": null,
+    "reason": "Официальный сайт разработчика: описание собственного технологического продукта.",
+    "evidence": [
+      "https://ai.google.dev"
+    ],
+    "review_status": "reviewed_first_party",
+    "reviewed_on": "2026-09-19",
+    "audit_result": "HTTP 200",
+    "source_category": "developer_company"
+  },
+  "aiche.confex.com": {
+    "trust_level": "unknown",
+    "source_type": null,
+    "reason": "Описание сайта недостаточно для однозначного отнесения к доверенной категории ТЗ.",
+    "evidence": [
+      "https://aiche.confex.com/aiche/"
+    ],
+    "review_status": "unresolved_identity",
+    "reviewed_on": "2026-09-19",
+    "audit_result": "HTTP 200"
+  },
+  "aisecurityandsafety.org": {
+    "trust_level": "indicator",
+    "source_type": "aggregator",
+    "reason": "Каталог, агрегатор новостей или база сигналов; требуется ссылка на первоисточник.",
+    "evidence": [
+      "https://aisecurityandsafety.org/en/"
+    ],
+    "review_status": "reviewed_first_party",
+    "reviewed_on": "2026-09-19",
+    "audit_result": "HTTP 200",
+    "source_category": "aggregator"
+  },
+  "akamai.com": {
+    "trust_level": "unknown",
+    "source_type": null,
+    "reason": "Первичный сайт не удалось прочитать; категория не подтверждена.",
+    "evidence": [
+      "https://akamai.com"
+    ],
+    "review_status": "unresolved_access",
+    "reviewed_on": "2026-09-19",
+    "audit_result": "HTTPError"
+  },
+  "allaboutcircuits.com": {
+    "trust_level": "unknown",
+    "source_type": null,
+    "reason": "Первичный сайт не удалось прочитать; категория не подтверждена.",
+    "evidence": [
+      "https://allaboutcircuits.com"
+    ],
+    "review_status": "unresolved_access",
+    "reviewed_on": "2026-09-19",
+    "audit_result": "HTTPError"
+  },
+  "allenai.org": {
+    "trust_level": "unknown",
+    "source_type": null,
+    "reason": "Первичный сайт не удалось прочитать; категория не подтверждена.",
+    "evidence": [
+      "https://allenai.org"
+    ],
+    "review_status": "unresolved_access",
+    "reviewed_on": "2026-09-19",
+    "audit_result": "HTTPError"
+  },
+  "amd.com": {
+    "trust_level": "trusted",
+    "source_type": null,
+    "reason": "Официальный сайт разработчика: описание собственного технологического продукта.",
+    "evidence": [
+      "https://www.amd.com/en.html"
+    ],
+    "review_status": "reviewed_first_party",
+    "reviewed_on": "2026-09-19",
+    "audit_result": "HTTP 200",
+    "source_category": "developer_company"
+  },
+  "amlintelligence.com": {
+    "trust_level": "trusted",
+    "source_type": "news",
+    "reason": "Профильное издание: официальный сайт описывает редакционные новости и анализ отрасли.",
+    "evidence": [
+      "https://www.amlintelligence.com/"
+    ],
+    "review_status": "reviewed_first_party",
+    "reviewed_on": "2026-09-19",
+    "audit_result": "HTTP 200",
+    "source_category": "professional_media"
+  },
+  "amlnetwork.org": {
+    "trust_level": "unknown",
+    "source_type": null,
+    "reason": "Описание сайта недостаточно для однозначного отнесения к доверенной категории ТЗ.",
+    "evidence": [
+      "https://amlnetwork.org"
+    ],
+    "review_status": "unresolved_identity",
+    "reviewed_on": "2026-09-19",
+    "audit_result": "HTTP 200"
+  },
+  "anthropic.com": {
+    "trust_level": "trusted",
+    "source_type": null,
+    "reason": "Официальный сайт разработчика: описание собственного технологического продукта.",
+    "evidence": [
+      "https://www.anthropic.com/"
+    ],
+    "review_status": "reviewed_first_party",
+    "reviewed_on": "2026-09-19",
+    "audit_result": "HTTP 200",
+    "source_category": "developer_company"
+  },
+  "apolloresearch.ai": {
+    "trust_level": "trusted",
+    "source_type": null,
+    "reason": "Исследовательская организация или отраслевое объединение; назначение подтверждено официальным сайтом.",
+    "evidence": [
+      "https://apolloresearch.ai"
+    ],
+    "review_status": "reviewed_first_party",
+    "reviewed_on": "2026-09-19",
+    "audit_result": "HTTP 200",
+    "source_category": "research_organization"
+  },
+  "app.fundz.net": {
+    "trust_level": "indicator",
+    "source_type": "aggregator",
+    "reason": "Каталог, агрегатор новостей или база сигналов; требуется ссылка на первоисточник.",
+    "evidence": [
+      "https://app.fundz.net"
+    ],
+    "review_status": "reviewed_first_party",
+    "reviewed_on": "2026-09-19",
+    "audit_result": "HTTP 200",
+    "source_category": "aggregator"
+  },
+  "appsecsanta.com": {
+    "trust_level": "unknown",
+    "source_type": null,
+    "reason": "Описание сайта недостаточно для однозначного отнесения к доверенной категории ТЗ.",
+    "evidence": [
+      "https://appsecsanta.com"
+    ],
+    "review_status": "unresolved_identity",
+    "reviewed_on": "2026-09-19",
+    "audit_result": "HTTP 200"
+  },
+  "ar5iv.labs.arxiv.org": {
+    "trust_level": "trusted",
+    "source_type": "preprint",
+    "reason": "Правило team/PROMPT-konstantin.md",
+    "evidence": [
+      "team/PROMPT-konstantin.md"
+    ],
+    "review_status": "brief_rule"
+  },
+  "arxiv.org": {
+    "trust_level": "trusted",
+    "source_type": "preprint",
+    "reason": "Правило team/PROMPT-konstantin.md",
+    "evidence": [
+      "team/PROMPT-konstantin.md"
+    ],
+    "review_status": "brief_rule"
+  },
+  "asia.ccb.com": {
+    "trust_level": "unknown",
+    "source_type": null,
+    "reason": "Первичный сайт не удалось прочитать; категория не подтверждена.",
+    "evidence": [
+      "https://asia.ccb.com"
+    ],
+    "review_status": "unresolved_access",
+    "reviewed_on": "2026-09-19",
+    "audit_result": "URLError"
+  },
+  "awesomeagents.ai": {
+    "trust_level": "unknown",
+    "source_type": null,
+    "reason": "Описание сайта недостаточно для однозначного отнесения к доверенной категории ТЗ.",
+    "evidence": [
+      "https://awesomeagents.ai"
+    ],
+    "review_status": "unresolved_identity",
+    "reviewed_on": "2026-09-19",
+    "audit_result": "HTTP 200"
+  },
+  "biometricupdate.com": {
+    "trust_level": "trusted",
+    "source_type": "news",
+    "reason": "Профильное издание: официальный сайт описывает редакционные новости и анализ отрасли.",
+    "evidence": [
+      "https://www.biometricupdate.com/"
+    ],
+    "review_status": "reviewed_first_party",
+    "reviewed_on": "2026-09-19",
+    "audit_result": "HTTP 200",
+    "source_category": "professional_media"
+  },
+  "bits-chips.com": {
+    "trust_level": "unknown",
+    "source_type": null,
+    "reason": "Описание сайта недостаточно для однозначного отнесения к доверенной категории ТЗ.",
+    "evidence": [
+      "https://bits-chips.com"
+    ],
+    "review_status": "unresolved_identity",
+    "reviewed_on": "2026-09-19",
+    "audit_result": "HTTP 200"
+  },
+  "blog.cloudflare.com": {
+    "trust_level": "trusted",
+    "source_type": "blog",
+    "reason": "Технический блог или документация разработчика; тип отдельного материала уточняет коннектор.",
+    "evidence": [
+      "https://blog.cloudflare.com"
+    ],
+    "review_status": "reviewed_first_party",
+    "reviewed_on": "2026-09-19",
+    "audit_result": "HTTP 200",
+    "source_category": "developer_company"
+  },
+  "blog.digitalasset.com": {
+    "trust_level": "trusted",
+    "source_type": "blog",
+    "reason": "Технический блог или документация разработчика; тип отдельного материала уточняет коннектор.",
+    "evidence": [
+      "https://blog.digitalasset.com/blog"
+    ],
+    "review_status": "reviewed_first_party",
+    "reviewed_on": "2026-09-19",
+    "audit_result": "HTTP 200",
+    "source_category": "developer_company"
+  },
+  "blog.zk.me": {
+    "trust_level": "trusted",
+    "source_type": "blog",
+    "reason": "Технический блог или документация разработчика; тип отдельного материала уточняет коннектор.",
+    "evidence": [
+      "https://blog.zk.me"
+    ],
+    "review_status": "reviewed_first_party",
+    "reviewed_on": "2026-09-19",
+    "audit_result": "HTTP 200",
+    "source_category": "developer_company"
+  },
+  "blogs.cisco.com": {
+    "trust_level": "trusted",
+    "source_type": "blog",
+    "reason": "Технический блог или документация разработчика; тип отдельного материала уточняет коннектор.",
+    "evidence": [
+      "https://blogs.cisco.com"
+    ],
+    "review_status": "reviewed_first_party",
+    "reviewed_on": "2026-09-19",
+    "audit_result": "HTTP 200",
+    "source_category": "developer_company"
+  },
+  "blogs.microsoft.com": {
+    "trust_level": "trusted",
+    "source_type": "blog",
+    "reason": "Технический блог или документация разработчика; тип отдельного материала уточняет коннектор.",
+    "evidence": [
+      "https://blogs.microsoft.com"
+    ],
+    "review_status": "reviewed_first_party",
+    "reviewed_on": "2026-09-19",
+    "audit_result": "HTTP 200",
+    "source_category": "developer_company"
+  },
+  "businesswire.com": {
+    "trust_level": "indicator",
+    "source_type": "press_release",
+    "reason": "Сервис распространения пресс-релизов; по ТЗ только индикатор.",
+    "evidence": [
+      "https://www.businesswire.com/"
+    ],
+    "review_status": "verified_service_type"
+  },
+  "calcalistech.com": {
+    "trust_level": "trusted",
+    "source_type": "news",
+    "reason": "Профильное издание: официальный сайт описывает редакционные новости и анализ отрасли.",
+    "evidence": [
+      "https://www.calcalistech.com/ctechnews"
+    ],
+    "review_status": "reviewed_first_party",
+    "reviewed_on": "2026-09-19",
+    "audit_result": "HTTP 200",
+    "source_category": "professional_media"
+  },
+  "capaloai.com": {
+    "trust_level": "trusted",
+    "source_type": null,
+    "reason": "Официальный сайт разработчика: описание собственного технологического продукта.",
+    "evidence": [
+      "https://capaloai.com"
+    ],
+    "review_status": "reviewed_first_party",
+    "reviewed_on": "2026-09-19",
+    "audit_result": "HTTP 200",
+    "source_category": "developer_company"
+  },
+  "celent.com": {
+    "trust_level": "unknown",
+    "source_type": null,
+    "reason": "Описание сайта недостаточно для однозначного отнесения к доверенной категории ТЗ.",
+    "evidence": [
+      "https://www.celent.com/en"
+    ],
+    "review_status": "unresolved_identity",
+    "reviewed_on": "2026-09-19",
+    "audit_result": "HTTP 200"
+  },
+  "cftc.gov": {
+    "trust_level": "unknown",
+    "source_type": null,
+    "reason": "Описание сайта недостаточно для однозначного отнесения к доверенной категории ТЗ.",
+    "evidence": [
+      "https://www.cftc.gov/"
+    ],
+    "review_status": "unresolved_identity",
+    "reviewed_on": "2026-09-19",
+    "audit_result": "HTTP 200"
+  },
+  "cgap.org": {
+    "trust_level": "trusted",
+    "source_type": null,
+    "reason": "Исследовательская организация или отраслевое объединение; назначение подтверждено официальным сайтом.",
+    "evidence": [
+      "https://www.cgap.org/"
+    ],
+    "review_status": "reviewed_first_party",
+    "reviewed_on": "2026-09-19",
+    "audit_result": "HTTP 200",
+    "source_category": "research_organization"
+  },
+  "chinadaily.com.cn": {
+    "trust_level": "unknown",
+    "source_type": null,
+    "reason": "Описание сайта недостаточно для однозначного отнесения к доверенной категории ТЗ.",
+    "evidence": [
+      "https://www.chinadaily.com.cn/"
+    ],
+    "review_status": "unresolved_identity",
+    "reviewed_on": "2026-09-19",
+    "audit_result": "HTTP 200"
+  },
+  "cignal.ai": {
+    "trust_level": "trusted",
+    "source_type": null,
+    "reason": "Исследовательская организация или отраслевое объединение; назначение подтверждено официальным сайтом.",
+    "evidence": [
+      "https://cignal.ai"
+    ],
+    "review_status": "reviewed_first_party",
+    "reviewed_on": "2026-09-19",
+    "audit_result": "HTTP 200",
+    "source_category": "research_organization"
+  },
+  "cirt.gy": {
+    "trust_level": "unknown",
+    "source_type": null,
+    "reason": "Описание сайта недостаточно для однозначного отнесения к доверенной категории ТЗ.",
+    "evidence": [
+      "https://cirt.gy"
+    ],
+    "review_status": "unresolved_identity",
+    "reviewed_on": "2026-09-19",
+    "audit_result": "HTTP 200"
+  },
+  "citigroup.com": {
+    "trust_level": "unknown",
+    "source_type": null,
+    "reason": "Описание сайта недостаточно для однозначного отнесения к доверенной категории ТЗ.",
+    "evidence": [
+      "https://www.citigroup.com/global"
+    ],
+    "review_status": "unresolved_identity",
+    "reviewed_on": "2026-09-19",
+    "audit_result": "HTTP 200"
+  },
+  "cloud.google.com": {
+    "trust_level": "trusted",
+    "source_type": null,
+    "reason": "Официальный сайт разработчика: описание собственного технологического продукта.",
+    "evidence": [
+      "https://cloud.google.com"
+    ],
+    "review_status": "reviewed_first_party",
+    "reviewed_on": "2026-09-19",
+    "audit_result": "HTTP 200",
+    "source_category": "developer_company"
+  },
+  "coinpaprika.com": {
+    "trust_level": "indicator",
+    "source_type": "aggregator",
+    "reason": "Каталог, агрегатор новостей или база сигналов; требуется ссылка на первоисточник.",
+    "evidence": [
+      "https://coinpaprika.com"
+    ],
+    "review_status": "reviewed_first_party",
+    "reviewed_on": "2026-09-19",
+    "audit_result": "HTTP 200",
+    "source_category": "aggregator"
+  },
+  "computeexpresslink.org": {
+    "trust_level": "trusted",
+    "source_type": null,
+    "reason": "Исследовательская организация или отраслевое объединение; назначение подтверждено официальным сайтом.",
+    "evidence": [
+      "https://computeexpresslink.org"
+    ],
+    "review_status": "reviewed_first_party",
+    "reviewed_on": "2026-09-19",
+    "audit_result": "HTTP 200",
+    "source_category": "research_organization"
+  },
+  "computerfraudsecurity.com": {
+    "trust_level": "unknown",
+    "source_type": null,
+    "reason": "Описание сайта недостаточно для однозначного отнесения к доверенной категории ТЗ.",
+    "evidence": [
+      "https://computerfraudsecurity.com/index.php/journal"
+    ],
+    "review_status": "unresolved_identity",
+    "reviewed_on": "2026-09-19",
+    "audit_result": "HTTP 200"
+  },
+  "confidential.ai": {
+    "trust_level": "trusted",
+    "source_type": null,
+    "reason": "Официальный сайт разработчика: описание собственного технологического продукта.",
+    "evidence": [
+      "https://confidential.ai"
+    ],
+    "review_status": "reviewed_first_party",
+    "reviewed_on": "2026-09-19",
+    "audit_result": "HTTP 200",
+    "source_category": "developer_company"
+  },
+  "consilient.com": {
+    "trust_level": "trusted",
+    "source_type": null,
+    "reason": "Официальный сайт разработчика: описание собственного технологического продукта.",
+    "evidence": [
+      "https://consilient.com"
+    ],
+    "review_status": "reviewed_first_party",
+    "reviewed_on": "2026-09-19",
+    "audit_result": "HTTP 200",
+    "source_category": "developer_company"
+  },
+  "corsound.ai": {
+    "trust_level": "trusted",
+    "source_type": null,
+    "reason": "Официальный сайт разработчика: описание собственного технологического продукта.",
+    "evidence": [
+      "https://www.corsound.ai/"
+    ],
+    "review_status": "reviewed_first_party",
+    "reviewed_on": "2026-09-19",
+    "audit_result": "HTTP 200",
+    "source_category": "developer_company"
+  },
+  "credora.network": {
+    "trust_level": "trusted",
+    "source_type": null,
+    "reason": "Официальный сайт разработчика: описание собственного технологического продукта.",
+    "evidence": [
+      "https://www.credora.network/"
+    ],
+    "review_status": "reviewed_first_party",
+    "reviewed_on": "2026-09-19",
+    "audit_result": "HTTP 200",
+    "source_category": "developer_company"
+  },
+  "credprotocol.com": {
+    "trust_level": "trusted",
+    "source_type": null,
+    "reason": "Официальный сайт разработчика: описание собственного технологического продукта.",
+    "evidence": [
+      "https://credprotocol.com"
+    ],
+    "review_status": "reviewed_first_party",
+    "reviewed_on": "2026-09-19",
+    "audit_result": "HTTP 200",
+    "source_category": "developer_company"
+  },
+  "crossmint.com": {
+    "trust_level": "trusted",
+    "source_type": null,
+    "reason": "Официальный сайт разработчика: описание собственного технологического продукта.",
+    "evidence": [
+      "https://www.crossmint.com/"
+    ],
+    "review_status": "reviewed_first_party",
+    "reviewed_on": "2026-09-19",
+    "audit_result": "HTTP 200",
+    "source_category": "developer_company"
+  },
+  "crowdfundinsider.com": {
+    "trust_level": "trusted",
+    "source_type": "news",
+    "reason": "Профильное издание: официальный сайт описывает редакционные новости и анализ отрасли.",
+    "evidence": [
+      "https://www.crowdfundinsider.com/"
+    ],
+    "review_status": "reviewed_first_party",
+    "reviewed_on": "2026-09-19",
+    "audit_result": "HTTP 200",
+    "source_category": "professional_media"
+  },
+  "cryptodaily.co.uk": {
+    "trust_level": "unknown",
+    "source_type": null,
+    "reason": "Описание сайта недостаточно для однозначного отнесения к доверенной категории ТЗ.",
+    "evidence": [
+      "https://cryptodaily.co.uk"
+    ],
+    "review_status": "unresolved_identity",
+    "reviewed_on": "2026-09-19",
+    "audit_result": "HTTP 200"
+  },
+  "cryptomathic.com": {
+    "trust_level": "trusted",
+    "source_type": null,
+    "reason": "Официальный сайт разработчика: описание собственного технологического продукта.",
+    "evidence": [
+      "https://www.cryptomathic.com/"
+    ],
+    "review_status": "reviewed_first_party",
+    "reviewed_on": "2026-09-19",
+    "audit_result": "HTTP 200",
+    "source_category": "developer_company"
+  },
+  "datacenterdynamics.com": {
+    "trust_level": "trusted",
+    "source_type": "news",
+    "reason": "Профильное издание: официальный сайт описывает редакционные новости и анализ отрасли.",
+    "evidence": [
+      "https://www.datacenterdynamics.com/en/"
+    ],
+    "review_status": "reviewed_first_party",
+    "reviewed_on": "2026-09-19",
+    "audit_result": "HTTP 200",
+    "source_category": "professional_media"
+  },
+  "datacenterfrontier.com": {
+    "trust_level": "trusted",
+    "source_type": "news",
+    "reason": "Профильное издание: официальный сайт описывает редакционные новости и анализ отрасли.",
+    "evidence": [
+      "https://www.datacenterfrontier.com:443/"
+    ],
+    "review_status": "reviewed_first_party",
+    "reviewed_on": "2026-09-19",
+    "audit_result": "HTTP 200",
+    "source_category": "professional_media"
+  },
+  "dbs.com": {
+    "trust_level": "unknown",
+    "source_type": null,
+    "reason": "Описание сайта недостаточно для однозначного отнесения к доверенной категории ТЗ.",
+    "evidence": [
+      "https://www.dbs.com/default.page"
+    ],
+    "review_status": "unresolved_identity",
+    "reviewed_on": "2026-09-19",
+    "audit_result": "HTTP 200"
+  },
+  "deploymentsafety.openai.com": {
+    "trust_level": "unknown",
+    "source_type": null,
+    "reason": "Описание сайта недостаточно для однозначного отнесения к доверенной категории ТЗ.",
+    "evidence": [
+      "https://deploymentsafety.openai.com"
+    ],
+    "review_status": "unresolved_identity",
+    "reviewed_on": "2026-09-19",
+    "audit_result": "HTTP 200"
+  },
+  "develop3d.com": {
+    "trust_level": "trusted",
+    "source_type": "news",
+    "reason": "Профильное издание: официальный сайт описывает редакционные новости и анализ отрасли.",
+    "evidence": [
+      "https://develop3d.com"
+    ],
+    "review_status": "reviewed_first_party",
+    "reviewed_on": "2026-09-19",
+    "audit_result": "HTTP 200",
+    "source_category": "professional_media"
+  },
+  "developers.cloudflare.com": {
+    "trust_level": "trusted",
+    "source_type": "blog",
+    "reason": "Технический блог или документация разработчика; тип отдельного материала уточняет коннектор.",
+    "evidence": [
+      "https://developers.cloudflare.com"
+    ],
+    "review_status": "reviewed_first_party",
+    "reviewed_on": "2026-09-19",
+    "audit_result": "HTTP 200",
+    "source_category": "developer_company"
+  },
+  "dhs.gov": {
+    "trust_level": "trusted",
+    "source_type": null,
+    "reason": "Официальный сайт государственного органа.",
+    "evidence": [
+      "https://www.dhs.gov/"
+    ],
+    "review_status": "reviewed_first_party",
+    "reviewed_on": "2026-09-19",
+    "audit_result": "HTTP 200",
+    "source_category": "government"
+  },
+  "discoveryalert.com": {
+    "trust_level": "indicator",
+    "source_type": "aggregator",
+    "reason": "Каталог, агрегатор новостей или база сигналов; требуется ссылка на первоисточник.",
+    "evidence": [
+      "https://discoveryalert.com"
+    ],
+    "review_status": "reviewed_first_party",
+    "reviewed_on": "2026-09-19",
+    "audit_result": "HTTP 200",
+    "source_category": "aggregator"
+  },
+  "docs.phala.com": {
+    "trust_level": "trusted",
+    "source_type": "blog",
+    "reason": "Технический блог или документация разработчика; тип отдельного материала уточняет коннектор.",
+    "evidence": [
+      "https://docs.phala.com"
+    ],
+    "review_status": "reviewed_first_party",
+    "reviewed_on": "2026-09-19",
+    "audit_result": "HTTP 200",
+    "source_category": "developer_company"
+  },
+  "dutchstartup.ai": {
+    "trust_level": "indicator",
+    "source_type": "aggregator",
+    "reason": "Каталог, агрегатор новостей или база сигналов; требуется ссылка на первоисточник.",
+    "evidence": [
+      "https://www.dutchstartup.ai/"
+    ],
+    "review_status": "reviewed_first_party",
+    "reviewed_on": "2026-09-19",
+    "audit_result": "HTTP 200",
+    "source_category": "aggregator"
+  },
+  "economictimes.com": {
+    "trust_level": "unknown",
+    "source_type": null,
+    "reason": "Описание сайта недостаточно для однозначного отнесения к доверенной категории ТЗ.",
+    "evidence": [
+      "https://economictimes.indiatimes.com/"
+    ],
+    "review_status": "unresolved_identity",
+    "reviewed_on": "2026-09-19",
+    "audit_result": "HTTP 200"
+  },
+  "edge-ai-vision.com": {
+    "trust_level": "trusted",
+    "source_type": null,
+    "reason": "Исследовательская организация или отраслевое объединение; назначение подтверждено официальным сайтом.",
+    "evidence": [
+      "https://www.edge-ai-vision.com/"
+    ],
+    "review_status": "reviewed_first_party",
+    "reviewed_on": "2026-09-19",
+    "audit_result": "HTTP 200",
+    "source_category": "research_organization"
+  },
+  "eetimes.com": {
+    "trust_level": "trusted",
+    "source_type": "news",
+    "reason": "Правило team/PROMPT-konstantin.md",
+    "evidence": [
+      "team/PROMPT-konstantin.md"
+    ],
+    "review_status": "brief_rule"
+  },
+  "elib.uni-stuttgart.de": {
+    "trust_level": "unknown",
+    "source_type": null,
+    "reason": "Описание сайта недостаточно для однозначного отнесения к доверенной категории ТЗ.",
+    "evidence": [
+      "https://elib.uni-stuttgart.de"
+    ],
+    "review_status": "unresolved_identity",
+    "reviewed_on": "2026-09-19",
+    "audit_result": "HTTP 200"
+  },
+  "embodiedglobal.com": {
+    "trust_level": "unknown",
+    "source_type": null,
+    "reason": "Описание сайта недостаточно для однозначного отнесения к доверенной категории ТЗ.",
+    "evidence": [
+      "https://embodiedglobal.com/en"
+    ],
+    "review_status": "unresolved_identity",
+    "reviewed_on": "2026-09-19",
+    "audit_result": "HTTP 200"
+  },
+  "en.alpsentek.com": {
+    "trust_level": "unknown",
+    "source_type": null,
+    "reason": "Описание сайта недостаточно для однозначного отнесения к доверенной категории ТЗ.",
+    "evidence": [
+      "https://en.alpsentek.com"
+    ],
+    "review_status": "unresolved_identity",
+    "reviewed_on": "2026-09-19",
+    "audit_result": "HTTP 200"
+  },
+  "en.wowtale.net": {
+    "trust_level": "trusted",
+    "source_type": "news",
+    "reason": "Профильное издание: официальный сайт описывает редакционные новости и анализ отрасли.",
+    "evidence": [
+      "https://en.wowtale.net"
+    ],
+    "review_status": "reviewed_first_party",
+    "reviewed_on": "2026-09-19",
+    "audit_result": "HTTP 200",
+    "source_category": "professional_media"
+  },
+  "eu-startups.com": {
+    "trust_level": "trusted",
+    "source_type": "news",
+    "reason": "Профильное издание: официальный сайт описывает редакционные новости и анализ отрасли.",
+    "evidence": [
+      "https://www.eu-startups.com/"
+    ],
+    "review_status": "reviewed_first_party",
+    "reviewed_on": "2026-09-19",
+    "audit_result": "HTTP 200",
+    "source_category": "professional_media"
+  },
+  "europol.europa.eu": {
+    "trust_level": "trusted",
+    "source_type": null,
+    "reason": "Официальный сайт государственного органа.",
+    "evidence": [
+      "https://www.europol.europa.eu/"
+    ],
+    "review_status": "reviewed_first_party",
+    "reviewed_on": "2026-09-19",
+    "audit_result": "HTTP 200",
+    "source_category": "government"
+  },
+  "f6s.com": {
+    "trust_level": "unknown",
+    "source_type": null,
+    "reason": "Описание сайта недостаточно для однозначного отнесения к доверенной категории ТЗ.",
+    "evidence": [
+      "https://www.f6s.com/"
+    ],
+    "review_status": "unresolved_identity",
+    "reviewed_on": "2026-09-19",
+    "audit_result": "HTTP 200"
+  },
+  "finance-commerce.com": {
+    "trust_level": "unknown",
+    "source_type": null,
+    "reason": "Первичный сайт не удалось прочитать; категория не подтверждена.",
+    "evidence": [
+      "https://finance-commerce.com"
+    ],
+    "review_status": "unresolved_access",
+    "reviewed_on": "2026-09-19",
+    "audit_result": "HTTPError"
+  },
+  "finance.yahoo.com": {
+    "trust_level": "indicator",
+    "source_type": "aggregator",
+    "reason": "Каталог, агрегатор новостей или база сигналов; требуется ссылка на первоисточник.",
+    "evidence": [
+      "https://finance.yahoo.com"
+    ],
+    "review_status": "reviewed_first_party",
+    "reviewed_on": "2026-09-19",
+    "audit_result": "HTTP 200",
+    "source_category": "aggregator"
+  },
+  "fintech.global": {
+    "trust_level": "trusted",
+    "source_type": "news",
+    "reason": "Профильное издание: официальный сайт описывает редакционные новости и анализ отрасли.",
+    "evidence": [
+      "https://fintech.global"
+    ],
+    "review_status": "reviewed_first_party",
+    "reviewed_on": "2026-09-19",
+    "audit_result": "HTTP 200",
+    "source_category": "professional_media"
+  },
+  "flagright.com": {
+    "trust_level": "trusted",
+    "source_type": null,
+    "reason": "Официальный сайт разработчика: описание собственного технологического продукта.",
+    "evidence": [
+      "https://www.flagright.com/"
+    ],
+    "review_status": "reviewed_first_party",
+    "reviewed_on": "2026-09-19",
+    "audit_result": "HTTP 200",
+    "source_category": "developer_company"
+  },
+  "fluix.ai": {
+    "trust_level": "trusted",
+    "source_type": null,
+    "reason": "Официальный сайт разработчика: описание собственного технологического продукта.",
+    "evidence": [
+      "https://www.fluix.ai/"
+    ],
+    "review_status": "reviewed_first_party",
+    "reviewed_on": "2026-09-19",
+    "audit_result": "HTTP 200",
+    "source_category": "developer_company"
+  },
+  "fortune.com": {
+    "trust_level": "trusted",
+    "source_type": "news",
+    "reason": "Профильное издание: официальный сайт описывает редакционные новости и анализ отрасли.",
+    "evidence": [
+      "https://fortune.com"
+    ],
+    "review_status": "reviewed_first_party",
+    "reviewed_on": "2026-09-19",
+    "audit_result": "HTTP 200",
+    "source_category": "professional_media"
+  },
+  "frontiersin.org": {
+    "trust_level": "trusted",
+    "source_type": "article",
+    "reason": "Официальный научный издатель или архив научных публикаций.",
+    "evidence": [
+      "https://www.frontiersin.org/"
+    ],
+    "review_status": "reviewed_first_party",
+    "reviewed_on": "2026-09-19",
+    "audit_result": "HTTP 200",
+    "source_category": "academic_publications"
+  },
+  "geekwire.com": {
+    "trust_level": "trusted",
+    "source_type": "news",
+    "reason": "Профильное издание: официальный сайт описывает редакционные новости и анализ отрасли.",
+    "evidence": [
+      "https://www.geekwire.com/"
+    ],
+    "review_status": "reviewed_first_party",
+    "reviewed_on": "2026-09-19",
+    "audit_result": "HTTP 200",
+    "source_category": "professional_media"
+  },
+  "geo.sig.ai": {
+    "trust_level": "trusted",
+    "source_type": null,
+    "reason": "Официальный сайт разработчика: описание собственного технологического продукта.",
+    "evidence": [
+      "https://geo.sig.ai"
+    ],
+    "review_status": "reviewed_first_party",
+    "reviewed_on": "2026-09-19",
+    "audit_result": "HTTP 200",
+    "source_category": "developer_company"
+  },
+  "github.com": {
+    "trust_level": "trusted",
+    "source_type": "repo",
+    "reason": "Правило team/PROMPT-konstantin.md",
+    "evidence": [
+      "team/PROMPT-konstantin.md"
+    ],
+    "review_status": "brief_rule"
+  },
+  "gizmodo.com": {
+    "trust_level": "trusted",
+    "source_type": "news",
+    "reason": "Профильное издание: официальный сайт описывает редакционные новости и анализ отрасли.",
+    "evidence": [
+      "https://gizmodo.com"
+    ],
+    "review_status": "reviewed_first_party",
+    "reviewed_on": "2026-09-19",
+    "audit_result": "HTTP 200",
+    "source_category": "professional_media"
+  },
+  "globenewswire.com": {
+    "trust_level": "indicator",
+    "source_type": "press_release",
+    "reason": "Сервис распространения пресс-релизов; по ТЗ только индикатор.",
+    "evidence": [
+      "https://www.globenewswire.com/"
+    ],
+    "review_status": "verified_service_type"
+  },
+  "gmacouncil.org": {
+    "trust_level": "unknown",
+    "source_type": null,
+    "reason": "Первичный сайт не удалось прочитать; категория не подтверждена.",
+    "evidence": [
+      "https://gmacouncil.org"
+    ],
+    "review_status": "unresolved_access",
+    "reviewed_on": "2026-09-19",
+    "audit_result": "URLError"
+  },
+  "help.zededa.com": {
+    "trust_level": "unknown",
+    "source_type": null,
+    "reason": "Первичный сайт не удалось прочитать; категория не подтверждена.",
+    "evidence": [
+      "https://help.zededa.com"
+    ],
+    "review_status": "unresolved_access",
+    "reviewed_on": "2026-09-19",
+    "audit_result": "HTTPError"
+  },
+  "highways.today": {
+    "trust_level": "trusted",
+    "source_type": "news",
+    "reason": "Профильное издание: официальный сайт описывает редакционные новости и анализ отрасли.",
+    "evidence": [
+      "https://highways.today"
+    ],
+    "review_status": "reviewed_first_party",
+    "reviewed_on": "2026-09-19",
+    "audit_result": "HTTP 200",
+    "source_category": "professional_media"
+  },
+  "hirundo.io": {
+    "trust_level": "trusted",
+    "source_type": null,
+    "reason": "Официальный сайт разработчика: описание собственного технологического продукта.",
+    "evidence": [
+      "https://www.hirundo.io/"
+    ],
+    "review_status": "reviewed_first_party",
+    "reviewed_on": "2026-09-19",
+    "audit_result": "HTTP 200",
+    "source_category": "developer_company"
+  },
+  "huggingface.co": {
+    "trust_level": "trusted",
+    "source_type": "model",
+    "reason": "Правило team/PROMPT-konstantin.md",
+    "evidence": [
+      "team/PROMPT-konstantin.md"
+    ],
+    "review_status": "brief_rule"
+  },
+  "hypertrends.com": {
+    "trust_level": "unknown",
+    "source_type": null,
+    "reason": "Описание сайта недостаточно для однозначного отнесения к доверенной категории ТЗ.",
+    "evidence": [
+      "https://www.hypertrends.com/"
+    ],
+    "review_status": "unresolved_identity",
+    "reviewed_on": "2026-09-19",
+    "audit_result": "HTTP 200"
+  },
+  "ibecbarcelona.eu": {
+    "trust_level": "trusted",
+    "source_type": null,
+    "reason": "Исследовательская организация или отраслевое объединение; назначение подтверждено официальным сайтом.",
+    "evidence": [
+      "https://ibecbarcelona.eu"
+    ],
+    "review_status": "reviewed_first_party",
+    "reviewed_on": "2026-09-19",
+    "audit_result": "HTTP 200",
+    "source_category": "research_organization"
+  },
+  "idc.com": {
+    "trust_level": "unknown",
+    "source_type": null,
+    "reason": "Описание сайта недостаточно для однозначного отнесения к доверенной категории ТЗ.",
+    "evidence": [
+      "https://www.idc.com/"
+    ],
+    "review_status": "unresolved_identity",
+    "reviewed_on": "2026-09-19",
+    "audit_result": "HTTP 200"
+  },
+  "ijiemjournal.uns.ac.rs": {
+    "trust_level": "trusted",
+    "source_type": "article",
+    "reason": "Официальный научный издатель или архив научных публикаций.",
+    "evidence": [
+      "https://ijiemjournal.uns.ac.rs"
+    ],
+    "review_status": "reviewed_first_party",
+    "reviewed_on": "2026-09-19",
+    "audit_result": "HTTP 200",
+    "source_category": "academic_publications"
+  },
+  "imt-starter.fr": {
+    "trust_level": "unknown",
+    "source_type": null,
+    "reason": "Описание сайта недостаточно для однозначного отнесения к доверенной категории ТЗ.",
+    "evidence": [
+      "https://www.imt-starter.fr/"
+    ],
+    "review_status": "unresolved_identity",
+    "reviewed_on": "2026-09-19",
+    "audit_result": "HTTP 200"
+  },
+  "indianstartupnews.com": {
+    "trust_level": "unknown",
+    "source_type": null,
+    "reason": "Первичный сайт не удалось прочитать; категория не подтверждена.",
+    "evidence": [
+      "https://indianstartupnews.com"
+    ],
+    "review_status": "unresolved_access",
+    "reviewed_on": "2026-09-19",
+    "audit_result": "HTTPError"
+  },
+  "infohub.delltechnologies.com": {
+    "trust_level": "unknown",
+    "source_type": null,
+    "reason": "Описание сайта недостаточно для однозначного отнесения к доверенной категории ТЗ.",
+    "evidence": [
+      "https://infohub.delltechnologies.com"
+    ],
+    "review_status": "unresolved_identity",
+    "reviewed_on": "2026-09-19",
+    "audit_result": "HTTP 200"
+  },
+  "insidedeeptech.com": {
+    "trust_level": "unknown",
+    "source_type": null,
+    "reason": "Описание сайта недостаточно для однозначного отнесения к доверенной категории ТЗ.",
+    "evidence": [
+      "https://www.insidedeeptech.com/"
+    ],
+    "review_status": "unresolved_identity",
+    "reviewed_on": "2026-09-19",
+    "audit_result": "HTTP 200"
+  },
+  "intelcapital.com": {
+    "trust_level": "unknown",
+    "source_type": null,
+    "reason": "Первичный сайт не удалось прочитать; категория не подтверждена.",
+    "evidence": [
+      "https://intelcapital.com"
+    ],
+    "review_status": "unresolved_access",
+    "reviewed_on": "2026-09-19",
+    "audit_result": "URLError"
+  },
+  "interestingengineering.com": {
+    "trust_level": "trusted",
+    "source_type": "news",
+    "reason": "Профильное издание: официальный сайт описывает редакционные новости и анализ отрасли.",
+    "evidence": [
+      "https://interestingengineering.com"
+    ],
+    "review_status": "reviewed_first_party",
+    "reviewed_on": "2026-09-19",
+    "audit_result": "HTTP 200",
+    "source_category": "professional_media"
+  },
+  "invariantlabs.ai": {
+    "trust_level": "trusted",
+    "source_type": null,
+    "reason": "Официальный сайт разработчика: описание собственного технологического продукта.",
+    "evidence": [
+      "https://invariantlabs.ai"
+    ],
+    "review_status": "reviewed_first_party",
+    "reviewed_on": "2026-09-19",
+    "audit_result": "HTTP 200",
+    "source_category": "developer_company"
+  },
+  "investor.nvidia.com": {
+    "trust_level": "unknown",
+    "source_type": null,
+    "reason": "Описание сайта недостаточно для однозначного отнесения к доверенной категории ТЗ.",
+    "evidence": [
+      "https://investor.nvidia.com/home/default.aspx"
+    ],
+    "review_status": "unresolved_identity",
+    "reviewed_on": "2026-09-19",
+    "audit_result": "HTTP 200"
+  },
+  "invezz.com": {
+    "trust_level": "trusted",
+    "source_type": "news",
+    "reason": "Профильное издание: официальный сайт описывает редакционные новости и анализ отрасли.",
+    "evidence": [
+      "https://invezz.com"
+    ],
+    "review_status": "reviewed_first_party",
+    "reviewed_on": "2026-09-19",
+    "audit_result": "HTTP 200",
+    "source_category": "professional_media"
+  },
+  "ioplus.nl": {
+    "trust_level": "trusted",
+    "source_type": "news",
+    "reason": "Профильное издание: официальный сайт описывает редакционные новости и анализ отрасли.",
+    "evidence": [
+      "https://ioplus.nl/en"
+    ],
+    "review_status": "reviewed_first_party",
+    "reviewed_on": "2026-09-19",
+    "audit_result": "HTTP 200",
+    "source_category": "professional_media"
+  },
+  "is.mpg.de": {
+    "trust_level": "unknown",
+    "source_type": null,
+    "reason": "Описание сайта недостаточно для однозначного отнесения к доверенной категории ТЗ.",
+    "evidence": [
+      "https://is.mpg.de/challenge"
+    ],
+    "review_status": "unresolved_identity",
+    "reviewed_on": "2026-09-19",
+    "audit_result": "HTTP 200"
+  },
+  "jobswithstartups.com": {
+    "trust_level": "indicator",
+    "source_type": "aggregator",
+    "reason": "Каталог, агрегатор новостей или база сигналов; требуется ссылка на первоисточник.",
+    "evidence": [
+      "https://jobswithstartups.com"
+    ],
+    "review_status": "reviewed_first_party",
+    "reviewed_on": "2026-09-19",
+    "audit_result": "HTTP 200",
+    "source_category": "aggregator"
+  },
+  "jpmorgan.com": {
+    "trust_level": "unknown",
+    "source_type": null,
+    "reason": "Описание сайта недостаточно для однозначного отнесения к доверенной категории ТЗ.",
+    "evidence": [
+      "https://www.jpmorgan.com/NL/en/about-us"
+    ],
+    "review_status": "unresolved_identity",
+    "reviewed_on": "2026-09-19",
+    "audit_result": "HTTP 200"
+  },
+  "kamiwaza.ai": {
+    "trust_level": "trusted",
+    "source_type": null,
+    "reason": "Официальный сайт разработчика: описание собственного технологического продукта.",
+    "evidence": [
+      "https://www.kamiwaza.ai/"
+    ],
+    "review_status": "reviewed_first_party",
+    "reviewed_on": "2026-09-19",
+    "audit_result": "HTTP 200",
+    "source_category": "developer_company"
+  },
+  "labs.snyk.io": {
+    "trust_level": "trusted",
+    "source_type": "blog",
+    "reason": "Технический блог или документация разработчика; тип отдельного материала уточняет коннектор.",
+    "evidence": [
+      "https://labs.snyk.io"
+    ],
+    "review_status": "reviewed_first_party",
+    "reviewed_on": "2026-09-19",
+    "audit_result": "HTTP 200",
+    "source_category": "developer_company"
+  },
+  "leaderobot.com": {
+    "trust_level": "unknown",
+    "source_type": null,
+    "reason": "Описание сайта недостаточно для однозначного отнесения к доверенной категории ТЗ.",
+    "evidence": [
+      "https://leaderobot.com"
+    ],
+    "review_status": "unresolved_identity",
+    "reviewed_on": "2026-09-19",
+    "audit_result": "HTTP 200"
+  },
+  "marianaminerals.com": {
+    "trust_level": "unknown",
+    "source_type": null,
+    "reason": "Описание сайта недостаточно для однозначного отнесения к доверенной категории ТЗ.",
+    "evidence": [
+      "https://marianaminerals.com"
+    ],
+    "review_status": "unresolved_identity",
+    "reviewed_on": "2026-09-19",
+    "audit_result": "HTTP 200"
+  },
+  "marvell.com": {
+    "trust_level": "unknown",
+    "source_type": null,
+    "reason": "Первичный сайт не удалось прочитать; категория не подтверждена.",
+    "evidence": [
+      "https://marvell.com"
+    ],
+    "review_status": "unresolved_access",
+    "reviewed_on": "2026-09-19",
+    "audit_result": "HTTPError"
+  },
+  "mdpi.com": {
+    "trust_level": "unknown",
+    "source_type": null,
+    "reason": "Первичный сайт не удалось прочитать; категория не подтверждена.",
+    "evidence": [
+      "https://mdpi.com"
+    ],
+    "review_status": "unresolved_access",
+    "reviewed_on": "2026-09-19",
+    "audit_result": "HTTPError"
+  },
+  "micro-insurance.yas.com.hk": {
+    "trust_level": "unknown",
+    "source_type": null,
+    "reason": "Описание сайта недостаточно для однозначного отнесения к доверенной категории ТЗ.",
+    "evidence": [
+      "https://micro-insurance.yas.com.hk"
+    ],
+    "review_status": "unresolved_identity",
+    "reviewed_on": "2026-09-19",
+    "audit_result": "HTTP 200"
+  },
+  "microsoft.com": {
+    "trust_level": "unknown",
+    "source_type": null,
+    "reason": "Описание сайта недостаточно для однозначного отнесения к доверенной категории ТЗ.",
+    "evidence": [
+      "https://www.microsoft.com/"
+    ],
+    "review_status": "unresolved_identity",
+    "reviewed_on": "2026-09-19",
+    "audit_result": "HTTP 200"
+  },
+  "momenta.vc": {
+    "trust_level": "unknown",
+    "source_type": null,
+    "reason": "Описание сайта недостаточно для однозначного отнесения к доверенной категории ТЗ.",
+    "evidence": [
+      "https://momenta.vc"
+    ],
+    "review_status": "unresolved_identity",
+    "reviewed_on": "2026-09-19",
+    "audit_result": "HTTP 200"
+  },
+  "mpp.dev": {
+    "trust_level": "trusted",
+    "source_type": null,
+    "reason": "Официальный сайт разработчика: описание собственного технологического продукта.",
+    "evidence": [
+      "https://mpp.dev"
+    ],
+    "review_status": "reviewed_first_party",
+    "reviewed_on": "2026-09-19",
+    "audit_result": "HTTP 200",
+    "source_category": "developer_company"
+  },
+  "nature.com": {
+    "trust_level": "trusted",
+    "source_type": "article",
+    "reason": "Правило team/PROMPT-konstantin.md",
+    "evidence": [
+      "team/PROMPT-konstantin.md"
+    ],
+    "review_status": "brief_rule"
+  },
+  "networkworld.com": {
+    "trust_level": "trusted",
+    "source_type": "news",
+    "reason": "Профильное издание: официальный сайт описывает редакционные новости и анализ отрасли.",
+    "evidence": [
+      "https://www.networkworld.com/"
+    ],
+    "review_status": "reviewed_first_party",
+    "reviewed_on": "2026-09-19",
+    "audit_result": "HTTP 200",
+    "source_category": "professional_media"
+  },
+  "neuromorphiccore.ai": {
+    "trust_level": "unknown",
+    "source_type": null,
+    "reason": "Описание сайта недостаточно для однозначного отнесения к доверенной категории ТЗ.",
+    "evidence": [
+      "https://neuromorphiccore.ai"
+    ],
+    "review_status": "unresolved_identity",
+    "reviewed_on": "2026-09-19",
+    "audit_result": "HTTP 200"
+  },
+  "neuronfeed.com": {
+    "trust_level": "indicator",
+    "source_type": "aggregator",
+    "reason": "Каталог, агрегатор новостей или база сигналов; требуется ссылка на первоисточник.",
+    "evidence": [
+      "https://neuronfeed.com"
+    ],
+    "review_status": "reviewed_first_party",
+    "reviewed_on": "2026-09-19",
+    "audit_result": "HTTP 200",
+    "source_category": "aggregator"
+  },
+  "neutronrise.com": {
+    "trust_level": "indicator",
+    "source_type": "blog",
+    "reason": "Авторский блог инженера; самостоятельное подтверждение сигнала требуется.",
+    "evidence": [
+      "https://neutronrise.com"
+    ],
+    "review_status": "reviewed_first_party",
+    "reviewed_on": "2026-09-19",
+    "audit_result": "HTTP 200",
+    "source_category": "personal_blog"
+  },
+  "newmarketpitch.com": {
+    "trust_level": "unknown",
+    "source_type": null,
+    "reason": "Описание сайта недостаточно для однозначного отнесения к доверенной категории ТЗ.",
+    "evidence": [
+      "https://newmarketpitch.com"
+    ],
+    "review_status": "unresolved_identity",
+    "reviewed_on": "2026-09-19",
+    "audit_result": "HTTP 200"
+  },
+  "news.microsoft.com": {
+    "trust_level": "unknown",
+    "source_type": null,
+    "reason": "Описание сайта недостаточно для однозначного отнесения к доверенной категории ТЗ.",
+    "evidence": [
+      "https://news.microsoft.com/source/"
+    ],
+    "review_status": "unresolved_identity",
+    "reviewed_on": "2026-09-19",
+    "audit_result": "HTTP 200"
+  },
+  "nextplatform.com": {
+    "trust_level": "trusted",
+    "source_type": "news",
+    "reason": "Профильное издание: официальный сайт описывает редакционные новости и анализ отрасли.",
+    "evidence": [
+      "https://www.nextplatform.com/"
+    ],
+    "review_status": "reviewed_first_party",
+    "reviewed_on": "2026-09-19",
+    "audit_result": "HTTP 200",
+    "source_category": "professional_media"
+  },
+  "nordicsemi.com": {
+    "trust_level": "unknown",
+    "source_type": null,
+    "reason": "Первичный сайт не удалось прочитать; категория не подтверждена.",
+    "evidence": [
+      "https://nordicsemi.com"
+    ],
+    "review_status": "unresolved_access",
+    "reviewed_on": "2026-09-19",
+    "audit_result": "HTTPError"
+  },
+  "novarctech.com": {
+    "trust_level": "trusted",
+    "source_type": null,
+    "reason": "Официальный сайт разработчика: описание собственного технологического продукта.",
+    "evidence": [
+      "https://www.novarctech.com/"
+    ],
+    "review_status": "reviewed_first_party",
+    "reviewed_on": "2026-09-19",
+    "audit_result": "HTTP 200",
+    "source_category": "developer_company"
+  },
+  "nvidianews.nvidia.com": {
+    "trust_level": "unknown",
+    "source_type": null,
+    "reason": "Первичный сайт не удалось прочитать; категория не подтверждена.",
+    "evidence": [
+      "https://nvidianews.nvidia.com"
+    ],
+    "review_status": "unresolved_access",
+    "reviewed_on": "2026-09-19",
+    "audit_result": "HTTPError"
+  },
+  "openai.com": {
+    "trust_level": "unknown",
+    "source_type": null,
+    "reason": "Первичный сайт не удалось прочитать; категория не подтверждена.",
+    "evidence": [
+      "https://openai.com"
+    ],
+    "review_status": "unresolved_access",
+    "reviewed_on": "2026-09-19",
+    "audit_result": "HTTPError"
+  },
+  "openfort.io": {
+    "trust_level": "trusted",
+    "source_type": null,
+    "reason": "Официальный сайт разработчика: описание собственного технологического продукта.",
+    "evidence": [
+      "https://www.openfort.io/"
+    ],
+    "review_status": "reviewed_first_party",
+    "reviewed_on": "2026-09-19",
+    "audit_result": "HTTP 200",
+    "source_category": "developer_company"
+  },
+  "oxmaint.com": {
+    "trust_level": "trusted",
+    "source_type": null,
+    "reason": "Официальный сайт разработчика: описание собственного технологического продукта.",
+    "evidence": [
+      "https://oxmaint.com"
+    ],
+    "review_status": "reviewed_first_party",
+    "reviewed_on": "2026-09-19",
+    "audit_result": "HTTP 200",
+    "source_category": "developer_company"
+  },
+  "pandaily.com": {
+    "trust_level": "trusted",
+    "source_type": "news",
+    "reason": "Профильное издание: официальный сайт описывает редакционные новости и анализ отрасли.",
+    "evidence": [
+      "https://pandaily.com"
+    ],
+    "review_status": "reviewed_first_party",
+    "reviewed_on": "2026-09-19",
+    "audit_result": "HTTP 200",
+    "source_category": "professional_media"
+  },
+  "patsnap.com": {
+    "trust_level": "trusted",
+    "source_type": null,
+    "reason": "Официальный сайт разработчика: описание собственного технологического продукта.",
+    "evidence": [
+      "https://www.patsnap.com/"
+    ],
+    "review_status": "reviewed_first_party",
+    "reviewed_on": "2026-09-19",
+    "audit_result": "HTTP 200",
+    "source_category": "developer_company"
+  },
+  "phala.com": {
+    "trust_level": "trusted",
+    "source_type": null,
+    "reason": "Официальный сайт разработчика: описание собственного технологического продукта.",
+    "evidence": [
+      "https://phala.com"
+    ],
+    "review_status": "reviewed_first_party",
+    "reviewed_on": "2026-09-19",
+    "audit_result": "HTTP 200",
+    "source_category": "developer_company"
+  },
+  "pi.website": {
+    "trust_level": "unknown",
+    "source_type": null,
+    "reason": "Описание сайта недостаточно для однозначного отнесения к доверенной категории ТЗ.",
+    "evidence": [
+      "https://www.pi.website/"
+    ],
+    "review_status": "unresolved_identity",
+    "reviewed_on": "2026-09-19",
+    "audit_result": "HTTP 200"
+  },
+  "picmagazine.net": {
+    "trust_level": "trusted",
+    "source_type": "news",
+    "reason": "Профильное издание: официальный сайт описывает редакционные новости и анализ отрасли.",
+    "evidence": [
+      "https://picmagazine.net/home"
+    ],
+    "review_status": "reviewed_first_party",
+    "reviewed_on": "2026-09-19",
+    "audit_result": "HTTP 200",
+    "source_category": "professional_media"
+  },
+  "pmc.ncbi.nlm.nih.gov": {
+    "trust_level": "trusted",
+    "source_type": "article",
+    "reason": "Официальный научный издатель или архив научных публикаций.",
+    "evidence": [
+      "https://pmc.ncbi.nlm.nih.gov"
+    ],
+    "review_status": "reviewed_first_party",
+    "reviewed_on": "2026-09-19",
+    "audit_result": "HTTP 200",
+    "source_category": "academic_publications"
+  },
+  "polygon.technology": {
+    "trust_level": "trusted",
+    "source_type": null,
+    "reason": "Официальный сайт разработчика: описание собственного технологического продукта.",
+    "evidence": [
+      "https://polygon.technology"
+    ],
+    "review_status": "reviewed_first_party",
+    "reviewed_on": "2026-09-19",
+    "audit_result": "HTTP 200",
+    "source_category": "developer_company"
+  },
+  "premisys.ai": {
+    "trust_level": "trusted",
+    "source_type": null,
+    "reason": "Официальный сайт разработчика: описание собственного технологического продукта.",
+    "evidence": [
+      "https://premisys.ai"
+    ],
+    "review_status": "reviewed_first_party",
+    "reviewed_on": "2026-09-19",
+    "audit_result": "HTTP 200",
+    "source_category": "developer_company"
+  },
+  "prnewswire.com": {
+    "trust_level": "indicator",
+    "source_type": "press_release",
+    "reason": "Правило team/PROMPT-konstantin.md",
+    "evidence": [
+      "team/PROMPT-konstantin.md"
+    ],
+    "review_status": "brief_rule"
+  },
+  "prophesee.ai": {
+    "trust_level": "trusted",
+    "source_type": null,
+    "reason": "Официальный сайт разработчика: описание собственного технологического продукта.",
+    "evidence": [
+      "https://www.prophesee.ai/"
+    ],
+    "review_status": "reviewed_first_party",
+    "reviewed_on": "2026-09-19",
+    "audit_result": "HTTP 200",
+    "source_category": "developer_company"
+  },
+  "pubs.rsc.org": {
+    "trust_level": "unknown",
+    "source_type": null,
+    "reason": "Первичный сайт не удалось прочитать; категория не подтверждена.",
+    "evidence": [
+      "https://pubs.rsc.org"
+    ],
+    "review_status": "unresolved_access",
+    "reviewed_on": "2026-09-19",
+    "audit_result": "HTTPError"
+  },
+  "pulse2.com": {
+    "trust_level": "unknown",
+    "source_type": null,
+    "reason": "Описание сайта недостаточно для однозначного отнесения к доверенной категории ТЗ.",
+    "evidence": [
+      "https://pulse2.com"
+    ],
+    "review_status": "unresolved_identity",
+    "reviewed_on": "2026-09-19",
+    "audit_result": "HTTP 200"
+  },
+  "qualcomm.com": {
+    "trust_level": "unknown",
+    "source_type": null,
+    "reason": "Первичный сайт не удалось прочитать; категория не подтверждена.",
+    "evidence": [
+      "https://qualcomm.com"
+    ],
+    "review_status": "unresolved_access",
+    "reviewed_on": "2026-09-19",
+    "audit_result": "TimeoutError"
+  },
+  "radware.com": {
+    "trust_level": "unknown",
+    "source_type": null,
+    "reason": "Описание сайта недостаточно для однозначного отнесения к доверенной категории ТЗ.",
+    "evidence": [
+      "http://validate.perfdrive.com/?ssa=2bf87c1f-ecb5-4128-914a-b9e2131954a8&ssb=78692296671&ssc=https%3A%2F%2Fradware.com%2F&ssi=7cdaf6fd-bsff-449e-842c-e54dd6fae610&ssk=support@shieldsquare.com&ssm=40678148161439373107778694715706&ssn=058b1e87182b39ef64abe0993c98b2730162c5be281c-a3d4-48f4-bdfa55&sso=68f45986-80053fe7863eeb19a29a6cd2d39a156ff3164930e4099f7e&ssp=08095822961789771866178979552533376&ssq=40094379351523219427793515378619914286091&ssr=MTA5LjczLjIwNC4xNTQ=&sst=TrendRadar/0.1%20source%20classification%20audit&ssu=&ssv=&ssw=&ssx=eyJfX3V6bWYiOiI3ZjkwMDBjNWJlMjgxYy1hM2Q0LTQ4ZjQtYjk4Ni04MDA1M2ZlNzg2M2UxLTE3ODk3OTM1MTUxODMwLTAwNGUwMDNlNjM5NTk4MzRkZjQxMCIsInV6bXgiOiI3ZmMwMDA3N2Y0MGM3MC1lYTNiLTQ0NDctYWUxOC00N2U3ZmQyYTFjODcxLTE3ODk3OTM1MTUxODMwLTAwNTNmNWE5Yjc2ZDIwMjY2YjAxMCIsInJkIjoicmFkd2FyZS5jb20ifQ=="
+    ],
+    "review_status": "unresolved_identity",
+    "reviewed_on": "2026-09-19",
+    "audit_result": "HTTP 200"
+  },
+  "recodex.pro": {
+    "trust_level": "unknown",
+    "source_type": null,
+    "reason": "Описание сайта недостаточно для однозначного отнесения к доверенной категории ТЗ.",
+    "evidence": [
+      "https://recodex.pro"
+    ],
+    "review_status": "unresolved_identity",
+    "reviewed_on": "2026-09-19",
+    "audit_result": "HTTP 200"
+  },
+  "reuters.com": {
+    "trust_level": "unknown",
+    "source_type": null,
+    "reason": "Первичный сайт не удалось прочитать; категория не подтверждена.",
+    "evidence": [
+      "https://reuters.com"
+    ],
+    "review_status": "unresolved_access",
+    "reviewed_on": "2026-09-19",
+    "audit_result": "HTTPError"
+  },
+  "roboticsandautomationnews.com": {
+    "trust_level": "unknown",
+    "source_type": null,
+    "reason": "Первичный сайт не удалось прочитать; категория не подтверждена.",
+    "evidence": [
+      "https://roboticsandautomationnews.com"
+    ],
+    "review_status": "unresolved_access",
+    "reviewed_on": "2026-09-19",
+    "audit_result": "URLError"
+  },
+  "robotsatlas.com": {
+    "trust_level": "unknown",
+    "source_type": null,
+    "reason": "Описание сайта недостаточно для однозначного отнесения к доверенной категории ТЗ.",
+    "evidence": [
+      "https://robotsatlas.com"
+    ],
+    "review_status": "unresolved_identity",
+    "reviewed_on": "2026-09-19",
+    "audit_result": "HTTP 200"
+  },
+  "runtimewire.com": {
+    "trust_level": "trusted",
+    "source_type": "news",
+    "reason": "Профильное издание: официальный сайт описывает редакционные новости и анализ отрасли.",
+    "evidence": [
+      "https://runtimewire.com"
+    ],
+    "review_status": "reviewed_first_party",
+    "reviewed_on": "2026-09-19",
+    "audit_result": "HTTP 200",
+    "source_category": "professional_media"
+  },
+  "science.org": {
+    "trust_level": "unknown",
+    "source_type": null,
+    "reason": "Первичный сайт не удалось прочитать; категория не подтверждена.",
+    "evidence": [
+      "https://science.org"
+    ],
+    "review_status": "unresolved_access",
+    "reviewed_on": "2026-09-19",
+    "audit_result": "HTTPError"
+  },
+  "securityscientist.net": {
+    "trust_level": "unknown",
+    "source_type": null,
+    "reason": "Описание сайта недостаточно для однозначного отнесения к доверенной категории ТЗ.",
+    "evidence": [
+      "https://www.securityscientist.net/"
+    ],
+    "review_status": "unresolved_identity",
+    "reviewed_on": "2026-09-19",
+    "audit_result": "HTTP 200"
+  },
+  "securityweek.com": {
+    "trust_level": "trusted",
+    "source_type": "news",
+    "reason": "Профильное издание: официальный сайт описывает редакционные новости и анализ отрасли.",
+    "evidence": [
+      "https://www.securityweek.com/"
+    ],
+    "review_status": "reviewed_first_party",
+    "reviewed_on": "2026-09-19",
+    "audit_result": "HTTP 200",
+    "source_category": "professional_media"
+  },
+  "seedlist.com": {
+    "trust_level": "unknown",
+    "source_type": null,
+    "reason": "Описание сайта недостаточно для однозначного отнесения к доверенной категории ТЗ.",
+    "evidence": [
+      "https://seedlist.com"
+    ],
+    "review_status": "unresolved_identity",
+    "reviewed_on": "2026-09-19",
+    "audit_result": "HTTP 200"
+  },
+  "sei.cmu.edu": {
+    "trust_level": "trusted",
+    "source_type": null,
+    "reason": "Исследовательская организация или отраслевое объединение; назначение подтверждено официальным сайтом.",
+    "evidence": [
+      "https://sei.cmu.edu"
+    ],
+    "review_status": "reviewed_first_party",
+    "reviewed_on": "2026-09-19",
+    "audit_result": "HTTP 200",
+    "source_category": "research_organization"
+  },
+  "semiai.ai": {
+    "trust_level": "trusted",
+    "source_type": null,
+    "reason": "Официальный сайт разработчика: описание собственного технологического продукта.",
+    "evidence": [
+      "https://semiai.ai/ko"
+    ],
+    "review_status": "reviewed_first_party",
+    "reviewed_on": "2026-09-19",
+    "audit_result": "HTTP 200",
+    "source_category": "developer_company"
+  },
+  "semiwiki.com": {
+    "trust_level": "unknown",
+    "source_type": null,
+    "reason": "Описание сайта недостаточно для однозначного отнесения к доверенной категории ТЗ.",
+    "evidence": [
+      "https://semiwiki.com"
+    ],
+    "review_status": "unresolved_identity",
+    "reviewed_on": "2026-09-19",
+    "audit_result": "HTTP 200"
+  },
+  "sharpa.com": {
+    "trust_level": "trusted",
+    "source_type": null,
+    "reason": "Официальный сайт разработчика: описание собственного технологического продукта.",
+    "evidence": [
+      "https://www.sharpa.com/"
+    ],
+    "review_status": "reviewed_first_party",
+    "reviewed_on": "2026-09-19",
+    "audit_result": "HTTP 200",
+    "source_category": "developer_company"
+  },
+  "sherpa.ai": {
+    "trust_level": "trusted",
+    "source_type": null,
+    "reason": "Официальный сайт разработчика: описание собственного технологического продукта.",
+    "evidence": [
+      "https://sherpa.ai"
+    ],
+    "review_status": "reviewed_first_party",
+    "reviewed_on": "2026-09-19",
+    "audit_result": "HTTP 200",
+    "source_category": "developer_company"
+  },
+  "siliconangle.com": {
+    "trust_level": "trusted",
+    "source_type": "news",
+    "reason": "Правило team/PROMPT-konstantin.md",
+    "evidence": [
+      "team/PROMPT-konstantin.md"
+    ],
+    "review_status": "brief_rule"
+  },
+  "snu.elsevierpure.com": {
+    "trust_level": "trusted",
+    "source_type": "article",
+    "reason": "Официальный научный издатель или архив научных публикаций.",
+    "evidence": [
+      "https://snu.elsevierpure.com"
+    ],
+    "review_status": "reviewed_first_party",
+    "reviewed_on": "2026-09-19",
+    "audit_result": "HTTP 200",
+    "source_category": "academic_publications"
+  },
+  "speedrun.a16z.com": {
+    "trust_level": "unknown",
+    "source_type": null,
+    "reason": "Описание сайта недостаточно для однозначного отнесения к доверенной категории ТЗ.",
+    "evidence": [
+      "https://speedrun.a16z.com"
+    ],
+    "review_status": "unresolved_identity",
+    "reviewed_on": "2026-09-19",
+    "audit_result": "HTTP 200"
+  },
+  "startup-seeker.com": {
+    "trust_level": "unknown",
+    "source_type": null,
+    "reason": "Первичный сайт не удалось прочитать; категория не подтверждена.",
+    "evidence": [
+      "https://startup-seeker.com"
+    ],
+    "review_status": "unresolved_access",
+    "reviewed_on": "2026-09-19",
+    "audit_result": "HTTPError"
+  },
+  "startupfundraising.com": {
+    "trust_level": "indicator",
+    "source_type": "aggregator",
+    "reason": "Каталог, агрегатор новостей или база сигналов; требуется ссылка на первоисточник.",
+    "evidence": [
+      "https://startupfundraising.com"
+    ],
+    "review_status": "reviewed_first_party",
+    "reviewed_on": "2026-09-19",
+    "audit_result": "HTTP 200",
+    "source_category": "aggregator"
+  },
+  "startupresearcher.com": {
+    "trust_level": "unknown",
+    "source_type": null,
+    "reason": "Первичный сайт не удалось прочитать; категория не подтверждена.",
+    "evidence": [
+      "https://startupresearcher.com"
+    ],
+    "review_status": "unresolved_access",
+    "reviewed_on": "2026-09-19",
+    "audit_result": "HTTPError"
+  },
+  "startupticker.ch": {
+    "trust_level": "trusted",
+    "source_type": "news",
+    "reason": "Профильное издание: официальный сайт описывает редакционные новости и анализ отрасли.",
+    "evidence": [
+      "https://www.startupticker.ch/en/international"
+    ],
+    "review_status": "reviewed_first_party",
+    "reviewed_on": "2026-09-19",
+    "audit_result": "HTTP 200",
+    "source_category": "professional_media"
+  },
+  "stellagent.ai": {
+    "trust_level": "trusted",
+    "source_type": null,
+    "reason": "Официальный сайт разработчика: описание собственного технологического продукта.",
+    "evidence": [
+      "https://stellagent.ai"
+    ],
+    "review_status": "reviewed_first_party",
+    "reviewed_on": "2026-09-19",
+    "audit_result": "HTTP 200",
+    "source_category": "developer_company"
+  },
+  "stlpartners.com": {
+    "trust_level": "trusted",
+    "source_type": null,
+    "reason": "Исследовательская организация или отраслевое объединение; назначение подтверждено официальным сайтом.",
+    "evidence": [
+      "https://stlpartners.com"
+    ],
+    "review_status": "reviewed_first_party",
+    "reviewed_on": "2026-09-19",
+    "audit_result": "HTTP 200",
+    "source_category": "research_organization"
+  },
+  "stocktitan.net": {
+    "trust_level": "indicator",
+    "source_type": "aggregator",
+    "reason": "Каталог, агрегатор новостей или база сигналов; требуется ссылка на первоисточник.",
+    "evidence": [
+      "https://www.stocktitan.net/"
+    ],
+    "review_status": "reviewed_first_party",
+    "reviewed_on": "2026-09-19",
+    "audit_result": "HTTP 200",
+    "source_category": "aggregator"
+  },
+  "streamanalyze.com": {
+    "trust_level": "trusted",
+    "source_type": null,
+    "reason": "Официальный сайт разработчика: описание собственного технологического продукта.",
+    "evidence": [
+      "https://www.streamanalyze.com/"
+    ],
+    "review_status": "reviewed_first_party",
+    "reviewed_on": "2026-09-19",
+    "audit_result": "HTTP 200",
+    "source_category": "developer_company"
+  },
+  "swift.com": {
+    "trust_level": "unknown",
+    "source_type": null,
+    "reason": "Первичный сайт не удалось прочитать; категория не подтверждена.",
+    "evidence": [
+      "https://swift.com"
+    ],
+    "review_status": "unresolved_access",
+    "reviewed_on": "2026-09-19",
+    "audit_result": "HTTPError"
+  },
+  "syncrobotic.ai": {
+    "trust_level": "trusted",
+    "source_type": null,
+    "reason": "Официальный сайт разработчика: описание собственного технологического продукта.",
+    "evidence": [
+      "https://syncrobotic.ai"
+    ],
+    "review_status": "reviewed_first_party",
+    "reviewed_on": "2026-09-19",
+    "audit_result": "HTTP 200",
+    "source_category": "developer_company"
+  },
+  "tamradar.com": {
+    "trust_level": "indicator",
+    "source_type": "aggregator",
+    "reason": "Каталог, агрегатор новостей или база сигналов; требуется ссылка на первоисточник.",
+    "evidence": [
+      "https://www.tamradar.com/"
+    ],
+    "review_status": "reviewed_first_party",
+    "reviewed_on": "2026-09-19",
+    "audit_result": "HTTP 200",
+    "source_category": "aggregator"
+  },
+  "tech.yahoo.com": {
+    "trust_level": "indicator",
+    "source_type": "aggregator",
+    "reason": "Каталог, агрегатор новостей или база сигналов; требуется ссылка на первоисточник.",
+    "evidence": [
+      "https://tech.yahoo.com"
+    ],
+    "review_status": "reviewed_first_party",
+    "reviewed_on": "2026-09-19",
+    "audit_result": "HTTP 200",
+    "source_category": "aggregator"
+  },
+  "techbeat.ca": {
+    "trust_level": "unknown",
+    "source_type": null,
+    "reason": "Описание сайта недостаточно для однозначного отнесения к доверенной категории ТЗ.",
+    "evidence": [
+      "https://techbeat.ca"
+    ],
+    "review_status": "unresolved_identity",
+    "reviewed_on": "2026-09-19",
+    "audit_result": "HTTP 200"
+  },
+  "techcrunch.com": {
+    "trust_level": "trusted",
+    "source_type": "news",
+    "reason": "Правило team/PROMPT-konstantin.md",
+    "evidence": [
+      "team/PROMPT-konstantin.md"
+    ],
+    "review_status": "brief_rule"
+  },
+  "techfundingnews.com": {
+    "trust_level": "trusted",
+    "source_type": "news",
+    "reason": "Профильное издание: официальный сайт описывает редакционные новости и анализ отрасли.",
+    "evidence": [
+      "https://techfundingnews.com"
+    ],
+    "review_status": "reviewed_first_party",
+    "reviewed_on": "2026-09-19",
+    "audit_result": "HTTP 200",
+    "source_category": "professional_media"
+  },
+  "techpowerup.com": {
+    "trust_level": "trusted",
+    "source_type": "news",
+    "reason": "Профильное издание: официальный сайт описывает редакционные новости и анализ отрасли.",
+    "evidence": [
+      "https://www.techpowerup.com/"
+    ],
+    "review_status": "reviewed_first_party",
+    "reviewed_on": "2026-09-19",
+    "audit_result": "HTTP 200",
+    "source_category": "professional_media"
+  },
+  "techradar.com": {
+    "trust_level": "trusted",
+    "source_type": "news",
+    "reason": "Профильное издание: официальный сайт описывает редакционные новости и анализ отрасли.",
+    "evidence": [
+      "https://global.techradar.com/nl-nl"
+    ],
+    "review_status": "reviewed_first_party",
+    "reviewed_on": "2026-09-19",
+    "audit_result": "HTTP 200",
+    "source_category": "professional_media"
+  },
+  "techstartups.com": {
+    "trust_level": "trusted",
+    "source_type": "news",
+    "reason": "Профильное издание: официальный сайт описывает редакционные новости и анализ отрасли.",
+    "evidence": [
+      "https://techstartups.com"
+    ],
+    "review_status": "reviewed_first_party",
+    "reviewed_on": "2026-09-19",
+    "audit_result": "HTTP 200",
+    "source_category": "professional_media"
+  },
+  "techxplore.com": {
+    "trust_level": "trusted",
+    "source_type": "news",
+    "reason": "Профильное издание: официальный сайт описывает редакционные новости и анализ отрасли.",
+    "evidence": [
+      "https://techxplore.com"
+    ],
+    "review_status": "reviewed_first_party",
+    "reviewed_on": "2026-09-19",
+    "audit_result": "HTTP 200",
+    "source_category": "professional_media"
+  },
+  "tempo.xyz": {
+    "trust_level": "trusted",
+    "source_type": null,
+    "reason": "Официальный сайт разработчика: описание собственного технологического продукта.",
+    "evidence": [
+      "https://tempo.xyz"
+    ],
+    "review_status": "reviewed_first_party",
+    "reviewed_on": "2026-09-19",
+    "audit_result": "HTTP 200",
+    "source_category": "developer_company"
+  },
+  "theaiinsider.tech": {
+    "trust_level": "unknown",
+    "source_type": null,
+    "reason": "Описание сайта недостаточно для однозначного отнесения к доверенной категории ТЗ.",
+    "evidence": [
+      "https://theaiinsider.tech"
+    ],
+    "review_status": "unresolved_identity",
+    "reviewed_on": "2026-09-19",
+    "audit_result": "HTTP 200"
+  },
+  "theasianbanker.com": {
+    "trust_level": "trusted",
+    "source_type": "news",
+    "reason": "Профильное издание: официальный сайт описывает редакционные новости и анализ отрасли.",
+    "evidence": [
+      "https://www.theasianbanker.com/"
+    ],
+    "review_status": "reviewed_first_party",
+    "reviewed_on": "2026-09-19",
+    "audit_result": "HTTP 200",
+    "source_category": "professional_media"
+  },
+  "theblock.co": {
+    "trust_level": "unknown",
+    "source_type": null,
+    "reason": "Первичный сайт не удалось прочитать; категория не подтверждена.",
+    "evidence": [
+      "https://theblock.co"
+    ],
+    "review_status": "unresolved_access",
+    "reviewed_on": "2026-09-19",
+    "audit_result": "HTTPError"
+  },
+  "thedeeptech.in": {
+    "trust_level": "unknown",
+    "source_type": null,
+    "reason": "Описание сайта недостаточно для однозначного отнесения к доверенной категории ТЗ.",
+    "evidence": [
+      "https://thedeeptech.in"
+    ],
+    "review_status": "unresolved_identity",
+    "reviewed_on": "2026-09-19",
+    "audit_result": "HTTP 200"
+  },
+  "thehumanoidrace.com": {
+    "trust_level": "unknown",
+    "source_type": null,
+    "reason": "Описание сайта недостаточно для однозначного отнесения к доверенной категории ТЗ.",
+    "evidence": [
+      "https://thehumanoidrace.com"
+    ],
+    "review_status": "unresolved_identity",
+    "reviewed_on": "2026-09-19",
+    "audit_result": "HTTP 200"
+  },
+  "theinnovator.news": {
+    "trust_level": "trusted",
+    "source_type": "news",
+    "reason": "Профильное издание: официальный сайт описывает редакционные новости и анализ отрасли.",
+    "evidence": [
+      "https://theinnovator.news"
+    ],
+    "review_status": "reviewed_first_party",
+    "reviewed_on": "2026-09-19",
+    "audit_result": "HTTP 200",
+    "source_category": "professional_media"
+  },
+  "theregister.com": {
+    "trust_level": "trusted",
+    "source_type": "news",
+    "reason": "Правило team/PROMPT-konstantin.md",
+    "evidence": [
+      "team/PROMPT-konstantin.md"
+    ],
+    "review_status": "brief_rule"
+  },
+  "theroboticlife.com": {
+    "trust_level": "unknown",
+    "source_type": null,
+    "reason": "Описание сайта недостаточно для однозначного отнесения к доверенной категории ТЗ.",
+    "evidence": [
+      "https://theroboticlife.com"
+    ],
+    "review_status": "unresolved_identity",
+    "reviewed_on": "2026-09-19",
+    "audit_result": "HTTP 200"
+  },
+  "therobotreport.com": {
+    "trust_level": "trusted",
+    "source_type": "news",
+    "reason": "Профильное издание: официальный сайт описывает редакционные новости и анализ отрасли.",
+    "evidence": [
+      "https://www.therobotreport.com/"
+    ],
+    "review_status": "reviewed_first_party",
+    "reviewed_on": "2026-09-19",
+    "audit_result": "HTTP 200",
+    "source_category": "professional_media"
+  },
+  "thesaasnews.com": {
+    "trust_level": "unknown",
+    "source_type": null,
+    "reason": "Описание сайта недостаточно для однозначного отнесения к доверенной категории ТЗ.",
+    "evidence": [
+      "https://www.thesaasnews.com/"
+    ],
+    "review_status": "unresolved_identity",
+    "reviewed_on": "2026-09-19",
+    "audit_result": "HTTP 200"
+  },
+  "tianpan.co": {
+    "trust_level": "unknown",
+    "source_type": null,
+    "reason": "Описание сайта недостаточно для однозначного отнесения к доверенной категории ТЗ.",
+    "evidence": [
+      "https://tianpan.co"
+    ],
+    "review_status": "unresolved_identity",
+    "reviewed_on": "2026-09-19",
+    "audit_result": "HTTP 200"
+  },
+  "tinfoil.sh": {
+    "trust_level": "trusted",
+    "source_type": null,
+    "reason": "Официальный сайт разработчика: описание собственного технологического продукта.",
+    "evidence": [
+      "https://tinfoil.sh"
+    ],
+    "review_status": "reviewed_first_party",
+    "reviewed_on": "2026-09-19",
+    "audit_result": "HTTP 200",
+    "source_category": "developer_company"
+  },
+  "tomshardware.com": {
+    "trust_level": "trusted",
+    "source_type": "news",
+    "reason": "Профильное издание: официальный сайт описывает редакционные новости и анализ отрасли.",
+    "evidence": [
+      "https://www.tomshardware.com/"
+    ],
+    "review_status": "reviewed_first_party",
+    "reviewed_on": "2026-09-19",
+    "audit_result": "HTTP 200",
+    "source_category": "professional_media"
+  },
+  "trysignalbase.com": {
+    "trust_level": "indicator",
+    "source_type": "aggregator",
+    "reason": "Каталог, агрегатор новостей или база сигналов; требуется ссылка на первоисточник.",
+    "evidence": [
+      "https://www.trysignalbase.com/"
+    ],
+    "review_status": "reviewed_first_party",
+    "reviewed_on": "2026-09-19",
+    "audit_result": "HTTP 200",
+    "source_category": "aggregator"
+  },
+  "unite.ai": {
+    "trust_level": "trusted",
+    "source_type": "news",
+    "reason": "Профильное издание: официальный сайт описывает редакционные новости и анализ отрасли.",
+    "evidence": [
+      "https://www.unite.ai/"
+    ],
+    "review_status": "reviewed_first_party",
+    "reviewed_on": "2026-09-19",
+    "audit_result": "HTTP 200",
+    "source_category": "professional_media"
+  },
+  "veea.com": {
+    "trust_level": "trusted",
+    "source_type": null,
+    "reason": "Официальный сайт разработчика: описание собственного технологического продукта.",
+    "evidence": [
+      "https://www.veea.com/"
+    ],
+    "review_status": "reviewed_first_party",
+    "reviewed_on": "2026-09-19",
+    "audit_result": "HTTP 200",
+    "source_category": "developer_company"
+  },
+  "venturelab.swiss": {
+    "trust_level": "unknown",
+    "source_type": null,
+    "reason": "Описание сайта недостаточно для однозначного отнесения к доверенной категории ТЗ.",
+    "evidence": [
+      "https://www.venturelab.swiss/"
+    ],
+    "review_status": "unresolved_identity",
+    "reviewed_on": "2026-09-19",
+    "audit_result": "HTTP 200"
+  },
+  "wccftech.com": {
+    "trust_level": "trusted",
+    "source_type": "news",
+    "reason": "Профильное издание: официальный сайт описывает редакционные новости и анализ отрасли.",
+    "evidence": [
+      "https://wccftech.com"
+    ],
+    "review_status": "reviewed_first_party",
+    "reviewed_on": "2026-09-19",
+    "audit_result": "HTTP 200",
+    "source_category": "professional_media"
+  },
+  "x.com": {
+    "trust_level": "indicator",
+    "source_type": "blog",
+    "reason": "Правило team/PROMPT-konstantin.md",
+    "evidence": [
+      "team/PROMPT-konstantin.md"
+    ],
+    "review_status": "brief_rule"
+  },
+  "ycombinator.com": {
+    "trust_level": "unknown",
+    "source_type": null,
+    "reason": "Описание сайта недостаточно для однозначного отнесения к доверенной категории ТЗ.",
+    "evidence": [
+      "https://www.ycombinator.com/"
+    ],
+    "review_status": "unresolved_identity",
+    "reviewed_on": "2026-09-19",
+    "audit_result": "HTTP 200"
+  },
+  "yespress.io": {
+    "trust_level": "unknown",
+    "source_type": null,
+    "reason": "Первичный сайт не удалось прочитать; категория не подтверждена.",
+    "evidence": [
+      "https://yespress.io"
+    ],
+    "review_status": "unresolved_access",
+    "reviewed_on": "2026-09-19",
+    "audit_result": "HTTPError"
+  },
+  "zylos.ai": {
+    "trust_level": "trusted",
+    "source_type": null,
+    "reason": "Официальный сайт разработчика: описание собственного технологического продукта.",
+    "evidence": [
+      "https://zylos.ai"
+    ],
+    "review_status": "reviewed_first_party",
+    "reviewed_on": "2026-09-19",
+    "audit_result": "HTTP 200",
+    "source_category": "developer_company"
+  },
+  "zyphe.com": {
+    "trust_level": "trusted",
+    "source_type": null,
+    "reason": "Официальный сайт разработчика: описание собственного технологического продукта.",
+    "evidence": [
+      "https://www.zyphe.com/"
+    ],
+    "review_status": "reviewed_first_party",
+    "reviewed_on": "2026-09-19",
+    "audit_result": "HTTP 200",
+    "source_category": "developer_company"
+  }
+}
