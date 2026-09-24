@@ -23,6 +23,10 @@ et-xmlfile==2.0.0
     # via openpyxl
 fastapi==0.141.1
     # via trendradar
+feedparser==6.0.14
+    # via trendradar
+feedparser-sgmllib==2.1.0
+    # via feedparser
 h11==0.16.0
     # via
     #   httpcore
