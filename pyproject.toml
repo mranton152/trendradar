@@ -24,6 +24,7 @@ dependencies = [
     # классификатор этапа 1
     "scikit-learn>=1.5",
     "psycopg[binary]>=3.2",
+    "feedparser>=6.0,<7",
 ]
 
 [project.optional-dependencies]
