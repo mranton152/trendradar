@@ -36,8 +36,8 @@ jobs:
 
       - name: requirements.txt совпадает с uv.lock
         run: |
-          uv export --no-hashes --no-dev --no-emit-project --format requirements-txt -o /tmp/req.txt -q
-          diff requirements.txt /tmp/req.txt || { echo "::error::requirements.txt устарел: make requirements"; exit 1; }
+          make requirements
+          git diff --exit-code requirements.txt || { echo "::error::requirements.txt устарел: make requirements"; exit 1; }
 
       - name: Линт
         run: uv run ruff check .
