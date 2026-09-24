@@ -77,6 +77,7 @@ _GENERIC_NAME_WORDS = {
     'protocols', 'roadmap', 'robotics', 'rule', 'rules', 'signature', 'signatures',
     'web', 'where', 'who', 'with', 'without', 'world', 'strategy', 'strategies',
     'phone', 'phones', 'full-stack', 'safety', 'system', 'systems',
+    'ai-powered', 'best', 'scientific', 'paper', 'papers', 'version', 'versions',
 }
 # Это отсев явных общественно-политических сущностей, не справочник компаний.
 # Полноценный NER здесь не заявляется: незнакомое имя остаётся гипотезой.
@@ -86,6 +87,7 @@ _NON_COMPANIES = {
     'uk', 'usa', 'eu', 'white house', 'congress', 'senate', 'parliament',
     'cisa', 'nsa', 'fbi', 'cia', 'nist', 'fcc', 'hhs', 'irs', 'enisa',
     'elon musk', 'silicon valley', 'g7',
+    'josh brown', 'vinod paul',
 }
 _SINGULAR = dict(zip(
     ('sensors', 'processors', 'networks', 'models', 'chips', 'actuators'),
@@ -107,7 +109,10 @@ def live_technology_reason(label):
     return None
 
 
-def extract_live(rows, domain):
+def extract_live(rows, domain, *, min_docs=3):
+    # Значение API сохранено для прежних вызовов; CLI задаёт свой live-default.
+    if isinstance(min_docs, bool) or not isinstance(min_docs, int) or min_docs < 2:
+        raise ValueError('Live требует минимум два разных документа')
     if not domain or len({r['doc_id'] for r in rows}) != len(rows):
         raise ValueError('Нужен домен и уникальные doc_id')
     evidence = defaultdict(set)
@@ -182,7 +187,7 @@ def extract_live(rows, domain):
                 surfaces[key].update(match.group() for match in matches)
     candidates, links, entity_ids = [], [], []
     for (category, label), docs in sorted(evidence.items()):
-        if len(docs) < 3:
+        if len(docs) < min_docs:
             continue
         digest = hashlib.sha256((domain + '\0' + label.casefold()).encode()).hexdigest()[:24]
         cand_id = ('e:' if category == 'entity' else 't:') + domain + ':' + digest
@@ -197,7 +202,7 @@ def extract_live(rows, domain):
         if category == 'entity':
             entity_ids.append(cand_id)
     return candidates, links, {
-        'method': 'observed_technology_names_and_action_entities_v4', 'min_docs': 3,
+        'method': 'observed_technology_names_and_action_entities_v5', 'min_docs': min_docs,
         'n_documents': len(rows), 'n_candidates': len(candidates), 'n_links': len(links),
         'entity_candidate_ids': entity_ids, 'technology_name_rules': len(_PATTERNS),
         'limitations': 'English rules; incomplete vocabulary; entities are contextual hypotheses',

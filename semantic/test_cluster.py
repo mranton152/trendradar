@@ -1,5 +1,6 @@
 """Численная корректность c-TF-IDF и центроидов."""
 import numpy as np
+import pytest
 
 from semantic.cluster import assign_clusters, cluster_candidates, ctfidf_labels, reduce_embeddings
 
@@ -29,6 +30,8 @@ def test_noise_excluded_and_centroid_indices_align():
 
 
 def test_real_umap_hdbscan_separates_two_well_separated_groups():
+    pytest.importorskip('umap')
+    pytest.importorskip('hdbscan')
     rng = np.random.default_rng(42)
     vectors = rng.normal(0, 0.001, (60, 1024)).astype(np.float32)
     vectors[:30, 0] += 1
