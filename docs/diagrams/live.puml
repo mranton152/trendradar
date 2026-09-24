@@ -1,0 +1,33 @@
+@startuml live
+' Живой запрос: жюри вводит направление, которого нет в индексе.
+title Живой запрос по произвольному направлению
+skinparam defaultFontName Arial
+skinparam shadowing false
+
+actor Жюри as u
+participant "web/" as web
+participant "api/\nPOST /api/v1/live" as api
+participant "ingest/\nживой сбор" as ing
+participant "semantic/\nкандидаты" as sem
+participant "core/\nbuild --live" as core
+participant "cards/" as cards
+
+u -> web : направление\nсвободным текстом
+web -> api : запрос
+api --> web : job_id
+loop прогресс
+  web -> api : статус job_id
+  api --> web : «собрано N документов»
+end
+api -> ing : запрос → источники
+ing -> ing : RSS, HN, Google News,\nOpenAlex; доверенность
+ing --> api : data/live/{slug}/works.parquet
+api -> sem : кандидаты из заголовков\n+ техно-фильтр
+sem --> api : candidates, cand_docs
+api -> core : месячные ряды,\nфильтры, плато
+core --> api : trends + rejected
+api -> cards : резюме по-русски\nс пометкой модели
+cards --> api : cards
+api --> web : ТОП-15 + отсеянные с причинами
+web --> u : выдача
+@enduml

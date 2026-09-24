@@ -1,0 +1,51 @@
+@startuml pipeline
+' Конвейер обработки: каждая стадия — отдельная CLI-команда,
+' читает файлы предыдущей и пишет свои. Любую можно перезапустить отдельно.
+title Конвейер обработки данных
+skinparam defaultFontName Arial
+skinparam shadowing false
+skinparam activityBackgroundColor #F7F7F7
+
+start
+:**Сбор** — ingest/
+OpenAlex, arXiv, новости, GitHub, HF
+ретраи, кэш ответов, отказ ≠ ноль;
+note right: works.parquet\ndoc_id, год, страны, url,\nтип и доверенность источника
+:**Кандидаты** — semantic/
+n-граммы-термины и тематические кластеры;
+note right: candidates.parquet\ncand_docs.parquet
+:**Ряды** — core/series.py
+годовые (индекс) или месячные (живой режим)
+peer-нормировка по пулу кандидатов;
+:**Омонимы** — core/homonym.py, breakout.py
+берём текущий сегмент ряда, а не всю историю;
+:**Компоненты** — core/components.py
+новизна · рост · ускорение · всплеск · диффузия
+перцентильные ранги;
+:**Фильтры** — core/filters.py
+мало данных · старый · всплеск одного года ·
+заливка метаданных · одна страна · мейнстрим ·
+обрывок фразы;
+split
+  :не прошёл;
+  :rejected.parquet
+  с причиной;
+  detach
+split again
+  :прошёл;
+endsplit
+:**Скоринг** — core/score.py
+ES = Σ wᵢ·компонентаᵢ × штраф зрелости;
+:**Дедупликация** — core/dedup.py
+варианты одного термина, сопоставимые по объёму;
+:ТОП-15 → trends.parquet;
+:**Карточки** — cards/
+LLM формулирует по документам,
+утверждение без doc_id выбрасывается;
+fork
+  :API → веб-интерфейс;
+fork again
+  :storage/load.py → PostgreSQL;
+end fork
+stop
+@enduml

@@ -1,8 +1,8 @@
 # Postgres — хранилище сырых данных и итоговой выдачи (ТЗ).
-# Расчёт идёт на parquet, сюда набор заливается после:
+# Расчёт идёт на parquet; pg-load заливает золотой снапшот в базу при старте.
 #   docker compose -f storage/compose.yml up -d
-#   uv run python -m storage.load --all
 # Корневой docker-compose.yml подключает этот файл через include.
+# Пути здесь относительно storage/ — так их разрешает и include, и -f.
 services:
   postgres:
     image: postgres:16
@@ -20,6 +20,19 @@ services:
       interval: 2s
       timeout: 3s
       retries: 20
+
+  pg-load:
+    build:
+      context: ..
+      dockerfile: storage/Dockerfile
+    environment:
+      TRENDRADAR_PG_DSN: postgresql://trendradar:trendradar@postgres:5432/trendradar
+    volumes:
+      - ../data:/app/data:ro
+    depends_on:
+      postgres:
+        condition: service_healthy
+    restart: "no"
 
 volumes:
   pgdata:

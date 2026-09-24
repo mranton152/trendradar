@@ -1,4 +1,4 @@
-.PHONY: help check lint test contracts demo pull-corpus setup hooks pg-up pg-load pg-status
+.PHONY: help check lint test contracts demo pull-corpus setup hooks pg-up pg-load pg-status requirements diagrams
 
 DOMAIN ?= artificial-intelligence
 AS_OF  ?= 2026
@@ -12,6 +12,8 @@ help:
 	@echo "pg-up        — поднять Postgres (localhost:55432)"
 	@echo "pg-load      — залить все наборы из data/ в Postgres"
 	@echo "pg-status    — что сейчас лежит в Postgres"
+	@echo "requirements — пересобрать requirements.txt из uv.lock"
+	@echo "diagrams     — отрисовать схемы docs/diagrams/*.puml в SVG"
 
 setup: hooks
 	uv sync --all-extras
@@ -58,3 +60,11 @@ pg-load:
 
 pg-status:
 	uv run python -m storage.load --status
+
+# requirements.txt — для тех, кто ставит через pip. Источник правды — uv.lock,
+# CI падает, если файл с ним разошёлся.
+requirements:
+	uv export --no-hashes --no-dev --no-emit-project --format requirements-txt -o requirements.txt -q
+
+diagrams:
+	docker run --rm -v "$(CURDIR)/docs/diagrams:/data" plantuml/plantuml -tsvg /data/*.puml

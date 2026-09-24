@@ -34,6 +34,11 @@ jobs:
       - name: Поставить зависимости
         run: uv sync --all-extras
 
+      - name: requirements.txt совпадает с uv.lock
+        run: |
+          make requirements
+          git diff --exit-code requirements.txt || { echo "::error::requirements.txt устарел: make requirements"; exit 1; }
+
       - name: Линт
         run: uv run ruff check .
 
