@@ -8,6 +8,21 @@ on:
 jobs:
   ci:
     runs-on: ubuntu-latest
+    # Настоящий Postgres: тесты storage/ проверяют загрузку, а не только DDL.
+    services:
+      postgres:
+        image: postgres:16
+        env:
+          POSTGRES_USER: trendradar
+          POSTGRES_PASSWORD: trendradar
+          POSTGRES_DB: trendradar
+        ports:
+          - 55432:5432
+        options: >-
+          --health-cmd "pg_isready -U trendradar"
+          --health-interval 2s --health-timeout 3s --health-retries 20
+    env:
+      TRENDRADAR_PG_DSN: postgresql://trendradar:trendradar@localhost:55432/trendradar
     steps:
       - uses: actions/checkout@v4
 

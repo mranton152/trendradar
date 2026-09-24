@@ -21,7 +21,12 @@
 ## Архитектурный принцип
 
 Система — это **набор CLI-стадий, которые пишут parquet-файлы**, плюс read-only API
-поверх этих файлов. Никакого сервера БД, никакой очереди задач.
+поверх этих файлов. Никакой очереди задач.
+
+PostgreSQL появился по требованию ТЗ и играет одну роль: **хранилище** собранных
+данных и итоговой выдачи. Считают стадии по-прежнему на parquet, API читает
+parquet. В базу набор заливает `storage/load.py` после расчёта; схема таблиц
+выводится из контрактов, руками её не пишут.
 
 ```
 ingest/    → data/corpus/{domain}/works.parquet
@@ -29,6 +34,7 @@ semantic/  → data/index/{domain}/{candidates,cand_docs}.parquet + embeddings.n
 core/      → data/index/{domain}/trends.parquet
 cards/     → data/index/{domain}/cards.parquet
 api/ web/  → читают data/index/, ничего не считают
+storage/   → копия наборов в PostgreSQL (make pg-up && make pg-load)
 ```
 
 Следствия, которые нельзя ломать:
@@ -41,7 +47,7 @@ api/ web/  → читают data/index/, ничего не считают
 | Папка | Владелец | Трогать другим |
 |---|---|---|
 | `contracts/` | Антон | **нет** — только через issue |
-| `core/`, `validation/` | Антон | нет |
+| `core/`, `validation/`, `classifier/`, `storage/` | Антон | нет |
 | `ingest/`, `semantic/` | Константин | нет |
 | `cards/`, `api/`, `web/` | Михаил | нет |
 | `docs/`, `team/` | Антон | правки через PR |
@@ -72,9 +78,9 @@ api/ web/  → читают data/index/, ничего не считают
 Python 3.12 · pyarrow + DuckDB + Parquet · numpy/scipy · sentence-transformers
 (`intfloat/multilingual-e5-large`) · UMAP + HDBSCAN · FastAPI + Pydantic v2 ·
 Next.js 15 + TypeScript + Tailwind + Recharts · Ollama (абстракция провайдера) ·
-uv для зависимостей · ruff + pytest.
+uv для зависимостей · ruff + pytest · PostgreSQL 16 (только хранилище, psycopg 3).
 
-Сознательно **не используем**: Postgres, Redis, Celery/arq, Kafka, Airflow,
+Сознательно **не используем**: Redis, Celery/arq, Kafka, Airflow,
 Kubernetes, отдельную векторную БД. На две недели это накладные расходы.
 
 ## Проверка перед коммитом

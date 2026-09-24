@@ -1,4 +1,4 @@
-.PHONY: help check lint test contracts demo pull-corpus setup hooks
+.PHONY: help check lint test contracts demo pull-corpus setup hooks pg-up pg-load pg-status
 
 DOMAIN ?= artificial-intelligence
 AS_OF  ?= 2026
@@ -9,6 +9,9 @@ help:
 	@echo "check        — линт + тесты + валидация контрактов. Гнать перед каждым PR"
 	@echo "demo         — сквозной прогон: ingest → semantic → core → cards → api"
 	@echo "pull-corpus  — скачать полный корпус из GitHub Releases"
+	@echo "pg-up        — поднять Postgres (localhost:55432)"
+	@echo "pg-load      — залить все наборы из data/ в Postgres"
+	@echo "pg-status    — что сейчас лежит в Postgres"
 
 setup: hooks
 	uv sync --all-extras
@@ -46,3 +49,12 @@ demo:
 
 pull-corpus:
 	gh release download corpus-$(DOMAIN) -D data/corpus/$(DOMAIN)/ --clobber
+
+pg-up:
+	docker compose -f storage/compose.yml up -d --wait
+
+pg-load:
+	uv run python -m storage.load --all
+
+pg-status:
+	uv run python -m storage.load --status
