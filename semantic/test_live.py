@@ -2,6 +2,25 @@
 from semantic.live import extract_live
 
 
+def test_live_support_threshold_is_explicit_and_never_single_document():
+    import pytest
+
+    rows = [{'doc_id': str(i), 'title': 'Acme launches cybersecurity software'}
+            for i in range(2)]
+    assert any(c['label'] == 'Acme' for c in extract_live(rows, 'cyber', min_docs=2)[0])
+    assert not extract_live(rows, 'cyber', min_docs=3)[0]
+    with pytest.raises(ValueError):
+        extract_live(rows, 'cyber', min_docs=1)
+
+
+def test_two_document_threshold_rejects_generic_titles_and_known_people():
+    for name in ['AI-powered', 'Best Scientific Cybersecurity Paper', 'Version',
+                 'Josh Brown', 'Vinod Paul']:
+        rows = [{'doc_id': str(i), 'title': f"{name}'s cybersecurity software"}
+                for i in range(2)]
+        assert not extract_live(rows, 'cyber', min_docs=2)[2]['entity_candidate_ids'], name
+
+
 def test_guide_in_saved_headlines_is_not_a_product():
     titles = [
         'Top Quantum Software Companies 2026: The Definitive Stack Guide',
@@ -315,8 +334,11 @@ def test_build_live_retains_source_for_publisher_filter(tmp_path, monkeypatch):
     class Captured(Exception):
         pass
 
-    def capture(rows, domain):
+    observed_thresholds = []
+
+    def capture(rows, domain, *, min_docs):
         assert rows[0]['source'] == 'gnews'
+        observed_thresholds.append(min_docs)
         raise Captured
 
     monkeypatch.setattr(live, 'extract_live', capture)
@@ -325,3 +347,13 @@ def test_build_live_retains_source_for_publisher_filter(tmp_path, monkeypatch):
                                     str(tmp_path / 'cache'), '--scope', 'live', '--as-of', '2026'])
     with pytest.raises(Captured):
         build.main()
+    assert observed_thresholds == [2]
+    monkeypatch.setattr(sys, 'argv', [*sys.argv, '--min-docs', '3'])
+    with pytest.raises(Captured):
+        build.main()
+    assert observed_thresholds == [2, 3]
+    monkeypatch.setattr(sys, 'argv', [*sys.argv, '--min-docs', '1'])
+    with pytest.raises(SystemExit) as error:
+        build.main()
+    assert error.value.code == 2
+    assert observed_thresholds == [2, 3]
