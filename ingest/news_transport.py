@@ -1,6 +1,7 @@
 """Общий транспорт новостных источников: ограниченное время и кэш ответов."""
 import asyncio
 import hashlib
+import json
 import time
 import uuid
 from datetime import UTC, datetime
@@ -12,7 +13,8 @@ import httpx
 
 class NewsClient:
     def __init__(self, http: httpx.AsyncClient, cache: Path, *, deadline=None,
-                 attempts=3, ttl=3600, max_bytes=10_000_000, offline=False):
+                 attempts=3, ttl=3600, max_bytes=10_000_000, offline=False,
+                 follow_redirects=True):
         self.http = http
         self.cache = Path(cache)
         self.cache.mkdir(parents=True, exist_ok=True)
@@ -21,6 +23,7 @@ class NewsClient:
         self.ttl = ttl
         self.max_bytes = max_bytes
         self.offline = offline
+        self.follow_redirects = follow_redirects
 
     async def get(self, url, params=None):
         """Возвращает байты; deadline — monotonic, общий для всех источников."""
@@ -30,9 +33,21 @@ class NewsClient:
         async with asyncio.timeout(remaining):
             return await self._get(url, params)
 
-    async def _get(self, url, params):
+    async def post(self, url, *, data, params=None):
+        """POST для публичного разрешения ссылок, тот же дедлайн/кэш/ретраи."""
+        remaining = None if self.deadline is None else self.deadline - time.monotonic()
+        if remaining is not None and remaining <= 0:
+            raise TimeoutError('Исчерпан бюджет сбора')
+        async with asyncio.timeout(remaining):
+            return await self._get(url, params, data=data)
+
+    async def _get(self, url, params, *, data=None):
         target = str(httpx.URL(url, params=sorted((params or {}).items())))
-        path = self.cache / (hashlib.sha256(target.encode()).hexdigest() + '.bin')
+        key = (target if data is None else
+               'POST\n' + target + '\n' + json.dumps(data, sort_keys=True))
+        if not self.follow_redirects:
+            key = 'NO_REDIRECTS\n' + key
+        path = self.cache / (hashlib.sha256(key.encode()).hexdigest() + '.bin')
         if path.exists() and (self.offline or time.time() - path.stat().st_mtime <= self.ttl):
             if path.stat().st_size <= self.max_bytes:
                 return path.read_bytes()
@@ -41,8 +56,9 @@ class NewsClient:
         for attempt in range(self.attempts):
             delay = 2 ** attempt
             try:
-                async with self.http.stream('GET', target, timeout=20,
-                                            follow_redirects=True) as response:
+                async with self.http.stream('GET' if data is None else 'POST', target,
+                                            data=data, timeout=20,
+                                            follow_redirects=self.follow_redirects) as response:
                     response.raise_for_status()
                     body = bytearray()
                     async for chunk in response.aiter_bytes():

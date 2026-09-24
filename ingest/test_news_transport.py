@@ -8,6 +8,28 @@ import pytest
 from ingest.news_transport import NewsClient
 
 
+def test_post_cache_separates_method_and_request_body(tmp_path):
+    calls = []
+
+    def handler(request):
+        calls.append((request.method, request.content))
+        return httpx.Response(200, content=request.method.encode() + request.content)
+
+    async def run():
+        async with httpx.AsyncClient(transport=httpx.MockTransport(handler)) as http:
+            client = NewsClient(http, tmp_path)
+            first = await client.post('https://example.org', data={'id': 'one'})
+            assert await client.post('https://example.org', data={'id': 'one'}) == first
+            assert await client.post('https://example.org', data={'id': 'two'}) != first
+            assert await client.get('https://example.org') != first
+        async with httpx.AsyncClient(transport=httpx.MockTransport(
+                lambda request: pytest.fail('Offline не должен обращаться в сеть'))) as http:
+            assert await NewsClient(http, tmp_path, offline=True).post(
+                'https://example.org', data={'id': 'one'}) == first
+    asyncio.run(run())
+    assert len(calls) == 3
+
+
 def test_retry_and_cache(tmp_path):
     calls = []
 

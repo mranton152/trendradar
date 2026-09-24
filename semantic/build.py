@@ -115,6 +115,8 @@ def main():
     if n_docs < 1 or n_docs > args.max_documents:
         parser.error("Число документов вне лимита памяти; увеличьте --max-documents осознанно")
     columns = ["doc_id", "title", "abstract", "domain", "year"]
+    if args.scope == 'live':
+        columns.append('source')
     rows = pq.read_table(args.works, columns=columns).to_pylist()
     if len({r["doc_id"] for r in rows}) != len(rows):
         parser.error("Корпус содержит повторяющиеся doc_id")
@@ -199,7 +201,9 @@ def main():
             "embedding_run": embedding_meta, "min_cluster_size": args.min_cluster_size,
             "terms": terms_meta, "cluster_comparison": comparison,
             "rejected_clusters": rejected_clusters, "packages": packages,
-            "python": platform.python_version(), "filter_method": "lexical-heuristic-v1"}
+            "python": platform.python_version(),
+            "filter_method": "lexical-heuristic-v3" if args.scope == 'live'
+                             else "lexical-heuristic-v2"}
     if provenance:
         meta['sample_manifest'] = provenance
         meta['cluster_membership_scope'] = 'sample_only'

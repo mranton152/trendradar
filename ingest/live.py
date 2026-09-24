@@ -23,6 +23,30 @@ from ingest.sources import github, gnews, hackernews, huggingface, rss
 from ingest.sources.partial import PartialCollectionError
 from semantic.terms import ngrams
 
+_QUERY_STOP = frozenset('''the and for with from into via using based new emerging
+technology technologies system systems model models platform ai artificial intelligence
+development developments advanced local service services market markets'''.split())
+
+
+def matches_topic(title, phrases):
+    """Консервативный лексический отбор RSS, не оценка смысловой релевантности."""
+    tokens = set(re.findall(r'\w+', title.casefold()))
+    title_sequence = ' ' + ' '.join(re.findall(r'\w+', title.casefold())) + ' '
+    for phrase in phrases:
+        phrase_sequence = ' '.join(re.findall(r'\w+', phrase.casefold()))
+        # Точный предмет запроса сохраняем даже для AI, отсекаемого stop-list.
+        if phrase_sequence and (' ' + phrase_sequence + ' ') in title_sequence:
+            return True
+        terms = {t for t in re.findall(r'\w+', phrase.casefold())
+                 if len(t) > 2 and t not in _QUERY_STOP}
+        # Два признака одной фразы; одиночный точный термин допускается,
+        # только если сам запрос состоит из одного содержательного токена.
+        if len(terms) >= 2 and len(terms & tokens) >= 2:
+            return True
+        if len(terms) == 1 and len(re.findall(r'\w+', phrase)) == 1 and terms <= tokens:
+            return True
+    return False
+
 
 def deduplicate(rows):
     urls, titles, result = set(), set(), []
@@ -35,7 +59,10 @@ def deduplicate(rows):
                                  if not k.lower().startswith('utm_')
                                  and k not in {'fbclid', 'gclid'}))
         url = urlunsplit((parts.scheme.lower(), parts.netloc.lower(), parts.path, query, ''))
-        title = ' '.join(re.findall(r'\w+', row['title'].casefold()))
+        content_title = row['title']
+        if row.get('source') == 'gnews':
+            content_title = content_title.rsplit(' - ', 1)[0]
+        title = ' '.join(re.findall(r'\w+', content_title.casefold()))
         if url in urls or title in titles:
             continue
         urls.add(url)
@@ -80,12 +107,21 @@ def validate_phrases(payload):
     return list(dict.fromkeys(p.strip() for p in phrases))
 
 
+def news_event_queries(phrase):
+    """Дополнение предмета поиска событиями из ТЗ; не перевод и не подтемы."""
+    return [phrase + ' startup', phrase + ' funding']
+
+
 async def translate(query, timeout):
     prompt = ('Return JSON {"phrases": [1 to 3 concise English technology search phrases]}. '
               'Translate the technology topic, preserving its scope. Do not invent subtopics. '
-              'Weak signals means emerging technology trends, NOT vulnerabilities or failures. '
-              'Remove generic instructions: weak signals, promising, trends, in the field of. '
-              'Prefer 1 to 3 faithful translations or close synonyms over broad expansions. '
+              'Extract only the subject being researched, not the research intent. '
+              'Omit requests to find weak signals, promising solutions, trends, news, '
+              'developments, or emerging technologies. These are NOT search keywords. '
+              'Do not translate weak signals as signals, weaknesses or vulnerabilities. '
+              'Prefer ONE literal subject translation; add synonyms only if equivalent. '
+              'Example: promising solutions in robotics -> {"phrases": ["robotics"]}. '
+              'Example: trends in optical sensors -> {"phrases": ["optical sensors"]}. '
               'User topic: ' + json.dumps(query, ensure_ascii=False))
     audit = {'prompt': prompt, 'model': os.getenv('LLM_MODEL', 'qwen2.5:7b'),
              'backend': os.getenv('LLM_BACKEND', 'ollama')}
@@ -134,16 +170,15 @@ async def run(query, output, *, budget=180, cache=Path('data/live-cache'),
             for name, module in [('hn', hackernews), ('github', github),
                                  ('hf', huggingface), ('gnews-en', gnews)]:
                 jobs[name + ':' + phrase] = module.collect(client, phrase, domain, now)
+            for event_query in news_event_queries(phrase):
+                jobs['gnews-events:' + event_query] = gnews.collect(
+                    client, event_query, domain, now)
         jobs['gnews-ru'] = gnews.collect(client, query, domain, now, lang='ru')
         for name in rss.FEEDS:
             jobs['rss:' + name] = rss.collect(client, name, domain, now)
         reserve = min(30, budget * 0.2) if os.getenv('OPENALEX_API_KEY') else 0
         rows, statuses = await poll(jobs, deadline - time.monotonic() - reserve)
-        # Общие RSS ленты отбираем только по словам переведённого запроса.
-        words = {w for phrase in phrases for w in re.findall(r'\w+', phrase.casefold())
-                 if len(w) > 3}
-        rows = [r for r in rows if r['source'] != 'rss' or
-                words.intersection(re.findall(r'\w+', r['title'].casefold()))]
+        rows = [r for r in rows if r['source'] != 'rss' or matches_topic(r['title'], phrases)]
         rows = deduplicate(rows)
         history = {'status': 'skipped_deadline' if os.getenv('OPENALEX_API_KEY')
                    else 'skipped_no_key'}
@@ -182,6 +217,7 @@ async def run(query, output, *, budget=180, cache=Path('data/live-cache'),
                                       else name.split(':', 1)[0]) for name in statuses}),
             'n_source_queries': len(statuses), 'n_docs': len(rows),
             'elapsed_s': time.monotonic() - start, 'translation': audit,
+            'news_query_policy': 'subject_plus_startup_and_funding_v1',
             'sources': statuses, 'openalex_history': history}
     (stage / 'meta.json').write_text(
         json.dumps(meta, ensure_ascii=False, indent=2), encoding='utf-8')
