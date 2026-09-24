@@ -91,7 +91,7 @@ def main():
     parser.add_argument("--works", type=Path, required=True)
     parser.add_argument("--output", type=Path, required=True)
     parser.add_argument("--cache", type=Path, required=True)
-    parser.add_argument("--scope", required=True, choices=["sample", "full"])
+    parser.add_argument("--scope", required=True, choices=["sample", "full", "live"])
     parser.add_argument("--as-of", type=int, required=True)
     parser.add_argument("--min-docs", type=int, default=20)
     parser.add_argument("--min-cluster-size", type=int, default=25)
@@ -101,6 +101,9 @@ def main():
     parser.add_argument("--terms-only", action="store_true")
     parser.add_argument("--max-documents", type=int, default=200000)
     args = parser.parse_args()
+    if args.scope == 'live':
+        args.terms_only = True
+        args.min_docs = 3
     if args.output.exists():
         parser.error("Каталог результата уже существует; задайте новый --output")
     if args.scope == "full":
@@ -112,18 +115,30 @@ def main():
     if n_docs < 1 or n_docs > args.max_documents:
         parser.error("Число документов вне лимита памяти; увеличьте --max-documents осознанно")
     columns = ["doc_id", "title", "abstract", "domain", "year"]
+    if args.scope == 'live':
+        columns.append('source')
     rows = pq.read_table(args.works, columns=columns).to_pylist()
     if len({r["doc_id"] for r in rows}) != len(rows):
         parser.error("Корпус содержит повторяющиеся doc_id")
     if any(r["domain"] != args.domain or r["year"] > args.as_of for r in rows):
         parser.error("Домен или год корпуса не соответствует параметрам")
     corpus_hash = fingerprint(args.works)
+    live_meta = None
+    if args.scope == 'live':
+        live_meta = json.loads(args.works.with_name('meta.json').read_text(encoding='utf-8'))
+        if (live_meta.get('domain') != args.domain or live_meta.get('n_docs') != n_docs
+                or live_meta.get('corpus_sha256') != corpus_hash):
+            parser.error('Live meta не соответствует корпусу: домен, число строк или SHA256')
     provenance = (sample_provenance(args.works, corpus_hash, n_docs, args.domain, args.as_of)
                   if args.scope == 'sample' else None)
     if args.scope == "full":
         validate_full_manifest(args.works.parent / "manifest.json", corpus_hash,
                                len(rows), args.domain, args.as_of)
-    candidates, links, terms_meta = extract_terms(rows, args.domain, args.min_docs)
+    if args.scope == 'live':
+        from semantic.live import extract_live
+        candidates, links, terms_meta = extract_live(rows, args.domain)
+    else:
+        candidates, links, terms_meta = extract_terms(rows, args.domain, args.min_docs)
     centers = np.empty((0, 1024), dtype=np.float32)
     comparison, rejected_clusters, embedding_meta = [], [], {}
     if not args.terms_only:
@@ -186,7 +201,9 @@ def main():
             "embedding_run": embedding_meta, "min_cluster_size": args.min_cluster_size,
             "terms": terms_meta, "cluster_comparison": comparison,
             "rejected_clusters": rejected_clusters, "packages": packages,
-            "python": platform.python_version(), "filter_method": "lexical-heuristic-v1"}
+            "python": platform.python_version(),
+            "filter_method": "lexical-heuristic-v3" if args.scope == 'live'
+                             else "lexical-heuristic-v2"}
     if provenance:
         meta['sample_manifest'] = provenance
         meta['cluster_membership_scope'] = 'sample_only'
@@ -197,6 +214,10 @@ def main():
                     or stats.get('n_works') != provenance.get('source_n_works')):
                 raise ValueError('Corpus statistics do not match sample provenance')
             meta['full_corpus_statistics'] = stats
+    if live_meta:
+        meta['domain_query'] = live_meta['domain_query']
+        meta['live_ingest'] = live_meta
+        meta['n_sources_polled'] = live_meta['n_sources_polled']
     stage = args.output.with_name(args.output.name + ".building-" + uuid.uuid4().hex[:8])
     stage.mkdir(parents=True)
     try:

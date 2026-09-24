@@ -16,6 +16,8 @@ _TECHNOLOGY = re.compile(
     r"transformers?|semiconductors?|sensors?|photonic\w*|nanotech\w*|"
     r"bioprint\w*|crispr|immunotherap\w*|vaccin\w*|sequencing|"
     r"gene editing|genome editing|gene therapy|drug delivery|"
+    r"cybersecurity|cyber[- ]security|encryption|cryptograph\w*|"
+    r"кибербезопасност\w*|криптограф\w*|шифрован\w*|"
     r"нейрон\w*|нейросет\w*|квантов\w*|вычислен\w*|алгоритм\w*|"
     r"робот\w*|сенсор\w*|полупроводник\w*|фотон\w*|"
     r"редактирован\w* геном\w*|генн\w* терап\w*|вакцин\w*|"
