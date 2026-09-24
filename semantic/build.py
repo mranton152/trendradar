@@ -93,7 +93,8 @@ def main():
     parser.add_argument("--cache", type=Path, required=True)
     parser.add_argument("--scope", required=True, choices=["sample", "full", "live"])
     parser.add_argument("--as-of", type=int, required=True)
-    parser.add_argument("--min-docs", type=int, default=20)
+    parser.add_argument("--min-docs", type=int, default=None,
+                        help='Минимум документов: live=2 (не менее 2), sample/full=20')
     parser.add_argument("--min-cluster-size", type=int, default=25)
     parser.add_argument("--batch-size", type=int, default=64)
     parser.add_argument("--device", default="cuda", choices=["cuda", "cpu"])
@@ -101,9 +102,12 @@ def main():
     parser.add_argument("--terms-only", action="store_true")
     parser.add_argument("--max-documents", type=int, default=200000)
     args = parser.parse_args()
+    if args.min_docs is None:
+        args.min_docs = 2 if args.scope == 'live' else 20
+    if args.min_docs < (2 if args.scope == 'live' else 1):
+        parser.error('Недопустимый --min-docs: live требует не менее 2, остальные — 1')
     if args.scope == 'live':
         args.terms_only = True
-        args.min_docs = 3
     if args.output.exists():
         parser.error("Каталог результата уже существует; задайте новый --output")
     if args.scope == "full":
@@ -136,7 +140,7 @@ def main():
                                len(rows), args.domain, args.as_of)
     if args.scope == 'live':
         from semantic.live import extract_live
-        candidates, links, terms_meta = extract_live(rows, args.domain)
+        candidates, links, terms_meta = extract_live(rows, args.domain, min_docs=args.min_docs)
     else:
         candidates, links, terms_meta = extract_terms(rows, args.domain, args.min_docs)
     centers = np.empty((0, 1024), dtype=np.float32)
