@@ -142,11 +142,23 @@ def _trend(row: dict[str, object], documents: dict[str, dict[str, object]]) -> d
         "stage": row["stage"],
         "confidence": row["confidence"],
         "series_granularity": row.get("series_granularity") or "year",
+        "backtest": _backtest(row),
     }
 
 
 def _optional_int(value: object) -> int | None:
     return int(value) if value is not None else None
+
+
+def _backtest(row: dict[str, object]) -> dict[str, int | float] | None:
+    values = (row.get("bt_at_cutoff"), row.get("bt_peak_after"), row.get("bt_growth_x"))
+    if any(value is None for value in values):
+        return None
+    return {
+        "at_cutoff": int(values[0]),
+        "peak_after": int(values[1]),
+        "growth_x": float(values[2]),
+    }
 
 
 def main() -> None:

@@ -5,6 +5,7 @@ from datetime import UTC, datetime
 from fastapi import APIRouter, HTTPException, Request
 
 from api.models import (
+    Backtest,
     CaseExample,
     Components,
     DomainInfo,
@@ -50,6 +51,7 @@ def _as_model(row: dict, store: Store, domain: str) -> Trend:
     card = store.card(domain, row["trend_id"])
     motivation = None
     case_example = None
+    backtest = None
     if card is not None:
         problem = card["problem"]
         advantage = card["advantage"]
@@ -66,6 +68,15 @@ def _as_model(row: dict, store: Store, domain: str) -> Trend:
                 description=card["case_text"],
                 source=card["case_docs"][0] if card["case_docs"] else None,
             )
+    backtest_values = (
+        row.get("bt_at_cutoff"), row.get("bt_peak_after"), row.get("bt_growth_x")
+    )
+    if all(value is not None for value in backtest_values):
+        backtest = Backtest(
+            at_cutoff=int(backtest_values[0]),
+            peak_after=int(backtest_values[1]),
+            growth_x=float(backtest_values[2]),
+        )
     return Trend(
         trend_id=row["trend_id"],
         rank=int(row["rank"]),
@@ -113,6 +124,7 @@ def _as_model(row: dict, store: Store, domain: str) -> Trend:
         confidence=row["confidence"],
         confidence_pct=round(float(row["emergence_score"]) * 100),
         series_granularity=row.get("series_granularity") or "year",
+        backtest=backtest,
     )
 
 

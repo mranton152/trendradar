@@ -50,6 +50,11 @@ export type Trend = {
   stage: "emerging" | "early_growth" | "scaling";
   confidence: "high" | "medium" | "low";
   series_granularity: "year" | "month";
+  backtest: {
+    at_cutoff: number;
+    peak_after: number;
+    growth_x: number;
+  } | null;
 };
 
 export type TrendsResponse = {
@@ -99,4 +104,16 @@ export async function getTrends(
   }
 
   return (await response.json()) as TrendsResponse;
+}
+
+export async function getAvailableDomains(): Promise<string[]> {
+  const apiUrl = process.env.NEXT_PUBLIC_API_URL;
+  if (!apiUrl) return ["golden"];
+
+  const response = await fetch(`${apiUrl}/api/v1/health`, { cache: "no-store" });
+  if (!response.ok) return [];
+  const body = (await response.json()) as { indexed_domains?: unknown };
+  return Array.isArray(body.indexed_domains)
+    ? body.indexed_domains.filter((domain): domain is string => typeof domain === "string")
+    : [];
 }

@@ -126,6 +126,20 @@ export default async function TrendPage({ params, searchParams }: TrendPageProps
         <ScoreBreakdown components={trend.components} />
       </section>
 
+      {trend.backtest && (
+        <section className="rounded-xl border border-indigo-200 bg-indigo-50 p-6">
+          <h2 className="text-lg font-semibold text-slate-900">Что произошло после среза</h2>
+          <p className="mt-2 text-slate-700">
+            На момент среза — {trend.backtest.at_cutoff} публикаций. Позднейший пик —{" "}
+            {trend.backtest.peak_after}; рост в {trend.backtest.growth_x.toFixed(1)} раза.
+          </p>
+          <p className="mt-2 text-sm text-slate-600">
+            Это результат бэктеста: система показывает, как найденный в прошлом сигнал
+            развился до текущего периода.
+          </p>
+        </section>
+      )}
+
       {(trend.motivation || trend.case_example) && (
         <section className="space-y-6 rounded-xl border border-slate-200 bg-white p-6 shadow-sm">
           {trend.motivation && (

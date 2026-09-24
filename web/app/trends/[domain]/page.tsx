@@ -2,7 +2,7 @@ import Link from "next/link";
 
 import { AsOfSwitch } from "@/components/AsOfSwitch";
 import { TrendCard } from "@/components/TrendCard";
-import { getTrends } from "@/lib/api";
+import { getAvailableDomains, getTrends } from "@/lib/api";
 
 const AVAILABLE_YEARS = [2021, 2026];
 
@@ -23,7 +23,33 @@ export default async function TrendsPage({
   const { domain: encodedDomain } = await params;
   const { as_of: asOfParam } = await searchParams;
   const domain = decodeURIComponent(encodedDomain);
-  const data = await getTrends(domain, selectedYear(asOfParam));
+  let data;
+  try {
+    data = await getTrends(domain, selectedYear(asOfParam));
+  } catch {
+    const availableDomains = await getAvailableDomains();
+    return (
+      <main className="mx-auto max-w-3xl px-6 py-12">
+        <h1 className="text-3xl font-bold tracking-tight text-slate-950">Направление пока не найдено</h1>
+        <p className="mt-3 text-slate-600">
+          Выберите доступное направление или дождитесь живого поиска.
+        </p>
+        {availableDomains.length > 0 ? (
+          <ul className="mt-6 space-y-2">
+            {availableDomains.map((availableDomain) => (
+              <li key={availableDomain}>
+                <Link className="text-indigo-600 hover:underline" href={`/trends/${encodeURIComponent(availableDomain)}`}>
+                  {availableDomain}
+                </Link>
+              </li>
+            ))}
+          </ul>
+        ) : (
+          <p className="mt-6 text-slate-500">Доступных направлений пока нет.</p>
+        )}
+      </main>
+    );
+  }
 
   return (
     <main className="mx-auto max-w-3xl px-6 py-12">
