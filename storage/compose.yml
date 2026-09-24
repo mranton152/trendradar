@@ -1,0 +1,25 @@
+# Postgres — хранилище сырых данных и итоговой выдачи (ТЗ).
+# Расчёт идёт на parquet, сюда набор заливается после:
+#   docker compose -f storage/compose.yml up -d
+#   uv run python -m storage.load --all
+# Корневой docker-compose.yml подключает этот файл через include.
+services:
+  postgres:
+    image: postgres:16
+    environment:
+      POSTGRES_USER: trendradar
+      POSTGRES_PASSWORD: trendradar
+      POSTGRES_DB: trendradar
+    ports:
+      # 55432 снаружи: 5432 и 5433 на машинах команды заняты чужими проектами
+      - "127.0.0.1:${TRENDRADAR_PG_PORT:-55432}:5432"
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U trendradar"]
+      interval: 2s
+      timeout: 3s
+      retries: 20
+
+volumes:
+  pgdata:
