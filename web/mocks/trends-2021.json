@@ -5,7 +5,7 @@
     "n_works": 5000
   },
   "as_of": 2021,
-  "generated_at": "2026-09-22T06:06:12.094261+00:00",
+  "generated_at": "2026-09-22T11:02:12.717769+00:00",
   "methodology_version": "1.0",
   "stats": {
     "n_sources_polled": 5000,
@@ -79,7 +79,12 @@
       ],
       "stage": "emerging",
       "confidence": "medium",
-      "series_granularity": "year"
+      "series_granularity": "year",
+      "backtest": {
+        "at_cutoff": 315,
+        "peak_after": 1785,
+        "growth_x": 5.650000095367432
+      }
     },
     {
       "trend_id": "t:golden:2021:02",
@@ -245,7 +250,12 @@
       ],
       "stage": "emerging",
       "confidence": "medium",
-      "series_granularity": "year"
+      "series_granularity": "year",
+      "backtest": {
+        "at_cutoff": 6111,
+        "peak_after": 6024,
+        "growth_x": 0.9900000095367432
+      }
     },
     {
       "trend_id": "t:golden:2021:03",
@@ -334,7 +344,12 @@
       ],
       "stage": "early_growth",
       "confidence": "high",
-      "series_granularity": "year"
+      "series_granularity": "year",
+      "backtest": {
+        "at_cutoff": 498,
+        "peak_after": 1992,
+        "growth_x": 3.990000009536743
+      }
     },
     {
       "trend_id": "t:golden:2021:04",
@@ -401,7 +416,12 @@
       ],
       "stage": "emerging",
       "confidence": "medium",
-      "series_granularity": "year"
+      "series_granularity": "year",
+      "backtest": {
+        "at_cutoff": 402,
+        "peak_after": 1374,
+        "growth_x": 3.4100000858306885
+      }
     },
     {
       "trend_id": "t:golden:2021:05",
@@ -468,7 +488,12 @@
       ],
       "stage": "emerging",
       "confidence": "medium",
-      "series_granularity": "year"
+      "series_granularity": "year",
+      "backtest": {
+        "at_cutoff": 2408,
+        "peak_after": 26795,
+        "growth_x": 11.119999885559082
+      }
     },
     {
       "trend_id": "t:golden:2021:06",
@@ -535,7 +560,12 @@
       ],
       "stage": "emerging",
       "confidence": "medium",
-      "series_granularity": "year"
+      "series_granularity": "year",
+      "backtest": {
+        "at_cutoff": 360,
+        "peak_after": 755,
+        "growth_x": 2.0899999141693115
+      }
     },
     {
       "trend_id": "t:golden:2021:07",
@@ -624,7 +654,12 @@
       ],
       "stage": "emerging",
       "confidence": "high",
-      "series_granularity": "year"
+      "series_granularity": "year",
+      "backtest": {
+        "at_cutoff": 1651,
+        "peak_after": 3631,
+        "growth_x": 2.200000047683716
+      }
     },
     {
       "trend_id": "t:golden:2021:08",
@@ -702,7 +737,12 @@
       ],
       "stage": "early_growth",
       "confidence": "medium",
-      "series_granularity": "year"
+      "series_granularity": "year",
+      "backtest": {
+        "at_cutoff": 877,
+        "peak_after": 2262,
+        "growth_x": 2.5799999237060547
+      }
     },
     {
       "trend_id": "t:golden:2021:09",
@@ -813,7 +853,12 @@
       ],
       "stage": "emerging",
       "confidence": "medium",
-      "series_granularity": "year"
+      "series_granularity": "year",
+      "backtest": {
+        "at_cutoff": 3215,
+        "peak_after": 8575,
+        "growth_x": 2.6700000762939453
+      }
     },
     {
       "trend_id": "t:golden:2021:10",
@@ -891,7 +936,12 @@
       ],
       "stage": "emerging",
       "confidence": "medium",
-      "series_granularity": "year"
+      "series_granularity": "year",
+      "backtest": {
+        "at_cutoff": 3004,
+        "peak_after": 16898,
+        "growth_x": 5.619999885559082
+      }
     },
     {
       "trend_id": "t:golden:2021:11",
@@ -1013,7 +1063,12 @@
       ],
       "stage": "emerging",
       "confidence": "medium",
-      "series_granularity": "year"
+      "series_granularity": "year",
+      "backtest": {
+        "at_cutoff": 1698,
+        "peak_after": 6111,
+        "growth_x": 3.5999999046325684
+      }
     },
     {
       "trend_id": "t:golden:2021:12",
@@ -1091,7 +1146,12 @@
       ],
       "stage": "emerging",
       "confidence": "medium",
-      "series_granularity": "year"
+      "series_granularity": "year",
+      "backtest": {
+        "at_cutoff": 792,
+        "peak_after": 1935,
+        "growth_x": 2.440000057220459
+      }
     },
     {
       "trend_id": "t:golden:2021:13",
@@ -1158,7 +1218,12 @@
       ],
       "stage": "early_growth",
       "confidence": "high",
-      "series_granularity": "year"
+      "series_granularity": "year",
+      "backtest": {
+        "at_cutoff": 215,
+        "peak_after": 471,
+        "growth_x": 2.190000057220459
+      }
     },
     {
       "trend_id": "t:golden:2021:14",
@@ -1280,7 +1345,12 @@
       ],
       "stage": "early_growth",
       "confidence": "medium",
-      "series_granularity": "year"
+      "series_granularity": "year",
+      "backtest": {
+        "at_cutoff": 3662,
+        "peak_after": 7811,
+        "growth_x": 2.130000114440918
+      }
     },
     {
       "trend_id": "t:golden:2021:15",
@@ -1369,7 +1439,12 @@
       ],
       "stage": "emerging",
       "confidence": "medium",
-      "series_granularity": "year"
+      "series_granularity": "year",
+      "backtest": {
+        "at_cutoff": 1121,
+        "peak_after": 1797,
+        "growth_x": 1.600000023841858
+      }
     }
   ],
   "rejected": [

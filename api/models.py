@@ -125,3 +125,25 @@ class ResolveResponse(BaseModel):
     n_works: int = Field(default=0, ge=0)
     in_index: bool
     alternatives: list[str] = Field(default_factory=list)
+
+
+class LiveRequest(BaseModel):
+    query: str = Field(min_length=1, max_length=200)
+    budget_s: int = Field(default=180, ge=30, le=300)
+
+
+class LiveAccepted(BaseModel):
+    job_id: str
+    domain: str
+
+
+class LiveStatus(BaseModel):
+    status: Literal["collecting", "candidates", "scoring", "cards", "done", "failed"]
+    stage_text: str
+    n_docs: int = Field(default=0, ge=0)
+    n_sources_polled: int = Field(default=0, ge=0)
+    n_candidates: int = Field(default=0, ge=0)
+    elapsed_s: float = Field(default=0, ge=0)
+    domain: str | None = None
+    error: str | None = None
+    no_trends: bool = False

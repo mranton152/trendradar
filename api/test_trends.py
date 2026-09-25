@@ -48,6 +48,9 @@ def test_single_trend_keeps_index_folder_for_source_lookup(index):  # noqa: F811
         response = client.get("/api/v1/trends/t:ai:2021:1")
     assert response.status_code == 200
     assert response.json()["sources"][0]["doc_id"] == "openalex:W1"
+    assert response.json()["backtest"] == {
+        "at_cutoff": 20, "peak_after": 120, "growth_x": 6.0,
+    }
 
 
 def test_trend_includes_generated_motivation_and_case(index):  # noqa: F811

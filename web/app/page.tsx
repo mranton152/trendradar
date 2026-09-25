@@ -8,13 +8,44 @@ const DEFAULT_QUERY = "технологии в ИИ";
 export default function HomePage() {
   const router = useRouter();
   const [query, setQuery] = useState(DEFAULT_QUERY);
+  const [progress, setProgress] = useState<string | null>(null);
+  const [error, setError] = useState<string | null>(null);
 
-  function submit(event: FormEvent<HTMLFormElement>) {
+  async function submit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
     const value = query.trim();
 
-    if (value) {
-      router.push(`/trends/${encodeURIComponent(value)}`);
+    if (!value) return;
+    setError(null);
+    setProgress("Запускаем живой поиск…");
+    try {
+      const started = await fetch("/api/live", {
+        method: "POST", headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ query: value }),
+      });
+      if (!started.ok) throw new Error("Не удалось запустить поиск");
+      const { job_id: jobId } = (await started.json()) as { job_id: string };
+      const timer = window.setInterval(async () => {
+        const response = await fetch(`/api/live/${jobId}`);
+        if (!response.ok) return;
+        const job = (await response.json()) as { status: string; stage_text: string; domain?: string; error?: string; no_trends?: boolean };
+        setProgress(job.stage_text);
+        if (job.status === "done" && job.no_trends) {
+          window.clearInterval(timer);
+          setError("Поиск завершён, но зарождающихся трендов не найдено. Попробуйте уточнить направление.");
+        } else if (job.status === "done" && job.domain) {
+          window.clearInterval(timer);
+          router.push(`/trends/${encodeURIComponent(job.domain)}`);
+        }
+        if (job.status === "failed") {
+          window.clearInterval(timer);
+          setProgress(null);
+          setError(job.error ?? "Живой поиск завершился ошибкой");
+        }
+      }, 1500);
+    } catch (cause) {
+      setProgress(null);
+      setError(cause instanceof Error ? cause.message : "Не удалось запустить поиск");
     }
   }
 
@@ -48,6 +79,8 @@ export default function HomePage() {
           Найти
         </button>
       </form>
+      {progress && <p className="mt-5 text-indigo-700" role="status">{progress}</p>}
+      {error && <p className="mt-5 text-red-700" role="alert">{error}</p>}
     </main>
   );
 }

@@ -25,6 +25,9 @@ def index(tmp_path):
             "n_docs": 20, "n_countries": 5, "n_orgs": None, "n_patents": None,
             "top_doc_ids": ["openalex:W1"], "stage": "emerging", "confidence": "low",
             "methodology_version": "1.0",
+            "bt_at_cutoff": 20 if year == 2021 else None,
+            "bt_peak_after": 120 if year == 2021 else None,
+            "bt_growth_x": 6.0 if year == 2021 else None,
         })
     pq.write_table(pa.Table.from_pylist(rows, schema=TRENDS), domain / "trends.parquet")
     works = [{
