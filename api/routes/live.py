@@ -8,6 +8,7 @@ import time
 import uuid
 from pathlib import Path
 
+import pyarrow.parquet as pq
 from fastapi import APIRouter, HTTPException, Request
 
 from api.models import LiveAccepted, LiveRequest, LiveStatus
@@ -45,13 +46,16 @@ def _run(job: dict, root: Path, query: str, budget: int, app) -> None:
                    stage_text="Считаем слабые сигналы…")
         subprocess.run([sys.executable, "-m", "core.build", "--domain", meta["domain"],
                         "--live", str(semantic_dir)], check=True, timeout=60)
+        no_trends = pq.read_metadata(semantic_dir / "trends.parquet").num_rows == 0
         destination = root / meta["domain"]
         if destination.exists():
             shutil.rmtree(destination)
         shutil.move(str(semantic_dir), destination)
         shutil.rmtree(work_dir)
         app.state.store = Store(root)
-        job.update(status="done", stage_text="Готово", domain=meta["domain"])
+        stage_text = "Поиск завершён: зарождающихся трендов не найдено" if no_trends else "Готово"
+        job.update(status="done", no_trends=no_trends, stage_text=stage_text,
+                   domain=meta["domain"])
     except (OSError, subprocess.SubprocessError, ValueError, KeyError, json.JSONDecodeError) as exc:
         job.update(status="failed", stage_text="Не удалось собрать выдачу", error=str(exc))
     finally:

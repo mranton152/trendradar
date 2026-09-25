@@ -146,3 +146,4 @@ class LiveStatus(BaseModel):
     elapsed_s: float = Field(default=0, ge=0)
     domain: str | None = None
     error: str | None = None
+    no_trends: bool = False

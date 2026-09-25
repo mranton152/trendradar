@@ -19,19 +19,21 @@ export default function HomePage() {
     setError(null);
     setProgress("Запускаем живой поиск…");
     try {
-      const apiUrl = process.env.NEXT_PUBLIC_API_URL ?? "http://localhost:8000";
-      const started = await fetch(`${apiUrl}/api/v1/live`, {
+      const started = await fetch("/api/live", {
         method: "POST", headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ query: value }),
       });
       if (!started.ok) throw new Error("Не удалось запустить поиск");
       const { job_id: jobId } = (await started.json()) as { job_id: string };
       const timer = window.setInterval(async () => {
-        const response = await fetch(`${apiUrl}/api/v1/live/${jobId}`);
+        const response = await fetch(`/api/live/${jobId}`);
         if (!response.ok) return;
-        const job = (await response.json()) as { status: string; stage_text: string; domain?: string; error?: string };
+        const job = (await response.json()) as { status: string; stage_text: string; domain?: string; error?: string; no_trends?: boolean };
         setProgress(job.stage_text);
-        if (job.status === "done" && job.domain) {
+        if (job.status === "done" && job.no_trends) {
+          window.clearInterval(timer);
+          setError("Поиск завершён, но зарождающихся трендов не найдено. Попробуйте уточнить направление.");
+        } else if (job.status === "done" && job.domain) {
           window.clearInterval(timer);
           router.push(`/trends/${encodeURIComponent(job.domain)}`);
         }
