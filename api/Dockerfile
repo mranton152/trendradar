@@ -8,6 +8,8 @@ RUN uv pip install --system --no-cache .
 
 COPY contracts/ ./contracts/
 COPY core/ ./core/
+COPY ingest/ ./ingest/
+COPY semantic/ ./semantic/
 COPY api/ ./api/
 
 EXPOSE 8000
