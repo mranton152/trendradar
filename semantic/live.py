@@ -78,7 +78,10 @@ _GENERIC_NAME_WORDS = {
     'web', 'where', 'who', 'with', 'without', 'world', 'strategy', 'strategies',
     'phone', 'phones', 'full-stack', 'safety', 'system', 'systems',
     'ai-powered', 'best', 'scientific', 'paper', 'papers', 'version', 'versions',
+    'funding', 'top', 'week', 'powerful', 'robotic', 'lab', 'high', 'school',
 }
+# Подтверждённые фрагменты заголовков, а не названия продуктов/компаний.
+_HEADLINE_FRAGMENTS = {'three laws', 'taps meta'}
 # Это отсев явных общественно-политических сущностей, не справочник компаний.
 # Полноценный NER здесь не заявляется: незнакомое имя остаётся гипотезой.
 _NON_COMPANIES = {
@@ -159,7 +162,7 @@ def extract_live(rows, domain, *, min_docs=3):
                     if label.split() and label.split()[0].casefold() in {
                             'senator', 'minister', 'president', 'governor', 'mayor'}:
                         continue
-                    if label.casefold() in _NON_COMPANIES:
+                    if label.casefold() in _NON_COMPANIES | _HEADLINE_FRAGMENTS:
                         continue
                     if not label or _NOUN.fullmatch(label) or any(
                             rule.fullmatch(label) for rule in _PATTERNS.values()):
@@ -202,7 +205,7 @@ def extract_live(rows, domain, *, min_docs=3):
         if category == 'entity':
             entity_ids.append(cand_id)
     return candidates, links, {
-        'method': 'observed_technology_names_and_action_entities_v5', 'min_docs': min_docs,
+        'method': 'observed_technology_names_and_action_entities_v6', 'min_docs': min_docs,
         'n_documents': len(rows), 'n_candidates': len(candidates), 'n_links': len(links),
         'entity_candidate_ids': entity_ids, 'technology_name_rules': len(_PATTERNS),
         'limitations': 'English rules; incomplete vocabulary; entities are contextual hypotheses',

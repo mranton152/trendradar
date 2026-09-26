@@ -2,6 +2,22 @@
 from semantic.live import extract_live
 
 
+def test_robotics_generic_headline_fragments_are_not_entities():
+    for name in ['Funding', 'Top Funding', 'Week', 'Powerful', 'Robotic',
+                 'Robotics Lab', 'High School Robotics', 'Three Laws', 'Taps Meta']:
+        rows = [{'doc_id': str(i), 'title': f"{name}'s robotics software"}
+                for i in range(2)]
+        assert not extract_live(rows, 'robotics', min_docs=2)[2]['entity_candidate_ids'], name
+
+
+def test_robotics_distinctive_names_survive_generic_word_filter():
+    for name in ['Generalist', 'Humanoid', 'World Labs', 'Agility Robotics', 'Isaac']:
+        rows = [{'doc_id': str(i), 'title': f'{name} launches robotics software'}
+                for i in range(2)]
+        assert any(c['label'] == name for c in extract_live(
+            rows, 'robotics', min_docs=2)[0]), name
+
+
 def test_live_support_threshold_is_explicit_and_never_single_document():
     import pytest
 
