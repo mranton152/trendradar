@@ -82,6 +82,13 @@ _GENERIC_NAME_WORDS = {
 }
 # Подтверждённые фрагменты заголовков, а не названия продуктов/компаний.
 _HEADLINE_FRAGMENTS = {'three laws', 'taps meta'}
+# Полное известное имя не является упоминанием одноимённого продукта.
+# Фамилии отдельно не запрещаем: Asimov может быть названием компании.
+_PERSON_NAMES = {'isaac asimov', 'dean kamen', 'sebastian thrun', 'travis kalanick',
+                 'elon musk', 'josh brown', 'vinod paul'}
+_PERSON_PATTERN = re.compile(
+    r'(?<![\w.-])(?:' + '|'.join(re.escape(n) for n in sorted(_PERSON_NAMES))
+    + r')(?![\w-]|\.[A-Za-z0-9])', re.IGNORECASE)
 # Это отсев явных общественно-политических сущностей, не справочник компаний.
 # Полноценный NER здесь не заявляется: незнакомое имя остаётся гипотезой.
 _NON_COMPANIES = {
@@ -91,6 +98,7 @@ _NON_COMPANIES = {
     'cisa', 'nsa', 'fbi', 'cia', 'nist', 'fcc', 'hhs', 'irs', 'enisa',
     'elon musk', 'silicon valley', 'g7',
     'josh brown', 'vinod paul',
+    'afghanistan', 'korea', 'utah', 'pittsburgh', 'navy',
 }
 _SINGULAR = dict(zip(
     ('sensors', 'processors', 'networks', 'models', 'chips', 'actuators'),
@@ -126,6 +134,8 @@ def extract_live(rows, domain, *, min_docs=3):
         # Google RSS дописывает издателя: это не упоминание компании в новости.
         if row.get('source') == 'gnews':
             title = title.rsplit(' - ', 1)[0]
+        original_title = title
+        title = _PERSON_PATTERN.sub(lambda match: ' ' * len(match.group()), title)
         technology_context = technology_reason(title) is None
         for label, pattern in _PATTERNS.items():
             matches = list(pattern.finditer(title))
@@ -147,7 +157,9 @@ def extract_live(rows, domain, *, min_docs=3):
         if technology_context:
             contextual_titles.append((row['doc_id'], title))
             for pattern in (_ENTITY, _POSSESSIVE, _PRODUCT, _OWNED_PRODUCT):
-                for match in pattern.finditer(title):
+                # Имя основателя не учитываем, но его продукт всё ещё нужен.
+                seed_title = original_title if pattern is _OWNED_PRODUCT else title
+                for match in pattern.finditer(seed_title):
                     if pattern is _OWNED_PRODUCT:
                         if all(word.casefold() in _STOP_NAMES for word in match.group(1).split()):
                             continue
@@ -162,7 +174,7 @@ def extract_live(rows, domain, *, min_docs=3):
                     if label.split() and label.split()[0].casefold() in {
                             'senator', 'minister', 'president', 'governor', 'mayor'}:
                         continue
-                    if label.casefold() in _NON_COMPANIES | _HEADLINE_FRAGMENTS:
+                    if label.casefold() in _NON_COMPANIES | _HEADLINE_FRAGMENTS | _PERSON_NAMES:
                         continue
                     if not label or _NOUN.fullmatch(label) or any(
                             rule.fullmatch(label) for rule in _PATTERNS.values()):
@@ -205,7 +217,7 @@ def extract_live(rows, domain, *, min_docs=3):
         if category == 'entity':
             entity_ids.append(cand_id)
     return candidates, links, {
-        'method': 'observed_technology_names_and_action_entities_v6', 'min_docs': min_docs,
+        'method': 'observed_technology_names_and_action_entities_v7', 'min_docs': min_docs,
         'n_documents': len(rows), 'n_candidates': len(candidates), 'n_links': len(links),
         'entity_candidate_ids': entity_ids, 'technology_name_rules': len(_PATTERNS),
         'limitations': 'English rules; incomplete vocabulary; entities are contextual hypotheses',

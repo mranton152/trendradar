@@ -2,6 +2,38 @@
 from semantic.live import extract_live
 
 
+def test_person_mentions_do_not_count_as_product_evidence():
+    titles = ['Weave launches Isaac robotics software',
+              'Isaac Asimov shaped robotics software',
+              "Isaac Asimov's robotics laws"]
+    rows = [{'doc_id': str(i), 'title': title} for i, title in enumerate(titles)]
+    assert not extract_live(rows, 'robotics', min_docs=2)[0]
+    rows.append({'doc_id': '3', 'title': 'NVIDIA Isaac robotics software released'})
+    candidates, links, _ = extract_live(rows, 'robotics', min_docs=2)
+    isaac = next(c for c in candidates if c['label'] == 'Isaac')
+    assert isaac['n_docs'] == 2
+    assert {link['doc_id'] for link in links if link['cand_id'] == isaac['cand_id']} == {'0', '3'}
+
+
+def test_person_exclusion_keeps_company_in_same_title_and_unrelated_names():
+    rows = [{'doc_id': str(i), 'title': title} for i, title in enumerate([
+        "Travis Kalanick's Atoms improves robotics software",
+        'Atoms robotics software reaches production',
+        'Asimov launches robotics software',
+        'Asimov develops robotics software',
+    ])]
+    labels = {c['label'] for c in extract_live(rows, 'robotics', min_docs=2)[0]}
+    assert {'Atoms', 'Asimov'} <= labels
+
+
+def test_observed_people_and_places_are_not_company_labels():
+    for name in ['Dean Kamen', 'Sebastian Thrun', 'Travis Kalanick',
+                 'Afghanistan', 'Korea', 'Utah', 'Pittsburgh', 'Navy']:
+        rows = [{'doc_id': str(i), 'title': f"{name}'s robotics software"}
+                for i in range(2)]
+        assert not extract_live(rows, 'robotics', min_docs=2)[0], name
+
+
 def test_robotics_generic_headline_fragments_are_not_entities():
     for name in ['Funding', 'Top Funding', 'Week', 'Powerful', 'Robotic',
                  'Robotics Lab', 'High School Robotics', 'Three Laws', 'Taps Meta']:
