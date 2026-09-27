@@ -2,6 +2,7 @@
 import argparse
 import hashlib
 import json
+import os
 import platform
 import shutil
 import uuid
@@ -140,7 +141,14 @@ def main():
                                len(rows), args.domain, args.as_of)
     if args.scope == 'live':
         from semantic.live import extract_live
-        candidates, links, terms_meta = extract_live(rows, args.domain, min_docs=args.min_docs)
+        extra, llm_audit = [], {'status': 'disabled'}
+        if os.getenv('TRENDRADAR_LLM_TERMS', '1') != '0':
+            from cards.llm import LLM
+            from semantic.llm_terms import заголовки_корпуса, предложить
+            extra, llm_audit = предложить(заголовки_корпуса(rows), LLM())
+        candidates, links, terms_meta = extract_live(
+            rows, args.domain, min_docs=args.min_docs, **({'extra_terms': extra} if extra else {}))
+        terms_meta['llm_terms'] = llm_audit
     else:
         candidates, links, terms_meta = extract_terms(rows, args.domain, args.min_docs)
     centers = np.empty((0, 1024), dtype=np.float32)

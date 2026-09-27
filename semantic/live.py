@@ -144,7 +144,9 @@ def live_technology_reason(label):
     return None
 
 
-def extract_live(rows, domain, *, min_docs=3):
+def extract_live(rows, domain, *, min_docs=3, extra_terms=None):
+    """extra_terms — строки-кандидаты от LLM (semantic/llm_terms.py). Они
+    засчитываются только по дословному совпадению в заголовках документов."""
     # Значение API сохранено для прежних вызовов; CLI задаёт свой live-default.
     if isinstance(min_docs, bool) or not isinstance(min_docs, int) or min_docs < 2:
         raise ValueError('Live требует минимум два разных документа')
@@ -220,6 +222,18 @@ def extract_live(rows, domain, *, min_docs=3):
                         key = ('entity', label.casefold())
                         evidence[key].add(row['doc_id'])
                         surfaces[key].add(label)
+    if extra_terms:
+        from semantic.llm_terms import шаблон
+        заголовки = [(r['doc_id'], r['title'].rsplit(' - ', 1)[0]
+                      if r.get('source') == 'gnews' else r['title']) for r in rows]
+        for term in extra_terms:
+            key = ('technology', term)
+            правило = шаблон(term)
+            for doc_id, title in заголовки:
+                совпадения = [m.group() for m in правило.finditer(title[:4096])]
+                if совпадения:
+                    evidence[key].add(doc_id)
+                    surfaces[key].update(совпадения)
     # Контекст действия нужен для открытия имени, а не для каждого упоминания.
     # Считаем точные границы имени только в технологическом контексте.
     for key in list(evidence):
