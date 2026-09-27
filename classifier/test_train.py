@@ -59,3 +59,53 @@ def test_ошибки_перечислены_поимённо():
     и = главное(_синтетика())
     for e in и["модели"]["logreg"]["ошибки"]:
         assert {"label", "истина", "предсказано"} <= set(e)
+
+
+def test_лес_и_эмбеддинги_голосует_и_объясняется_лесом():
+    import numpy as np
+
+    from classifier.train import ЛесИЭмбеддинги
+    X, y = матрица(_синтетика())
+    шум = np.random.default_rng(0).normal(size=(len(y), 8))
+    m = ЛесИЭмбеддинги().fit(np.hstack([X, шум]), y)
+    p = m.predict_proba(np.hstack([X, шум]))
+    assert p.shape == (len(y), 2) and np.allclose(p.sum(axis=1), 1)
+    assert len(m.feature_importances_) == len(ОПИСАНИЯ)
+
+
+def test_главное_с_эмбеддингами_добавляет_модель():
+    import numpy as np
+    строки = _синтетика()
+    и = главное(строки, np.random.default_rng(0).normal(size=(len(строки), 8)), разбиений=1)
+    assert "forest_e5" in и["модели"]
+    assert и["модели"]["forest_e5"]["разбиений"] == 1
+
+
+def test_стиль_запроса_не_выдаёт_класс():
+    """Охрана от утечки: кодируем query_en, потому что по его длине и символам
+    класс не угадывается. Если снимок поменяется и это перестанет быть так,
+    эмбеддинги начнут учить стиль разметки - тест должен упасть."""
+    import json
+    from pathlib import Path
+
+    import numpy as np
+    import pytest
+    from sklearn.linear_model import LogisticRegression
+    from sklearn.model_selection import StratifiedKFold, cross_val_score
+
+    снимок = Path("classifier/features_v1.json")
+    if not снимок.exists():
+        pytest.skip("нет снимка признаков")
+    строки = json.loads(снимок.read_text(encoding="utf-8"))
+
+    def стиль(t):
+        return [len(t), len(t.split()), t.count("("),
+                sum(c.isascii() and c.isalpha() for c in t) / max(len(t), 1)]
+
+    y = np.array([int(bool(r["is_weak_signal"])) for r in строки])
+    cv = StratifiedKFold(5, shuffle=True, random_state=42)
+    def acc(поле):
+        X = np.array([стиль(r[поле] or "") for r in строки])
+        return cross_val_score(LogisticRegression(max_iter=2000), X, y, cv=cv).mean()
+    assert acc("query_en") < 0.65     # около монетки - кодировать можно
+    assert acc("label") > 0.9         # стиль разметки - кодировать нельзя

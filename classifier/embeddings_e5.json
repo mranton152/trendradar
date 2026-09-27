@@ -1,0 +1,8 @@
+{
+ "model": "intfloat/multilingual-e5-large",
+ "field": "query_en",
+ "prefix": "query: ",
+ "n": 196,
+ "dim": 1024,
+ "sha": "11cca237be43f9a8b0d05f945d23e0012bac9dfd3d5e26047b514956fe325434"
+}

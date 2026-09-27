@@ -10,7 +10,7 @@
 
 | Что проверяли | Результат |
 |---|---|
-| Классификатор на датасете заказчика (5-fold CV, 20 разбиений) | **77%** accuracy (75–79%, порог ТЗ 75% взят на всех 20), F1 0,79 — [отчёт](classifier/REPORT.md) |
+| Классификатор на датасете заказчика (5-fold CV, 20 разбиений) | **78%** accuracy (76,5–80%, порог ТЗ 75% взят на всех 20), F1 0,80 — [отчёт](classifier/REPORT.md) |
 | Бэктест: считаем по данным до 2021, смотрим, что стало к 2026 | **93%** трендов выросли, фора до пика **6 лет** — [отчёт](validation/REPORT.md) |
 | Первый в ТОПе среза 2021 — `vision transformer` | вырос к 2026 в **65 раз** |
 
@@ -105,7 +105,7 @@ cd web && npm ci && NEXT_PUBLIC_API_URL=http://localhost:8000 npm run dev   # в
 Все команды работают на чистом клоне без сети.
 
 ```bash
-uv run python -m classifier.train --offline     # классификатор: 77% ± 1, пишет classifier/REPORT.md
+uv run python -m classifier.train --offline     # классификатор: 78% ± 1, пишет classifier/REPORT.md
 uv run python -m validation.report --source pool # бэктест на срезе 2021: 93%, фора 6 лет
 uv run pytest -q                                # 247 тестов
 ```
