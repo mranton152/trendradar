@@ -9,7 +9,16 @@ services:
     ports:
       - "8000:8000"
     volumes:
-      - ./data:/app/data:ro
+      # Без :ro — живой режим пишет data/live и data/index/live-*.
+      - ./data:/app/data
+    environment:
+      # Ollama работает на хосте: перевод запроса и кандидаты-технологии.
+      LLM_BASE_URL: ${LLM_BASE_URL:-http://host.docker.internal:11434}
+      # Ключ OpenAlex необязателен: без него живой сбор пропускает историю
+      # публикаций, фильтр зрелости работает анонимно. Берётся из .env.
+      OPENALEX_API_KEY: ${OPENALEX_API_KEY:-}
+    extra_hosts:
+      - "host.docker.internal:host-gateway"
 
   web:
     build:
