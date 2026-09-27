@@ -27,3 +27,6 @@ build/
 # Классификатор: сырой кэш ответов API - 70 МБ, в git не едет.
 # Воспроизводимость даёт features_v1.json: по нему обучение повторяется офлайн.
 classifier/features_cache.json
+
+# Кэш инкрементальной проверки типов TypeScript
+*.tsbuildinfo

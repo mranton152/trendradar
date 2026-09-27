@@ -107,7 +107,7 @@ export default async function TrendPage({ params, searchParams }: TrendPageProps
           {trend.title}
         </h1>
         <p className="mt-3 text-sm text-slate-500">
-          Уверенность модели {trend.confidence_pct}% · взлёт{" "}
+          Оценка зарождения {trend.confidence_pct}% · взлёт{" "}
           {trend.evidence.takeoff_year ?? "—"} · первое упоминание{" "}
           {trend.evidence.first_mention ?? "—"}
         </p>

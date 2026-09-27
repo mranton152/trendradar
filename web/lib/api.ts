@@ -62,6 +62,8 @@ export type TrendsResponse = {
     query: string;
     resolved: string;
     n_works: number;
+    title?: string | null;
+    live?: boolean;
   };
   as_of: number;
   generated_at: string;

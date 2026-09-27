@@ -1,5 +1,6 @@
 """Фоновый запуск живого конвейера без очереди и без расчётов в HTTP-потоке."""
 import json
+import re
 import shutil
 import subprocess
 import sys
@@ -15,6 +16,26 @@ from api.models import LiveAccepted, LiveRequest, LiveStatus
 from api.store import Store
 
 router = APIRouter(prefix="/api/v1", tags=["live"])
+
+# Широкий запрос про ИИ — пример из ТЗ — ведём в готовый индекс: там выдача
+# по 5000 работ с бэктестом и карточками. Живой режим на нём слабее (замер
+# 27.09: «технологии в ИИ» — 2 тренда), потому что новости по «ИИ вообще»
+# повторяют одни и те же зрелые термины. Узкие запросы («кибербезопасность ИИ»)
+# в правило не попадают и идут в живой сбор.
+СЛУЖЕБНЫЕ = {"технологии", "технология", "в", "во", "области", "сфере", "тренды",
+             "тренд", "слабые", "сигналы", "перспективные", "зарождающиеся", "новые",
+             "направление", "развитие", "и", "technologies", "technology", "in", "trends",
+             "emerging", "weak", "signals", "the", "of"}
+ИИ = {"ии", "ai", "искусственный интеллект", "artificial intelligence",
+      "машинное обучение", "machine learning", "нейросети", "нейронные сети"}
+ИНДЕКС_ИИ = ("golden", "ai-full")
+
+
+def индекс_для(query: str, domains: list[str]) -> str | None:
+    слова = [w for w in re.findall(r"[\w-]+", query.lower()) if w not in СЛУЖЕБНЫЕ]
+    if " ".join(слова) in ИИ:
+        return next((d for d in ИНДЕКС_ИИ if d in domains), None)
+    return None
 
 
 def _jobs(request: Request) -> dict[str, dict]:
@@ -65,6 +86,15 @@ def _run(job: dict, root: Path, query: str, budget: int, app) -> None:
 @router.post("/live", response_model=LiveAccepted, status_code=202)
 def start_live(body: LiveRequest, request: Request) -> LiveAccepted:
     job_id = uuid.uuid4().hex
+    store = request.app.state.store
+    готовый = индекс_для(body.query, store.domains())
+    if готовый:
+        _jobs(request)[job_id] = {
+            "job_id": job_id, "status": "done", "domain": готовый, "error": None,
+            "stage_text": "Направление есть в индексе: выдача с бэктестом",
+            "n_docs": store.n_works(готовый), "n_sources_polled": 0,
+            "n_candidates": 0, "elapsed_s": 0.0, "no_trends": False}
+        return LiveAccepted(job_id=job_id, domain=готовый)
     job = {"job_id": job_id, "status": "collecting", "stage_text": "Собираем источники…",
            "n_docs": 0, "n_sources_polled": 0, "n_candidates": 0, "elapsed_s": 0.0,
            "domain": None, "error": None}

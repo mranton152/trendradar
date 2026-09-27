@@ -62,14 +62,15 @@ export default async function TrendsPage({
         </Link>
       </div>
       <h1 className="mt-3 text-3xl font-bold tracking-tight text-slate-950">
-        ТОП-{data.trends.length}: {data.domain.query}
+        ТОП-{data.trends.length}: {data.domain.title ?? data.domain.query}
       </h1>
       <p className="mt-2 text-sm text-slate-500">
-        срез {data.as_of} · методология {data.methodology_version}
+        {data.domain.live ? "живой запрос · новости и публикации за 24 месяца" : `срез ${data.as_of}`}
+        {" · "}методология {data.methodology_version}
       </p>
       <dl className="mt-6 grid gap-3 sm:grid-cols-3">
         <div className="rounded-xl border border-slate-200 bg-white p-4">
-          <dt className="text-sm text-slate-500">Обработано источников</dt>
+          <dt className="text-sm text-slate-500">{data.domain.live ? "Обработано документов" : "Обработано источников"}</dt>
           <dd className="mt-1 text-2xl font-semibold text-slate-950">{data.stats.n_sources_polled}</dd>
         </div>
         <div className="rounded-xl border border-slate-200 bg-white p-4">
@@ -77,13 +78,15 @@ export default async function TrendsPage({
           <dd className="mt-1 text-2xl font-semibold text-slate-950">{data.stats.n_candidates}</dd>
         </div>
         <div className="rounded-xl border border-slate-200 bg-white p-4">
-          <dt className="text-sm text-slate-500">Сигналов с уверенностью &gt;75%</dt>
+          <dt className="text-sm text-slate-500">Сигналов с оценкой &gt;75%</dt>
           <dd className="mt-1 text-2xl font-semibold text-slate-950">{data.stats.n_confident}</dd>
         </div>
       </dl>
-      <div className="mt-5">
-        <AsOfSwitch current={data.as_of} domain={domain} years={AVAILABLE_YEARS} />
-      </div>
+      {!data.domain.live && (
+        <div className="mt-5">
+          <AsOfSwitch current={data.as_of} domain={domain} years={AVAILABLE_YEARS} />
+        </div>
+      )}
       <div className="mt-8 space-y-3">
         {data.trends.map((trend) => (
           <TrendCard asOf={data.as_of} domain={domain} key={trend.trend_id} trend={trend} />

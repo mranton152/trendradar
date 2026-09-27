@@ -30,13 +30,13 @@ export function TrendCard({ trend, domain, asOf }: TrendCardProps) {
         <span className="text-sm tabular-nums text-slate-400">#{trend.rank}</span>
         <h2 className="flex-1 text-lg font-semibold text-slate-950">{trend.title}</h2>
         <span className="text-sm tabular-nums text-slate-600">
-          уверенность {trend.confidence_pct}%
+          оценка {trend.confidence_pct}%
         </span>
       </div>
       <div className="mt-3 flex flex-wrap gap-x-4 gap-y-1 text-sm text-slate-600">
         <span>взлёт {trend.evidence.takeoff_year ?? "—"}</span>
-        <span>{trend.evidence.n_docs} публикаций</span>
-        <span>{trend.evidence.n_countries} стран</span>
+        <span>{trend.evidence.n_docs} {trend.series_granularity === "month" ? "упоминаний" : "публикаций"}</span>
+        <span>{trend.evidence.n_countries} {trend.series_granularity === "month" ? "изданий" : "стран"}</span>
         <span className="text-slate-400">{STAGES[trend.stage]}</span>
         {trend.confidence !== "high" && (
           <span className="text-amber-700">{CONFIDENCE[trend.confidence]}</span>

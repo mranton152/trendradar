@@ -15,7 +15,8 @@ def test_trends_response_contains_evidence_and_sources(index):  # noqa: F811
         })
     assert response.status_code == 200
     body = response.json()
-    assert body["domain"] == {"query": "golden", "resolved": "golden", "n_works": 1}
+    assert body["domain"] == {"query": "golden", "resolved": "golden", "n_works": 1,
+                              "title": "Искусственный интеллект", "live": False}
     assert body["as_of"] == 2026
     assert body["methodology_version"] == "1.0"
     assert len(body["trends"]) == 2

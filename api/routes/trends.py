@@ -128,6 +128,16 @@ def _as_model(row: dict, store: Store, domain: str) -> Trend:
     )
 
 
+ИМЕНА_ИНДЕКСОВ = {"golden": "Искусственный интеллект", "ai-full": "Искусственный интеллект"}
+
+
+def _title(store: Store, domain: str) -> tuple[str, bool]:
+    """Заголовок направления и признак живого запроса."""
+    if domain.startswith("live-"):
+        return str(store.meta(domain).get("domain_query") or domain), True
+    return ИМЕНА_ИНДЕКСОВ.get(domain, domain), False
+
+
 def _stats(store: Store, domain: str, as_of: int) -> Stats:
     """Счётчики для шапки; meta.json точнее, fallback сохраняет работу старого индекса."""
     rows = store.trends(domain, as_of, top=50)
@@ -139,7 +149,11 @@ def _stats(store: Store, domain: str, as_of: int) -> Stats:
         return value if isinstance(value, int) and value >= 0 else fallback
 
     return Stats(
-        n_sources_polled=meta_count("n_sources_polled", store.n_works(domain)),
+        # В живом режиме n_sources_polled в meta — число опрошенных лент (9),
+        # а в шапке аналитик ждёт число обработанных документов (сотни).
+        n_sources_polled=(meta_count("n_works", store.n_works(domain))
+                          if domain.startswith("live-")
+                          else meta_count("n_sources_polled", store.n_works(domain))),
         n_candidates=meta_count("n_candidates", len(rows) + len(rejected)),
         n_rejected=meta_count("n_rejected", len(rejected)),
         n_confident=sum(float(row["emergence_score"]) > 0.75 for row in rows),
@@ -176,7 +190,8 @@ def trends(body: TrendsRequest, request: Request) -> TrendsResponse:
             f"Доступные срезы: {available_years}.",
         )
     return TrendsResponse(
-        domain=DomainInfo(query=body.domain, resolved=domain, n_works=store.n_works(domain)),
+        domain=DomainInfo(query=body.domain, resolved=domain, n_works=store.n_works(domain),
+                          title=_title(store, domain)[0], live=_title(store, domain)[1]),
         as_of=body.as_of,
         methodology_version=rows[0]["methodology_version"],
         generated_at=datetime.now(UTC),
