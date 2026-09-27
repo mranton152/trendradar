@@ -106,7 +106,7 @@ def test_живой_прогон_ранжирует_и_укладывается_
     import time
     t = time.time()
     тренды, отсеянные = построить_live(живой, живой / "works.parquet", "live-test",
-                                       as_of="2026-08")
+                                       as_of="2026-08", зрелость=False)
     assert time.time() - t < 10
     метки = [r["label"] for r in тренды]
     assert метки[0] == "agent-iam"
@@ -115,3 +115,50 @@ def test_живой_прогон_ранжирует_и_укладывается_
     assert тренды[0]["series_granularity"] == "month"
     assert len(тренды[0]["years"]) == len(тренды[0]["counts"])
 
+
+
+def test_издание_агрегатора_берётся_из_заголовка():
+    """Ссылка Google News ведёт на news.google.com; издание — в хвосте заголовка.
+    Без этого все новости кандидата считались одним сайтом, и живой режим
+    отсекал всё (замер 27.09: 0 трендов на шести запросах)."""
+    from core.live import издание
+    assert издание("gnews", "Vertical quantum sensor - Phys.org",
+                   "https://news.google.com/rss/articles/X") == "phys.org"
+    assert издание("rss", "Что-то - с дефисом", "https://www.theregister.com/a") == \
+        "theregister.com"
+
+
+def test_тема_запроса_не_сигнал():
+    from core.live import это_тема_запроса
+    фразы = ["квантовые сенсоры", "quantum sensors"]
+    assert это_тема_запроса("quantum sensor", фразы)
+    assert это_тема_запроса("Quantum Sensing", фразы)
+    assert not это_тема_запроса("Q-CTRL", фразы)
+    assert not это_тема_запроса("quantum computing", фразы)
+
+
+def test_массово_изученное_отсеивается_с_числом_в_причине():
+    comp = {"counts_recent": 30, "age_months": 2, "active_months": 4, "last_share": 0.2}
+    причина = причина_отказа_live(comp, n_domains=9, trusted_share=0.5, наука_10л=600_924)
+    assert причина.startswith("массово изучено") and "600 924" in причина
+    assert причина_отказа_live(comp, n_domains=9, trusted_share=0.5, наука_10л=160) is None
+
+
+def test_отказ_openalex_не_становится_нулём(monkeypatch, tmp_path):
+    """Ноль значил бы «новое» — кандидат прошёл бы фильтр зрелости из-за сбоя сети."""
+    import httpx
+
+    from core.live import научная_база
+
+    def сбой(*a, **k):
+        raise httpx.ConnectError("нет сети")
+    monkeypatch.setattr(httpx, "get", сбой)
+    assert научная_база(["Q-CTRL"], кэш=tmp_path / "s.json") == {"Q-CTRL": None}
+
+
+def test_тонкие_данные_понижают_уверенность_а_не_прячут(живой):
+    """Слабый сигнал по определению свежий и редкий: мягкие пороги дают low."""
+    тренды, _ = построить_live(живой, живой / "works.parquet", "live-test",
+                               as_of="2026-08", зрелость=False)
+    по_метке = {r["label"]: r for r in тренды}
+    assert по_метке["agent-iam"]["confidence"] in ("medium", "high")

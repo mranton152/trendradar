@@ -20,10 +20,15 @@
  "порог_ТЗ": 0.8,
  "модели": {
   "logreg": {
-   "accuracy": 0.719,
-   "precision": 0.723,
-   "recall": 0.73,
-   "f1": 0.726,
+   "accuracy": 0.706,
+   "precision": 0.711,
+   "recall": 0.715,
+   "f1": 0.712,
+   "accuracy_std": 0.013,
+   "accuracy_min": 0.673,
+   "accuracy_max": 0.73,
+   "разбиений": 20,
+   "разбиений_выше_мин": 0,
    "confusion": {
     "tp": 73,
     "fp": 28,
@@ -431,10 +436,15 @@
    ]
   },
   "gboost": {
-   "accuracy": 0.76,
-   "precision": 0.739,
-   "recall": 0.82,
-   "f1": 0.777,
+   "accuracy": 0.756,
+   "precision": 0.745,
+   "recall": 0.795,
+   "f1": 0.769,
+   "accuracy_std": 0.021,
+   "accuracy_min": 0.709,
+   "accuracy_max": 0.781,
+   "разбиений": 20,
+   "разбиений_выше_мин": 12,
    "confusion": {
     "tp": 82,
     "fp": 29,
@@ -794,10 +804,15 @@
    ]
   },
   "forest": {
-   "accuracy": 0.791,
-   "precision": 0.766,
-   "recall": 0.85,
-   "f1": 0.806,
+   "accuracy": 0.769,
+   "precision": 0.748,
+   "recall": 0.826,
+   "f1": 0.785,
+   "accuracy_std": 0.011,
+   "accuracy_min": 0.75,
+   "accuracy_max": 0.791,
+   "разбиений": 20,
+   "разбиений_выше_мин": 20,
    "confusion": {
     "tp": 85,
     "fp": 26,
@@ -1123,69 +1138,69 @@
  },
  "абляция_logreg": [
   {
-   "без": "github_stars_max",
-   "accuracy": 0.684,
-   "потеря": 0.035
-  },
-  {
    "без": "github_new_share",
-   "accuracy": 0.684,
-   "потеря": 0.035
+   "accuracy": 0.677,
+   "потеря": 0.029
   },
   {
    "без": "pub_growth",
-   "accuracy": 0.694,
-   "потеря": 0.025
+   "accuracy": 0.679,
+   "потеря": 0.027
+  },
+  {
+   "без": "github_stars_max",
+   "accuracy": 0.679,
+   "потеря": 0.027
   },
   {
    "без": "pub_accel",
-   "accuracy": 0.704,
-   "потеря": 0.015
-  },
-  {
-   "без": "pub_last_3y_share",
-   "accuracy": 0.709,
-   "потеря": 0.01
+   "accuracy": 0.698,
+   "потеря": 0.008
   },
   {
    "без": "log_pub_total",
-   "accuracy": 0.709,
-   "потеря": 0.01
-  },
-  {
-   "без": "pub_age",
-   "accuracy": 0.714,
-   "потеря": 0.005
+   "accuracy": 0.702,
+   "потеря": 0.004
   },
   {
    "без": "github_repos",
-   "accuracy": 0.714,
-   "потеря": 0.005
+   "accuracy": 0.703,
+   "потеря": 0.003
   },
   {
    "без": "pub_total_10y",
-   "accuracy": 0.719,
-   "потеря": 0.0
-  },
-  {
-   "без": "pub_burst",
-   "accuracy": 0.719,
-   "потеря": 0.0
-  },
-  {
-   "без": "pub_countries",
-   "accuracy": 0.719,
-   "потеря": 0.0
-  },
-  {
-   "без": "pub_company_share",
-   "accuracy": 0.719,
-   "потеря": 0.0
+   "accuracy": 0.707,
+   "потеря": -0.001
   },
   {
    "без": "hf_models",
-   "accuracy": 0.719,
-   "потеря": 0.0
+   "accuracy": 0.707,
+   "потеря": -0.001
+  },
+  {
+   "без": "pub_burst",
+   "accuracy": 0.708,
+   "потеря": -0.002
+  },
+  {
+   "без": "pub_company_share",
+   "accuracy": 0.709,
+   "потеря": -0.003
+  },
+  {
+   "без": "pub_last_3y_share",
+   "accuracy": 0.711,
+   "потеря": -0.005
+  },
+  {
+   "без": "pub_age",
+   "accuracy": 0.711,
+   "потеря": -0.005
+  },
+  {
+   "без": "pub_countries",
+   "accuracy": 0.714,
+   "потеря": -0.008
   }
  ],
  "выбор": "forest",
