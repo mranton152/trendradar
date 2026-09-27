@@ -63,3 +63,71 @@ def test_отказ_модели_не_роняет_живой_режим():
 def test_шаблон_целого_слова_и_множественного_числа():
     assert шаблон("stablecoin").search("New stablecoins launch")
     assert not шаблон("ai chip").search("Mainland ai chipset")
+
+
+def test_lmstudio_uses_technology_schema_and_records_response(monkeypatch):
+    import httpx
+
+    from semantic.llm_terms import create_llm
+
+    monkeypatch.setenv('LLM_BACKEND', 'lmstudio')
+    monkeypatch.setenv('LLM_BASE_URL', 'http://localhost:1234')
+    monkeypatch.setenv('LLM_MODEL', 'local-test')
+    monkeypatch.delenv('LLM_API_KEY', raising=False)
+    requests = []
+
+    def post(url, **kwargs):
+        requests.append((url, kwargs))
+        return httpx.Response(200, request=httpx.Request('POST', url), json={
+            'choices': [{'message': {'content': '{"technologies": ["gene editing"]}'}}]})
+
+    monkeypatch.setattr(httpx, 'post', post)
+    terms, audit = предложить(['Gene editing platform', 'Gene editing improves'], create_llm())
+    assert terms == ['gene editing']
+    payload = requests[0][1]['json']['response_format']
+    assert payload['type'] == 'json_schema'
+    assert 'technologies' in payload['json_schema']['schema']['properties']
+    assert audit['responses'][0]['response'] == {'technologies': ['gene editing']}
+    assert 'Gene editing platform' in audit['responses'][0]['prompt']
+
+
+def test_invalid_technology_payload_is_audited_without_character_candidates():
+    terms, audit = предложить(['Gene editing'], ФейкLLM({'technologies': 'gene editing'}))
+    assert terms == []
+    assert audit['errors'] == ['invalid_technologies_payload']
+
+
+def test_build_passes_dates_to_recent_headline_selection(tmp_path, monkeypatch):
+    import json
+    import sys
+
+    import pyarrow as pa
+    import pyarrow.parquet as pq
+    import pytest
+
+    from semantic import build, llm_terms
+
+    works = tmp_path / 'works.parquet'
+    rows = [{**_row(0, 'Old biotechnology headline'), 'date': '2016-01-01'},
+            {**_row(1, 'New biotechnology headline'), 'date': '2026-09-27'}]
+    for row in rows:
+        row.update(abstract=None, domain='bio', year=int(row['date'][:4]))
+    pq.write_table(pa.Table.from_pylist(rows), works)
+    works.with_name('meta.json').write_text(json.dumps({
+        'domain': 'bio', 'n_docs': 2, 'corpus_sha256': build.fingerprint(works)}))
+
+    class Captured(Exception):
+        pass
+
+    def capture(headlines, llm):
+        assert headlines == ['New biotechnology headline', 'Old biotechnology headline']
+        raise Captured
+
+    monkeypatch.setenv('TRENDRADAR_LLM_TERMS', '1')
+    monkeypatch.setattr(llm_terms, 'предложить', capture)
+    monkeypatch.setattr(llm_terms, 'create_llm', lambda: object())
+    monkeypatch.setattr(sys, 'argv', ['build', '--scope', 'live', '--domain', 'bio',
+                                    '--works', str(works), '--output', str(tmp_path / 'index'),
+                                    '--cache', str(tmp_path / 'cache'), '--as-of', '2026'])
+    with pytest.raises(Captured):
+        build.main()

@@ -122,6 +122,8 @@ def main():
     columns = ["doc_id", "title", "abstract", "domain", "year"]
     if args.scope == 'live':
         columns.append('source')
+        if 'date' in pq.read_schema(args.works).names:
+            columns.append('date')
     rows = pq.read_table(args.works, columns=columns).to_pylist()
     if len({r["doc_id"] for r in rows}) != len(rows):
         parser.error("Корпус содержит повторяющиеся doc_id")
@@ -143,9 +145,8 @@ def main():
         from semantic.live import extract_live
         extra, llm_audit = [], {'status': 'disabled'}
         if os.getenv('TRENDRADAR_LLM_TERMS', '1') != '0':
-            from cards.llm import LLM
-            from semantic.llm_terms import заголовки_корпуса, предложить
-            extra, llm_audit = предложить(заголовки_корпуса(rows), LLM())
+            from semantic.llm_terms import create_llm, заголовки_корпуса, предложить
+            extra, llm_audit = предложить(заголовки_корпуса(rows), create_llm())
         candidates, links, terms_meta = extract_live(
             rows, args.domain, min_docs=args.min_docs, **({'extra_terms': extra} if extra else {}))
         terms_meta['llm_terms'] = llm_audit
