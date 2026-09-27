@@ -9,6 +9,10 @@ class DomainInfo(BaseModel):
     query: str
     resolved: str
     n_works: int = Field(ge=0)
+    # Что показать в заголовке: исходный запрос живого режима или имя индекса,
+    # а не технический slug вроде live-e2b875fc5b4aca7c.
+    title: str | None = None
+    live: bool = False
 
 
 class Components(BaseModel):
