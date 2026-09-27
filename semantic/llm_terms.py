@@ -14,8 +14,33 @@
 фильтры ядра, что и остальные: зрелость по OpenAlex, тема запроса, издания.
 """
 import json
+import os
 import re
 import time
+
+import httpx
+
+from cards.llm import LLM
+
+
+class StudioTermsLLM(LLM):
+    """LM Studio требует JSON Schema; общий cards.llm не изменяем."""
+
+    def _request(self, prompt, schema):
+        api_key = os.getenv('LLM_API_KEY')
+        response = httpx.post(
+            self.base_url + '/v1/chat/completions', timeout=45,
+            headers={'Authorization': 'Bearer ' + api_key} if api_key else {},
+            json={'model': self.model, 'messages': [{'role': 'user', 'content': prompt}],
+                  'temperature': 0, 'max_tokens': 768,
+                  'response_format': {'type': 'json_schema', 'json_schema': {
+                      'name': 'technology_terms', 'strict': True, 'schema': dict(schema)}}})
+        response.raise_for_status()
+        return response.json()['choices'][0]['message']['content']
+
+
+def create_llm():
+    return StudioTermsLLM() if os.getenv('LLM_BACKEND') == 'lmstudio' else LLM()
 
 ПРОМПТ = """From these news headlines, list specific emerging technologies, \
 technical approaches or product categories they mention (2-4 words each, English, lowercase).
@@ -59,18 +84,24 @@ def предложить(заголовки: list[str], llm, бюджет_с: fl
     начало = time.monotonic()
     найдено: dict[str, None] = {}
     аудит = {"model": getattr(llm, "model", None), "backend": getattr(llm, "backend", None),
-             "n_headlines": min(len(заголовки), МАКС_ЗАГОЛОВКОВ), "batches": 0, "errors": []}
+             "n_headlines": min(len(заголовки), МАКС_ЗАГОЛОВКОВ), "batches": 0, "errors": [],
+             "responses": []}
     for i in range(0, min(len(заголовки), МАКС_ЗАГОЛОВКОВ), ПАЧКА):
         if time.monotonic() - начало > бюджет_с:
             аудит["errors"].append("бюджет времени исчерпан")
             break
         пачка = "\n".join(f"- {h}" for h in заголовки[i:i + ПАЧКА])
+        prompt = ПРОМПТ.format(headlines=пачка)
         try:
-            ответ = llm.json(ПРОМПТ.format(headlines=пачка), СХЕМА)
+            ответ = llm.json(prompt, СХЕМА)
         except Exception as exc:  # сеть, провайдер, невалидный JSON — всё не фатально
             аудит["errors"].append(type(exc).__name__)
             continue
         аудит["batches"] += 1
+        аудит['responses'].append({'offset': i, 'prompt': prompt, 'response': ответ})
+        if not isinstance(ответ, dict) or not isinstance(ответ.get('technologies'), list):
+            аудит['errors'].append('invalid_technologies_payload')
+            continue
         for term in ответ.get("technologies", []):
             if isinstance(term, str) and (t := _чистый(term)):
                 найдено.setdefault(t)
@@ -102,7 +133,6 @@ if __name__ == "__main__":  # ручная проверка: python -m semantic.
 
     import pyarrow.parquet as pq
 
-    from cards.llm import LLM
     rows = pq.read_table(sys.argv[1]).to_pylist()
-    термины, аудит = предложить(заголовки_корпуса(rows), LLM())
+    термины, аудит = предложить(заголовки_корпуса(rows), create_llm())
     print(json.dumps(аудит, ensure_ascii=False), *термины, sep="\n")

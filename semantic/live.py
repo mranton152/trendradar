@@ -226,8 +226,13 @@ def extract_live(rows, domain, *, min_docs=3, extra_terms=None):
         from semantic.llm_terms import шаблон
         заголовки = [(r['doc_id'], r['title'].rsplit(' - ', 1)[0]
                       if r.get('source') == 'gnews' else r['title']) for r in rows]
+        # Правила могли уже найти тот же термин в другом регистре («AI agent»
+        # против «ai agent»): cand_id считается без учёта регистра, и два ключа
+        # дали бы повтор cand_id. Термин модели дописывается к найденному.
+        по_регистру = {label.casefold(): (category, label)
+                       for category, label in evidence if category == 'technology'}
         for term in extra_terms:
-            key = ('technology', term)
+            key = по_регистру.get(term.casefold(), ('technology', term))
             правило = шаблон(term)
             for doc_id, title in заголовки:
                 совпадения = [m.group() for m in правило.finditer(title[:4096])]
