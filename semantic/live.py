@@ -78,7 +78,41 @@ _GENERIC_NAME_WORDS = {
     'web', 'where', 'who', 'with', 'without', 'world', 'strategy', 'strategies',
     'phone', 'phones', 'full-stack', 'safety', 'system', 'systems',
     'ai-powered', 'best', 'scientific', 'paper', 'papers', 'version', 'versions',
+    'funding', 'top', 'week', 'powerful', 'robotic', 'lab', 'high', 'school',
 }
+# Подтверждённые фрагменты заголовков, а не названия продуктов/компаний.
+_HEADLINE_FRAGMENTS = {'three laws', 'taps meta'}
+# Подтверждённые омонимы: обычного совпадения строки недостаточно.
+_AMBIGUOUS_NAMES = {'humanoid', 'run robotics'}
+_QUALIFIED_PRODUCTS = {
+    'NVIDIA Isaac': re.compile(r'\bNVIDIA(?:[’\']s)?\s+Isaac\b', re.IGNORECASE),
+    'Weave Isaac 1': re.compile(
+        r'\bWeave Robotics(?:[’\']s)?\s+'
+        r'(?:(?:launches|unveils|introduces|releases)\s+)?Isaac\s+1(?![\w-]|\.\d)',
+        re.IGNORECASE),
+}
+
+
+def normalized_entity_name(label):
+    words = label.strip().split()
+    while words and words[0].casefold() in {'the', 'new', 'this', 'a', 'an'}:
+        words.pop(0)
+    return _COMPANY_DESCRIPTION.sub('', ' '.join(words))
+
+
+def ambiguous_company_context(label, title):
+    """Для омонимов требуем явного действия компании или притяжательного имени."""
+    return any(normalized_entity_name(match.group(1)).casefold() == label
+               for pattern in (_ENTITY, _POSSESSIVE) for match in pattern.finditer(title))
+
+
+# Полное известное имя не является упоминанием одноимённого продукта.
+# Фамилии отдельно не запрещаем: Asimov может быть названием компании.
+_PERSON_NAMES = {'isaac asimov', 'dean kamen', 'sebastian thrun', 'travis kalanick',
+                 'elon musk', 'josh brown', 'vinod paul'}
+_PERSON_PATTERN = re.compile(
+    r'(?<![\w.-])(?:' + '|'.join(re.escape(n) for n in sorted(_PERSON_NAMES))
+    + r')(?![\w-]|\.[A-Za-z0-9])', re.IGNORECASE)
 # Это отсев явных общественно-политических сущностей, не справочник компаний.
 # Полноценный NER здесь не заявляется: незнакомое имя остаётся гипотезой.
 _NON_COMPANIES = {
@@ -88,6 +122,7 @@ _NON_COMPANIES = {
     'cisa', 'nsa', 'fbi', 'cia', 'nist', 'fcc', 'hhs', 'irs', 'enisa',
     'elon musk', 'silicon valley', 'g7',
     'josh brown', 'vinod paul',
+    'afghanistan', 'korea', 'utah', 'pittsburgh', 'navy',
 }
 _SINGULAR = dict(zip(
     ('sensors', 'processors', 'networks', 'models', 'chips', 'actuators'),
@@ -109,7 +144,9 @@ def live_technology_reason(label):
     return None
 
 
-def extract_live(rows, domain, *, min_docs=3):
+def extract_live(rows, domain, *, min_docs=3, extra_terms=None):
+    """extra_terms — строки-кандидаты от LLM (semantic/llm_terms.py). Они
+    засчитываются только по дословному совпадению в заголовках документов."""
     # Значение API сохранено для прежних вызовов; CLI задаёт свой live-default.
     if isinstance(min_docs, bool) or not isinstance(min_docs, int) or min_docs < 2:
         raise ValueError('Live требует минимум два разных документа')
@@ -118,11 +155,14 @@ def extract_live(rows, domain, *, min_docs=3):
     evidence = defaultdict(set)
     surfaces = defaultdict(set)
     contextual_titles = []
+    qualified_by_doc = {}
     for row in rows:
         title = row['title'][:4096]
         # Google RSS дописывает издателя: это не упоминание компании в новости.
         if row.get('source') == 'gnews':
             title = title.rsplit(' - ', 1)[0]
+        original_title = title
+        title = _PERSON_PATTERN.sub(lambda match: ' ' * len(match.group()), title)
         technology_context = technology_reason(title) is None
         for label, pattern in _PATTERNS.items():
             matches = list(pattern.finditer(title))
@@ -142,24 +182,33 @@ def extract_live(rows, domain, *, min_docs=3):
                 evidence[key].add(row['doc_id'])
                 surfaces[key].add(match.group())
         if technology_context:
+            qualified = {name for name, rule in _QUALIFIED_PRODUCTS.items() if rule.search(title)}
+            qualified_by_doc[row['doc_id']] = qualified
+            for name in qualified:
+                key = ('entity', name.casefold())
+                evidence[key].add(row['doc_id'])
+                surfaces[key].add(name)
             contextual_titles.append((row['doc_id'], title))
             for pattern in (_ENTITY, _POSSESSIVE, _PRODUCT, _OWNED_PRODUCT):
-                for match in pattern.finditer(title):
+                # Имя основателя не учитываем, но его продукт всё ещё нужен.
+                seed_title = original_title if pattern is _OWNED_PRODUCT else title
+                for match in pattern.finditer(seed_title):
                     if pattern is _OWNED_PRODUCT:
                         if all(word.casefold() in _STOP_NAMES for word in match.group(1).split()):
                             continue
                         label = match.group(2).strip()
                     else:
                         label = match.group(1).strip()
-                    words = label.split()
-                    while words and words[0].casefold() in {'the', 'new', 'this', 'a', 'an'}:
-                        words.pop(0)
-                    label = ' '.join(words)
-                    label = _COMPANY_DESCRIPTION.sub('', label)
+                    label = normalized_entity_name(label)
+                    if qualified and re.search(r'\bisaac\b', label, re.IGNORECASE):
+                        continue
+                    if label.casefold() in _AMBIGUOUS_NAMES and not ambiguous_company_context(
+                            label.casefold(), title):
+                        continue
                     if label.split() and label.split()[0].casefold() in {
                             'senator', 'minister', 'president', 'governor', 'mayor'}:
                         continue
-                    if label.casefold() in _NON_COMPANIES:
+                    if label.casefold() in _NON_COMPANIES | _HEADLINE_FRAGMENTS | _PERSON_NAMES:
                         continue
                     if not label or _NOUN.fullmatch(label) or any(
                             rule.fullmatch(label) for rule in _PATTERNS.values()):
@@ -173,6 +222,18 @@ def extract_live(rows, domain, *, min_docs=3):
                         key = ('entity', label.casefold())
                         evidence[key].add(row['doc_id'])
                         surfaces[key].add(label)
+    if extra_terms:
+        from semantic.llm_terms import шаблон
+        заголовки = [(r['doc_id'], r['title'].rsplit(' - ', 1)[0]
+                      if r.get('source') == 'gnews' else r['title']) for r in rows]
+        for term in extra_terms:
+            key = ('technology', term)
+            правило = шаблон(term)
+            for doc_id, title in заголовки:
+                совпадения = [m.group() for m in правило.finditer(title[:4096])]
+                if совпадения:
+                    evidence[key].add(doc_id)
+                    surfaces[key].update(совпадения)
     # Контекст действия нужен для открытия имени, а не для каждого упоминания.
     # Считаем точные границы имени только в технологическом контексте.
     for key in list(evidence):
@@ -181,6 +242,13 @@ def extract_live(rows, domain, *, min_docs=3):
         pattern = re.compile(r'(?<![\w.-])' + re.escape(key[1])
                              + r'(?![\w-]|\.[A-Za-z0-9])', re.IGNORECASE)
         for doc_id, title in contextual_titles:
+            qualified = qualified_by_doc[doc_id]
+            if key[1] in {name.casefold() for name in _QUALIFIED_PRODUCTS}:
+                continue  # Полные названия уже посчитаны по отдельным правилам.
+            if key[1] == 'isaac' and qualified:
+                continue
+            if key[1] in _AMBIGUOUS_NAMES and not ambiguous_company_context(key[1], title):
+                continue
             matches = list(pattern.finditer(title))
             if matches:
                 evidence[key].add(doc_id)
@@ -202,7 +270,7 @@ def extract_live(rows, domain, *, min_docs=3):
         if category == 'entity':
             entity_ids.append(cand_id)
     return candidates, links, {
-        'method': 'observed_technology_names_and_action_entities_v5', 'min_docs': min_docs,
+        'method': 'observed_technology_names_and_action_entities_v8', 'min_docs': min_docs,
         'n_documents': len(rows), 'n_candidates': len(candidates), 'n_links': len(links),
         'entity_candidate_ids': entity_ids, 'technology_name_rules': len(_PATTERNS),
         'limitations': 'English rules; incomplete vocabulary; entities are contextual hypotheses',

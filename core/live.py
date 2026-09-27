@@ -47,10 +47,11 @@ from core.series import top_docs
     "MIN_TRUSTED_SHARE": 0.34,   # ТЗ: индикаторные источники - не единственное основание
     "PLATEAU_AGE_MONTHS": 18,    # плато = давно пишут...
     "PLATEAU_MAX_GROWTH": 0.03,  # ...и не растёт
-    "MAX_SCIENCE_10Y": 10_000,   # научных работ в OpenAlex за 10 лет: больше - массово
-                                 # изучено. Граница по замеру 27.09 на 82 кандидатах:
-                                 # выше - Google, Amazon, OpenAI, machine learning,
-                                 # ниже - Q-CTRL, Mesa Quantum, Apptronik, NEURA Robotics
+    "MAX_SCIENCE_10Y": 10_000,   # научных работ в OpenAlex за 10 лет (точная фраза):
+                                 # больше - массово изучено. Замер 27.09: выше -
+                                 # machine learning 1,37 млн, federated learning 64 тыс.,
+                                 # AI agent 26 тыс., digital payments 15 тыс.; ниже -
+                                 # physical ai 1 190, instant payments 624, Q-CTRL 22
 }
 
 ОПИСАНИЯ_ПОРОГОВ_LIVE = {
@@ -185,7 +186,11 @@ def научная_база(labels: list[str], кэш: Path | None = None,
     ключ = os.getenv("OPENALEX_API_KEY")
 
     def один(label: str) -> tuple[str, int | None]:
-        params = {"filter": f"title_and_abstract.search:{label},"
+        # Точная фраза, а не «все слова где угодно». По словам «video ai» — 34 705
+        # работ, фразой — 208; «physical ai» 59 815 против 1 190. Поиск по словам
+        # записывал молодые многословные технологии в массово изученные (замер 27.09).
+        фраза = '"' + label.replace('"', " ").replace(",", " ") + '"'
+        params = {"filter": f"title_and_abstract.search:{фраза},"
                             f"publication_year:{год - 9}-{год}",
                   "per-page": 1, "mailto": "trendradar@example.org"}
         if ключ:
@@ -319,7 +324,7 @@ def построить_live(index_dir: str | Path, corpus_path: str | Path, doma
         [str(index_dir / "candidates.parquet")]).fetchall()}
 
     фразы = фразы_запроса(index_dir)
-    наука = (научная_база(list(подписи.values()), кэш=index_dir / "science_10y.json",
+    наука = (научная_база(list(подписи.values()), кэш=index_dir / "science_10y_phrase.json",
                           год=int(as_of[:4]))
              if зрелость else {})
 
