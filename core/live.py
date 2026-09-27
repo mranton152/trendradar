@@ -76,6 +76,23 @@ from core.series import top_docs
 # 171-325 разных изданиях в каждом корпусе.
 АГРЕГАТОРЫ = {"gnews"}
 
+# Слова новостной хроники на краю подписи: правила извлечения захватывают их
+# вместе с именем компании — «Holiday Robotics Raises», «First Pure-Play
+# Humanoid Robotics» (замер 27.09, запрос «роботы-гуманоиды»). На 166
+# кандидатах семи живых запросов правило отсекает ровно эти два и ни одного
+# настоящего названия.
+КРАЯ_ЗАГОЛОВКА = {
+    "raises", "raised", "raise", "raising", "launches", "launched", "launch", "unveils",
+    "unveiled", "announces", "announced", "secures", "secured", "lands", "closes",
+    "debuts", "acquires", "acquired", "partners", "expands", "first", "new", "top",
+    "best", "pure-play", "largest", "leading", "biggest", "latest", "how", "why", "what",
+    "inside", "meet", "says", "said", "gets", "wins", "hits", "nears", "eyes"}
+
+
+def обрывок_заголовка(label: str) -> bool:
+    слова = label.lower().split()
+    return len(слова) > 1 and (слова[0] in КРАЯ_ЗАГОЛОВКА or слова[-1] in КРАЯ_ЗАГОЛОВКА)
+
 
 # --------------------------------------------------------------- ряды
 
@@ -291,6 +308,8 @@ def причина_отказа_live(comp: dict, n_domains: int, trusted_share: 
                         наука_10л: int | None = None, тема: bool = False) -> str | None:
     if тема:
         return "это сама тема запроса, а не сигнал внутри неё"
+    if comp.get("label") and обрывок_заголовка(comp["label"]):
+        return "обрывок новостного заголовка, а не название"
     if наука_10л is not None and наука_10л > ПОРОГИ_LIVE["MAX_SCIENCE_10Y"]:
         return f"массово изучено: {наука_10л:,} научных работ за 10 лет".replace(",", " ")
     if comp["counts_recent"] < ПОРОГИ_LIVE["MIN_EVIDENCE"]:
@@ -338,6 +357,7 @@ def построить_live(index_dir: str | Path, corpus_path: str | Path, doma
             continue
         comp = components_monthly(counts, norm, as_of)
         метка = подписи[cand_id]
+        comp["label"] = метка
         причина = причина_отказа_live(comp, домены.get(cand_id, 0), доверие.get(cand_id, 0.5),
                                       наука.get(метка), это_тема_запроса(метка, фразы))
         if not причина and это_плато(comp):

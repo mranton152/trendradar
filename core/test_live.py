@@ -162,3 +162,16 @@ def test_тонкие_данные_понижают_уверенность_а_н
                                as_of="2026-08", зрелость=False)
     по_метке = {r["label"]: r for r in тренды}
     assert по_метке["agent-iam"]["confidence"] in ("medium", "high")
+
+
+def test_обрывок_новостного_заголовка_отсекается():
+    from core.live import обрывок_заголовка
+    assert обрывок_заголовка("Holiday Robotics Raises")
+    assert обрывок_заголовка("First Pure-Play Humanoid Robotics")
+    assert not обрывок_заголовка("NEURA Robotics")
+    assert not обрывок_заголовка("XPENG")
+    assert not обрывок_заголовка("stablecoin settlement")
+    comp = {"counts_recent": 10, "age_months": 2, "active_months": 4, "last_share": 0.2,
+            "label": "Holiday Robotics Raises"}
+    assert причина_отказа_live(comp, n_domains=5, trusted_share=0.5) == \
+        "обрывок новостного заголовка, а не название"
