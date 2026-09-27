@@ -9,6 +9,11 @@ RUN uv pip install --system --no-cache .
 COPY contracts/ ./contracts/
 COPY core/ ./core/
 COPY api/ ./api/
+# Живой режим запускает сбор, кандидатов и ядро подпроцессами (api/routes/live.py).
+# Без этих папок живой запрос в контейнере падал на первом шаге: No module named 'ingest'.
+COPY ingest/ ./ingest/
+COPY semantic/ ./semantic/
+COPY cards/ ./cards/
 
 EXPOSE 8000
 CMD ["uvicorn", "api.main:app", "--host", "0.0.0.0", "--port", "8000"]
