@@ -131,3 +131,14 @@ def test_build_passes_dates_to_recent_headline_selection(tmp_path, monkeypatch):
                                     '--cache', str(tmp_path / 'cache'), '--as-of', '2026'])
     with pytest.raises(Captured):
         build.main()
+
+
+def test_термин_модели_в_другом_регистре_не_даёт_повтор_cand_id():
+    """Правила нашли «AI agent», модель предложила «ai agent» — один кандидат."""
+    rows = [_row(0, "AI agent platform launches - TechCrunch"),
+            _row(1, "Banks test AI agent for payments - Reuters"),
+            _row(2, "Why every AI agent needs identity - Wired")]
+    cands, _, _ = extract_live(rows, "live-x", min_docs=2, extra_terms=["ai agent"])
+    ids = [c["cand_id"] for c in cands]
+    assert len(ids) == len(set(ids))
+    assert sum(c["label"].casefold() == "ai agent" for c in cands) == 1
