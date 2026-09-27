@@ -55,14 +55,35 @@ def модели() -> dict:
     }
 
 
-def оценить(model, X: np.ndarray, y: np.ndarray, folds: int = 5) -> dict:
-    cv = StratifiedKFold(n_splits=folds, shuffle=True, random_state=СИД)
+РАЗБИЕНИЙ = 20
+
+
+def _одно(model, X: np.ndarray, y: np.ndarray, folds: int, seed: int) -> tuple[dict, np.ndarray]:
+    cv = StratifiedKFold(n_splits=folds, shuffle=True, random_state=seed)
     pred = cross_val_predict(model, X, y, cv=cv)
+    return {"accuracy": accuracy_score(y, pred), "precision": precision_score(y, pred),
+            "recall": recall_score(y, pred), "f1": f1_score(y, pred)}, pred
+
+
+def оценить(model, X: np.ndarray, y: np.ndarray, folds: int = 5,
+            разбиений: int = РАЗБИЕНИЙ) -> dict:
+    """Метрики — среднее по `разбиений` случайным 5-fold разбиениям.
+
+    На 196 примерах результат одного разбиения гуляет на ±2 п.п.: на seed 42
+    лес давал 79%, и это оказался максимум из двадцати, а не типичное значение.
+    Поэтому отчитываемся средним и разбросом. Матрица ошибок и поимённые ошибки —
+    по одному разбиению (seed 42): они нужны, чтобы показать, где модель слепа.
+    """
+    прогоны = [_одно(model, X, y, folds, seed)[0] for seed in range(разбиений)]
+    _, pred = _одно(model, X, y, folds, СИД)
     tn, fp, fn, tp = confusion_matrix(y, pred).ravel()
-    return {"accuracy": round(accuracy_score(y, pred), 3),
-            "precision": round(precision_score(y, pred), 3),
-            "recall": round(recall_score(y, pred), 3),
-            "f1": round(f1_score(y, pred), 3),
+    acc = [п["accuracy"] for п in прогоны]
+    return {**{k: round(float(np.mean([п[k] for п in прогоны])), 3)
+               for k in ("accuracy", "precision", "recall", "f1")},
+            "accuracy_std": round(float(np.std(acc, ddof=1)), 3) if len(acc) > 1 else 0.0,
+            "accuracy_min": round(min(acc), 3), "accuracy_max": round(max(acc), 3),
+            "разбиений": разбиений,
+            "разбиений_выше_мин": sum(a >= ПОРОГ_МИН for a in acc),
             "confusion": {"tp": int(tp), "fp": int(fp), "fn": int(fn), "tn": int(tn)},
             "pred": pred.tolist()}
 
@@ -82,7 +103,7 @@ def абляция(X: np.ndarray, y: np.ndarray, признаки: list[str], б
     out = []
     for i, п in enumerate(признаки):
         Xi = np.delete(X, i, axis=1)
-        acc = оценить(модели()["logreg"], Xi, y)["accuracy"]
+        acc = оценить(модели()["logreg"], Xi, y, разбиений=5)["accuracy"]
         out.append({"без": п, "accuracy": acc, "потеря": round(базовая - acc, 3)})
     return sorted(out, key=lambda d: -d["потеря"])
 
@@ -116,9 +137,13 @@ def главное(строки: list[dict]) -> dict:
 def отчёт_md(и: dict) -> str:
     def таб(m):
         c = m["confusion"]
-        return (f"| accuracy | **{m['accuracy']:.0%}** |\n| precision | {m['precision']:.2f} |\n"
+        return (f"| accuracy, среднее | **{m['accuracy']:.1%}** ± {m['accuracy_std']:.1%} |\n"
+                f"| accuracy, диапазон | {m['accuracy_min']:.1%} – {m['accuracy_max']:.1%}; "
+                f"≥75% в {m['разбиений_выше_мин']} из {m['разбиений']} |\n"
+                f"| precision | {m['precision']:.2f} |\n"
                 f"| recall | {m['recall']:.2f} |\n| F1 | {m['f1']:.2f} |\n"
-                f"| матрица | TP {c['tp']} · FP {c['fp']} · FN {c['fn']} · TN {c['tn']} |")
+                f"| матрица (seed 42) | TP {c['tp']} · FP {c['fp']} · FN {c['fn']} · "
+                f"TN {c['tn']} |")
     lg, gb = и["модели"]["logreg"], и["модели"]["gboost"]
     rf = и["модели"]["forest"]
     выбор = и["выбор"]
@@ -140,7 +165,8 @@ def отчёт_md(и: dict) -> str:
 
 Выборка: {и['n']} технологий — {и['n_pos']} слабых сигналов из датасета заказчика
 и {и['n_neg']} зрелых технологий, собранных нами с обоснованием каждой
-(`classifier/dataset.py`). Стратифицированная 5-fold кросс-валидация, seed 42.
+(`classifier/dataset.py`). Стратифицированная 5-fold кросс-валидация,
+повторённая на {rf['разбиений']} случайных разбиениях; метрики — среднее по ним.
 
 {вердикт}
 
@@ -184,8 +210,13 @@ def отчёт_md(и: dict) -> str:
 
 ## Что здесь честно сказать
 
-**Отбор моделей.** Три конфигурации сравнены на одной и той же кросс-валидации
-и выбрана лучшая по accuracy. Это даёт небольшой оптимистический сдвиг: на
+**Одно разбиение врёт.** Первая версия отчёта считала на одном разбиении
+(seed 42) и показывала у леса 79%. На двадцати разбиениях это оказался максимум,
+а типичное значение — на 2 п.п. ниже. Разброс на 196 примерах — около ±1 п.п.,
+поэтому здесь среднее и диапазон, а не одна удачная цифра.
+
+**Отбор моделей.** Три конфигурации сравнены на одних и тех же разбиениях
+и выбрана лучшая по среднему. Это даёт небольшой оптимистический сдвиг: на
 по-настоящему новых данных результат будет чуть ниже.
 
 **Новостные признаки пробовали и убрали.** Четыре признака по Hacker News
@@ -244,7 +275,7 @@ def main(argv: list[str] | None = None) -> None:
                                               encoding="utf-8")
     Path("classifier/REPORT.md").write_text(отчёт_md(и), encoding="utf-8")
     for имя, m in и["модели"].items():
-        print(f"{имя}: acc={m['accuracy']:.0%} P={m['precision']:.2f} "
+        print(f"{имя}: acc={m['accuracy']:.1%}±{m['accuracy_std']:.1%} P={m['precision']:.2f} "
               f"R={m['recall']:.2f} F1={m['f1']:.2f}")
     print("выбор:", и["выбор"])
 
