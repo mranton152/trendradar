@@ -2,6 +2,101 @@
 from semantic.live import extract_live
 
 
+def test_ambiguous_company_words_require_company_context_for_each_document():
+    for label, unrelated in [
+        ('Humanoid', 'XPENG Robotics Raises Funding for Humanoid Robots'),
+        ('Run Robotics', 'Funding to Help Run Robotics Training Centre'),
+    ]:
+        rows = [{'doc_id': '1', 'title': f'{label} raises funding for robotics'},
+                {'doc_id': '2', 'title': unrelated}]
+        assert not any(c['label'] == label for c in extract_live(rows, 'robotics', min_docs=2)[0])
+        rows.append({'doc_id': '3', 'title': f'{label} launches robotics software'})
+        candidates, links, _ = extract_live(rows, 'robotics', min_docs=2)
+        candidate = next(c for c in candidates if c['label'] == label)
+        assert {r['doc_id'] for r in links if r['cand_id'] == candidate['cand_id']} == {'1', '3'}
+
+
+def test_isaac_products_do_not_share_evidence_between_owners():
+    rows = [{'doc_id': 'n1', 'title': 'NVIDIA Isaac ROS advances robotics software'},
+            {'doc_id': 'w1', 'title': 'Weave Robotics launches Isaac 1 home robot'}]
+    assert not extract_live(rows, 'robotics', min_docs=2)[0]
+    rows += [{'doc_id': 'n2', 'title': 'NVIDIA Isaac ROS releases robotics tools'},
+             {'doc_id': 'w2', 'title': 'Weave Robotics unveils Isaac 1 robot'}]
+    candidates, links, _ = extract_live(rows, 'robotics', min_docs=2)
+    for label, docs in [('NVIDIA Isaac', {'n1', 'n2'}), ('Weave Isaac 1', {'w1', 'w2'})]:
+        candidate = next(c for c in candidates if c['label'] == label)
+        assert {r['doc_id'] for r in links if r['cand_id'] == candidate['cand_id']} == docs
+    assert not any(c['label'] == 'Isaac' for c in candidates)
+
+
+def test_qualified_product_does_not_attribute_reviewed_competitor_to_weave():
+    rows = [{'doc_id': str(i), 'title': title} for i, title in enumerate([
+        'Weave Robotics tests NVIDIA Isaac 1.0 robotics software',
+        'Weave Robotics evaluates NVIDIA Isaac 1.0 robotics tools',
+    ])]
+    labels = {c['label'] for c in extract_live(rows, 'robotics', min_docs=2)[0]}
+    assert 'NVIDIA Isaac' in labels
+    assert 'Weave Isaac 1' not in labels
+
+
+def test_ambiguous_company_context_uses_normalized_name():
+    rows = [{'doc_id': str(i), 'title': title} for i, title in enumerate([
+        'Humanoid launches robotics software',
+        'New Humanoid releases robotics software',
+    ])]
+    candidate = next(c for c in extract_live(rows, 'robotics', min_docs=2)[0]
+                     if c['label'] == 'Humanoid')
+    assert candidate['n_docs'] == 2
+
+
+def test_person_mentions_do_not_count_as_product_evidence():
+    titles = ['Weave launches Isaac robotics software',
+              'Isaac Asimov shaped robotics software',
+              "Isaac Asimov's robotics laws"]
+    rows = [{'doc_id': str(i), 'title': title} for i, title in enumerate(titles)]
+    assert not extract_live(rows, 'robotics', min_docs=2)[0]
+    rows.append({'doc_id': '3', 'title': 'Isaac robotics software released'})
+    candidates, links, _ = extract_live(rows, 'robotics', min_docs=2)
+    isaac = next(c for c in candidates if c['label'] == 'Isaac')
+    assert isaac['n_docs'] == 2
+    assert {link['doc_id'] for link in links if link['cand_id'] == isaac['cand_id']} == {'0', '3'}
+
+
+def test_person_exclusion_keeps_company_in_same_title_and_unrelated_names():
+    rows = [{'doc_id': str(i), 'title': title} for i, title in enumerate([
+        "Travis Kalanick's Atoms improves robotics software",
+        'Atoms robotics software reaches production',
+        'Asimov launches robotics software',
+        'Asimov develops robotics software',
+    ])]
+    labels = {c['label'] for c in extract_live(rows, 'robotics', min_docs=2)[0]}
+    assert {'Atoms', 'Asimov'} <= labels
+
+
+def test_observed_people_and_places_are_not_company_labels():
+    for name in ['Dean Kamen', 'Sebastian Thrun', 'Travis Kalanick',
+                 'Afghanistan', 'Korea', 'Utah', 'Pittsburgh', 'Navy']:
+        rows = [{'doc_id': str(i), 'title': f"{name}'s robotics software"}
+                for i in range(2)]
+        assert not extract_live(rows, 'robotics', min_docs=2)[0], name
+
+
+def test_robotics_generic_headline_fragments_are_not_entities():
+    for name in ['Funding', 'Top Funding', 'Week', 'Powerful', 'Robotic',
+                 'Robotics Lab', 'High School Robotics', 'Three Laws', 'Taps Meta']:
+        rows = [{'doc_id': str(i), 'title': f"{name}'s robotics software"}
+                for i in range(2)]
+        assert not extract_live(rows, 'robotics', min_docs=2)[2]['entity_candidate_ids'], name
+
+
+def test_robotics_distinctive_names_survive_generic_word_filter():
+    for name in ['Generalist', 'Humanoid', 'World Labs', 'Agility Robotics', 'Isaac']:
+        rows = [{'doc_id': str(i), 'title': f'{name} launches robotics software'}
+                for i in range(2)]
+        assert any(c['label'] == name for c in extract_live(
+            rows, 'robotics', min_docs=2)[0]), name
+
+
 def test_live_support_threshold_is_explicit_and_never_single_document():
     import pytest
 
