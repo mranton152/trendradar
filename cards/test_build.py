@@ -150,3 +150,11 @@ def test_build_retries_once_after_invalid_model_json(tmp_path: Path, monkeypatch
 
     assert build_module.build("demo", 2026, llm=llm) == 1
     assert llm.calls == 2
+
+
+def test_английская_карточка_переспрашивается_по_русски():
+    from cards.build import _доля_кириллицы
+    assert _доля_кириллицы({"problem": "Embedded payments integrate finance",
+                            "advantage": "", "case_text": ""}) < 0.5
+    assert _доля_кириллицы({"problem": "Встроенные платежи в продуктах Stripe",
+                            "advantage": "", "case_text": ""}) > 0.5

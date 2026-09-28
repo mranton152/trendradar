@@ -117,12 +117,47 @@ def _run(job: dict, root: Path, query: str, budget: int, app) -> None:
         stage_text = "Поиск завершён: зарождающихся трендов не найдено" if no_trends else "Готово"
         job.update(status="done", no_trends=no_trends, stage_text=stage_text,
                    domain=meta["domain"])
+        if not no_trends:
+            threading.Thread(target=_карточки, args=(root, meta["domain"], app),
+                             daemon=True).start()
     except (OSError, subprocess.SubprocessError, ValueError, KeyError, json.JSONDecodeError) as exc:
         # Жюри видит понятную фразу, а не «Command [...] returned non-zero exit status».
         log.warning("Живой поиск %s не удался: %s", job["job_id"], exc)
         job.update(status="failed", stage_text="Не удалось собрать выдачу", error=СБОЙ)
     finally:
         job["elapsed_s"] = round(time.monotonic() - started, 1)
+
+
+ПЕРВЫМИ = 5
+
+
+def _карточки(root: Path, domain: str, app) -> None:
+    """Карточки живой выдачи в фоне: ТЗ требует для каждого сигнала преимущество
+    и кейс, но одна карточка — около 14 с на локальной модели, 15 штук — 3,5 мин.
+    Выдача показывается сразу, карточки первых трендов готовы примерно через
+    минуту, остальных — позже. Сбой генерации не трогает выдачу."""
+    from cards.build import build
+
+    try:
+        ранги = pq.read_table(root / domain / "trends.parquet",
+                              columns=["trend_id", "rank", "as_of"]).to_pylist()
+    except OSError as exc:
+        log.warning("Карточки %s: нет трендов: %s", domain, exc)
+        return
+    if not ранги:
+        return
+    as_of = ранги[0]["as_of"]
+    ранги.sort(key=lambda r: r["rank"])
+    ids = [r["trend_id"] for r in ранги]
+    for пачка in (set(ids[:ПЕРВЫМИ]), set(ids[ПЕРВЫМИ:])):
+        if not пачка:
+            continue
+        try:
+            build(domain, as_of, trend_ids=пачка)
+        except Exception as exc:  # модель, сеть, файл — выдача уже показана
+            log.warning("Карточки %s не построены: %s", domain, exc)
+            return
+        app.state.store = Store(root)
 
 
 @router.post("/live", response_model=LiveAccepted, status_code=202)
