@@ -1,3 +1,7 @@
+// Без этого Next.js отрисовывает страницу один раз при сборке образа, когда API
+// ещё нет, и навсегда показывает запасные значения (MIN_EVIDENCE = 20 …).
+export const dynamic = "force-dynamic";
+
 type Methodology = {
   version: string;
   weights: Record<string, number>;

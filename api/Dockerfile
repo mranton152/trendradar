@@ -14,6 +14,10 @@ COPY api/ ./api/
 COPY ingest/ ./ingest/
 COPY semantic/ ./semantic/
 COPY cards/ ./cards/
+# Отчёты для страницы методологии: без них в Docker на ней нет ни классификатора,
+# ни проверки на прошлом.
+COPY classifier/report.json ./classifier/report.json
+COPY validation/report.json ./validation/report.json
 
 EXPOSE 8000
 CMD ["uvicorn", "api.main:app", "--host", "0.0.0.0", "--port", "8000"]
