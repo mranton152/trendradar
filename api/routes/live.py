@@ -1,5 +1,6 @@
 """Фоновый запуск живого конвейера без очереди и без расчётов в HTTP-потоке."""
 import json
+import logging
 import re
 import shutil
 import subprocess
@@ -16,6 +17,45 @@ from api.models import LiveAccepted, LiveRequest, LiveStatus
 from api.store import Store
 
 router = APIRouter(prefix="/api/v1", tags=["live"])
+log = logging.getLogger("trendradar")
+
+# Клавиатурный набор («ывапролд», «qwertyuiop») модель перевода не отвергает, а
+# «угадывает» тему: «ывапролд» стал «encryption» и дал 13 уверенных трендов про
+# шифрование (замер 28.09). Запрет угадывать в промпте ломал настоящие запросы
+# («слабые сигналы в области робототехники» → пусто), поэтому мусор ловится до
+# модели: подряд идущие клавиши одного ряда. На 19 881 настоящем слове из корпусов
+# и датасета ложных срабатываний ноль.
+РЯДЫ = ("йцукенгшщзхъ", "фывапролджэ", "ячсмитьбю", "qwertyuiop", "asdfghjkl", "zxcvbnm",
+        "1234567890")
+
+
+def _серия(слово: str) -> int:
+    лучшая = 0
+    for ряд in РЯДЫ:
+        for r in (ряд, ряд[::-1]):
+            i = 0
+            while i < len(слово):
+                j = i + 1
+                while (j < len(слово) and слово[j] in r and слово[j - 1] in r
+                       and r.find(слово[j]) == r.find(слово[j - 1]) + 1):
+                    j += 1
+                if слово[i] in r:
+                    лучшая = max(лучшая, j - i)
+                i += 1
+    return лучшая
+
+
+def не_тема(query: str) -> bool:
+    слова = re.findall(r"[a-zа-яё0-9]+", query.lower())
+    if sum(len(w) for w in слова) < 2:  # «6G», «5G», «ИИ» — настоящие запросы
+        return True
+    return any(len(w) >= 4 and _серия(w) >= max(4, len(w) * 0.6) for w in слова)
+
+
+НЕ_ТЕМА = ("Не похоже на технологическое направление. Уточните запрос, "
+           "например: «квантовые сенсоры» или «робототехника».")
+СБОЙ = ("Не удалось собрать выдачу: источники не ответили вовремя. "
+        "Попробуйте ещё раз через минуту.")
 
 # Широкий запрос про ИИ — пример из ТЗ — ведём в готовый индекс: там выдача
 # по 5000 работ с бэктестом и карточками. Живой режим на нём слабее (замер
@@ -78,7 +118,9 @@ def _run(job: dict, root: Path, query: str, budget: int, app) -> None:
         job.update(status="done", no_trends=no_trends, stage_text=stage_text,
                    domain=meta["domain"])
     except (OSError, subprocess.SubprocessError, ValueError, KeyError, json.JSONDecodeError) as exc:
-        job.update(status="failed", stage_text="Не удалось собрать выдачу", error=str(exc))
+        # Жюри видит понятную фразу, а не «Command [...] returned non-zero exit status».
+        log.warning("Живой поиск %s не удался: %s", job["job_id"], exc)
+        job.update(status="failed", stage_text="Не удалось собрать выдачу", error=СБОЙ)
     finally:
         job["elapsed_s"] = round(time.monotonic() - started, 1)
 
@@ -87,6 +129,12 @@ def _run(job: dict, root: Path, query: str, budget: int, app) -> None:
 def start_live(body: LiveRequest, request: Request) -> LiveAccepted:
     job_id = uuid.uuid4().hex
     store = request.app.state.store
+    if не_тема(body.query):
+        _jobs(request)[job_id] = {
+            "job_id": job_id, "status": "failed", "domain": None, "error": НЕ_ТЕМА,
+            "stage_text": "Запрос не распознан", "n_docs": 0, "n_sources_polled": 0,
+            "n_candidates": 0, "elapsed_s": 0.0, "no_trends": False}
+        return LiveAccepted(job_id=job_id, domain="unknown")
     готовый = индекс_для(body.query, store.domains())
     if готовый:
         _jobs(request)[job_id] = {
