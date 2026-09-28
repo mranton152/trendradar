@@ -143,6 +143,7 @@ api/ web/  выдача                          ← читают data/index/, �
 | Документ | О чём |
 |---|---|
 | [docs/presentation/TrendRadar.pdf](docs/presentation/TrendRadar.pdf) | **презентация**, 15 слайдов |
+| [docs/screencast/TrendRadar-screencast.mp4](docs/screencast/TrendRadar-screencast.mp4) | **скринкаст**, 3 минуты с озвучкой |
 | [docs/16-technical.md](docs/16-technical.md) | **техническая документация**: пайплайн, отбор признаков, фильтрация шума, отказоустойчивость |
 | [docs/diagrams/](docs/diagrams/) | схемы архитектуры, конвейера и живого запроса (PlantUML) |
 | [docs/01-methodology.md](docs/01-methodology.md) | методология детекции: формулы, обоснования, литература |
