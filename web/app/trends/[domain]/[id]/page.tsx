@@ -93,12 +93,17 @@ export default async function TrendPage({ params, searchParams }: TrendPageProps
 
   return (
     <main className="mx-auto max-w-3xl space-y-9 px-6 py-12">
-      <Link
-        className="text-sm text-indigo-600 hover:underline"
-        href={`/trends/${encodeURIComponent(domain)}?as_of=${data.as_of}`}
-      >
-        ← К списку трендов
-      </Link>
+      <nav aria-label="Навигация" className="flex flex-wrap items-center justify-between gap-3 text-sm font-semibold">
+        <Link
+          className="text-indigo-600 hover:underline"
+          href={`/trends/${encodeURIComponent(domain)}?as_of=${data.as_of}`}
+        >
+          ← К списку трендов
+        </Link>
+        <Link className="text-indigo-600 hover:underline" href="/">
+          Новый поиск
+        </Link>
+      </nav>
       <header>
         <p className="text-sm font-semibold uppercase tracking-[0.2em] text-indigo-600">
           #{trend.rank} · {STAGE_LABELS[trend.stage]}

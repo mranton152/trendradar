@@ -30,7 +30,10 @@ export default async function TrendsPage({
     const availableDomains = await getAvailableDomains();
     return (
       <main className="mx-auto max-w-3xl px-6 py-12">
-        <h1 className="text-3xl font-bold tracking-tight text-slate-950">Направление пока не найдено</h1>
+        <Link className="text-sm font-semibold text-indigo-600 hover:underline" href="/">
+          ← К поиску
+        </Link>
+        <h1 className="mt-4 text-3xl font-bold tracking-tight text-slate-950">Направление пока не найдено</h1>
         <p className="mt-3 text-slate-600">
           Выберите доступное направление или дождитесь живого поиска.
         </p>
@@ -53,14 +56,15 @@ export default async function TrendsPage({
 
   return (
     <main className="mx-auto max-w-3xl px-6 py-12">
-      <div className="flex items-center justify-between gap-4">
-        <p className="text-sm font-semibold uppercase tracking-[0.2em] text-indigo-600">
+      <nav aria-label="Навигация" className="flex flex-wrap items-center justify-between gap-4">
+        <Link className="text-sm font-semibold uppercase tracking-[0.2em] text-indigo-600 hover:underline" href="/">
           TrendRadar
-        </p>
-        <Link className="text-sm font-semibold text-indigo-600 hover:underline" href="/methodology">
-          Методология
         </Link>
-      </div>
+        <div className="flex items-center gap-5 text-sm font-semibold">
+          <Link className="text-indigo-600 hover:underline" href="/">← Новый поиск</Link>
+          <Link className="text-indigo-600 hover:underline" href="/methodology">Методология</Link>
+        </div>
+      </nav>
       <h1 className="mt-3 text-3xl font-bold tracking-tight text-slate-950">
         ТОП-{data.trends.length}: {data.domain.title ?? data.domain.query}
       </h1>

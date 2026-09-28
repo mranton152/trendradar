@@ -1,5 +1,6 @@
 "use client";
 
+import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { FormEvent, useState } from "react";
 
@@ -81,6 +82,9 @@ export default function HomePage() {
       </form>
       {progress && <p className="mt-5 text-indigo-700" role="status">{progress}</p>}
       {error && <p className="mt-5 text-red-700" role="alert">{error}</p>}
+      <Link className="mt-8 w-fit text-sm font-semibold text-indigo-600 hover:underline" href="/methodology">
+        Как мы находим тренды →
+      </Link>
     </main>
   );
 }

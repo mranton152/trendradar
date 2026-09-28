@@ -1,3 +1,5 @@
+import Link from "next/link";
+
 type Methodology = {
   version: string;
   weights: Record<string, number>;
@@ -73,9 +75,10 @@ export default async function MethodologyPage() {
 
   return (
     <main className="mx-auto max-w-3xl space-y-9 px-6 py-12">
-      <p className="text-sm font-semibold uppercase tracking-[0.2em] text-indigo-600">
-        TrendRadar
-      </p>
+      <nav aria-label="Навигация" className="flex flex-wrap items-center justify-between gap-4">
+        <Link className="text-sm font-semibold uppercase tracking-[0.2em] text-indigo-600 hover:underline" href="/">TrendRadar</Link>
+        <Link className="text-sm font-semibold text-indigo-600 hover:underline" href="/">← К поиску</Link>
+      </nav>
       <h1 className="text-3xl font-bold tracking-tight text-slate-950">
         Методология, версия {data.version}
       </h1>
