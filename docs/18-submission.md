@@ -14,8 +14,8 @@
 | Репозиторий | https://github.com/mranton152/trendradar | код, README с запуском через Docker |
 | Документация | https://github.com/mranton152/trendradar/blob/main/docs/16-technical.md | пайплайн, отбор признаков, фильтры, схемы архитектуры |
 | Презентация | https://github.com/mranton152/trendradar/blob/main/docs/presentation/TrendRadar.pdf | 15 слайдов в шаблоне ЛЦТ-2026 |
-| Прототип | ⬜ ссылка на скринкаст | живой запрос и вся выдача на видео — по [сценарию](17-screencast.md) |
-| Доп. материалы | та же ссылка на скринкаст + репозиторий | видео; схемы — в `docs/diagrams/` |
+| Прототип | https://github.com/mranton152/trendradar/blob/main/docs/screencast/TrendRadar-screencast.mp4 | скринкаст 3 мин с озвучкой: индекс, карточка, бэктест, исключённые, живой запрос, методология |
+| Доп. материалы | https://github.com/mranton152/trendradar/tree/main/docs/diagrams | схемы архитектуры, конвейера и живого запроса |
 
 **Облачного стенда нет:** форма на грант Yandex Cloud закрылась, организаторы
 подтвердили, что можно сдавать без него. По правилам сдачи в поле «Прототип»
