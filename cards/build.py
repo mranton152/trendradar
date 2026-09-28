@@ -22,7 +22,40 @@ from cards.verify import проверить_цитаты
 from contracts.schemas import CARDS
 
 ROOT = Path(__file__).resolve().parents[1]
-TITLE_RU_OVERRIDES = {"foundation model": "Фундаментальные модели"}
+# Устоявшиеся русские термины. Модель переводила буквально и с ошибками:
+# «Редкая внимание», «Продолжающееся обучение», «Инференс причинности».
+# Вычитано вручную 28.09 по всем трендам индекса.
+TITLE_RU_OVERRIDES = {
+    "mixture of experts": "Смесь экспертов",
+    "continual learning": "Непрерывное обучение",
+    "state space model": "Модели пространства состояний",
+    "sparse attention": "Разреженное внимание",
+    "differentiable rendering": "Дифференцируемый рендеринг",
+    "prompt engineering": "Промпт-инжиниринг",
+    "question answering": "Вопросно-ответные системы",
+    "neural radiance field": "Нейронные поля излучения",
+    "vision-language model": "Визуально-языковые модели",
+    "time series forecasting": "Прогнозирование временных рядов",
+    "causal inference": "Причинный вывод",
+    "physics-informed neural network": "Физически информированные нейросети",
+    "foundation model": "Фундаментальные модели",
+    "diffusion model": "Диффузионные модели",
+    "topic modeling": "Тематическое моделирование",
+    "self-supervised learning": "Самоконтролируемое обучение",
+    "covid-19 pandemic": "Пандемия COVID-19",
+    "bayesian optimization": "Байесовская оптимизация",
+    "transformer": "Трансформеры",
+    "named entity recognition": "Распознавание именованных сущностей",
+    "semantic segmentation": "Семантическая сегментация",
+    "domain adaptation": "Доменная адаптация",
+    "object detection": "Обнаружение объектов",
+    "attention mechanism": "Механизм внимания",
+    "anomaly detection": "Обнаружение аномалий",
+    "pose estimation": "Оценка позы",
+    "image captioning": "Генерация подписей к изображениям",
+    "transfer learning": "Перенос обучения",
+    "gaussian process": "Гауссовские процессы",
+}
 
 
 def _index_dir(domain: str) -> Path:

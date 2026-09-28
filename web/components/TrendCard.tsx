@@ -28,7 +28,12 @@ export function TrendCard({ trend, domain, asOf }: TrendCardProps) {
     >
       <div className="flex items-baseline gap-4">
         <span className="text-sm tabular-nums text-slate-400">#{trend.rank}</span>
-        <h2 className="flex-1 text-lg font-semibold text-slate-950">{trend.title}</h2>
+        <h2 className="flex-1 text-lg font-semibold text-slate-950">
+          {trend.title}
+          {trend.label_en && trend.label_en.toLowerCase() !== trend.title.toLowerCase() && (
+            <span className="ml-2 text-sm font-normal text-slate-400">{trend.label_en}</span>
+          )}
+        </h2>
         <span className="text-sm tabular-nums text-slate-600">
           оценка {trend.confidence_pct}%
         </span>
