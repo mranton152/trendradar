@@ -80,7 +80,9 @@ def _as_model(row: dict, store: Store, domain: str) -> Trend:
     return Trend(
         trend_id=row["trend_id"],
         rank=int(row["rank"]),
-        title=row["label"],
+        # ТЗ: аналитическая выдача на русском. Русское название — из карточки,
+        # английский термин остаётся в label_en: по нему ищут источники.
+        title=(card or {}).get("title_ru") or row["label"],
         label_en=row["label"],
         aliases=list(row["aliases"] or []),
         emergence_score=float(row["emergence_score"]),

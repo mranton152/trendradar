@@ -105,6 +105,9 @@ export default async function TrendPage({ params, searchParams }: TrendPageProps
         </p>
         <h1 className="mt-3 text-3xl font-bold tracking-tight text-slate-950">
           {trend.title}
+          {trend.label_en && trend.label_en.toLowerCase() !== trend.title.toLowerCase() && (
+            <span className="mt-1 block text-lg font-normal text-slate-400">{trend.label_en}</span>
+          )}
         </h1>
         <p className="mt-3 text-sm text-slate-500">
           Оценка зарождения {trend.confidence_pct}% · взлёт{" "}
