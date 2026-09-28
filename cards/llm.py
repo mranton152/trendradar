@@ -42,6 +42,10 @@ class LLM:
                     "prompt": prompt,
                     "format": dict(schema) if schema else "json",
                     "stream": False,
+                    # Потолок длины ответа: в режиме JSON модель изредка уходит в
+                    # бесконечную генерацию и висит до таймаута в 300 с (замер
+                    # 28.09 на живой карточке). Карточке хватает ~300 токенов.
+                    "options": {"num_predict": int(os.getenv("LLM_NUM_PREDICT", "800"))},
                 },
             )
             response.raise_for_status()

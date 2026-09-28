@@ -88,8 +88,23 @@ def _card_row(
     }
 
 
-def build(domain: str, as_of: int, llm: LLM | None = None) -> int:
-    """Строит cards.parquet и возвращает число созданных карточек."""
+ПО_РУССКИ = ("\n\nВАЖНО: все текстовые поля пиши на русском языке. "
+             "Названия технологий и компаний можно оставить как в документах.")
+
+
+def _доля_кириллицы(card: dict[str, Any]) -> float:
+    текст = " ".join(str(card.get(k) or "") for k in ("problem", "advantage", "case_text"))
+    буквы = [c for c in текст if c.isalpha()]
+    return sum("а" <= c.lower() <= "я" or c.lower() == "ё" for c in буквы) / max(1, len(буквы))
+
+
+def build(domain: str, as_of: int, llm: LLM | None = None,
+          trend_ids: set[str] | None = None) -> int:
+    """Строит cards.parquet и возвращает число созданных карточек.
+
+    trend_ids — только эти тренды; остальные карточки файла сохраняются. Нужно
+    живому режиму: сначала карточки первых трендов, затем остальных.
+    """
     index_dir = _index_dir(domain)
     trends_path = index_dir / "trends.parquet"
     if not trends_path.is_file():
@@ -104,15 +119,31 @@ def build(domain: str, as_of: int, llm: LLM | None = None) -> int:
     rows: list[dict[str, Any]] = []
     with duckdb.connect(":memory:") as connection:
         for trend in _read_trends(connection, index_dir, as_of):
+            if trend_ids is not None and trend["trend_id"] not in trend_ids:
+                continue
             documents = _read_documents(connection, works_path, list(trend["top_doc_ids"]))
             prompt = собрать(trend, documents)
             try:
-                raw_card = model.json(prompt)
-            except (json.JSONDecodeError, ValueError) as exc:
-                sys.stderr.write(
-                    f"[cards] {trend['label'][:40]:<40} повтор: некорректный JSON ({exc})\n"
-                )
-                raw_card = model.json(prompt)
+                try:
+                    raw_card = model.json(prompt)
+                except (json.JSONDecodeError, ValueError) as exc:
+                    sys.stderr.write(
+                        f"[cards] {trend['label'][:40]:<40} повтор: некорректный JSON ({exc})\n"
+                    )
+                    raw_card = model.json(prompt)
+            except Exception as exc:  # таймаут, сеть, повторно битый JSON
+                # Одна неудачная карточка не должна стоить остальных.
+                sys.stderr.write(f"[cards] {trend['label'][:40]:<40} пропущена: {exc}\n")
+                continue
+            # ТЗ: аналитическая выдача на русском. По новостным заголовкам модель
+            # иногда отвечает целиком по-английски — переспрашиваем один раз.
+            if _доля_кириллицы(raw_card) < 0.5:
+                try:
+                    повтор = model.json(prompt + ПО_РУССКИ)
+                    if _доля_кириллицы(повтор) > _доля_кириллицы(raw_card):
+                        raw_card = повтор
+                except (json.JSONDecodeError, ValueError):
+                    pass
             clean_card, coverage = проверить_цитаты(
                 raw_card, {document["doc_id"] for document in documents}
             )

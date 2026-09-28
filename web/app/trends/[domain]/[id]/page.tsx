@@ -140,6 +140,12 @@ export default async function TrendPage({ params, searchParams }: TrendPageProps
         </section>
       )}
 
+      {data.domain.live && !trend.motivation && !trend.case_example && (
+        <section className="rounded-xl border border-dashed border-slate-300 bg-white p-5 text-slate-600">
+          Описание технологии и кейс готовятся по найденным источникам — обновите
+          страницу через минуту. Источники ниже уже доступны.
+        </section>
+      )}
       {(trend.motivation || trend.case_example) && (
         <section className="space-y-6 rounded-xl border border-slate-200 bg-white p-6 shadow-sm">
           {trend.motivation && (
